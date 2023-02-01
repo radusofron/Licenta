@@ -7,15 +7,12 @@
     --extralightblue: #B0D1E8;
     --violet: #A4778B;
     --pink: #C97B84;
+    --regular: 400;
+    --medium: 500;
+    --semibold: 600;
+    --bold: 700;
+    --extrabold: 800;
 }
-
-/*  
-    regular:    font-weight: 400,
-    medium:     font-weight: 500,
-    semibold:   font-weight: 600,
-    bold:       font-weight: 700,
-    extrabold:  font-weight: 800
-*/
 
 * {
     padding: 0vh;
