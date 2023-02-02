@@ -33,7 +33,7 @@ function changePhoto() {
 }
 
 // variables used for photo animation
-let setIntervalID = setInterval(changePhoto, 8000);
+let setIntervalID = setInterval(changePhoto, 6000);
 let alreadyOnViewport = true;
 let alreadyOutOfViewport = false;
 
@@ -42,11 +42,12 @@ let alreadyOutOfViewport = false;
 /* Code for enabling scrolling option after 6 seconds */
 const mainContainer = document.querySelector("main.container-for-sections");
 
+// TODO -> change value from setTimout back to 7000
 function enableScrolling() {
     mainContainer.style["overflow-y"] = 'scroll';
 }
 
-setTimeout(enableScrolling, 7000);
+setTimeout(enableScrolling, 3500);
 
 
 
@@ -59,11 +60,15 @@ const sections = [];
 const sectionsNumber = 6;
 const sectionsClasses = [".first-section", ".second-section", ".third-section", ".fourth-section", ".fifth-section", ".sixth-section"];
 const sectionsHeights = [];
-for (let index = 0; index < sectionsNumber; index++){
-    sections[index] = document.querySelector(sectionsClasses[index]);
-    sectionsHeights[index] = sections[index].getBoundingClientRect().height;
+for (let i = 0; i < sectionsNumber; i++){
+    sections[i] = document.querySelector(sectionsClasses[i]);
+    sectionsHeights[i] = sections[i].getBoundingClientRect().height;
 }
-secondSectionsVisited = false;
+// stores true if the section was visited
+const sectionsVisited = [];
+for (let i = 0; i < sectionsNumber; i++){
+    sectionsVisited[i] = false;
+}
 
 // check when to run continuous animations of section 1 -> ebery time the section is in the viewport
 function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
@@ -109,17 +114,43 @@ function secondSectionAnimations(liveSecondSectionY, secondSectionHeight) {
         // extract elements which will contain animations
         let leftIconContainers = document.querySelectorAll(".ab-icon-container.left");
         for (let i = 0; i < leftIconContainers.length; i++){
-            leftIconContainers[i].style.animation = 'about-from-left-animation 3.75s';
+            leftIconContainers[i].style.animation = 'about-from-left-animation 1.5s';
         }
         let rightIconContainers = document.querySelectorAll(".ab-icon-container.right");
         for (let i = 0; i < rightIconContainers.length; i++){
-            rightIconContainers[i].style.animation = 'about-from-right-animation 3.75s';
+            rightIconContainers[i].style.animation = 'about-from-right-animation 1.5s';
         }
         let textContainers = document.querySelectorAll(".ab-text-title, .ab-text-description");
         for (let i = 0; i < textContainers.length; i++){
-            console.log(textContainers[i]);
-            textContainers[i].style.animation = 'about-text-animation 3.75s';
+            textContainers[i].style.animation = 'about-text-animation 1s';
         }
+
+        sectionsVisited[1] = true;
+    }
+}
+
+function thirdSectionAnimations(liveThirdSectionY, thirdSectionHeight){
+    // FIXME -> to be 0
+    // now in the third section
+    if (liveThirdSectionY >= -1 && liveThirdSectionY < (thirdSectionHeight - 1))
+    {
+        // extract elements which will contain animations
+        let introText = document.querySelector(".ab-intro-text");
+        introText.style.animation = 'about-2-from-left-animation 1s';
+        let infoCards = document.querySelectorAll(".ab-info-card");
+        for (let i = 0; i < infoCards.length; i++){
+            infoCards[i].style.animation = 'about-2-cards-animation 2s';
+        }
+        let leftDesignElements = document.querySelectorAll(".left-blur");
+        for (let i = 0; i < leftDesignElements.length; i++){
+            leftDesignElements[i].style.animation = 'about-2-from-left-2-animation 2.5s';
+        }
+        let rightDesignElements = document.querySelectorAll(".right-blur");
+        for (let i = 0; i < rightDesignElements.length; i++){
+            rightDesignElements[i].style.animation = 'about-2-from-right-animation 2.5s';
+        }
+        
+        sectionsVisited[2] = true;
     }
 }
 
@@ -128,16 +159,18 @@ mainContainer.addEventListener('scroll', function() {
 
     // extract sections' current position compared to the viewport
     liveSectionsY = [];
-    for (let index = 0; index < sectionsNumber; index++){
-        liveSectionsY[index] = sections[index].getBoundingClientRect().y;
+    for (let i = 0; i < sectionsNumber; i++){
+        liveSectionsY[i] = sections[i].getBoundingClientRect().y;
     }
     
     // animations for first section
     firstSectionAnimations(liveSectionsY[0], sectionsHeights[0]);
 
     // animations for second section
-    if (secondSectionsVisited == false){
+    if (sectionsVisited[1] == false){
         secondSectionAnimations(liveSectionsY[1], sectionsHeights[1]);
-        secondSectionsVisited = true;
+    }
+    if (sectionsVisited[2] == false){
+        thirdSectionAnimations(liveSectionsY[2], sectionsHeights[2]);
     }
 });
