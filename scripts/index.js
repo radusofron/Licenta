@@ -1,3 +1,12 @@
+/* Code for enabling scrolling option after 6 seconds */
+const mainContainer = document.querySelector("main.container-for-sections");
+function enableScrolling() {
+    mainContainer.style["overflow-y"] = 'scroll';
+}
+setTimeout(enableScrolling, 3500);
+
+
+
 /* Code for photo slider */
 function changePhoto() {
     // attribute name
@@ -9,45 +18,31 @@ function changePhoto() {
     // remove attribute for the above html element and add it to the next html element
     activeImage.removeAttribute(attribute);
     let nextActiveImage;
-    if (activeImageClass === "photo-container photo-container-1")
+    if (activeImageClass === "photo-container photo-container--1")
     {
-        nextActiveImage = document.querySelector(".photo-container-2");
+        nextActiveImage = document.querySelector(".photo-container--2");
     }
     else {
-        if (activeImageClass === "photo-container photo-container-2")
+        if (activeImageClass === "photo-container photo-container--2")
         {
-            nextActiveImage = document.querySelector(".photo-container-3");
+            nextActiveImage = document.querySelector(".photo-container--3");
         }
         else {
-            if (activeImageClass === "photo-container photo-container-3")
+            if (activeImageClass === "photo-container photo-container--3")
             {
-                nextActiveImage = document.querySelector(".photo-container-4");
+                nextActiveImage = document.querySelector(".photo-container--4");
             }
             else {
-                nextActiveImage = document.querySelector(".photo-container-1");
+                nextActiveImage = document.querySelector(".photo-container--1");
             }
         }
 
     }
     nextActiveImage.setAttribute(attribute, "");
 }
-
-// variables used for photo animation
 let setIntervalID = setInterval(changePhoto, 6000);
 let alreadyOnViewport = true;
 let alreadyOutOfViewport = false;
-
-
-
-/* Code for enabling scrolling option after 6 seconds */
-const mainContainer = document.querySelector("main.container-for-sections");
-
-// TODO -> change value from setTimout back to 7000
-function enableScrolling() {
-    mainContainer.style["overflow-y"] = 'scroll';
-}
-
-setTimeout(enableScrolling, 3500);
 
 
 
@@ -58,7 +53,7 @@ const userWidth = document.documentElement.clientWidth;
 // extract main container's sections & their height
 const sections = [];
 const sectionsNumber = 6;
-const sectionsClasses = [".first-section", ".second-section", ".third-section", ".fourth-section", ".fifth-section", ".sixth-section"];
+const sectionsClasses = [".section--first-section", ".section--second-section", ".section--third-section", ".section--fourth-section", ".section--fifth-section", ".section--sixth-section"];
 const sectionsHeights = [];
 for (let i = 0; i < sectionsNumber; i++){
     sections[i] = document.querySelector(sectionsClasses[i]);
@@ -72,9 +67,6 @@ for (let i = 0; i < sectionsNumber; i++){
 
 // check when to run continuous animations of section 1 -> ebery time the section is in the viewport
 function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
-    
-    // extract element for site-name-color-animation
-    const siteName = document.querySelector(".site-name-text");
 
     // now in the first section
     if (liveFirstSectionY >= 0 && liveFirstSectionY <= firstSectionHeight)
@@ -85,9 +77,6 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
             setIntervalID = setInterval(changePhoto, 7000);    
             alreadyOnViewport = true;
             alreadyOutOfViewport = false;
-            
-            // turn on site-name-color-animation
-            siteName.style.animationPlayState = 'running';
         }
     }
     //  not anymore in the first section
@@ -98,9 +87,6 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
             clearInterval(setIntervalID);
             alreadyOnViewport = false;
             alreadyOutOfViewport = true;
-
-            // turn off site-name-color-animation
-            siteName.style.animationPlayState = 'paused';
         }
     }
 }
@@ -112,15 +98,15 @@ function secondSectionAnimations(liveSecondSectionY, secondSectionHeight) {
     if (liveSecondSectionY >= -1 && liveSecondSectionY < secondSectionHeight)
     {
         // extract elements which will contain animations
-        let leftIconContainers = document.querySelectorAll(".ab-icon-container.left");
+        let leftIconContainers = document.querySelectorAll(".intro-for-about__icon-container.intro-for-about__icon-container--left");
         for (let i = 0; i < leftIconContainers.length; i++){
             leftIconContainers[i].style.animation = 'about-from-left-animation 1.5s';
         }
-        let rightIconContainers = document.querySelectorAll(".ab-icon-container.right");
+        let rightIconContainers = document.querySelectorAll(".intro-for-about__icon-container.intro-for-about__icon-container--right");
         for (let i = 0; i < rightIconContainers.length; i++){
             rightIconContainers[i].style.animation = 'about-from-right-animation 1.5s';
         }
-        let textContainers = document.querySelectorAll(".ab-text-title, .ab-text-description");
+        let textContainers = document.querySelectorAll(".title-container__title, .description-container__description");
         for (let i = 0; i < textContainers.length; i++){
             textContainers[i].style.animation = 'about-text-animation 1s';
         }
@@ -135,9 +121,9 @@ function thirdSectionAnimations(liveThirdSectionY, thirdSectionHeight){
     if (liveThirdSectionY >= -1 && liveThirdSectionY < (thirdSectionHeight - 1))
     {
         // extract elements which will contain animations
-        let introText = document.querySelector(".ab-intro-text");
+        let introText = document.querySelector(".content__about-intro-text");
         introText.style.animation = 'about-2-from-left-animation 1s';
-        let infoCards = document.querySelectorAll(".ab-info-card");
+        let infoCards = document.querySelectorAll(".about-card");
         for (let i = 0; i < infoCards.length; i++){
             infoCards[i].style.animation = 'about-2-cards-animation 2s';
         }

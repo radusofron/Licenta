@@ -17,87 +17,89 @@
 
 <body>
     <main class="container-for-sections">
-        <section class="first-section">
-            <header class="first-type-header">
-                <h1 class="site-name">
-                    <span class="site-name-text">SITE NAME</span>
+        <section class="section section--first-section">
+            <header class="section__header">
+                <h1 class="header__site-name-title">
+                    <span class="title__text">SITE NAME</span>
                 </h1>
-                <div class="first-type-account-buttons">
-                    <div class="login-button"><a class="rs-link-to-login" href="login.html">Log in</a></div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                <div class="header__first-type-account-buttons">
+                    <div class="login-button">
+                        <a class="login-button__link" href="login.html">Log in</a>
+                    </div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            <div class="fs-second-row">
-                <div class="text-container">
-                    <div class="subtitle">
-                        <p class="subtitle-word word-1">YOUR</p>
-                        <p class="subtitle-word word-2">OWN</p>
-                        <p class="subtitle-word word-3">TRAVEL</p>
-                        <p class="subtitle-word word-4">AGENCY</p>
+            <div class="section__content-template-one">
+                <div class="content__text-container">
+                    <div class="text-container__subtitle">
+                        <p class="subtitle__word subtitle__word--one">YOUR</p>
+                        <p class="subtitle__word subtitle__word--two">OWN</p>
+                        <p class="subtitle__word subtitle__word--three">TRAVEL</p>
+                        <p class="subtitle__word subtitle__word--four">AGENCY</p>
                     </div>
-                    <div class="ideas">
-                        <p class="idea">Made by a traveller for the other travellers.</p>
-                        <p class="idea">Explore the capitals of Europe in a simpler way.</p>
-                        <p class="idea">No more maps, travel guides or anything like that.</p>
+                    <div class="text-container__main-ideas">
+                        <p class="main-ideas__idea">Made by a traveller for the other travellers.</p>
+                        <p class="main-ideas__idea">Explore the capitals of Europe in a simpler way.</p>
+                        <p class="main-ideas__idea">No more maps, travel guides or anything like that.</p>
                     </div>
-                    <a class="ls-link-to-register" href="register.html">
-                        <div class="ls-sign-up-button">Start the journey</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="text-container__sign-up-button">Start the journey</div>
                     </a>
                 </div>
                 <div class="photo-slider">
-                    <div class="photo-container photo-container-1" active-image>
+                    <div class="photo-container photo-container--1" active-image>
                         <img class="photo" alt="Photo from London" src="resources/London.jpg">
                     </div>
-                    <div class="photo-container photo-container-2">
+                    <div class="photo-container photo-container--2">
                         <img class=" photo" alt="Photo from Berlin" src="resources/Berlin.jpg">
                     </div>
-                    <div class="photo-container photo-container-3">
+                    <div class="photo-container photo-container--3">
                         <img class="photo" alt="Photo from Paris" src="resources/Paris.jpg">
                     </div>
-                    <div class="photo-container photo-container-4">
+                    <div class="photo-container photo-container--4">
                         <img class="photo" alt="Photo from Madrid" src="resources/Madrid.jpg">
                     </div>
                 </div>
             </div>
-            <div class="fs-third-row">
-                <div class="div-for-layout"></div>
-                <nav class="buttons">
-                    <a class="link-to-same-page" href="index.html">About</a>
-                    <a class="link-to-same-page" href="index.html">Destinations</a>
-                    <a class="link-to-same-page" href="index.html">Reviews</a>
-                    <a class="link-to-same-page" href="index.html">Contact</a>
-                </nav>
-            </div>
+            <nav class="nav">
+                <div class="nav__div-for-layout"></div>
+                <ul class="nav__menu">
+                    <li><a class="menu__link" href="index.html#about">About</a></li>
+                    <li><a class="menu__link" href="index.html#destinations">Destinations</a></li>
+                    <li><a class="menu__link" href="index.html#reviews">Reviews</a></li>
+                    <li><a class="menu__link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
         </section>
-        <section class="second-section">
-            <header class="second-type-header">
-                <div class="div-for-header-layout"></div>
-                <h1 class="title">
-                    <span class="title-text">ABOUT</span>
+        <section class="section section--second-section" id="about">
+            <header class="section__header">
+                <div class="header__div-for-layout"></div>
+                <h1 class="header__section-title">
+                    <span class="title__text">ABOUT</span>
                 </h1>
-                <div class="second-type-account-buttons">
+                <div class="header__second-type-account-buttons">
                     <div class="login-button">
-                        <a class="rs-link-to-login" href="login.html">Log in</a>
+                        <a class="login-button__link" href="login.html">Log in</a>
                     </div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            <div class="ss-second-row">
-                <div class="about">
+            <div class="section__content-template-two">
+                <div class="intro-for-about">
                     <div class="ss-left-blur left-blur-1"></div>
-                    <div class="ab-icon-container left">
-                        <img class="ab-photo idea-photo" src="resources/Idea.png" alt="An illustration">
+                    <div class="intro-for-about__icon-container intro-for-about__icon-container--left">
+                        <img class="icon-container__icon" src="resources/Idea.png" alt="An illustration">
                     </div>
-                    <div class="ab-text-container">
-                        <div class="ab-text-title-container">
-                            <h2 class="ab-text-title">The idea behind the project</h2>
+                    <div class="intro-for-about__text-container">
+                        <div class="text-container__title-container">
+                            <h2 class="title-container__title">The idea behind the project</h2>
                         </div>
-                        <div class="ab-text-description-container">
-                            <p class="ab-text-description">
+                        <div class="text-container__description-container">
+                            <p class="description-container__description">
                                 In a world full of people who love travelling, we thought to make
                                 their life easier. The desire was to make an application for travaelling without needing
                                 anything else than this app.
@@ -105,34 +107,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="about">
-                    <div class="ab-text-container">
-                        <div class="ab-text-title-container">
-                            <h2 class="ab-text-title">What is this app capable of?</h2>
+                <div class="intro-for-about">
+                    <div class="intro-for-about__text-container">
+                        <div class="text-container__title-container">
+                            <h2 class="title-container__title">What is this app capable of?</h2>
                         </div>
-                        <div class="ab-text-description-container">
-                            <p class="ab-text-description">
+                        <div class="text-container__description-container">
+                            <p class="description-container__description">
                                 Imagine there is an app which incorporates many applications for travelling useful for
                                 travelling like Google Maps, Wikipedia, etc. Well, this app exists, and this is it.
                             </p>
                         </div>
                     </div>
-                    <div class="ab-icon-container right">
-                        <img class="ab-photo grouping-photo" src="resources/Grouping.png" alt="An illustration">
+                    <div class="intro-for-about__icon-container intro-for-about__icon-container--right">
+                        <img class="icon-container__icon" src="resources/Grouping.png" alt="An illustration">
                     </div>
                     <div class="ss-right-blur"></div>
                 </div>
-                <div class="about">
+                <div class="intro-for-about">
                     <div class="ss-left-blur left-blur-2"></div>
-                    <div class="ab-icon-container left">
-                        <img class="ab-photo more-photo" src="resources/More.png" alt="An illustration">
+                    <div class="intro-for-about__icon-container intro-for-about__icon-container--left">
+                        <img class="icon-container__icon" src="resources/More.png" alt="An illustration">
                     </div>
-                    <div class="ab-text-container">
-                        <div class="ab-text-title-container">
-                            <h2 class="ab-text-title">More things about it</h2>
+                    <div class="intro-for-about__text-container">
+                        <div class="text-container__title-container">
+                            <h2 class="title-container__title">More things about it</h2>
                         </div>
-                        <div class="ab-text-description-container">
-                            <p class="ab-text-description">
+                        <div class="text-container__description-container">
+                            <p class="description-container__description">
                                 Find you next city to visit, plan your vacation and plan the touristic objectives very
                                 easily. The app will help you finding the best solutions for almost anything in the area
                                 of
@@ -143,178 +145,180 @@
                 </div>
             </div>
         </section>
-        <section class="third-section">
-            <header class="second-type-header">
-                <div class="div-for-header-layout"></div>
-                <h1 class="title">
-                    <span class="title-text">ABOUT</span>
+        <section class="section section--third-section">
+            <header class="section__header">
+                <div class="header__div-for-layout"></div>
+                <h1 class="header__section-title">
+                    <span class="title__text">ABOUT</span>
                 </h1>
-                <div class="second-type-account-buttons">
+                <div class="header__second-type-account-buttons">
                     <div class="login-button">
-                        <a class="rs-link-to-login" href="login.html">Log in</a>
+                        <a class="login-button__link" href="login.html">Log in</a>
                     </div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            <div class="ts-second-row">
-                <p class="ab-intro-text">Let's have a look at what this app can actually do...</p>
-                <ul class="ab-container-for-grid">
-                    <li class="ab-info-card">
+            <div class="section__content-template-two">
+                <p class="content__about-intro-text">Let's have a look at what this app can actually do...</p>
+                <ul class="content__container-for-grid">
+                    <li class="about-card">
                         <div class="ts-blur left-blur blue"></div>
-                        <p class="ab-info-index blue">1</p>
-                        <p class="ab-info-description">
+                        <p class="about-card__number about-card__number--blue">1</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
-                    <li class="ab-info-card">
-                        <p class="ab-info-index violet">2</p>
-                        <p class="ab-info-description">
+                    <li class="about-card">
+                        <p class="about-card__number about-card__number--violet">2</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
-                    <li class="ab-info-card">
+                    <li class="about-card">
                         <div class="ts-blur right-blur pink"></div>
-                        <p class="ab-info-index pink">3</p>
-                        <p class="ab-info-description">
+                        <p class="about-card__number about-card__number--pink">3</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
-                    <li class="ab-info-card">
+                    <li class="about-card">
                         <div class="ts-blur left-blur pink"></div>
-                        <p class="ab-info-index pink">4</p>
-                        <p class="ab-info-description">
+                        <p class="about-card__number about-card__number--pink">4</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
-                    <li class="ab-info-card">
-                        <p class="ab-info-index blue">5</p>
-                        <p class="ab-info-description">
+                    <li class="about-card">
+                        <p class="about-card__number about-card__number--blue">5</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
-                    <li class="ab-info-card">
+                    <li class="about-card">
                         <div class="ts-blur right-blur violet"></div>
-                        <p class="ab-info-index violet">6</p>
-                        <p class="ab-info-description">
+                        <p class="about-card__number about-card__number--violet">6</p>
+                        <p class="about-card__idea">
                             Main point of this functionality. A short idea.
                         </p>
                     </li>
                 </ul>
             </div>
         </section>
-        <section class="fourth-section">
-            <header class="second-type-header">
-                <div class="div-for-header-layout"></div>
-                <h1 class="title">
-                    <span class="title-text">DESTINATIONS</span>
+        <section class="section section--fourth-section" id="destinations">
+            <header class="section__header">
+                <div class="header__div-for-layout"></div>
+                <h1 class="header__section-title">
+                    <span class="title__text">DESTINATIONS</span>
                 </h1>
-                <div class="second-type-account-buttons">
+                <div class="header__second-type-account-buttons">
                     <div class="login-button">
-                        <a class="rs-link-to-login" href="login.html">Log in</a>
+                        <a class="login-button__link" href="login.html">Log in</a>
                     </div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            <!-- Delete next 6 lines -->
+            <!-- TODO Delete next 3 lines -->
             <div class="coming-soon-container">
                 <p class="coming-soon">Coming soon...</p>
             </div>
         </section>
-        <section class="fifth-section">
-            <header class="second-type-header">
-                <div class="div-for-header-layout"></div>
-                <h1 class="title">
-                    <span class="title-text">REVIEWS</span>
+        <section class="section section--fifth-section" id="reviews">
+            <header class="section__header">
+                <div class="header__div-for-layout"></div>
+                <h1 class="header__section-title">
+                    <span class="title__text">REVIEWS</span>
                 </h1>
-                <div class="second-type-account-buttons">
+                <div class="header__second-type-account-buttons">
                     <div class="login-button">
-                        <a class="rs-link-to-login" href="login.html">Log in</a>
+                        <a class="login-button__link" href="login.html">Log in</a>
                     </div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            <div class="fth-second-row">
-                <div class="rvw-infos">
-                    <p class="rvw-info-intro">
+            <div class="section__content-template-two">
+                <div class="content__review-intro-text">
+                    <p class="review-intro-text__title">
                         We are not the only ones praising our app.
                     </p>
-                    <p class="rvw-info-description">
+                    <p class="review-intro-text__description">
                         If you are still skeptic, have a look on what other people had to say about this app. We will
                         let
                         them words speak for ourselfs.
                     </p>
                 </div>
-                <div class="reviews">
-                    <div class="review not-main">
-                        <div class="user-details">
-                            <div class="user-photo-container">
+                <div class="reviews-container">
+                    <div class="review review--not-main">
+                        <div class="review__user-container">
+                            <div class="review__user-photo-container">
                             </div>
-                            <p class="user-name">Username</p>
+                            <p class="review__user-name">Username</p>
                         </div>
-                        <div class="user-review">
-                            <img class="quote-photo first" src="resources/Quote.png" alt="quotes">
+                        <div class="review__user-opinion">
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--first"
+                                src="resources/Quote.png" alt="quotes">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit excepturi vero aliquam
                             labore, consequatur laboriosam eveniet, reiciendis fugiat modi illum inventore magni
                             exercitationem? Libero voluptate quisquam eum, esse nihil amet.
-                            <img class="quote-photo last" src="resources/Quote.png" alt="quotes">
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--last"
+                                src="resources/Quote.png" alt="quotes">
                         </div>
                     </div>
-                    <div class="review main">
-                        <div class="user-details">
-                            <div class="user-photo-container">
+                    <div class="review review--main">
+                        <div class="review__user-container">
+                            <div class="review__user-photo-container">
                             </div>
-                            <p class="user-name">Username</p>
+                            <p class="review__user-name">Username</p>
                         </div>
-                        <div class="user-review">
-                            <img class="quote-photo first" src="resources/Quote.png" alt="quotes">
+                        <div class="review__user-opinion">
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--first"
+                                src="resources/Quote.png" alt="quotes">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit excepturi vero aliquam
                             labore, consequatur laboriosam eveniet, reiciendis fugiat modi illum inventore magni
                             exercitationem? Libero voluptate quisquam eum, esse nihil amet.
-                            <img class="quote-photo last" src="resources/Quote.png" alt="quotes">
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--last"
+                                src="resources/Quote.png" alt="quotes">
                         </div>
                     </div>
-                    <div class="review not-main">
-                        <div class="user-details">
-                            <div class="user-photo-container">
+                    <div class="review review--not-main">
+                        <div class="review__user-container">
+                            <div class="review__user-photo-container">
                             </div>
-                            <p class="user-name">Username</p>
+                            <p class="review__user-name">Username</p>
                         </div>
-                        <div class="user-review">
-                            <img class="quote-photo first" src="resources/Quote.png" alt="quotes">
-                            <p class="user-review-text">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit excepturi vero aliquam
-                                labore, consequatur laboriosam eveniet, reiciendis fugiat modi illum inventore magni
-                                exercitationem? Libero voluptate quisquam eum, esse nihil amet.
-                            </p>
-                            <img class="quote-photo last" src="resources/Quote.png" alt="quotes">
+                        <div class="review__user-opinion">
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--first"
+                                src="resources/Quote.png" alt="quotes">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit excepturi vero aliquam
+                            labore, consequatur laboriosam eveniet, reiciendis fugiat modi illum inventore magni
+                            exercitationem? Libero voluptate quisquam eum, esse nihil amet.
+                            <img class="user-opinion__quote-photo user-opinion__quote-photo--last"
+                                src="resources/Quote.png" alt="quotes">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="sixth-section">
-            <header class="second-type-header">
-                <div class="div-for-header-layout"></div>
-                <h1 class="title">
-                    <span class="title-text">CONTACT</span>
+        <section class="section section--sixth-section" id="contact">
+            <header class="section__header">
+                <div class="header__div-for-layout"></div>
+                <h1 class="header__section-title">
+                    <span class="title__text">CONTACT</span>
                 </h1>
-                <div class="second-type-account-buttons">
+                <div class="header__second-type-account-buttons">
                     <div class="login-button">
-                        <a class="rs-link-to-login" href="login.html">Log in</a>
+                        <a class="login-button__link" href="login.html">Log in</a>
                     </div>
-                    <a class="rs-link-to-register" href="register.html">
-                        <div class="rs-sign-up-button">Sign up</div>
+                    <a class="sign-up-button__link" href="register.html">
+                        <div class="sign-up-button">Sign up</div>
                     </a>
                 </div>
             </header>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos explicabo autem error nemo quos incidunt.
-            Quibusdam, minima quas! Et optio cumque veritatis quasi amet neque sit tempora, incidunt esse quam!
         </section>
     </main>
 </body>

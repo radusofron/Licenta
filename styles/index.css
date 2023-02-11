@@ -36,7 +36,7 @@ main.container-for-sections{
     scroll-snap-type: y mandatory;
     overflow-y: hidden;
 }
-section{
+section.section{
     padding: 0vh 5vw;
     padding-top: 2.5vh;
     height: 97.5vh;
@@ -46,32 +46,38 @@ section{
     flex-wrap: wrap;
     scroll-snap-align: start;
 }
-
-
-
-/* <-- headers --> */
-/* --- 1st type --- */
-header.first-type-header{
+header.section__header{
     height: 10%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
 }
-.site-name{
+div.section__content-template-one{
+    height: 80%;
+    color: var(--white);
+    display: flex;
+}
+div.section__content-template-two{
+    position: relative;
+    height: 90%;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+
+
+/* <-- header elements --> */
+/* --- only for section 1 --- */
+.header__site-name-title{
     flex-basis: 30%;
     margin-right: 5vh;
     animation:  site-name-from-left-animation 1s;
 }
-.site-name-text{
-    font-weight: var(--semibold);
-    font-size: 5vh;
-    background-image: linear-gradient(to right, var(--blue), var(--white));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.first-type-account-buttons{
+.header__first-type-account-buttons{
     flex-basis: 70%;
     font-weight: var(--semibold);
     font-size: 2vh;
@@ -84,54 +90,20 @@ header.first-type-header{
     column-gap: 2.5vh;
     animation: come-from-right-animation 1s;
 }
-div.login-button{
-    padding: 0.5vh 0vh;
-    background-color: transparent;
-}
-.rs-link-to-login{
-    text-decoration: none;
-    color: var(--white);
-}
-div.rs-sign-up-button{
-    padding: 0.5vh 3vh;
-    border-radius: 0.33rem;
-    color: var(--white);
-    background-color: var(--blue);
-}
-.rs-link-to-register{
-    text-decoration: none;
-    color: var(--white);
-}
-/* --- 2nd type --- */
-header.second-type-header{
-    height: 10%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-}
-.div-for-header-layout{
+/* --- only for section 2, 3, 4, 5, 6 --- */
+.header__div-for-layout{
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0%;
 }
-.title{
+.header__section-title{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
 }
-.title-text{
-    font-weight: var(--semibold);
-    font-size: 5vh;
-    background-image: linear-gradient(to right, var(--blue), var(--white), var(--blue));
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-size: 200%;
-    color: transparent;
-}
-.second-type-account-buttons{
+.header__second-type-account-buttons{
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0%;
@@ -143,18 +115,39 @@ header.second-type-header{
     justify-content: flex-end;
     column-gap: 2.5vh;
 }
-
-
-
-/* <-- 1st section --> */
-/* --- 2nd row --- */
-div.fs-second-row{
-    height: 80%;
-    color: var(--white);
-    display: flex;
-    flex-direction: row;
+/* --- for all sections ---- */
+.title__text{
+    font-weight: var(--semibold);
+    font-size: 5vh;
+    background-image: linear-gradient(to right, var(--blue), var(--white));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
-.text-container{
+div.login-button{
+    padding: 0.5vh 0vh;
+    background-color: transparent;
+}
+.login-button__link{
+    text-decoration: none;
+    color: var(--white);
+}
+div.sign-up-button{
+    padding: 0.5vh 3vh;
+    border-radius: 0.33rem;
+    color: var(--white);
+    background-color: var(--blue);
+}
+.sign-up-button__link{
+    text-decoration: none;
+    color: var(--white);
+}
+
+
+
+/* <-- content elements --> */
+/* --- 1st section --- */
+.content__text-container{
     flex-basis: 30%;
     margin-right: 5vh;
     margin-top: 5vh;
@@ -165,7 +158,7 @@ div.fs-second-row{
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-.subtitle{
+.text-container__subtitle{
     font-weight: var(--medium);
     font-size: 5vh;
     display: flex;
@@ -173,10 +166,10 @@ div.fs-second-row{
     flex-wrap: wrap;
     animation: subtitle-display-animation 2.5s;
 }
-.subtitle-word{
+.subtitle__word{
     flex-basis: 100%;
 }
-.ideas{
+.text-container__main-ideas{
     font-weight: var(--regular);
     font-size: 2vh;
     display: flex;
@@ -185,10 +178,10 @@ div.fs-second-row{
     row-gap: 5vh;
     animation: ideas-display-animation 3s;
 }
-.idea{
+.main-ideas__idea{
     flex-basis: 100%;
 }
-div.ls-sign-up-button{
+div.text-container__sign-up-button{
     padding: 1.5vh 3vh;
     border-radius: 0.33rem;
     font-weight: var(--semibold);
@@ -203,12 +196,8 @@ div.ls-sign-up-button{
     transition: all 500ms ease-out;
     animation: left-sign-up-button-animation 3.5s;
 }
-div.ls-sign-up-button:hover{
+div.text-container__sign-up-button:hover{
     background-position: right center;
-}
-.ls-link-to-register{
-    text-decoration: none;
-    color: var(--white);
 }
 .photo-slider{
     flex-basis: 70%;
@@ -226,15 +215,15 @@ div.ls-sign-up-button:hover{
     opacity: 1;
     transition: 1.5s ease-out
 }
-.photo-container-2{
+.photo-container--2{
     position: absolute;
     top: 0;
 }
-.photo-container-3{
+.photo-container--3{
     position: absolute;
     top: 0;
 }
-.photo-container-4{
+.photo-container--4{
     position: absolute;
     top: 0;
 }
@@ -245,59 +234,6 @@ div.ls-sign-up-button:hover{
     width: 100%;
     object-fit: cover;
     object-position: center;
-}
-/* --- 3rd row --- */
-div.fs-third-row{
-    height: 10%;
-    color: var(--white);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
-.div-for-layout{
-    flex-basis: 30%;
-    margin-right: 2.5vh;
-}
-.buttons{
-    flex-basis: 70%;
-    margin: 0vh 1.25vh;
-    font-weight: var(--semibold);
-    font-size: 2vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center; 
-    animation: come-from-right-animation 2s;
-}
-.link-to-same-page{
-    position: relative;
-    text-decoration: none;
-    color: var(--white);
-}
-.link-to-same-page::before{
-    position: absolute;
-    content: '';
-    top: 100%;
-    height: 0.25vh;
-    width: 0;
-    background-color: var(--white);
-    transition: all 750ms ease-out;
-}
-.link-to-same-page:hover::before{
-    width: 100%;
-}
-.link-to-same-page::after{
-    position: absolute;
-    content: '';
-    top: 100%;
-    left: 0;
-    height: 0.25vh;
-    width: 100%;
-    background-color: var(--white);
-}
-.link-to-same-page:hover::after{
-    width: 0;
 }
 /* !!! animations --> 1st section !!! */
 @keyframes subtitle-display-animation{
@@ -351,29 +287,17 @@ div.fs-third-row{
 }
 
 
-
-
-/* <-- 2nd section --> */
-/* --- 2nd row --- */
-div.ss-second-row{
+/* --- 2nd section --- */
+.intro-for-about{
     position: relative;
-    height: 90%;
-    color: var(--white);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-}
-.about{
-    position: relative;
-    flex-basis: 24.44%;
+    flex-basis: 25%;
     display:flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: stretch;
     z-index: 1;
 }
-.ab-icon-container{
+.intro-for-about__icon-container{
     flex-basis: 25%;
     box-shadow: 0rem 0rem 1rem 0.4rem var(--extra-dark-grey);
     border-radius: 0.66rem;
@@ -384,37 +308,37 @@ div.ss-second-row{
     justify-content: center;
     align-items: center;
 }
-.ab-photo{
+.icon-container__icon{
     width: 50%;
     height: 50%;
     object-fit: contain;
     object-position: center;
 }
-.ab-text-container{
+.intro-for-about__text-container{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: stretch;
 }
-.ab-text-title-container{
+.text-container__title-container{
     flex-basis: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.ab-text-title{
+.title-container__title{
     flex-basis: 70%;
     font-size: 3vh;
     font-weight: var(--semibold);
     text-align: left;
 }
-.ab-text-description-container{
+.text-container__description-container{
     flex-basis: 60%;
     display: flex;
     align-items: stretch;
     justify-content: center;
 }
-.ab-text-description{
+.description-container__description{
     flex-basis: 70%;
     font-size: 2vh;
     font-weight: var(--regular);
@@ -481,28 +405,19 @@ div.ss-second-row{
 }
 
 
-/* <-- 3rd section --> */
-.third-section{
+/* --- 3rd section --- */
+.section--third-section{
     position: relative;
     z-index: 1;
 }
-/* --- 2nd row --- */
-.ts-second-row{
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    justify-content: space-evenly;
-}
-.ab-intro-text{
+.content__about-intro-text{
     flex-basis: 10%;
     color: var(--white);
     font-size: 3vh;
     font-weight: var(--medium);
     animation: about-from-left-animation 
 }
-.ab-container-for-grid{
+.content__container-for-grid{
     flex-basis: 70%;
     list-style: none;
     display: grid;
@@ -511,7 +426,7 @@ div.ss-second-row{
     row-gap: 7.5vh;
     column-gap: 7.5vw;
 }
-.ab-info-card{
+.about-card{
     position: relative;
     border-radius: 0.66rem;
     box-shadow: 0rem 0rem 1rem 0.4rem var(--extra-dark-grey);
@@ -521,23 +436,23 @@ div.ss-second-row{
     flex-wrap: nowrap;
     align-items: center;
 }
-.ab-info-index{
+.about-card__number{
     flex-basis: 20%;
     padding: 1vh 1vw;
     font-size: 10vh;
     font-weight: var(--medium);
     text-align: center;
 }
-.ab-info-index.blue{
+.about-card__number.about-card__number--blue{
     color: var(--blue);
 }
-.ab-info-index.violet{
+.about-card__number.about-card__number--violet{
     color: var(--violet);
 }
-.ab-info-index.pink{
+.about-card__number.about-card__number--pink{
     color: var(--pink);
 }
-.ab-info-description{
+.about-card__idea{
     flex-basis: 80%;
     padding: 1vh 1vw;
     font-size: 2vh;
@@ -545,7 +460,7 @@ div.ss-second-row{
     color: var(--white);
     text-align: center;
 }
-/* design elements for 3rd row */
+/* design elements for 3rd section */
 .ts-blur{
     position: absolute;
     height: 70%;
@@ -621,8 +536,7 @@ div.ss-second-row{
 }
 
 
-
-/* <-- 4th section --> */
+/* --- 4th section --- */
 .coming-soon-container{
     height: 90%;
     display: flex;
@@ -637,34 +551,25 @@ div.ss-second-row{
 }
 
 
-/* <-- 5th section --> */
-/* --- 2nd row --- */
-.fth-second-row{
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-    color: var(--white);
-}
-.rvw-infos{
+/* --- 5th section --- */
+.content__review-intro-text{
     flex-basis: 20%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
-.rvw-info-intro{
+.review-intro-text__title{
     flex-basis: 50%;
     font-size: 3vh;
     font-weight: var(--medium);
 }
-.rvw-info-description{
+.review-intro-text__description{
     flex-basis: 50%;
     font-size: 2vh;
     font-weight: var(--regular);
 }
-.reviews{
+.reviews-container{
     flex-basis: 60%;
     display: flex;
     flex-direction: row;
@@ -679,13 +584,13 @@ div.ss-second-row{
     flex-wrap: nowrap;
     transform: scale(0.9);
 }
-.main{
+.review.review--main{
     transform: scale(1.1);
 }
-.review.not-main{
+.review.review--not-main{
     transform: translateY(-10%);
 }
-.user-details{
+.review__user-container{
     flex-basis: 20%;
     margin: 0vh 1vw;
     border-bottom: 0.25rem solid var(--violet);
@@ -695,19 +600,19 @@ div.ss-second-row{
     justify-content: space-evenly;
     align-items: center;
 }
-.user-photo-container{
+.review__user-photo-container{
     height: 3.5rem;
     width: 3.5rem;
     border-radius: 50%;
     background-color: var(--grey);
 }
-.user-name{
+.review__user-name{
     flex-basis: 60%;
     font-size: 2vh;
     font-weight: var(--medium);
     text-align: center;
 }
-.user-review{
+.review__user-opinion{
     position: relative;
     flex-basis: 80%;
     margin: 1vh 2vw;
@@ -717,23 +622,88 @@ div.ss-second-row{
     align-items: center;
     justify-content: center;
 }
-.quote-photo{
+.user-opinion__quote-photo{
     position: absolute;
     height: 15%;
     width: 20%;
 }
-.quote-photo.first{
+.user-opinion__quote-photo.user-opinion__quote-photo--first{
     top: 0;
     left: 0;
 }
-.quote-photo.last{
+.user-opinion__quote-photo.user-opinion__quote-photo--last{
     bottom: 0;
     left: 80%;
 }
 
 
-
-/* <-- 6th section --> */
-.sixth-section{
+/* --- 6th section --- */
+.section.section--sixth-section{
     background-color: red;
+}
+
+
+
+/* navigation -> -> 1st section */
+.nav{
+    height: 10%;
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.nav__div-for-layout{
+    flex-basis: 30%;
+    margin-right: 2.5vh;
+}
+.nav__menu{
+    flex-basis: 70%;
+    list-style: none;
+    margin: 0vh 1.25vh;
+    font-weight: var(--semibold);
+    font-size: 2vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center; 
+    animation: come-from-right-animation 2s;
+}
+.menu__link{
+    position: relative;
+    text-decoration: none;
+    color: var(--white);
+}
+.menu__link::before{
+    position: absolute;
+    content: '';
+    top: 100%;
+    height: 0.25vh;
+    width: 0;
+    background-color: var(--white);
+    transition: all 750ms ease-out;
+}
+.menu__link:hover::before{
+    width: 100%;
+}
+.menu__link::after{
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    height: 0.25vh;
+    width: 100%;
+    background-color: var(--white);
+}
+.menu__link:hover::after{
+    width: 0;
+}
+/* !!! animations - > 1st section, navigation !!! */
+@keyframes come-from-right-animation{
+    0%{
+        transform: translateX(200%);
+    }
+    100%{
+        transform: translateX(0);
+    }
 }
