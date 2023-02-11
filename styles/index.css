@@ -194,7 +194,7 @@ div.text-container__sign-up-button{
     justify-content: center;
     align-items: stretch;
     transition: all 500ms ease-out;
-    animation: left-sign-up-button-animation 3.5s;
+    animation: start-the-journey-appear-animation 3.5s, start-the-journey-pop-up-animation 10s infinite;
 }
 div.text-container__sign-up-button:hover{
     background-position: right center;
@@ -258,7 +258,7 @@ div.text-container__sign-up-button:hover{
         opacity: 1;
     }
 }
-@keyframes left-sign-up-button-animation{
+@keyframes start-the-journey-appear-animation{
     0%{
         opacity: 0;
     }
@@ -267,6 +267,26 @@ div.text-container__sign-up-button:hover{
     }
     100%{
         opacity: 1;
+    }
+}
+@keyframes start-the-journey-pop-up-animation{
+    0%{
+        transform: scale(1);
+    }
+    80%{
+        transform: scale(1);
+    }
+    85%{
+        transform: scale(1.075);
+    }
+    90%{
+        transform: scale(1);
+    }
+    95%{
+        transform: scale(1.075);
+    }
+    100%{
+        transform: scale(1);
     }
 }
 @keyframes site-name-from-left-animation{

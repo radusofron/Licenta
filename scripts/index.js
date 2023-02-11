@@ -40,7 +40,8 @@ function changePhoto() {
     }
     nextActiveImage.setAttribute(attribute, "");
 }
-let setIntervalID = setInterval(changePhoto, 6000);
+let intervalIdForPhotos = setInterval(changePhoto, 7000);
+// let intervalIdForStartTheJourney = null;
 let alreadyOnViewport = true;
 let alreadyOutOfViewport = false;
 
@@ -74,9 +75,13 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
         if(alreadyOnViewport == false)
         {
             // turn on "changing" photo slider
-            setIntervalID = setInterval(changePhoto, 7000);    
+            intervalIdForPhotos = setInterval(changePhoto, 7000);    
             alreadyOnViewport = true;
             alreadyOutOfViewport = false;
+
+            // turn on "pop up" start the journey button
+            startTheJourney = document.querySelector(".text-container__sign-up-button");
+            startTheJourney.style.animationPlayState = 'running';
         }
     }
     //  not anymore in the first section
@@ -84,9 +89,13 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
         if (alreadyOutOfViewport == false)
         {
             // turn off "changing" photo slider
-            clearInterval(setIntervalID);
+            clearInterval(intervalIdForPhotos);
             alreadyOnViewport = false;
             alreadyOutOfViewport = true;
+
+            // turn off "pop up" start the journey buttom
+            startTheJourney = document.querySelector(".text-container__sign-up-button");
+            startTheJourney.style.animationPlayState = 'paused';
         }
     }
 }
