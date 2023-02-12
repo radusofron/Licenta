@@ -1,4 +1,5 @@
 :root {
+    --light-grey: #A4ACB6;
     --grey: #808080;
     --dark-grey: #373C44;
     --extra-dark-grey: #232426;
@@ -16,9 +17,6 @@
 }
 
 body{
-    /* TODO - delete these 2 lines later */
-    /*       TOP RIGHT BTM LEFT     ->       TOP RIGHT */
-    /* padding: 0vh 10vh; */
     height: 100vh;
     width: 100vw;
     background-color: var(--dark-grey);
@@ -564,7 +562,7 @@ div.text-container__sign-up-button:hover{
     align-items: center;
 }
 .coming-soon{
-    font-size: 5vh;
+    font-size: 3vh;
     font-weight: var(--medium);
     color: var(--white);
     text-align: center;
@@ -599,10 +597,14 @@ div.text-container__sign-up-button:hover{
 }
 .review{
     flex-basis: 25%;
+    border-radius: 0.66rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    transform: scale(0.9);
+    transition: 0.5s ease-out;
+}
+.review:hover{
+    box-shadow: 0rem 0rem 1rem 0.4rem var(--violet);
 }
 .review.review--main{
     transform: scale(1.1);
@@ -658,8 +660,70 @@ div.text-container__sign-up-button:hover{
 
 
 /* --- 6th section --- */
-.section.section--sixth-section{
-    background-color: red;
+.contact{
+    padding: 0vh 10vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+.contact__intro-text{
+    flex-basis: 10%;
+    font-size: 3vh;
+    font-weight: var(--medium);
+    text-align: left;
+}
+.contact__container{
+    flex-basis: 70%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 1vw;
+    row-gap: 3vh;
+}
+.container__option-available{
+    border-radius: 0.66rem;
+    box-shadow: 0rem 0rem 1rem 0.4rem var(--extra-dark-grey);
+    background: linear-gradient(to bottom right, var(--dark-grey), var(--light-grey), var(--dark-grey));
+    background-size: 200%;
+    background-position: bottom right;
+    opacity: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.35s ease-out;
+}
+.container__option-available:hover{
+    background-position: top left;
+}
+.option-available__icon{
+    object-position: center;
+}
+.container__option-displayed{
+    padding: 1vh 1vw;
+    opacity: 0;
+    color: var(--pink);
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease-out;
+}
+.option-displayed__title{
+    flex-basis: 40%;
+    font-size: 3vh;
+    font-weight: var(--semibold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.option-displayed__description{
+    flex-basis: 60%;
+    font-size: 2vh;
+    font-weight: var(--regular);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 
@@ -716,7 +780,7 @@ div.text-container__sign-up-button:hover{
     background-color: var(--white);
 }
 .menu__link:hover::after{
-    width: 0;
+    opacity: 0;
 }
 /* !!! animations - > 1st section, navigation !!! */
 @keyframes come-from-right-animation{

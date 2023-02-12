@@ -1,4 +1,4 @@
-/* Code for enabling scrolling option after 6 seconds */
+/* Code for enabling scrolling option after 3.5 seconds */
 const mainContainer = document.querySelector("main.container-for-sections");
 function enableScrolling() {
     mainContainer.style["overflow-y"] = 'scroll';
@@ -47,6 +47,20 @@ let alreadyOutOfViewport = false;
 
 
 
+/* Code to detect if user already passed the animation zone */
+// extract links which passes the animation zone
+let passingAnimationsLinks = document.querySelectorAll(".menu__link--passing-animations");
+let animationZonePassed = false;
+for (let i = 0; i < passingAnimationsLinks.length; i++)
+{
+    passingAnimationsLinks[i].onclick = function(){
+        animationZonePassed = true;
+    } 
+}
+
+
+
+
 /* Code to determine if a section is in the viewport or not */
 // extract user's viewport height and width
 const userHeight = document.documentElement.clientHeight;
@@ -72,7 +86,7 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
     // now in the first section
     if (liveFirstSectionY >= 0 && liveFirstSectionY <= firstSectionHeight)
     {
-        if(alreadyOnViewport == false)
+        if(!alreadyOnViewport)
         {
             // turn on "changing" photo slider
             intervalIdForPhotos = setInterval(changePhoto, 7000);    
@@ -86,7 +100,7 @@ function firstSectionAnimations(liveFirstSectionY, firstSectionHeight) {
     }
     //  not anymore in the first section
     else{
-        if (alreadyOutOfViewport == false)
+        if (!alreadyOutOfViewport)
         {
             // turn off "changing" photo slider
             clearInterval(intervalIdForPhotos);
@@ -127,7 +141,7 @@ function secondSectionAnimations(liveSecondSectionY, secondSectionHeight) {
 function thirdSectionAnimations(liveThirdSectionY, thirdSectionHeight){
     // FIXME -> to be 0
     // now in the third section
-    if (liveThirdSectionY >= -1 && liveThirdSectionY < (thirdSectionHeight - 1))
+    if (liveThirdSectionY >= -1 && liveThirdSectionY < (thirdSectionHeight - 0.5))
     {
         // extract elements which will contain animations
         let introText = document.querySelector(".content__about-intro-text");
@@ -162,10 +176,49 @@ mainContainer.addEventListener('scroll', function() {
     firstSectionAnimations(liveSectionsY[0], sectionsHeights[0]);
 
     // animations for second section
-    if (sectionsVisited[1] == false){
+    if (!sectionsVisited[1] && !animationZonePassed){
         secondSectionAnimations(liveSectionsY[1], sectionsHeights[1]);
     }
-    if (sectionsVisited[2] == false){
+    if (!sectionsVisited[2] && !animationZonePassed){
         thirdSectionAnimations(liveSectionsY[2], sectionsHeights[2]);
     }
+});
+
+
+
+/* Code to display contact information */
+// extract contact options elements
+const locationOption = document.querySelector(".container__option-available--location");
+const phoneOption = document.querySelector(".container__option-available--phone");
+const mailOption = document.querySelector(".container__option-available--mail");
+const instagramOption = document.querySelector(".container__option-available--instagram");
+const locationContent = document.querySelector(".container__option-displayed--location");
+const phoneContent = document.querySelector(".container__option-displayed--phone");
+const mailContent = document.querySelector(".container__option-displayed--mail");
+const instagraContent = document.querySelector(".container__option-displayed--instagram");
+
+// check when an option is hovered and process accordingly
+locationOption.addEventListener('mouseover', function() {
+    locationContent.style["opacity"] = '1';
+    phoneContent.style["opacity"] = '0';
+    mailContent.style["opacity"] = '0';
+    instagraContent.style["opacity"] = '0';
+});
+phoneOption.addEventListener('mouseover', function() {
+    phoneContent.style["opacity"] = '1';
+    locationContent.style["opacity"] = '0';
+    mailContent.style["opacity"] = '0';
+    instagraContent.style["opacity"] = '0';
+});
+mailOption.addEventListener('mouseover', function() {
+    mailContent.style["opacity"] = '1';
+    locationContent.style["opacity"] = '0';
+    phoneContent.style["opacity"] = '0';
+    instagraContent.style["opacity"] = '0';
+});
+instagramOption.addEventListener('mouseover', function() {
+    instagraContent.style["opacity"] = '1';
+    locationContent.style["opacity"] = '0';
+    mailContent.style["opacity"] = '0';
+    phoneContent.style["opacity"] = '0';;
 });
