@@ -1,0 +1,67 @@
+/* CSS standard */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Montserrat';
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input {
+    border: 1px solid #b0b0b0;
+    padding: 3px 5px 4px;
+    color: #979797;
+    width: 190px;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol,
+ul,
+dl {
+    list-style: none;
+}
+
+q:before,
+q:after {
+    content: "";
+}
+
+a{
+    text-decoration: none;
+}
+
+/* CSS general */
+
+:root {
+    --blue: #608DB8;
+    --grey: #8C98AD;
+    --dark-grey: #3B3941;
+    --light-pink: #C4A4A4;
+    --pink: #D7897E;
+    --glow-pink: #d49991;
+    --dark-pink: #7B5A60;
+    --white: #FFFFFF;
+    --white-12-5: rgb(255, 255, 255, 0.125);
+    --white-25: rgb(255, 255, 255, 0.25);
+    --white-50: rgb(255, 255, 255, 0.5);
+    --regular: 400;
+    --medium: 500;
+    --semibold: 600;
+    --bold: 700;
+    --extrabold: 800;
+}

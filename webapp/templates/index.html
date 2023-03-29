@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}" />
+{% endblock %}
+
+{% block title %} Site name {% endblock %}
+
+{% block body %}
+<main>
+    <img class="background-image" src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
+        alt="Image of a city" />
+    <header>
+        <a class="site-name" href="{{ url_for('index_view_blueprint.index_view') }}">SITE NAME</a>
+        <ul class="header-options">
+            <li class="header-option">About</li>
+            <li class="header-option">Destinations</li>
+            <li class="header-option">Reviews</li>
+            <li class="header-option">Contact</li>
+        </ul>
+        <div class="account-buttons">
+            <a class="login-button" href="{{ url_for('login_view_blueprint.login_view') }}">Login</a>
+            <a class="sign-up-button" href="{{ url_for('register_view_blueprint.register_view') }}">Sign up</a>
+        </div>
+    </header>
+    <div class="subtitle">YOUR OWN TRAVEL AGENCY</div>
+    <ul class="paragraphs">
+        <li class="paragraph">Made by a traveller for the other travelers</li>
+        <li class="paragraph">Explore the capitals of Europe in a simpler way.</li>
+        <li class="paragraph">No more maps, travel guides or anything like that.</li>
+    </ul>
+    <a class="start-the-journey-button" href="{{ url_for('register_view_blueprint.register_view') }}">
+        Start the journey
+    </a>
+</main>
+{% endblock %}

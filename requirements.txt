@@ -1,0 +1,2 @@
+flask==2.2.1
+flask_api==3.0.post1

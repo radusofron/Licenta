@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}" />
+{% endblock %}
+
+{% block title %} Site name | Login {% endblock %}
+
+{% block body %}
+<main>
+    <section class="main-content">
+        <div class="login">
+            <div class="welcome">
+                <p class="message">Welcome back,</p>
+                <p class="username">Radu</p>
+            </div>
+            <div class="user-credentials">
+                <div class="email-container">
+                    <p class="email">E-mail</p>
+                    <input type="text">
+                </div>
+                <div class="password-container">
+                    <p class="password">Password</p>
+                    <input type="password">
+                </div>
+            </div>
+            <a class="login-button">Login</a>
+        </div>
+        <div class="sign-up">
+            <p class="question">Don't have an account?</p>
+            <a class="answear">Register now.</a>
+        </div>
+    </section>
+    <section class="side-content">
+        <img class="illustration" src="{{url_for('static', filename='/assets/illustrations/asset_login_page.png')}}"
+            alt="Some happy travellers">
+        <p class="msg_1">Start travelling again!</p>
+        <p class="msg_2">We missed you...</p>
+    </section>
+</main>
+{% endblock %}

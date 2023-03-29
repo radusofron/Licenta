@@ -1,0 +1,3 @@
+*cache*
+.vscode/*
+!./vscode/launch.json
