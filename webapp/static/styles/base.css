@@ -51,10 +51,12 @@ a{
     --blue: #608DB8;
     --grey: #8C98AD;
     --dark-grey: #3B3941;
-    --light-pink: #C4A4A4;
-    --pink: #D7897E;
-    --glow-pink: #d49991;
-    --dark-pink: #7B5A60;
+    --light-pink: #C4A4A4; /* FIGMA */
+    --pink: #D7897E; /* FIGMA */
+    --pink-0: rgba(215, 137, 126, 0);
+    --pink-50: rgba(215, 137, 126, 0.5);
+    --glow-pink: #d49991; /* HOVER FOR PINK */
+    --dark-pink: #7B5A60; /* FIGMA */
     --white: #FFFFFF;
     --white-12-5: rgb(255, 255, 255, 0.125);
     --white-25: rgb(255, 255, 255, 0.25);

@@ -1,3 +1,5 @@
+/* COMMON */
+
 main{
     position: relative;
     height: 100vh;
@@ -35,6 +37,7 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    cursor: pointer;
 }
 .header-options{
     flex-basis: 50%;
@@ -47,6 +50,7 @@ header{
 }
 .header-option{
     position: relative;
+    cursor: pointer;
 }
 .header-option::before{
     position: absolute;
@@ -107,10 +111,20 @@ header{
     align-items: center;
 }
 
-.paragraphs{
+section{
+    display: none;
     position: absolute;
     top: 32.5%;
+    height: 67.5vh;
     width: 100vw;
+}
+
+/* DIFFERENT */
+/* 1. Intro */
+section.intro{
+    color: white;
+}
+.paragraphs{
     height: 12.5vh;
     font-size: 2vh;
     font-weight: var(--regular);
@@ -120,12 +134,11 @@ header{
     justify-content: space-evenly;
     align-items: center;
 }
-
 .start-the-journey-button{
     position: absolute;
-    top: 70%;
+    top: 50%;
     left: 37.5%;
-    height: 5%;
+    height: 7%;
     width: 25%;
     font-size: 2.25vh;
     color: var(--white);
@@ -143,7 +156,6 @@ header{
 .start-the-journey-button:hover{
     background-position: left;
 }
-
 @keyframes start-the-journey-animation{
     0%{
         transform: scale(1);
@@ -163,4 +175,30 @@ header{
     100%{
         transform: scale(1);
     }
+}
+
+/* For the following sections */
+.gradient{
+    position: absolute;
+    top: 0%;
+    height: 67.5vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, var(--pink-0), var(--pink-50), var(--blue), var(--blue));
+    opacity: 75%;
+}
+
+/* 2. About */
+section.about{
+    color: white;
+}
+
+/* 3. Destinations */
+
+/* 4. Reviews */
+
+/* 5. Contact */
+
+/* To display one section at a time */
+section.active{
+    display: block;
 }

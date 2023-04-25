@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}" />
+<script src="{{ url_for('static', filename='scripts/index.js') }}" defer></script>
 {% endblock %}
 
 {% block title %} Site name {% endblock %}
@@ -11,12 +12,12 @@
     <img class="background-image" src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
         alt="Image of a city" />
     <header>
-        <a class="site-name" href="{{ url_for('index_view_blueprint.index_view') }}">SITE NAME</a>
+        <a class="site-name intro active">SITE NAME</a>
         <ul class="header-options">
-            <li class="header-option">About</li>
-            <li class="header-option">Destinations</li>
-            <li class="header-option">Reviews</li>
-            <li class="header-option">Contact</li>
+            <li class="header-option about">About</li>
+            <li class="header-option destinations">Destinations</li>
+            <li class="header-option reviews">Reviews</li>
+            <li class="header-option contact">Contact</li>
         </ul>
         <div class="account-buttons">
             <a class="login-button" href="{{ url_for('login_view_blueprint.login_view') }}">Login</a>
@@ -24,13 +25,31 @@
         </div>
     </header>
     <div class="subtitle">YOUR OWN TRAVEL AGENCY</div>
-    <ul class="paragraphs">
-        <li class="paragraph">Made by a traveller for the other travelers</li>
-        <li class="paragraph">Explore the capitals of Europe in a simpler way.</li>
-        <li class="paragraph">No more maps, travel guides or anything like that.</li>
-    </ul>
-    <a class="start-the-journey-button" href="{{ url_for('register_view_blueprint.register_view') }}">
-        Start the journey
-    </a>
+    <section class="section intro active">
+        <ul class="paragraphs">
+            <li class="paragraph">Made by a traveller for the other travelers</li>
+            <li class="paragraph">Explore the capitals of Europe in a simpler way.</li>
+            <li class="paragraph">No more maps, travel guides or anything like that.</li>
+        </ul>
+        <a class="start-the-journey-button" href="{{ url_for('register_view_blueprint.register_view') }}">
+            Start the journey
+        </a>
+    </section>
+    <section class="section about">
+        <div class="gradient"></div>
+        <div class="about__description">The idea behind the project</div>
+    </section>
+    <section class="section destinations">
+        <div class="gradient"></div>
+        A large variety of city
+    </section>
+    <section class="section reviews">
+        <div class="gradient"></div>
+        We are not the only ones praising our app.
+    </section>
+    <section class="section contact">
+        <div class="gradient"></div>
+        Where you can find us?
+    </section>
 </main>
 {% endblock %}
