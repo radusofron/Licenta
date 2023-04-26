@@ -1,3 +1,5 @@
+/* CONTENT LOADS / STYLES DINAMICALLY */
+
 // Function finds the section containing a class named "active"
 function findActiveSection(sections) {
     targetClassName = "active"
@@ -9,18 +11,37 @@ function findActiveSection(sections) {
     return activeSection
 }
 
-// Function removes class named "active"
+// Function removes class named "active" for a section
 function removeActiveSection(section) {
     section.classList.remove("active")
 }
 
-// Function adds class named "active"
+// Function adds class named "active" for a section
 function addActiveSection(section) {
     section.classList.add("active")
 }
 
+// Function finds the header option containing a class named "active" if exists one
+function findActiveOption() {
+    activeOption = document.querySelector(".header-option.active")
+    return activeOption
+}
+
+// Function removes class named "active" for a header option if exists one
+function removeActiveOption(option) {
+    if (option) {
+        option.classList.remove("active")
+    }
+}
+
+// Function adds class named "active" for a header option if a header option was clicked
+function addActiveOption(option) {
+    option.classList.add("active")
+}
+
 // Function starts when an option is clicked
-function option_display(option, sections) {
+function displayOptionAndSection(option, sections) {
+    // For sections
     const activeSection = findActiveSection(sections)
     removeActiveSection(activeSection)
     sections.forEach(section => {
@@ -29,7 +50,30 @@ function option_display(option, sections) {
         }
     });
     addActiveSection(wantedSection)
+
+    // For options
+    const activeOption = findActiveOption()
+    removeActiveOption(activeOption)
+    addActiveOption(option)
+    
 }
+
+
+/* RESPONSIVE */
+
+// Function opens / closes phone menu
+function displayPhoneMenu() {
+    const phoneMenu = document.querySelector(".phone-menu")
+    if (phoneMenu.classList[1] == "active") {
+        phoneMenu.classList.remove("active")
+    }
+    else {
+        phoneMenu.classList.add("active")
+    }
+}
+
+
+/* GENERAL */
 
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
@@ -40,10 +84,14 @@ window.addEventListener("load", function() {
     const options = Array.from(otherOptions).concat(defaultOption)
 
     // Get sections
-    const sections = this.document.querySelectorAll(".section")
+    const sections = document.querySelectorAll(".section")
 
     // Add an event listener for every header option
     options.forEach(option => {
-            option.addEventListener("click", () => option_display(option, sections))
+            option.addEventListener("click", () => displayOptionAndSection(option, sections))
         });
+
+    // Get menu
+    const menu = document.querySelector(".phone-menu-icon-container")
+    menu.addEventListener("click", () => displayPhoneMenu())
   });

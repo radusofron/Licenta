@@ -12,7 +12,9 @@
     <img class="background-image" src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
         alt="Image of a city" />
     <header>
-        <a class="site-name intro active">SITE NAME</a>
+        <div class="site-name-container">
+            <a class="site-name intro active">SITE NAME</a>
+        </div>
         <ul class="header-options">
             <li class="header-option about">About</li>
             <li class="header-option destinations">Destinations</li>
@@ -22,6 +24,9 @@
         <div class="account-buttons">
             <a class="login-button" href="{{ url_for('login_view_blueprint.login_view') }}">Login</a>
             <a class="sign-up-button" href="{{ url_for('register_view_blueprint.register_view') }}">Sign up</a>
+        </div>
+        <div class="phone-menu-icon-container">
+            <img class="phone-menu-icon" src="{{url_for('static', filename='/assets/illustrations/menu.png')}}">
         </div>
     </header>
     <div class="subtitle">YOUR OWN TRAVEL AGENCY</div>
@@ -51,5 +56,17 @@
         <div class="gradient"></div>
         Where you can find us?
     </section>
+    <nav class="phone-menu">
+        <ul class="header-options phone">
+            <li class="header-option about">About</li>
+            <li class="header-option destinations">Destinations</li>
+            <li class="header-option reviews">Reviews</li>
+            <li class="header-option contact">Contact</li>
+        </ul>
+        <div class="account-buttons phone">
+            <a class="login-button" href="{{ url_for('login_view_blueprint.login_view') }}">Login</a>
+            <a class="sign-up-button" href="{{ url_for('register_view_blueprint.register_view') }}">Sign up</a>
+        </div>
+    </nav>
 </main>
 {% endblock %}
