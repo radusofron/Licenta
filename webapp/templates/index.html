@@ -13,7 +13,7 @@
         alt="Image of a city" />
     <header>
         <div class="site-name-container">
-            <a class="site-name intro active">TOYO</a>
+            <a class="site-name intro active">TONYOU</a>
         </div>
         <ul class="header-options">
             <li class="header-option about">About</li>
@@ -83,13 +83,59 @@
     </section>
     <section class="section destinations">
         <div class="gradient"></div>
-        A large variety of city
+        <div class="destinations__container">
+            <div class="destinations__text">
+                <h3 class="destinations__title">A large variety of cities</h3>
+                <p class="destinations__description">From cities of Western Europe to the ones finding in east, we have
+                    them all. From London to Istanbul, from Oslo to Athens, we think that here you can find whatever you
+                    want.</p>
+            </div>
+            <div class="destinations__most-visited">
+                <h3 class="destinations__title">Check our most visited destinations</h3>
+                <ul class="destinations__list">
+                    {% for index in range(3) %}
+                    <li class="destinations__list-element">
+                        <div class="destinations__icon-container">
+                            <img class="destinations__icon"
+                                src="{{url_for('static', filename='/assets/illustrations/medal.png')}}">
+                        </div>
+                        <p class="destinations__name">City name</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </section>
     <section class="section reviews">
         <div class="gradient"></div>
-        We are not the only ones praising our app.
+        <div class="reviews__container">
+            <h3 class="reviews__title">We are not the only ones praising our app</h3>
+            <p class="reviews__description">If you are still skeptic, have a look on what other people had to say about
+                this app. We will let their words speak for ourselves.</p>
+            <ul class="reviews__list">
+                {% for index in range(3) %}
+                <li class="reviews__list-element">
+                    <p class="reviews__person">
+                    </p>
+                    <div class="reviews__review">
+                        <div class="reviews__review-icon-container">
+                            <img class="reviews__review-icon"
+                                src="{{url_for('static', filename='/assets/illustrations/quote.png')}}">
+                        </div>
+                        <p class="reviews__review-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae,
+                            quasi ex quo iusto unde eveniet cumque minima aspernatur animi dicta magnam sint enim. Ea,
+                            repudiandae numquam nulla ratione eum molestiae.</p>
+                        <div class="reviews__review-icon-container">
+                            <img class="reviews__review-icon"
+                                src="{{url_for('static', filename='/assets/illustrations/quote.png')}}">
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </section>
-    <section class="section contact">
+    <section class=" section contact">
         <div class="gradient"></div>
         Where you can find us?
     </section>

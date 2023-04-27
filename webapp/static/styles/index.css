@@ -202,7 +202,7 @@ section.intro.active{
     }
 }
 
-/* For the following sections: */
+/* A background gradient used in all the following sections: */
 .gradient{
     position: absolute;
     top: 0;
@@ -217,6 +217,7 @@ section.intro.active{
 /* 2. About */
 section.about.active{
     display: block;
+    height: 62.5vh;
 }
 ul.about__list{
     position: absolute;
@@ -224,7 +225,7 @@ ul.about__list{
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: stretch;
     z-index: 2;
 }
@@ -264,8 +265,80 @@ li.about__list-element{
 }
 
 /* 3. Destinations */
+section.destinations.active{
+    display: block;
+    height: 62.5vh;
+}
+.destinations__container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    z-index: 2;
+}
+.destinations__text{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5vh;
+}
+.destinations__title{
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+    text-align: center;
+}
+.destinations__description{
+    flex-basis: 50%;
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+    text-align: center;
+}
+.destinations__most-visited{
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5vh;
+}
+ul.destinations__list{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+li.destinations__list-element{
+    position: relative;
+    flex-basis: 25%;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 1rem var(--black-25);
+    background-color: var(--white-25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.destinations__icon-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+}
+.destinations__icon{
+    object-fit: content;
+}
+.destinations__name{
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+    text-align: center;
+}
 
 /* 4. Reviews */
+section.reviews.active{
+    display: block;
+    height: 62.5vh;
+}
 
 /* 5. Contact */
 
@@ -397,17 +470,26 @@ nav.phone-menu.active{
         height: 14%;
     }
 }
-/* 2. About */
+
+/* COMMON for the following sections: */
+/* 1. Background gradient used in all the following sections */
+/* 2. Scroll bar */
 @media (max-width: 700px){
     .gradient{
-        height: 75vh;
+        height: 85vh;
     }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+}
+
+/* 2. About */
+@media (max-width: 700px){
     section.about.active{
-        top: 25%;
-        height: 75vh;
+        top: 15%;
+        height: 80vh;
     }
     ul.about__list{
-        height: 85%;
         border-radius: 0.5rem;
         justify-content: inherit;
         gap: 10vh;
@@ -434,8 +516,30 @@ nav.phone-menu.active{
         font-weight: var(--regular);
         text-align: center;
     }
-    ::-webkit-scrollbar{
-        display: none;
+}
+/* 3. Destinations */
+@media (max-width: 700px){
+    section.destinations.active{
+        top: 15%;
+        height: 80vh;
     }
-
+    .destinations__container{
+        border-radius: 0.5rem;
+        justify-content: inherit;
+        gap: 10vh;
+        overflow-y: scroll;
+    }
+    ul.destinations__list{
+        display: flex;
+        flex-direction: column;
+        gap: 5vh;
+        align-items: stretch;
+    }
+    li.destinations__list-element{
+        justify-content: flex-start;
+        gap: 2.5vh;
+    }
+    .destinations__icon-container{
+        position: relative;
+    }
 }
