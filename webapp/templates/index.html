@@ -13,7 +13,7 @@
         alt="Image of a city" />
     <header>
         <div class="site-name-container">
-            <a class="site-name intro active">TONYOU</a>
+            <a class="site-name intro active">TOYO</a>
         </div>
         <ul class="header-options">
             <li class="header-option about">About</li>
@@ -109,14 +109,16 @@
     <section class="section reviews">
         <div class="gradient"></div>
         <div class="reviews__container">
-            <h3 class="reviews__title">We are not the only ones praising our app</h3>
-            <p class="reviews__description">If you are still skeptic, have a look on what other people had to say about
-                this app. We will let their words speak for ourselves.</p>
+            <div class="reviews_text">
+                <h3 class="reviews__title">We are not the only ones praising our app</h3>
+                <p class="reviews__description">If you are still skeptic, have a look on what other people had to say
+                    about
+                    this app. We will let their words speak for ourselves.</p>
+            </div>
             <ul class="reviews__list">
                 {% for index in range(3) %}
                 <li class="reviews__list-element">
-                    <p class="reviews__person">
-                    </p>
+                    <p class="reviews__person">Username</p>
                     <div class="reviews__review">
                         <div class="reviews__review-icon-container">
                             <img class="reviews__review-icon"

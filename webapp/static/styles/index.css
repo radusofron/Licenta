@@ -225,7 +225,7 @@ ul.about__list{
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 10vh;
     align-items: stretch;
     z-index: 2;
 }
@@ -291,7 +291,6 @@ section.destinations.active{
     text-align: center;
 }
 .destinations__description{
-    flex-basis: 50%;
     font-size: clamp(0.5rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     text-align: center;
@@ -338,6 +337,81 @@ li.destinations__list-element{
 section.reviews.active{
     display: block;
     height: 62.5vh;
+}
+.reviews__container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10vh;
+    z-index: 2;
+}
+.reviews_text{
+    gap: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.reviews__title{
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+    text-align: center;
+}
+.reviews__description{
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+    text-align: center;
+}
+ul.reviews__list{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+li.reviews__list-element{
+    flex-basis: 25%;
+    border-radius: 0.25rem;
+    box-shadow: 0rem 0rem 1rem var(--black-25);
+    background-color: var(--white-25);
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+.reviews__person{
+    flex-basis: 15%;
+    padding: 1rem;
+    border-bottom: 0.35rem solid var(--white-50);
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-weight: var(--semibold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reviews__review{
+    flex-basis: 85%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.reviews__review-icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.reviews__review-icon{
+    object-fit: cover;
+}
+.reviews__review-text{
+    height: 100%;
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 /* 5. Contact */
@@ -530,10 +604,8 @@ nav.phone-menu.active{
         overflow-y: scroll;
     }
     ul.destinations__list{
-        display: flex;
         flex-direction: column;
         gap: 5vh;
-        align-items: stretch;
     }
     li.destinations__list-element{
         justify-content: flex-start;
@@ -543,3 +615,32 @@ nav.phone-menu.active{
         position: relative;
     }
 }
+/* 4. Reviews */
+@media (max-width: 1200px){
+    .reviews__container{
+        border-radius: 0.5rem;
+        overflow-y: scroll;
+    }
+    ul.reviews__list{
+        flex-direction: column;
+        gap: 5vh;
+    }
+    li.reviews__list-element{
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+        width: 75%;
+    }
+} 
+@media (max-width: 700px){
+    section.reviews.active{
+        top: 15%;
+        height: 80vh;
+    }
+    ul.reviews__list{
+        justify-content: inherit;
+    }
+    li.reviews__list-element{
+        margin: 0;
+        width: 100%;
+    }
+} 
