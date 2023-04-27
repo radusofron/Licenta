@@ -63,12 +63,16 @@ function displayOptionAndSection(option, sections) {
 
 // Function opens / closes phone menu
 function displayPhoneMenu() {
+    // Get header background for phone menu & phone menu
     const phoneMenu = document.querySelector(".phone-menu")
+    const header = document.querySelector(".header-background")
     if (phoneMenu.classList[1] == "active") {
         phoneMenu.classList.remove("active")
+        header.classList.remove("active")
     }
     else {
         phoneMenu.classList.add("active")
+        header.classList.add("active")
     }
 }
 

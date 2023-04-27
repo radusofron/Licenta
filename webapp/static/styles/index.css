@@ -17,8 +17,8 @@ img.background-image{
     width: 120%;
     height: 120%;
     object-fit: cover;
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
     transform: scale(1.05);
 }
 
@@ -29,12 +29,12 @@ header{
     height: 12.5vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
+    z-index: 1;
 }
 .site-name-container{
     flex-basis: 25%;
-    font-size: 5vh;
+    font-size: clamp(1.5rem, 5vh, 7.5vh);
     font-weight: var(--medium);
     display: flex;
     flex-direction: row;
@@ -50,7 +50,7 @@ header{
 }
 .header-options{
     flex-basis: 50%;
-    font-size: 2vh;
+    font-size: clamp(0.5rem, 2vh, 5vh);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -84,7 +84,7 @@ header{
 }
 .account-buttons{
     flex-basis: 25%;
-    font-size: 2.1vh;
+    font-size: clamp(0.6rem, 2.1vh, 5vh);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -121,7 +121,7 @@ header{
     left: 15%; 
     width: 70%;
     height: 20vh;
-    font-size: 5vh;
+    font-size: clamp(1.5rem, 5vh, 7.5vh);
     font-weight: var(--medium);
     color: var(--white);
     display: flex;
@@ -136,17 +136,21 @@ section{
     top: 32.5%;
     height: 67.5vh;
     width: 90vw;
+    color: white;
 }
+
 
 
 /* DIFFERENT */
 /* 1. Intro */
-section.intro{
-    color: white;
+section.intro.active{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .paragraphs{
     height: 12.5vh;
-    font-size: 2vh;
+    font-size: clamp(0.5rem, 2vh, 5vh);
     font-weight: var(--regular);
     color: var(--white);
     display: flex;
@@ -160,7 +164,7 @@ section.intro{
     left: 37.5%;
     height: 7%;
     width: 25%;
-    font-size: 2.25vh;
+    font-size: clamp(0.65rem, 2.25vh, 5vh);
     color: var(--white);
     font-weight: var(--semibold);
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -170,6 +174,7 @@ section.intro{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     animation: start-the-journey-animation 10s infinite;
     transition: 500ms;
 }
@@ -197,7 +202,7 @@ section.intro{
     }
 }
 
-/* For the following sections */
+/* For the following sections: */
 .gradient{
     position: absolute;
     top: 0;
@@ -205,12 +210,57 @@ section.intro{
     height: 67.5vh;
     width: 100vw;
     background: linear-gradient(to bottom, var(--pink-0), var(--pink-50), var(--blue), var(--blue));
-    opacity: 75%;
+    opacity: 90%;
+    z-index: 1;
 }
 
 /* 2. About */
-section.about{
-    color: white;
+section.about.active{
+    display: block;
+}
+ul.about__list{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    z-index: 2;
+}
+li.about__list-element{
+    flex-basis: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.about__icon-container{
+    flex-basis: 20%;
+    border-radius: 0.5rem;
+    background-color: var(--white-25);
+    box-shadow: 0rem 0rem 1rem var(--black-25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about__icon{
+    object-fit: content;
+}
+.about__text{
+    flex-basis: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.about__title{
+    flex-basis: 35%;
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+}
+.about__description{
+    flex-basis: 65%;
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
 }
 
 /* 3. Destinations */
@@ -219,15 +269,26 @@ section.about{
 
 /* 5. Contact */
 
-/* To display one section at a time */
-section.active{
-    display: block;
-}
 
 
 /* RESPONSIVE */
 
 /* 0. Header */
+.header-background{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    height: 12.5vh;
+    width: 90vw; /* 5vw are left and right padding */
+    background-color: var(--light-blue);
+    transition: 250ms;
+    z-index: 0;
+}
+.header-background.active{
+    transform: translateX(-100%);
+}
 .phone-menu-icon-container{
     display: none;
 }
@@ -241,19 +302,18 @@ nav.phone-menu{
     left: 100%;
     padding-left: 20vw;
     padding-right: 20vw;
+    border-top: 0.25rem solid var(--blue);
     height: 87.5vh;
-    width: 60%;
+    width: 60vw; /* 20vw are left and right padding */
     background-color: var(--light-blue);
-    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     transition: 250ms;
-    z-index: -1;
+    z-index: 3;
 }
 nav.phone-menu.active{
     transform: translateX(-100%);
-    z-index: 1;
 }
 .header-options.phone{
     flex-basis: 60%;
@@ -319,13 +379,63 @@ nav.phone-menu.active{
 }
 @media (max-width: 700px){
     .subtitle{
-        top: 25%;
-    }
-    .paragraphs{
         display: none;
     }
-    .start-the-journey-button{
-        left: 15%;
-        width: 70%;
+    .intro{
+        align-items: stretch;
     }
+    .paragraph{
+        text-align: center;
+    }
+    .start-the-journey-button{
+        left: 12.5%;
+        width: 75%;
+    }
+}
+@media (max-width: 350px){
+    .start-the-journey-button{
+        height: 14%;
+    }
+}
+/* 2. About */
+@media (max-width: 700px){
+    .gradient{
+        height: 75vh;
+    }
+    section.about.active{
+        top: 25%;
+        height: 75vh;
+    }
+    ul.about__list{
+        height: 85%;
+        border-radius: 0.5rem;
+        justify-content: inherit;
+        gap: 10vh;
+        overflow-y: scroll;
+    }
+    li.about__list-element{
+        display: flex;
+        flex-direction: column;
+        gap: 5vh;
+    }
+    li.about__list-element.right{
+        flex-direction: column-reverse;
+    }
+    .about__text{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2.5vh;
+    }
+    .about__title{
+        text-align: center;
+    }
+    .about__description{
+        font-weight: var(--regular);
+        text-align: center;
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
 }
