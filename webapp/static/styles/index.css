@@ -252,14 +252,13 @@ li.about__list-element{
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: 2.5vh;
 }
-.about__title{
-    flex-basis: 35%;
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+.about__title{font-size: clamp(0.6rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
 }
 .about__description{
-    flex-basis: 65%;
+    height: 100%;
     font-size: clamp(0.5rem, 1.75vh, 5vh);
     font-weight: var(--medium);
 }
@@ -328,7 +327,7 @@ li.destinations__list-element{
     object-fit: content;
 }
 .destinations__name{
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
@@ -415,8 +414,77 @@ li.reviews__list-element{
 }
 
 /* 5. Contact */
-
-
+section.contact.active{
+    display: block;
+    height: 62.5vh;
+}
+.contact__container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10vh;
+    z-index: 2;
+}
+.contact__text{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5vh;
+}
+.contact__title{
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+    text-align: center;
+}
+.contact__description{
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+    text-align: center;
+}
+ul.contact__list{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+li.contact__list-element{
+    flex-basis: 17.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.5vh;
+}
+.contact__icon-container{
+    height: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 1rem var(--black-25);
+    background-color: var(--white-25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact__icon{
+    object-fit: cover;
+}
+.contact__name{
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-weight: var(--semibold);
+    text-align: center;
+}
+.contact__details{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.contact__detail{
+    flex-basis: 33.3%;
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+    text-align: center;
+}
 
 /* RESPONSIVE */
 
@@ -519,6 +587,10 @@ nav.phone-menu.active{
 
 /* 1. Intro */
 @media (max-width: 1200px){
+    .subtitle{
+        left: 10%;
+        width: 80%;
+    }
     .start-the-journey-button{
         left: 30%;
         width: 40%;
@@ -566,7 +638,7 @@ nav.phone-menu.active{
     ul.about__list{
         border-radius: 0.5rem;
         justify-content: inherit;
-        gap: 10vh;
+        gap: 7.5vh;
         overflow-y: scroll;
     }
     li.about__list-element{
@@ -576,12 +648,6 @@ nav.phone-menu.active{
     }
     li.about__list-element.right{
         flex-direction: column-reverse;
-    }
-    .about__text{
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 2.5vh;
     }
     .about__title{
         text-align: center;
@@ -600,7 +666,7 @@ nav.phone-menu.active{
     .destinations__container{
         border-radius: 0.5rem;
         justify-content: inherit;
-        gap: 10vh;
+        gap: 7.5vh;
         overflow-y: scroll;
     }
     ul.destinations__list{
@@ -618,7 +684,7 @@ nav.phone-menu.active{
 /* 4. Reviews */
 @media (max-width: 1200px){
     .reviews__container{
-        border-radius: 0.5rem;
+        border-radius: 0.25rem;
         overflow-y: scroll;
     }
     ul.reviews__list{
@@ -636,11 +702,56 @@ nav.phone-menu.active{
         top: 15%;
         height: 80vh;
     }
+    .reviews__container{
+        gap: 7.5vh;
+    }
     ul.reviews__list{
         justify-content: inherit;
+        gap: 7.5vh;
     }
     li.reviews__list-element{
         margin: 0;
         width: 100%;
     }
+    .reviews__review-text{
+        font-weight: var(--regular);
+    }
 } 
+/* 5. Contact */
+@media (max-width: 1200px){
+    .contact__container{
+        border-radius: 0.5rem;
+        overflow-y: scroll;
+    }
+    ul.contact__list{
+        flex-wrap: wrap;
+        gap: 10vh;
+    }
+    li.contact__list-element{
+        flex-basis: 40%;
+    }
+    .contact__icon-container{
+        height: max-content;
+    }
+}
+@media (max-width: 700px){
+    section.contact.active{
+        top: 15%;
+        height: 80vh;
+    }
+    .contact__container{
+        gap: 7.5vh;
+    }
+    ul.contact__list{
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 7.5vh;
+    }
+    li.contact__list-element{
+        flex-basis: 0;
+    }
+    .contact__detail{
+        font-weight: var(--regular);
+    }
+}

@@ -139,7 +139,50 @@
     </section>
     <section class=" section contact">
         <div class="gradient"></div>
-        Where you can find us?
+        <div class="contact__container">
+            <div class="contact__text">
+                <h3 class="contact__title">Where you can find us?</h3>
+                <p class="contact__description">You can get in touch with us in the following ways:</p>
+            </div>
+            <ul class="contact__list">
+                <li class="contact__list-element">
+                    <div class="contact__icon-container">
+                        <img class="contact__icon"
+                            src="{{url_for('static', filename='/assets/illustrations/address.png')}}">
+                    </div>
+                    <p class="contact__name">Address</p>
+                    <div class="contact__details">
+                        <p class="contact__detail">Country: name</p>
+                        <p class="contact__detail">City: name</p>
+                        <p class="contact__detail">Street: name</p>
+                    </div>
+                </li>
+                <li class="contact__list-element">
+                    <div class="contact__icon-container">
+                        <img class="contact__icon"
+                            src="{{url_for('static', filename='/assets/illustrations/phone.png')}}">
+                    </div>
+                    <p class="contact__name">Phone</p>
+                    <p class="contact__detail">+40xxxxxxxxx</p>
+                </li>
+                <li class="contact__list-element">
+                    <div class="contact__icon-container">
+                        <img class="contact__icon"
+                            src="{{url_for('static', filename='/assets/illustrations/email.png')}}">
+                    </div>
+                    <p class="contact__name">E-mail</p>
+                    <p class="contact__detail">toyo_travel@gmail.com</p>
+                </li>
+                <li class="contact__list-element">
+                    <div class="contact__icon-container">
+                        <img class="contact__icon"
+                            src="{{url_for('static', filename='/assets/illustrations/instagram.png')}}">
+                    </div>
+                    <p class="contact__name">Instagram</p>
+                    <p class="contact__detail">@toyo_travel</p>
+                </li>
+            </ul>
+        </div>
     </section>
     <div class="header-background"></div>
     <nav class="phone-menu">
