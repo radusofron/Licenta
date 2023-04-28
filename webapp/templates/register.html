@@ -34,10 +34,12 @@
         </div>
     </section>
     <section class="side-content">
-        <img class="illustration" src="{{url_for('static', filename='/assets/illustrations/asset_sign_up_page.png')}}"
-            alt="Some happy travellers">
+        <div class="illustration-container">
+            <img class="illustration"
+                src="{{url_for('static', filename='/assets/illustrations/asset_sign_up_page.png')}}"
+                alt="Some happy travellers">
+        </div>
         <p class="msg_1">Improve your travelling experience now!</p>
-        <p class="msg_2">We'll see.</p>
     </section>
 </main>
 {% endblock %}

@@ -1,0 +1,26 @@
+important title:
+    font-size: clamp(1.5rem, 5vh, 7.5vh);
+    font-weight: var(--medium);
+
+title:
+    font-size: clamp(1rem, 3vh, 7.5vh);
+    font-weight: var(--semibold);
+
+important subtitle:
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-weight: var(--semibold);
+
+subtitle:
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-weight: var(--semibold);
+
+important description & description on big screens:
+    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-weight: var(--medium);
+
+description on small screens:
+    font-weight: var(--regular);
+
+important buttons:
+    font-size: clamp(0.6rem, 2.1vh, 5vh);
+    font-weight: var(--semibold);

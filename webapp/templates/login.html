@@ -11,8 +11,7 @@
     <section class="main-content">
         <div class="login">
             <div class="welcome">
-                <p class="message">Welcome back,</p>
-                <p class="username">Radu</p>
+                <p class="message">Welcome back</p>
             </div>
             <div class="user-credentials">
                 <div class="email-container">
@@ -32,10 +31,11 @@
         </div>
     </section>
     <section class="side-content">
-        <img class="illustration" src="{{url_for('static', filename='/assets/illustrations/asset_login_page.png')}}"
-            alt="Some happy travellers">
-        <p class="msg_1">Start travelling again!</p>
-        <p class="msg_2">We missed you...</p>
+        <div class="illustration-container">
+            <img class="illustration" src="{{url_for('static', filename='/assets/illustrations/asset_login_page.png')}}"
+                alt="Some happy travellers">
+        </div>
+        <p class="msg_1">Start travelling again with us!</p>
     </section>
 </main>
 {% endblock %}

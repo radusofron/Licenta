@@ -34,11 +34,9 @@ section.main-content{
     flex-direction: column;
     justify-content: center;
 }
-.welcome > p{
-    font-size: 5vh;
-    font-weight: var(--semibold);
-}
 .message{
+    font-size: clamp(1.5rem, 5vh, 7.5vh);
+    font-weight: var(--semibold);
     text-align: center;
 }
 .username{
@@ -46,11 +44,11 @@ section.main-content{
 }
 .user-credentials{
     flex-basis: 25%;
-    width: 70%;
+    width: 75%;
     color: var(--dark-grey);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: stretch;
 }
 .email-container{
@@ -59,7 +57,7 @@ section.main-content{
 }
 .email{
     flex-basis: 25%;
-    font-size: 2.5vh;
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=text]{
@@ -83,7 +81,7 @@ input[type=text]:focus{
 }
 .password{
     flex-basis: 35%;
-    font-size: 2.5vh;
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=password]{
@@ -106,7 +104,7 @@ input[type=password]:focus{
     position: relative;
     height: 6%;
     width: 25%;
-    font-size: 2.5vh;
+    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     border-radius: 0.25rem;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -137,33 +135,25 @@ section.side-content{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5vh;
+}
+.illustration-container{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .illustration{
-    max-width: 80%;
+    object-fit: cover;
 }
 .msg_1{
-    flex-basis: 10%;
-    font-size: 4vh;
+    width: 75%;
+    font-size: clamp(1rem, 3vh, 7.5vh);
     font-weight: var(--semibold);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.msg_2{
-    flex-basis: 10%;
-    font-size: 2vh;
-    font-weight: var(--medium);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    text-align: center;
 }
 
 
-@media (max-width: 1200px){
-    .illustration{
-        flex-basis: 40%;
-    }
-}
 @media (max-width: 1000px){
     section.main-content{
         flex-basis: 100%;
@@ -171,23 +161,32 @@ section.side-content{
     section.side-content{
         display: none;
     }
-}
-@media (max-width: 500px){
-    .login-button{
-        width: 50%;
+    .user-credentials{
+        width: 80%;
     }
+}
+@media (max-width: 650px){
     .user-credentials{
         align-items: center;
+        gap: 5vh;
     }
     .email-container{
+        width: 100%;
         flex-direction: column;
+        gap:2.5vh;
     }
     .password-container{
+        width: 100%;
         flex-direction: column;
+        gap:2.5vh;
     }
-}
-@media (max-width: 450px){
-    .welcome > p{
-        font-size: 2rem;
+    input[type=text]{
+        width: 100%;
+    }
+    input[type=password]{
+        width: 100%;
+    }
+    .login-button{
+        width: 50%;
     }
 }
