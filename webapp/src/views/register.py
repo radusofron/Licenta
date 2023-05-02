@@ -1,4 +1,4 @@
-from controllers.index import index
+from controllers.register import register
 from flask import Blueprint, make_response, render_template, session
 from flask.wrappers import Response
 from flask_api import status
@@ -9,7 +9,7 @@ register_view_blueprint = Blueprint("register_view_blueprint", __name__)
 
 @register_view_blueprint.route("/register")
 def register_view() -> Response:
-    result = index()
+    result = register()
     if result.status_code == status.HTTP_404_NOT_FOUND:
         return make_response(render_template("register.html"))
 

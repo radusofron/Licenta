@@ -15,7 +15,7 @@ section.main-content{
 
 /* top */
 .welcome{
-    font-size: clamp(1.5rem, 5vh, 7.5vh);
+    font-size: clamp(2.5rem, 5vh, 7.5vh);
     font-weight: var(--semibold);
     color: var(--dark-grey);
     text-align: center;
@@ -45,7 +45,7 @@ section.main-content{
 }
 .username{
     flex-basis: 35%;
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=text].input-username{
@@ -57,14 +57,14 @@ input[type=text].input-username{
 }
 .email{
     flex-basis: 25%;
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=text].input-email{
     flex-basis: 70%;
 }
 input[type=text]{
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
@@ -82,12 +82,12 @@ input[type=text]:focus{
 }
 .password{
     flex-basis: 35%;
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=password]{
     flex-basis: 60%;
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
@@ -103,9 +103,9 @@ input[type=password]:focus{
 }
 .sign-up-button{
     position: relative;
-    flex-basis: 8%;
     width: 35%;
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    padding: 1vh;
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     border-radius: 0.25rem;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -160,7 +160,7 @@ section.side-content{
 }
 .msg_1{
     width: 75%;
-    font-size: clamp(1rem, 3vh, 7.5vh);
+    font-size: clamp(1.6rem, 3vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }

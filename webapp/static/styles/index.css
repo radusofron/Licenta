@@ -34,7 +34,7 @@ header{
 }
 .site-name-container{
     flex-basis: 25%;
-    font-size: clamp(1.5rem, 5vh, 7.5vh);
+    font-size: clamp(2.5rem, 5vh, 7.5vh);
     font-weight: var(--medium);
     display: flex;
     flex-direction: row;
@@ -50,7 +50,7 @@ header{
 }
 .header-options{
     flex-basis: 50%;
-    font-size: clamp(0.5rem, 2vh, 5vh);
+    font-size: clamp(1rem, 2vh, 7.5vh);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -84,7 +84,7 @@ header{
 }
 .account-buttons{
     flex-basis: 25%;
-    font-size: clamp(0.6rem, 2.1vh, 5vh);
+    font-size: clamp(1rem, 2.1vh, 5vh);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -121,7 +121,7 @@ header{
     left: 15%; 
     width: 70%;
     height: 20vh;
-    font-size: clamp(1.5rem, 5vh, 7.5vh);
+    font-size: clamp(2.5rem, 5vh, 7.5vh);
     font-weight: var(--medium);
     color: var(--white);
     display: flex;
@@ -150,7 +150,7 @@ section.intro.active{
 }
 .paragraphs{
     height: 12.5vh;
-    font-size: clamp(0.5rem, 2vh, 5vh);
+    font-size: clamp(0.95rem, 2vh, 7.5vh);
     font-weight: var(--regular);
     color: var(--white);
     display: flex;
@@ -162,9 +162,9 @@ section.intro.active{
     position: absolute;
     top: 50%;
     left: 37.5%;
-    height: 7%;
     width: 25%;
-    font-size: clamp(0.6rem, 2.1vh, 5vh);
+    padding: 1vh;
+    font-size: clamp(1rem, 2.1vh, 5vh);
     font-weight: var(--semibold);
     color: var(--white);
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -255,12 +255,12 @@ li.about__list-element{
     gap: 2.5vh;
 }
 .about__title{
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
 }
 .about__description{
     height: 100%;
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
 }
 
@@ -286,12 +286,12 @@ section.destinations.active{
     gap: 5vh;
 }
 .destinations__title{
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
 .destinations__description{
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -328,7 +328,7 @@ li.destinations__list-element{
     object-fit: content;
 }
 .destinations__name{
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
@@ -356,12 +356,12 @@ section.reviews.active{
     align-items: stretch;
 }
 .reviews__title{
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
 .reviews__description{
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -382,9 +382,9 @@ li.reviews__list-element{
 }
 .reviews__person{
     flex-basis: 15%;
-    padding: 1rem;
+    padding: 0.5rem;
     border-bottom: 0.35rem solid var(--white-50);
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
     display: flex;
     justify-content: center;
@@ -392,7 +392,7 @@ li.reviews__list-element{
 }
 .reviews__review{
     flex-basis: 85%;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -406,7 +406,7 @@ li.reviews__list-element{
 }
 .reviews__review-text{
     height: 100%;
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     display: flex;
     justify-content: center;
@@ -436,12 +436,12 @@ section.contact.active{
     gap: 5vh;
 }
 .contact__title{
-    font-size: clamp(0.7rem, 2.5vh, 7.5vh);
+    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
 .contact__description{
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -471,7 +471,7 @@ li.contact__list-element{
     object-fit: cover;
 }
 .contact__name{
-    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--semibold);
     text-align: center;
 }
@@ -482,7 +482,7 @@ li.contact__list-element{
 }
 .contact__detail{
     flex-basis: 33.3%;
-    font-size: clamp(0.5rem, 1.75vh, 5vh);
+    font-size: clamp(0.8rem, 1.75vh, 5vh);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -509,8 +509,8 @@ li.contact__list-element{
     display: none;
 }
 .phone-menu-icon{
-    width: 75%;
-    height: 75%;
+    width: 50%;
+    height: 50%;
 }
 nav.phone-menu{
     position: absolute;
@@ -560,7 +560,7 @@ nav.phone-menu.active{
     justify-content: space-evenly;
     align-items: center;
 }
-@media (max-width: 1200px){
+@media (max-width: 1200px) and (min-height: 700px), (max-width: 800px){
     .header-options{
         display: none;
     }
@@ -587,7 +587,7 @@ nav.phone-menu.active{
 }
 
 /* 1. Intro */
-@media (max-width: 1200px){
+@media (max-width: 1200px) and (min-height: 700px), (max-width: 800px){
     .subtitle{
         left: 10%;
         width: 80%;
@@ -683,10 +683,21 @@ nav.phone-menu.active{
     }
 }
 /* 4. Reviews */
-@media (max-width: 1200px){
+@media (max-width: 1200px) and (min-height: 700px), (max-width: 1000px){
     .reviews__container{
         border-radius: 0.25rem;
         overflow-y: scroll;
+    }
+    .reviews__container::-webkit-scrollbar {
+        width: 10px;
+    }
+    .reviews__container::-webkit-scrollbar-track {
+        background-color: var(--white-25);
+        border-radius: 0.5rem;
+    }
+    .reviews__container::-webkit-scrollbar-thumb {
+        background-color: var(--white-50);
+        border-radius: 0.5rem;
     }
     ul.reviews__list{
         flex-direction: column;
@@ -718,11 +729,23 @@ nav.phone-menu.active{
         font-weight: var(--regular);
     }
 } 
+/* TODO - modify this max-width*/
 /* 5. Contact */
-@media (max-width: 1200px){
+@media (max-width: 1200px) and (min-height: 700px), (max-width: 800px){
     .contact__container{
         border-radius: 0.5rem;
         overflow-y: scroll;
+    }
+    .contact__container::-webkit-scrollbar {
+        width: 10px;
+    }
+    .contact__container::-webkit-scrollbar-track {
+        background-color: var(--white-25);
+        border-radius: 0.5rem;
+    }
+    .contact__container::-webkit-scrollbar-thumb {
+        background-color: var(--white-50);
+        border-radius: 0.5rem;
     }
     ul.contact__list{
         flex-wrap: wrap;
