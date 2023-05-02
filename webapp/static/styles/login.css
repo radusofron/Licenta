@@ -111,7 +111,7 @@ input[type=password]:focus{
 
 /* bottom */
 .sign-up{
-    font-size: 2vh;
+    font-size: clamp(0.95rem, 2vh, 7.5vh);
     font-weight: var(--medium);
     display: flex;
     flex-direction: column;
@@ -163,6 +163,9 @@ section.side-content{
     }
 }
 @media (max-width: 650px){
+    section.main-content{
+         padding-top: 5vh;
+    }
     .user-credentials{
         align-items: center;
         gap: 5vh;
