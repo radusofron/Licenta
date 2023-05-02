@@ -9,28 +9,29 @@
 {% block body %}
 <main>
     <section class="main-content">
-        <div class="sign-up">
-            <div class="welcome">
-                Welcome
-            </div>
+        <div class="welcome">
+            Welcome
+        </div>
+        <form class="register-form">
             <div class="user-credentials">
                 <div class="username-container">
                     <p class="username">Username</p>
-                    <input type="text" class="input-username">
+                    <input name="username" type="text" class="input-username" required>
                 </div>
                 <div class="email-container">
                     <p class="email">E-mail</p>
-                    <input type="text" class="input-email">
+                    <input name="email" type="text" class="input-email" required>
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
-                    <input type="password">
+                    <input name="password" type="password" required>
                 </div>
             </div>
-            <a class="sign-up-button">Sign up</a>
-        </div>
+            <button type="submit" class="sign-up-button">Sign up</button>
+        </form>
         <div class="login">
-            <p class="question">If you already have an account, please <a class="answear">log in.</a></p>
+            <p class="question">If you already have an account, please </p>
+            <a class="answear" href="{{ url_for('login_view_blueprint.login_view') }}">log in.</a>
         </div>
     </section>
     <section class="side-content">

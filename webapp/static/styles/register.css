@@ -6,49 +6,38 @@ main{
 
 /* LEFT SIDE */
 section.main-content{
-    flex-basis:50%;
+    flex-basis: 40%;
+    padding: 10vh 5% 5vh 5%;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
 }
-.sign-up{
-    flex-basis: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-.login{
-    flex-basis: 10%;
-    font-size: 2vh;
-    font-weight: var(--medium);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-}
-.question{
-    flex-basis: 75%;
-    text-align: center;
-}
-/* In .login */
+
+/* top */
 .welcome{
     font-size: clamp(1.5rem, 5vh, 7.5vh);
     font-weight: var(--semibold);
     color: var(--dark-grey);
+    text-align: center;
+}
+
+/* middle */
+.register-form{
+    height: 100%;
+    padding-bottom: 15vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-end;
+    gap: 15vh;
 }
 .user-credentials{
-    flex-basis: 25%;
-    width: 75%;
+    width: 85%;
     color: var(--dark-grey);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: stretch;
+    gap: 6vh;
 }
 .username-container{
     display: flex;
@@ -75,14 +64,14 @@ input[type=text].input-email{
     flex-basis: 70%;
 }
 input[type=text]{
-    font-size: 2vh;
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
     border-radius: 0.25rem;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    color: var(--pink);
+    color: var(--black);
 }
 input[type=text]:focus{
     outline: none;
@@ -98,14 +87,14 @@ input[type=text]:focus{
 }
 input[type=password]{
     flex-basis: 60%;
-    font-size: 2vh;
+    font-size: clamp(0.6rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
     border-radius: 0.25rem;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    color: var(--pink);
+    color: var(--black);
     font-family: Verdana;
 }
 input[type=password]:focus{
@@ -114,8 +103,8 @@ input[type=password]:focus{
 }
 .sign-up-button{
     position: relative;
-    height: 6%;
-    width: 25%;
+    flex-basis: 8%;
+    width: 35%;
     font-size: clamp(0.7rem, 2.5vh, 7.5vh);
     font-weight: var(--semibold);
     border-radius: 0.25rem;
@@ -126,17 +115,30 @@ input[type=password]:focus{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     transition: 500ms;
 }
 .sign-up-button:hover{
     background-position: left;
 }
 
-/* In .sign-up */
+/* bottom */
+.login{
+    font-size: 2vh;
+    font-weight: var(--medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.question{
+    flex-basis: 75%;
+    text-align: center;
+}
 .answear{
     text-decoration: underline;
     color: var(--blue);
 }
+
 
 /* RIGHT SIDE */
 section.side-content{
@@ -172,10 +174,19 @@ section.side-content{
         display: none;
     }
     .user-credentials{
-        width: 80%;
+        width: 90%;
     }
 }
 @media (max-width: 650px){
+    .register-form{
+        height: 100%;
+        padding-bottom: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10vh;
+    }
     .user-credentials{
         align-items: center;
         gap: 5vh;
@@ -196,7 +207,7 @@ section.side-content{
         gap:2.5vh;
     }
     .sign-up-button{
-        width: 50%;
+        width: 60%;
     }
     input[type=text]{
         width: 100%;

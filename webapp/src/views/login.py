@@ -13,13 +13,6 @@ def login_view() -> Response:
     if result.status_code == status.HTTP_404_NOT_FOUND:
         return make_response(render_template("login.html"))
 
-    json_data = json.loads(result.data)
-    data = json_data["data"]
-    text = json_data["text"]
-    number = json_data["number"]
-    a = json_data["a"]
-    session["data"] = data  # salvare de date in sesiune generala
-
     return make_response(
-        render_template("login.html", data=data, text=text, number=number, a=a)
+        render_template("login.html")
     )
