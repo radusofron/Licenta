@@ -42,28 +42,23 @@ section.main-content{
 .username-container{
     display: flex;
     flex-direction: row;
+    gap: 2vw;
 }
 .username{
-    flex-basis: 35%;
     font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
-}
-input[type=text].input-username{
-    flex-basis: 60%;
 }
 .email-container{
     display: flex;
     flex-direction: row;
+    gap: 2vw;
 }
 .email{
-    flex-basis: 25%;
     font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
-input[type=text].input-email{
-    flex-basis: 70%;
-}
 input[type=text]{
+    width: 100%;
     font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
@@ -79,14 +74,14 @@ input[type=text]:focus{
 .password-container{
     display: flex;
     flex-direction: row;
+    gap: 2vw;
 }
 .password{
-    flex-basis: 35%;
     font-size: clamp(1.2rem, 2.5vh, 7.5vh);
     font-weight: var(--bold);
 }
 input[type=password]{
-    flex-basis: 60%;
+    width: 100%;
     font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--medium);
     border: none;
