@@ -9,6 +9,7 @@ from views.register import register_view_blueprint
 from views.home import home_view_blueprint
 from datetime import timedelta
 
+
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 app.config["SECRET_KEY"] = "this_is_secret!"
 app.config["SESSION_TYPE"] = "SameSite"
