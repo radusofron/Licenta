@@ -1,18 +1,14 @@
-from flask import Blueprint, make_response, jsonify
+from flask import Blueprint, make_response, jsonify, redirect, request
 from flask_api import status
 from flask.wrappers import Response
 
 login_controller_blueprint = Blueprint("login_controller_blueprint", __name__)
 
 
-@login_controller_blueprint.route("/login/api")
-def login() -> Response:
-    return make_response(
-        jsonify({"data": "random data", "text": "aaaaa", "number": 123, "a": None}),
-        status.HTTP_200_OK,
-    )
-    # verific logare
-    return make_response(
-        # se pot trimite date
-        # status.HTTP_403_...
-    )
+@login_controller_blueprint.route("/api/login", methods = ["POST"])
+def check_login():
+     email = request.form["email"]
+     password = request.form["password"]
+     print("email:", email)
+     print("password:", password)
+     return redirect("/home", code=302)

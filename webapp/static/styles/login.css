@@ -7,7 +7,7 @@ main{
 /* LEFT SIDE */
 section.main-content{
     flex-basis: 40%;
-    padding: 10vh 5% 5vh 5%;
+    padding: 10vh 5% 10vh 5%;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -166,6 +166,7 @@ section.side-content{
 @media (max-width: 650px){
     section.main-content{
          padding-top: 5vh;
+         padding-bottom: 5vh;
     }
     .user-credentials{
         align-items: center;

@@ -7,7 +7,7 @@ main{
 /* LEFT SIDE */
 section.main-content{
     flex-basis: 40%;
-    padding: 10vh 5% 5vh 5%;
+    padding: 10vh 5% 10vh 5%;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
@@ -24,7 +24,8 @@ section.main-content{
 /* middle */
 .register-form{
     height: 100%;
-    padding-bottom: 15vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,15 +172,10 @@ section.side-content{
         width: 90%;
     }
 }
-@media (max-height: 700px){
-    .register-form{
-        padding-bottom: 12.5vh;
-        gap: 12.5vh;
-    }
-}
 @media (max-width: 650px){
     section.main-content{
         padding-top: 5vh;
+        padding-bottom: 5vh;
     }
     .register-form{
         height: 100%;
@@ -209,13 +205,13 @@ section.side-content{
         flex-direction: column;
         gap:2.5vh;
     }
-    .sign-up-button{
-        width: 60%;
-    }
     input[type=text]{
         width: 100%;
     }
     input[type=password]{
         width: 100%;
+    }
+    .sign-up-button{
+        width: 60%;
     }
 }
