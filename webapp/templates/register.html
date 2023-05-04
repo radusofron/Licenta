@@ -12,11 +12,11 @@
         <div class="welcome">
             Welcome
         </div>
-        <form class="register-form">
+        <form class="register-form" action="/api/register" method="post">
             <div class="user-credentials">
                 <div class="username-container">
                     <p class="username">Username</p>
-                    <input name="username" type="text" required>
+                    <input name="username" type="text" placeholder="Unique username" required>
                 </div>
                 <div class="email-container">
                     <p class="email">Email</p>
@@ -25,6 +25,10 @@
                 <div class="password-container">
                     <p class="password">Password</p>
                     <input name="password" type="password" required>
+                </div>
+                <div class="password-container">
+                    <p class="password">Confirm password</p>
+                    <input name="password" type="password-confirmation" required>
                 </div>
             </div>
             <button type="submit" class="sign-up-button">Sign up</button>

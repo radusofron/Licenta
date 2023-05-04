@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, redirect, request
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_user
+from database import dba, extract_user_for_login
 
 
 login_controller_blueprint = Blueprint("login_controller_blueprint", __name__)
@@ -15,7 +15,7 @@ def check_login():
      password = request.form["password"]
 
      # Return correspondent user for input data from database
-     rows = extract_user(dba, email, password)
+     rows = extract_user_for_login(dba, email, password)
 
      # Check if user exists and proceed accordingly
      if len(rows) == 1:

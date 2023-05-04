@@ -1,4 +1,3 @@
-from controllers.register import register
 from flask import Blueprint, make_response, render_template, session
 from flask.wrappers import Response
 from flask_api import status

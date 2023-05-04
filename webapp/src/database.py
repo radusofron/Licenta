@@ -16,19 +16,44 @@ def connect_to_dba():
     return dba
 
 
-def extract_user(dba, input_email: str, input_password: str):
-    """Function returns user from database
+def extract_user_for_login(dba, input_email: str, input_password: str):
+    """Function returns user credentials (email and password) from database
     """
     # Extract user credentials
     dba_cursor = dba.cursor()
-    dba_cursor.execute(f"SELECT `email`, `password` FROM `users` WHERE `email`=%s AND `password`=%s", (input_email, input_password))
+    dba_cursor.execute("SELECT `email`, `password` FROM `users` WHERE `email`=%s AND `password`=%s", (input_email, input_password))
     user_credentials = dba_cursor.fetchall()
     return user_credentials
 
 
-# TODO -> cand exista deja un cont cu email-ul dat
-# TODO -> cand exista deja un cont cu username-ul dat
-# TODO -> cand se trece de verificarile mai sus, se insereaza
+def extract_user_username(dba, input_username: str):
+    """Function returns user username from database
+    """
+    # Extract username
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `username` FROM `users` WHERE `username`=%s", input_username)
+    username = dba_cursor.fetchall()
+    return username
+
+
+def extract_user_email(dba, input_email: str):
+    """Function returns user email from database
+    """
+    # Extract email
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `email` FROM `users` WHERE `email`=%s", input_email)
+    email = dba_cursor.fetchall()
+    return email
+
+
+def extract_user_max_id(dba):
+    """Function returns the maximum id number from database
+    """
+    # Extract maximum id number
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT MAX(`id`) from `users`")
+    max_id = dba_cursor.fetchone()
+    return max_id
 
 
 # Create database object
