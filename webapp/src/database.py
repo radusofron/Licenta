@@ -1,4 +1,5 @@
 import mysql.connector
+import time
 
 
 def connect_to_dba():
@@ -23,6 +24,7 @@ def extract_user_for_login(dba, input_email: str, input_password: str):
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `email`, `password` FROM `users` WHERE `email`=%s AND `password`=%s", (input_email, input_password))
     user_credentials = dba_cursor.fetchall()
+    dba_cursor.close()
     return user_credentials
 
 
@@ -31,8 +33,9 @@ def extract_user_username(dba, input_username: str):
     """
     # Extract username
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `username` FROM `users` WHERE `username`=%s", input_username)
+    dba_cursor.execute("SELECT `username` FROM `users` WHERE `username`=%s", (input_username,))
     username = dba_cursor.fetchall()
+    dba_cursor.close()
     return username
 
 
@@ -41,19 +44,39 @@ def extract_user_email(dba, input_email: str):
     """
     # Extract email
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `email` FROM `users` WHERE `email`=%s", input_email)
+    dba_cursor.execute("SELECT `email` FROM `users` WHERE `email`=%s", (input_email,))
     email = dba_cursor.fetchall()
+    dba_cursor.close()
     return email
 
 
 def extract_user_max_id(dba):
-    """Function returns the maximum id number from database
+    """Function returns the biggest user id from database
     """
     # Extract maximum id number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT MAX(`id`) from `users`")
-    max_id = dba_cursor.fetchone()
+    max_id = dba_cursor.fetchall()
+    dba_cursor.close()
     return max_id
+
+
+def insert_user(dba, username, email, password):
+    """Function inserts user to the database
+    """
+    # Extract the biggest user id
+    max_id = extract_user_max_id(dba)
+    # Compute new user id
+    new_max_id = max_id + 1
+
+    # Extract date
+    date_time = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Insert user
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("INSERT INTO `users` (`id`, `username`, `email`, `password`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, username, email, password, date_time))
+    dba_cursor.close()
+    dba.commit()
 
 
 # Create database object

@@ -101,23 +101,11 @@ input[type=password]{
     color: var(--black);
     font-family: Verdana;
 }
-input[type=password-confirmation]{
-    width: 100%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
-    font-weight: var(--medium);
-    border: none;
-    border-bottom: 0.25rem solid var(--dark-grey);
-    border-radius: 0.25rem;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    color: var(--black);
-    font-family: Verdana;
-}
 input[type=password]:focus{
     outline: none;
 }
-input[type=password-confirmation]:focus{
-    outline: none;
+.error::placeholder{
+    color: var(--pink);
 }
 .sign-up-button{
     position: relative;
@@ -225,9 +213,6 @@ section.side-content{
         width: 100%;
     }
     input[type=password]{
-        width: 100%;
-    }
-    input[type=password-confirmation]{
         width: 100%;
     }
     .sign-up-button{
