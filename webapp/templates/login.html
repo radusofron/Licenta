@@ -14,6 +14,20 @@
         </div>
         <form class="login-form" action="/api/login" method="post">
             <div class="user-credentials">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <!-- Not the first time displaying the page (User credentials error): -->
+                <div class="email-container">
+                    <p class="email">Email</p>
+                    <input class="error" name="email" type="text" placeholder="Invalid username or password." required>
+                </div>
+                <div class="password-container">
+                    <p class="password">Password</p>
+                    <input class="error" name="password" type="password" placeholder="Invalid username or password."
+                        required>
+                </div>
+                {% else %}
+                <!-- First time displaying the page: -->
                 <div class="email-container">
                     <p class="email">Email</p>
                     <input name="email" type="text" required>
@@ -22,6 +36,8 @@
                     <p class="password">Password</p>
                     <input name="password" type="password" required>
                 </div>
+                {% endif %}
+                {% endwith %}
             </div>
             <button type="submit" class="login-button">Login</button>
         </form>

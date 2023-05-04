@@ -13,7 +13,6 @@ def connect_to_dba():
     
     # Connect to database
     dba = mysql.connector.connect(host=dba_host, password=dba_password, user=dba_user, database=dba_name)
-    
     return dba
 
 
@@ -61,7 +60,7 @@ def extract_user_max_id(dba):
     return max_id
 
 
-def insert_user(dba, username, email, password):
+def insert_user(dba, username: str, email: str, password: str):
     """Function inserts user to the database
     """
     # Extract the biggest user id

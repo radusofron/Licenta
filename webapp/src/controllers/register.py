@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, redirect, request, flash
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_user_username, extract_user_email
+from database import dba, extract_user_username, extract_user_email, insert_user
 
 
 register_controller_blueprint = Blueprint("register_controller_blueprint", __name__)
@@ -23,18 +23,19 @@ def register():
 
     # Check if account can be created and proceed accordingly
     if len(username_rows) == 1:
-        flash("Username already exists!")
+        flash("username_error")
         return redirect("/register", code=302)
     if len(email_rows) == 1:
-        flash("Email already exists!")
+        flash("email_error")
         return redirect("/register", code=302)
     if len(password) < 8:
-        flash("Password too short!")
+        flash("password_error")
         return redirect("/register", code=302)
     if password != password_confirmation:
-        flash("Passwords are different!")
+        flash("passwords_error")
         return redirect("/register", code=302)
 
-    # TODO -> inserez in baza de date
+    # Check finish: successful
+    insert_user(dba, username, email, password)
     return redirect("/home", code=302)
        

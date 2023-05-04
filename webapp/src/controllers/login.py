@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, jsonify, redirect, request
+from flask import Blueprint, make_response, jsonify, redirect, request, flash
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_user_for_login
@@ -21,4 +21,5 @@ def check_login():
      if len(rows) == 1:
           return redirect("/home", code=302)
      else:
-          return redirect("/login", code=302)  # TODO -> returnez problema aparuta
+          flash("Invalid username or password. Please try again.")
+          return redirect("/login", code=302)

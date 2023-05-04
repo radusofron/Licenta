@@ -1,8 +1,6 @@
 from flask import Blueprint, make_response, render_template, session
 from flask.wrappers import Response
-from flask_api import status
-import json
-from controllers.register import register
+
 
 register_view_blueprint = Blueprint("register_view_blueprint", __name__)
 

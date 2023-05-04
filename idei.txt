@@ -1,4 +1,0 @@
-Daca in controller fac ca pentru get sa-mi returneze acele 4 campuri goale si
-pt post sa-mi returneze acele 4 campuri pe valori boolene, nu functioneaza
-pentru ca in view nu se mai apeleaza niciodata register()
-

@@ -92,8 +92,10 @@ input[type=password]{
     font-family: Verdana;
 }
 input[type=password]:focus{
-    outline: none;
-   
+    outline: none;  
+}
+.error::placeholder{
+    color: var(--pink);
 }
 .login-button{
     position: relative;

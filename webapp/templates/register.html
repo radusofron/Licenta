@@ -16,40 +16,42 @@
             <div class="user-credentials">
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
+                <!-- Not the first time displaying the page (User credentials error): -->
                 <div class="username-container">
                     <p class="username">Username</p>
-                    {% if messages[0] == "Username already exists!" %}
-                    <input class="error" name="username" type="text" placeholder="{{messages[0]}}" required>
+                    {% if messages[0] == "username_error" %}
+                    <input class="error" name="username" type="text" placeholder="Username already exists!" required>
                     {% else %}
                     <input name="username" type="text" placeholder="Your username (individual)" required>
                     {% endif %}
                 </div>
                 <div class="email-container">
                     <p class="email">Email</p>
-                    {% if messages[0] == "Email already exists!"%}
-                    <input class="error" name="email" type="text" placeholder="{{messages[0]}}" required>
+                    {% if messages[0] == "email_error"%}
+                    <input class="error" name="email" type="text" placeholder="Email already exists!" required>
                     {% else %}
                     <input name="email" type="text" placeholder="Your email" required>
                     {% endif %}
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
-                    {% if messages[0] == "Password too short!"%}
-                    <input class="error" name="password" type="password" placeholder="{{messages[0]}}" required>
+                    {% if messages[0] == "password_error"%}
+                    <input class="error" name="password" type="password" placeholder="Password too short!" required>
                     {% else %}
                     <input name="password" type="password" placeholder="Your password (min. 8 characters)" required>
                     {% endif %}
                 </div>
                 <div class="password-container">
                     <p class="password">Confirm password</p>
-                    {% if messages[0] == "Passwords are different!"%}
-                    <input class="error" name="password-confirmation" type="password" placeholder="{{messages[0]}}"
-                        required>
+                    {% if messages[0] == "passwords_error"%}
+                    <input class="error" name="password-confirmation" type="password"
+                        placeholder="Passwords are different!" required>
                     {% else %}
                     <input name="password-confirmation" type="password" placeholder="Repeat your password" required>
                     {% endif %}
                 </div>
                 {% else %}
+                <!-- First time displaying the page: -->
                 <div class="username-container">
                     <p class="username">Username</p>
                     <input name="username" type="text" placeholder="Your username (individual)" required>
