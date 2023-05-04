@@ -73,6 +73,12 @@ input[type=text]{
 input[type=text]:focus{
     outline: none;
 }
+::placeholder {
+    color: var(--grey);
+    font-style: italic;
+    font-weight: var(--regular);
+    opacity: 1;
+}
 .password-container{
     display: flex;
     flex-direction: row;
@@ -81,6 +87,7 @@ input[type=text]:focus{
 .password{
     font-size: clamp(1rem, 2.1vh, 7.5vh);
     font-weight: var(--bold);
+    white-space: nowrap;
 }
 input[type=password]{
     width: 100%;
