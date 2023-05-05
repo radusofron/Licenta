@@ -11,7 +11,7 @@ from datetime import timedelta
 
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
-app.config["SECRET_KEY"] = "this_is_secret!"
+app.config["SECRET_KEY"] = "a_secrey_key"
 app.config["SESSION_TYPE"] = "SameSite"
 app.config["SESSION_COOKIE_PATH"] = "/"
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
