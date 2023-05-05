@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, redirect, request, flash
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_user_for_login
+from database import dba, login_validation
 
 
 login_controller_blueprint = Blueprint("login_controller_blueprint", __name__)
@@ -9,17 +9,17 @@ login_controller_blueprint = Blueprint("login_controller_blueprint", __name__)
 
 @login_controller_blueprint.route("/api/login", methods = ["POST"])
 def check_login():
-
+     # TODO - login nefunctional
      # Extract input data 
      email = request.form["email"]
      password = request.form["password"]
 
-     # Return correspondent user for input data from database
-     rows = extract_user_for_login(dba, email, password)
+     # Return login answear for input data
+     answear = login_validation(dba, email, password)
 
      # Check if user exists and proceed accordingly
-     if len(rows) == 1:
+     if answear:
           return redirect("/home", code=302)
      else:
-          flash("Invalid username or password. Please try again.")
+          flash("login_error")
           return redirect("/login", code=302)

@@ -19,22 +19,23 @@
                 <!-- Not the first time displaying the page (User credentials error): -->
                 <div class="email-container">
                     <p class="email">Email</p>
-                    <input class="error" name="email" type="text" placeholder="Invalid username or password." required>
+                    <input maxlength="40" class="error" name="email" type="text"
+                        placeholder="Invalid username or password." required>
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
-                    <input class="error" name="password" type="password" placeholder="Invalid username or password."
-                        required>
+                    <input maxlength="40" class="error" name="password" type="password"
+                        placeholder="Invalid username or password." required>
                 </div>
                 {% else %}
                 <!-- First time displaying the page: -->
                 <div class="email-container">
                     <p class="email">Email</p>
-                    <input name="email" type="text" required>
+                    <input maxlength="40" name="email" type="text" required>
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
-                    <input name="password" type="password" required>
+                    <input maxlength="40" name="password" type="password" required>
                 </div>
                 {% endif %}
                 {% endwith %}
