@@ -1,8 +1,9 @@
 from controllers.index import index
-from flask import Blueprint, make_response, render_template, session, redirect, url_for
+from flask import Blueprint, make_response, render_template, session, redirect
 from flask.wrappers import Response
 from flask_api import status
 import json
+
 
 home_view_blueprint = Blueprint("home_view_blueprint", __name__)
 

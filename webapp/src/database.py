@@ -80,7 +80,12 @@ def insert_user(dba, username: str, email: str, password: str):
     max_id = extract_user_max_id(dba)
 
     # Compute new user id
-    new_max_id = max_id[0] + 1
+    if max_id[0] is None:
+        # Case: first insertion
+        new_max_id = 1
+    else:
+        # Case: the other insertions
+        new_max_id = max_id[0] + 1
 
     # Hash the password
     encrypted_password = generate_password_hash(password)

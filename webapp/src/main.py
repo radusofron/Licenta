@@ -7,6 +7,7 @@ from views.index import index_view_blueprint
 from views.login import login_view_blueprint
 from views.register import register_view_blueprint
 from views.home import home_view_blueprint
+from views.error_404 import error_404_view_blueprint
 from datetime import timedelta
 
 
@@ -24,6 +25,7 @@ app.register_blueprint(register_controller_blueprint)
 app.register_blueprint(register_view_blueprint)
 app.register_blueprint(home_controller_blueprint)
 app.register_blueprint(home_view_blueprint)
+app.register_blueprint(error_404_view_blueprint)
 
 
 if __name__ == "__main__":

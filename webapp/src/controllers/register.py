@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, jsonify, redirect, request, flash
+from flask import Blueprint, make_response, jsonify, redirect, request, flash, session
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_user_username, extract_user_email, insert_user
@@ -35,7 +35,8 @@ def register():
         flash("passwords_error")
         return redirect("/register", code=302)
 
-    # Check finish: successful
+    # Check finished
     insert_user(dba, username, email, password)
+    session["logged_in"] = True
     return redirect("/home", code=302)
        
