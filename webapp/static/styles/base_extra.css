@@ -1,3 +1,49 @@
+/* CSS file ONLY for post_login_base.html */
+
+
 /* Header */
+header{
+    padding: 1.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--pink);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-name{
+    font-size: clamp(2.5rem, 5vh, 7.5vh);
+    font-weight: var(--medium);
+}
+
+.header-options{
+    font-size: clamp(1rem, 2vh, 7.5vh);
+    font-weight: var(--semibold);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5vw;
+}
+
+/* <a> elements: */
+.header-link{
+    color: var(--white);
+}
+.logout-button{
+    padding: 0.4rem 1.2rem;
+    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    border-radius: 0.25rem;
+    background-color: var(--white-50);
+    outline: 0.2rem solid var(--white-50);
+    transition: 250ms;
+}
+.logout-button:hover{
+    background-color: transparent;
+}
+
 
 /* Footer */

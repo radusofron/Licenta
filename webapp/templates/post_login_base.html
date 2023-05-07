@@ -14,7 +14,26 @@
 </head>
 
 <body>
-    <header>Header</header>
+    <header>
+        <h2 class="site-name">TOYO</h2>
+        <nav>
+            <ul class="header-options">
+                <li class="header-option">
+                    <a class="header-link" href="{{ url_for('home_view_blueprint.home_view') }}">Home</a>
+                </li>
+                <li class="header-option">
+                    <a class="header-link" href="{{ url_for('home_view_blueprint.home_view') }}">Destinations</a>
+                </li>
+                <li class="header-option">
+                    <a class="header-link" href="{{ url_for('home_view_blueprint.home_view') }}">Profile</a>
+                </li>
+                <li class="header-option">
+                    <a class="header-link logout-button" href="{{ url_for('index_view_blueprint.index_view') }}">Log
+                        out</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     {% block content %} {% endblock %}
     <footer>Footer</footer>
 </body>

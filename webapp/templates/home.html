@@ -7,7 +7,63 @@
 {% block title %} Site name | Home {% endblock %}
 
 {% block content %}
-<main>
-    Test
+<main class="grid-container">
+    <div class="welcome-messages grid-row-span-8">
+        <p class="message-big">Ready to go on a new trip?</p>
+        <p class="message-medium">CHOOSE YOUR NEXT DESTINATION AND LET US DO THE REST AS USUAL.</p>
+        <p class="message-small">
+            Our website provides a wide range of cities to explore, ensuring that there is something for every
+            traveller.
+        </p>
+    </div>
+    <div class="travel-itineraries grid-col-span-3 grid-row-span-3">
+        <h3 class="travel-itineraries__subtitle">
+            Travel itineraries
+        </h3>
+        <div class="travel-itineraries__icon-container">
+            <div class="travel-itineraries__book-border">
+                <span class="travel-itineraries__book-line one"></span>
+                <span class="travel-itineraries__book-line two"></span>
+                <span class="travel-itineraries__book-line three"></span>
+            </div>
+        </div>
+        <p class="travel-itineraries__description">
+            Travel itineraries are what makes our website so special, so you can see yours anytime. Click below to
+            view your personalized travel plans.
+        </p>
+        <a class="travel-itineraries__button dark-grey" href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+    </div>
+    <ul class="destinations grid-col-span-3 grid-row-span-2">
+        <li class="destinations__category visited-destinations">
+            <p class="destinations__number">02</p>
+            <h3 class="destinations__subtitle">visited destinations</h3>
+            <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all
+            </a>
+        </li>
+        <li class="destinations__category wishlisted-destinations">
+            <p class="destinations__number">01</p>
+            <h3 class="destinations__subtitle">destinations on whishlist</h3>
+            <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all</a>
+        </li>
+        <li class="destinations__category total-destinations">
+            <p class="destinations__number">27</p>
+            <h3 class="destinations__subtitle">total destinations</h3>
+            <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all</a>
+        </li>
+    </ul>
+    <div class="statistics grid-col-span-3 grid-row-span-3">
+        <h3 class="statistics__subtitle">Statistics</h3>
+        <div class="statistics__icon-container">
+            <div class="statistics__bars">
+                <span class="statistics__bar one"></span>
+                <span class="statistics__bar two"></span>
+                <span class="statistics__bar three"></span>
+            </div>
+        </div>
+        <p class="statistics__description">
+            Have a look on our in-depth statistics about the destinations.
+        </p>
+        <a class="statistics__button blue" href="{{ url_for('home_view_blueprint.home_view') }}">View statistics</a>
+    </div>
 </main>
 {% endblock %}
