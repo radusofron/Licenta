@@ -2,6 +2,7 @@
 
 // Function modifies menu icon for phone
 function modifyMenuIcon() {
+    // TODO -> delete next line
     console.log("Intra si in modifyPhoneMenu")
 
     // Get menu bars
@@ -16,6 +17,7 @@ function modifyMenuIcon() {
 
 // Function opens / closes phone menu
 function displayPhoneMenu() {
+    // TODO -> delete next line
     console.log("Intra in displayPhoneMenu")
 }
 

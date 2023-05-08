@@ -1,6 +1,7 @@
 important title:
     font-size: clamp(2.5rem, 5vh, 7.5vh);
 
+    font-size: var(--fs-big-title);
     font-size: 3rem;
     font-weight: var(--medium);
 
@@ -8,6 +9,7 @@ important title:
 title:
     font-size: clamp(2rem, 3vh, 7.5vh);
 
+    font-size: var(--fs-title);
     font-size: 2rem;
     font-weight: var(--semibold);
 
@@ -15,6 +17,7 @@ title:
 important subtitle:
     font-size: clamp(1.2rem, 2.5vh, 7.5vh);
 
+    font-size: var(--fs-big-subtitle);
     font-size: 1.6rem;
     font-weight: var(--semibold);
 
@@ -22,6 +25,7 @@ important subtitle:
 subtitle, important buttons:
     font-size: clamp(1rem, 2.1vh, 7.5vh);
 
+    font-size: var(--fs-subtitle);
     font-size: 1.4rem;
     font-weight: var(--semibold);
 
@@ -29,13 +33,22 @@ subtitle, important buttons:
 important description & description on big screens:
     font-size: clamp(0.8rem, 1.75vh, 5vh);
 
+    font-size: var(--fs-description);
     font-size: 1.125rem
     font-weight: var(--medium);
 
+    phone:
+    font-size: var(--fs-phone-description);
+
 
 header links:
-    font-size: 1.6rem;
+
+    font-size: var(--fs-header-link);
+    font-size:  1.25rem;
     font-weight: var(--semibold);
+
+    phone:
+    font-size: var(--fs-phone-header-link);
 
 
 

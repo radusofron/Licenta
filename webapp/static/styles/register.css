@@ -15,7 +15,7 @@ section.main-content{
 
 /* top */
 .welcome{
-    font-size: clamp(2.5rem, 5vh, 7.5vh);
+    font-size: var(--fs-big-title);
     font-weight: var(--semibold);
     color: var(--dark-grey);
     text-align: center;
@@ -40,28 +40,19 @@ section.main-content{
     align-items: stretch;
     gap: 6vh;
 }
-.username-container{
+.username-container, .email-container{
     display: flex;
     flex-direction: row;
     gap: 2vw;
 }
-.username{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
-    font-weight: var(--bold);
-}
-.email-container{
-    display: flex;
-    flex-direction: row;
-    gap: 2vw;
-}
-.email{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+.username, .email{
+    font-size: var(--fs-subtitle);
     font-weight: var(--bold);
 }
 input[type=text]{
     height: 100%;
     width: 100%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
@@ -85,13 +76,13 @@ input[type=text]:focus{
     gap: 2vw;
 }
 .password{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--bold);
     white-space: nowrap;
 }
 input[type=password]{
     width: 100%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
@@ -111,7 +102,7 @@ input[type=password]:focus{
     position: relative;
     width: 35%;
     padding: 1vh;
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     border-radius: 0.25rem;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -128,9 +119,9 @@ input[type=password]:focus{
     background-position: left;
 }
 
-/* bottom */
+/* Bottom */
 .login{
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     display: flex;
     flex-direction: column;
@@ -165,12 +156,13 @@ section.side-content{
 }
 .msg_1{
     width: 75%;
-    font-size: clamp(1.6rem, 3vh, 7.5vh);
+    font-size: var(--fs-title);
     font-weight: var(--semibold);
     text-align: center;
 }
 
 
+/* RESPONSIVE */
 @media (max-width: 1000px){
     section.main-content{
         flex-basis: 100%;
@@ -217,5 +209,34 @@ section.side-content{
     }
     .sign-up-button{
         width: 60%;
+    }
+}
+/* Change font-size */
+@media (max-height: 750px){
+    .welcome{
+        font-size: var(--fs-title);
+    }
+    .username, .email{
+        font-size: var(--fs-description);
+    }
+    input[type=text]{
+        font-size: var(--fs-phone-description);
+    }
+    .password{
+        font-size: var(--fs-description);
+    }
+    input[type=password]{
+        font-size: var(--fs-phone-description);
+    }
+    .sign-up-button{
+        font-size: var(--fs-description);
+    }
+    /* Bottom */
+    .login{
+        font-size: var(--fs-phone-description);
+    }
+    /* RIGHT SIDE */
+    .msg_1{
+        font-size: var(--fs-big-subtitle);
     }
 }
