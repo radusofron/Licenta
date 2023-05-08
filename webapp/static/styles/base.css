@@ -58,6 +58,7 @@ a{
     --turcoise: #7EBDC2;
     --light-pink: #C4A4A4; /* FIGMA */
     --pink: #D7897E; /* FIGMA */
+    --pink-hover: #D47E73;
     --pink-0: rgba(215, 137, 126, 0); /* Landing Page Gradient Background Pink */
     --pink-50: rgba(215, 137, 126, 0.5); /* Landing Page Gradient Background Pink */
     --glow-pink: #d49991; /* HOVER FOR PINK */

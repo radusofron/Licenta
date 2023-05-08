@@ -71,8 +71,8 @@ header{
     top: 100%;
     width: 0%;
     height: 0.2rem;
-    background-color: var(--white);
     border-radius: 0.5rem;
+    background-color: var(--white);
     transition: 500ms;
 }
 .header-option:hover::before{

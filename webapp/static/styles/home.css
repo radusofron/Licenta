@@ -140,24 +140,42 @@ main.grid-container{
     animation: book-line-animation-three 1s infinite;
 }
 @keyframes book-line-animation-one{
-    25%{
+    20%{
         width: 90%;
     }
-    100%{
-        width: 90%;
-    }
-}
-@keyframes book-line-animation-two{
     50%{
         width: 90%;
     }
+    80%{
+        width: 75%;
+    }
     100%{
+        width: 75%;
+    }
+}
+@keyframes book-line-animation-two{
+    35%{
         width: 90%;
+    }
+    50%{
+        width: 90%;
+    }
+    80%{
+        width: 35%;
+    }
+    100%{
+        width: 35%;
     }
 }
 @keyframes book-line-animation-three{
-    100%{
+    50%{
         width: 90%;
+    }
+    80%{
+        width: 0%;
+    }
+    100%{
+        width: 0%;
     }
 }
 .statistics:hover{
