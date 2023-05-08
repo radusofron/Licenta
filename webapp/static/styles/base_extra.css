@@ -216,7 +216,7 @@ input[type=text]:focus + .footer__review-button{
 nav.phone{
     display: none;
 }
-/* Menu icon for phone */
+/* Menu icon for phone + phone menu */
 @media (max-width: 900px){
     header{
         align-items: stretch;
@@ -235,30 +235,35 @@ nav.phone{
         width: 100%;
         border-radius: 0.5rem;
         background-color: var(--white);
-        transition: 250ms;
+        opacity: 1;
+        transition: 200ms;
     }
     .phone-menu-icon-bar.top.active{
-        transform-origin: left;
-        transform: rotate(45deg);
+        transform-origin: right;
+        transform: rotate(-45deg);
         width: 92%; 
     }
     .phone-menu-icon-bar.middle.active{
         opacity: 0;
     }
     .phone-menu-icon-bar.bottom.active{
-        transform-origin: left;
-        transform: rotate(-45deg);
+        transform-origin: right;
+        transform: rotate(45deg);
         width: 92%;
     }
     nav.phone{
         position: absolute;
         top: 6rem;
-        left: 0;
+        left: 100%;
         height: calc(100vh - 6rem);
         width: 100%;
-        display: block;
         background-color: var(--pink);
+        display: block;
+        transition: 250ms;
         z-index: 1;
+    }
+    nav.phone.active{
+        transform: translateX(-100%);
     }
     .header__options-phone{
         height: 100%;

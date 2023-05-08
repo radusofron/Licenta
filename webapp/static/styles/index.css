@@ -491,158 +491,121 @@ li.contact__list-element{
 
 /* RESPONSIVE */
 
-/* General */
-/* Change font-size */
-@media (max-height: 750px){
-    .site-name-container{
-        font-size: var(--fs-title);
-    }
-    .header-options{
-        font-size: var(--fs-phone-header-link);
-    }
-    .account-buttons{
-        font-size: var(--fs-description);
-    }
-    .subtitle{
-        font-size: var(--fs-title);
-    }
-    .paragraphs{
-        font-size: var(--fs-description);
-    }
-    .start-the-journey-button{
-        font-size: var(--fs-description);
-    }
-    .about__title{
-        font-size: var(--fs-description);
-    }
-    .about__description{
-        font-size: var(--fs-phone-description);
-    }
-    .destinations__title{
-        font-size: var(--fs-subtitle);
-    }
-    .destinations__description{
-        font-size: var(--fs-phone-description);
-    }
-    .destinations__name{
-        font-size: var(--fs-description);
-    }
-    .reviews__title{
-        font-size: var(--fs-subtitle);
-    }
-    .reviews__description{
-        font-size: var(--fs-phone-description);
-    }
-    .reviews__person{
-        font-size: var(--fs-description);
-    }
-    .reviews__person{
-        font-size: var(--fs-description);
-    }
-    .contact__title{
-        font-size: var(--fs-subtitle);
-    }
-    .contact__description{
-        font-size: var(--fs-phone-description);
-    }
-    .contact__name{
-        font-size: var(--fs-description);
-    }
-    .contact__detail{
-        font-size: var(--fs-phone-description);
-    }
-}
-
 /* 0. Header */
-.header-background{
-    position: absolute;
-    top: 0;
-    left: 100%;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    height: 12.5vh;
-    width: 90vw; /* 5vw are left and right padding */
-    background-color: var(--light-blue);
-    transition: 250ms;
-    z-index: 0;
-}
-.header-background.active{
-    transform: translateX(-100%);
+.header-options{
+    display: none;
 }
 .phone-menu-icon-container{
     display: none;
 }
-.phone-menu-icon{
-    width: 50%;
-    height: 50%;
-}
-nav.phone-menu{
-    position: absolute;
-    top: 12.5%;
-    left: 100%;
-    height: 87.5vh;
-    width: 100%; /* 20vw are left and right padding */
-    background-color: var(--light-blue);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    transition: 250ms;
-    z-index: 3;
-}
-nav.phone-menu.active{
-    transform: translateX(-100%);
-}
-.header-options.phone{
-    flex-basis: 60%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: 0.75vh;
-}
-.header-options.phone > li{
-    flex-basis: 15%;
-    width: 75%;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: 250ms;
-}
-.header-options.phone > li:hover{
-    background-color: var(--blue);
-}
-.header-options.phone > li::before{
-    content: none;
-}
-.account-buttons.phone{
-    flex-basis: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 1.5vh;
-}
+/* Menu icon for phone + phone menu */
 @media (max-width: 1100px) and (max-height: 700px), (max-width: 800px){
-    .header-options{
-        display: none;
+    .header-background{
+        position: absolute;
+        top: 0;
+        left: 100%;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        height: 12.5vh;
+        width: 90vw; /* 5vw are left and right padding */
+        background-color: var(--light-blue);
+        transition: 250ms;
+        z-index: 0;
+    }
+    .header-background.active{
+        transform: translateX(-100%);
     }
     .account-buttons{
         display: none;
     }
     header{
         justify-content: space-between;
+        align-items: stretch;
     }
     .site-name-container{
         flex-basis: content;
     }
     .phone-menu-icon-container{
+        width: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .phone-menu-icon-bar{
+        height: 9px;
+        width: 100%;
+        border-radius: 0.5rem;
+        background-color: var(--white);
+        opacity: 1;
+        transition: 200ms;
+    }
+    .phone-menu-icon-bar.top.active{
+        transform-origin: right;
+        transform: rotate(-45deg);
+        width: 92%; 
+    }
+    .phone-menu-icon-bar.middle.active{
+        opacity: 0;
+    }
+    .phone-menu-icon-bar.bottom.active{
+        transform-origin: right;
+        transform: rotate(45deg);
+        width: 92%;
+    }
+    nav.phone-menu{
+        position: absolute;
+        top: 6rem;
+        left: 100%;
+        height: calc(100vh - 6rem);
+        width: 100%;
+        background-color: var(--light-blue);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        transition: 250ms;
+        z-index: 3;
+    }
+    nav.phone-menu.active{
+        transform: translateX(-100%);
+    }
+    .header-options.phone{
+        flex-basis: 60%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0.75vh;
+    }
+    .header-options.phone > li{
+        flex-basis: 15%;
+        width: 75%;
+        border-radius: 0.5rem;
         display: flex;
         flex-direction: row;
-        justify-content: right;
+        justify-content: center;
         align-items: center;
+        transition: 250ms;
+    }
+    .header-options.phone > li:hover{
+        background-color: var(--blue);
+    }
+    .header-options.phone > li::before{
+        content: none;
+    }
+    .account-buttons.phone{
+        flex-basis: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 1.5vh;
+    }
+}
+@media (max-height: 750px){
+    nav.phone-menu{
+        top: 5rem;
+        height: calc(100vh - 5rem);
     }
 }
 
@@ -836,5 +799,67 @@ nav.phone-menu.active{
     }
     .contact__detail{
         font-weight: var(--regular);
+    }
+}
+
+/* General */
+/* Change font-size */
+@media (max-height: 750px){
+    .site-name-container{
+        font-size: var(--fs-title);
+    }
+    .header-options{
+        font-size: var(--fs-phone-header-link);
+    }
+    .account-buttons{
+        font-size: var(--fs-description);
+    }
+    .subtitle{
+        font-size: var(--fs-title);
+    }
+    .paragraphs{
+        font-size: var(--fs-description);
+    }
+    .start-the-journey-button{
+        font-size: var(--fs-description);
+    }
+    .about__title{
+        font-size: var(--fs-description);
+    }
+    .about__description{
+        font-size: var(--fs-phone-description);
+    }
+    .destinations__title{
+        font-size: var(--fs-subtitle);
+    }
+    .destinations__description{
+        font-size: var(--fs-phone-description);
+    }
+    .destinations__name{
+        font-size: var(--fs-description);
+    }
+    .reviews__title{
+        font-size: var(--fs-subtitle);
+    }
+    .reviews__description{
+        font-size: var(--fs-phone-description);
+    }
+    .reviews__person{
+        font-size: var(--fs-description);
+    }
+    .reviews__person{
+        font-size: var(--fs-description);
+    }
+    .contact__title{
+        font-size: var(--fs-subtitle);
+    }
+    .contact__description{
+        font-size: var(--fs-phone-description);
+    }
+    .contact__name{
+        font-size: var(--fs-description);
+    }
+    .contact__detail{
+        font-size: var(--fs-phone-description);
     }
 }

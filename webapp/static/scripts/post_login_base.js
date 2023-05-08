@@ -2,8 +2,6 @@
 
 // Function modifies menu icon for phone
 function modifyMenuIcon() {
-    // TODO -> delete next line
-    console.log("Intra si in modifyPhoneMenu")
 
     // Get menu bars
     const menuBars = document.querySelectorAll(".phone-menu-icon-bar")
@@ -17,8 +15,12 @@ function modifyMenuIcon() {
 
 // Function opens / closes phone menu
 function displayPhoneMenu() {
-    // TODO -> delete next line
-    console.log("Intra in displayPhoneMenu")
+
+    // Get phone menu
+    const phoneMenu = document.querySelector(".phone") 
+
+    // Display phone menu by adding CSS new class / removing CSS new class
+    phoneMenu.classList.toggle("active")
 }
 
 // Start after HTML code is rendered

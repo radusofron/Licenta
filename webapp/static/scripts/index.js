@@ -61,6 +61,19 @@ function displayOptionAndSection(option, sections) {
 
 /* RESPONSIVE */
 
+// Function modifies menu icon for phone
+function modifyMenuIcon() {
+
+    // Get menu bars
+    const menuBars = document.querySelectorAll(".phone-menu-icon-bar")
+
+    // Modify menu bars by adding CSS new class / remove CSS new class
+    menuBars.forEach(menuBar => {
+            menuBar.classList.toggle("active")
+    });
+
+}
+
 // Function opens / closes phone menu
 function displayPhoneMenu() {
     // Get header background for phone menu & phone menu
@@ -93,5 +106,8 @@ window.addEventListener("load", function() {
 
     // Get menu
     const menu = document.querySelector(".phone-menu-icon-container")
-    menu.addEventListener("click", () => displayPhoneMenu())
+    menu.addEventListener("click", () => {
+        modifyMenuIcon()
+        displayPhoneMenu()
+    });
   });
