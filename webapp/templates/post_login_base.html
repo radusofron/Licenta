@@ -28,7 +28,7 @@
                 <li class="header__option">
                     <a class="header__link" href="{{ url_for('home_view_blueprint.home_view') }}">Profile</a>
                 </li>
-                <li class="header__option">
+                <li class="header__option-logout">
                     <a class="header__logout-button" href="{{ url_for('index_view_blueprint.index_view') }}">Log
                         out</a>
                 </li>
@@ -40,6 +40,23 @@
             <span class="phone-menu-icon-bar bottom"></span>
         </div>
     </header>
+    <nav class="phone">
+        <ul class="header__options-phone">
+            <li class="header__option phone">
+                <a class="header__link phone" href="{{ url_for('home_view_blueprint.home_view') }}">Home</a>
+            </li>
+            <li class="header__option phone">
+                <a class="header__link phone" href="{{ url_for('home_view_blueprint.home_view') }}">Destinations</a>
+            </li>
+            <li class="header__option phone">
+                <a class="header__link phone" href="{{ url_for('home_view_blueprint.home_view') }}">Profile</a>
+            </li>
+            <li class="header__option-logout phone">
+                <a class="header__logout-button" href="{{ url_for('index_view_blueprint.index_view') }}">Log
+                    out</a>
+            </li>
+        </ul>
+    </nav>
     {% block content %} {% endblock %}
     <footer>
         <div class="footer__grid-container">

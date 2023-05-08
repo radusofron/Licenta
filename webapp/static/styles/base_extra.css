@@ -213,6 +213,9 @@ input[type=text]:focus + .footer__review-button{
 .phone-menu-icon-container{
     display: none;
 }
+nav.phone{
+    display: none;
+}
 /* Menu icon for phone */
 @media (max-width: 900px){
     header{
@@ -246,6 +249,52 @@ input[type=text]:focus + .footer__review-button{
         transform-origin: left;
         transform: rotate(-45deg);
         width: 92%;
+    }
+    nav.phone{
+        position: absolute;
+        top: 6rem;
+        left: 0;
+        height: calc(100vh - 6rem);
+        width: 100%;
+        display: block;
+        background-color: var(--pink);
+        z-index: 1;
+    }
+    .header__options-phone{
+        height: 100%;
+        width: 100%;
+        font-size: var(--fs-header-link);
+        font-weight: var(--semibold);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 1.5vh;
+    }
+    .header__option.phone{
+        flex-basis: 10%;
+        width: 75%;
+        display: flex;
+    }
+    .header__link.phone{
+        width: 100%;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .header__link.phone:hover{
+        color: var(--white);
+        background-color: var(--pink-hover);
+    }
+    .header__option-logout{
+        flex-basis: 0;
+    }
+}
+@media (max-height: 750px){
+    nav.phone{
+        top: 5rem;
+        height: calc(100vh - 5rem);
     }
 }
 /* Change menu icon dimensions for phone in case of a maxium height of 750px */
@@ -294,7 +343,7 @@ input[type=text]:focus + .footer__review-button{
         font-size: var(--fs-phone-header-link);
     }
     .header__logout-button{
-        font-size: var(--fs-description);
+        font-size: var(--fs-phone-header-link);
     }
     .footer__subtitle{
         font-size: var(--fs-subtitle);
