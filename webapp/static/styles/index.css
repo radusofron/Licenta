@@ -36,7 +36,7 @@ header{
 }
 .site-name-container{
     flex-basis: 25%;
-    font-size: clamp(2.5rem, 5vh, 7.5vh);
+    font-size: var(--fs-big-title);
     font-weight: var(--medium);
     display: flex;
     flex-direction: row;
@@ -52,7 +52,7 @@ header{
 }
 .header-options{
     flex-basis: 50%;
-    font-size: clamp(1rem, 2vh, 7.5vh);
+    font-size: var(--fs-header-link);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -86,7 +86,7 @@ header{
 }
 .account-buttons{
     flex-basis: 25%;
-    font-size: clamp(1rem, 2.1vh, 5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     display: flex;
     flex-direction: row;
@@ -123,7 +123,7 @@ header{
     left: 15%; 
     width: 70%;
     height: 20vh;
-    font-size: clamp(2.5rem, 5vh, 7.5vh);
+    font-size: var(--fs-big-title);
     font-weight: var(--medium);
     color: var(--white);
     display: flex;
@@ -152,7 +152,7 @@ section.intro.active{
 }
 .paragraphs{
     height: 12.5vh;
-    font-size: clamp(0.95rem, 2vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--regular);
     color: var(--white);
     display: flex;
@@ -166,7 +166,7 @@ section.intro.active{
     left: 37.5%;
     width: 25%;
     padding: 1vh;
-    font-size: clamp(1rem, 2.1vh, 5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--white);
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
@@ -257,12 +257,12 @@ li.about__list-element{
     gap: 2.5vh;
 }
 .about__title{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
 }
 .about__description{
     height: 100%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
 }
 
@@ -288,12 +288,12 @@ section.destinations.active{
     gap: 5vh;
 }
 .destinations__title{
-    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
+    font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     text-align: center;
 }
 .destinations__description{
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -330,7 +330,7 @@ li.destinations__list-element{
     object-fit: content;
 }
 .destinations__name{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     text-align: center;
 }
@@ -358,12 +358,12 @@ section.reviews.active{
     align-items: stretch;
 }
 .reviews__title{
-    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
+    font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     text-align: center;
 }
 .reviews__description{
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -386,7 +386,7 @@ li.reviews__list-element{
     flex-basis: 15%;
     padding: 0.5rem;
     border-bottom: 0.35rem solid var(--white-50);
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     display: flex;
     justify-content: center;
@@ -408,7 +408,7 @@ li.reviews__list-element{
 }
 .reviews__review-text{
     height: 100%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     display: flex;
     justify-content: center;
@@ -438,12 +438,12 @@ section.contact.active{
     gap: 5vh;
 }
 .contact__title{
-    font-size: clamp(1.2rem, 2.5vh, 7.5vh);
+    font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     text-align: center;
 }
 .contact__description{
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -473,7 +473,7 @@ li.contact__list-element{
     object-fit: cover;
 }
 .contact__name{
-    font-size: clamp(1rem, 2.1vh, 7.5vh);
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     text-align: center;
 }
@@ -484,7 +484,7 @@ li.contact__list-element{
 }
 .contact__detail{
     flex-basis: 33.3%;
-    font-size: clamp(0.8rem, 1.75vh, 5vh);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     text-align: center;
 }
@@ -492,6 +492,66 @@ li.contact__list-element{
 /* RESPONSIVE */
 
 /* General */
+/* Change font-size */
+@media (max-height: 750px){
+    .site-name-container{
+        font-size: var(--fs-title);
+    }
+    .header-options{
+        font-size: var(--fs-phone-header-link);
+    }
+    .account-buttons{
+        font-size: var(--fs-description);
+    }
+    .subtitle{
+        font-size: var(--fs-title);
+    }
+    .paragraphs{
+        font-size: var(--fs-description);
+    }
+    .start-the-journey-button{
+        font-size: var(--fs-description);
+    }
+    .about__title{
+        font-size: var(--fs-description);
+    }
+    .about__description{
+        font-size: var(--fs-phone-description);
+    }
+    .destinations__title{
+        font-size: var(--fs-subtitle);
+    }
+    .destinations__description{
+        font-size: var(--fs-phone-description);
+    }
+    .destinations__name{
+        font-size: var(--fs-description);
+    }
+    .reviews__title{
+        font-size: var(--fs-subtitle);
+    }
+    .reviews__description{
+        font-size: var(--fs-phone-description);
+    }
+    .reviews__person{
+        font-size: var(--fs-description);
+    }
+    .reviews__person{
+        font-size: var(--fs-description);
+    }
+    .contact__title{
+        font-size: var(--fs-subtitle);
+    }
+    .contact__description{
+        font-size: var(--fs-phone-description);
+    }
+    .contact__name{
+        font-size: var(--fs-description);
+    }
+    .contact__detail{
+        font-size: var(--fs-phone-description);
+    }
+}
 
 /* 0. Header */
 .header-background{
@@ -599,11 +659,6 @@ nav.phone-menu.active{
     .start-the-journey-button{
         left: 30%;
         width: 40%;
-    }
-}
-@media (max-height: 700px) and (max-width: 850px){
-    .subtitle{
-        font-size: clamp(2rem, 3vh, 7.5vh);
     }
 }
 @media (max-width: 700px){

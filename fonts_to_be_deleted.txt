@@ -54,3 +54,53 @@ header links:
 
 description on small screens:
     font-weight: var(--regular);
+
+
+
+
+
+.site-name-container{
+    font-size: var(--fs-big-title);
+}
+.header-options{
+    font-size: var(--fs-header-link);
+}
+.account-buttons{
+    font-size: var(--fs-subtitle);
+}
+.subtitle{
+    font-size: var(--fs-big-title);
+}
+.paragraphs{
+    font-size: var(--fs-subtitle);
+}
+.start-the-journey-button{
+    font-size: var(--fs-subtitle);
+}
+.about__title{
+    font-size: var(--fs-subtitle);
+}
+.about__description{
+    font-size: var(--fs-description);
+}
+.destinations__title{
+    font-size: var(--fs-big-subtitle);
+}
+.destinations__description{
+    font-size: var(--fs-description);
+}
+.destinations__name{
+    font-size: var(--fs-subtitle);
+}
+.reviews__title{
+    font-size: var(--fs-big-subtitle);
+}
+.reviews__description{
+    font-size: var(--fs-description);
+}
+.reviews__person{
+    font-size: var(--fs-subtitle);
+}
+.reviews__person{
+    font-size: var(--fs-subtitle);
+}
