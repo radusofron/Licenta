@@ -9,6 +9,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/base_extra.css') }}" />
+    <script src="{{ url_for('static', filename='scripts/post_login_base.js') }}" defer></script>
     {% block head %} {% endblock %}
     <title>{% block title %} {% endblock %}</title>
 </head>
@@ -16,7 +17,7 @@
 <body>
     <header>
         <h2 class="header__site-name">TOYO</h2>
-        <nav>
+        <nav class="desktop">
             <ul class="header__options">
                 <li class="header__option">
                     <a class="header__link" href="{{ url_for('home_view_blueprint.home_view') }}">Home</a>
@@ -33,6 +34,11 @@
                 </li>
             </ul>
         </nav>
+        <div class="phone-menu-icon-container">
+            <span class="phone-menu-icon-bar top"></span>
+            <span class="phone-menu-icon-bar middle"></span>
+            <span class="phone-menu-icon-bar bottom"></span>
+        </div>
     </header>
     {% block content %} {% endblock %}
     <footer>
@@ -65,8 +71,8 @@
                         matters to us!
                     </p>
                     <form class="footer__review-form">
-                        <input maxlength="128" class="footer__review-input" placeholder="Give us your feedback..."
-                            name="review" type="text" required>
+                        <input maxlength="128" autocomplete="off" class="footer__review-input"
+                            placeholder="Give us your feedback..." name="review" type="text" required>
                         <button type="submit" class="footer__review-button">Submit review</button>
                     </form>
                 </div>

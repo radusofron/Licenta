@@ -66,14 +66,10 @@ function displayPhoneMenu() {
     // Get header background for phone menu & phone menu
     const phoneMenu = document.querySelector(".phone-menu")
     const header = document.querySelector(".header-background")
-    if (phoneMenu.classList[1] == "active") {
-        phoneMenu.classList.remove("active")
-        header.classList.remove("active")
-    }
-    else {
-        phoneMenu.classList.add("active")
-        header.classList.add("active")
-    }
+
+    // Display phone menu by adding CSS new class / removing CSS new class
+    phoneMenu.classList.toggle("active")
+    header.classList.toggle("active")
 }
 
 

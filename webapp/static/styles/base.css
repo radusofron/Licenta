@@ -75,4 +75,15 @@ a{
     --semibold: 600;
     --bold: 700;
     --extrabold: 800;
+    --fs-big-title: 3rem;
+    --fs-title: 2rem;
+    --fs-big-subtitle: 1.6rem;
+    --fs-subtitle: 1.4rem;
+    --fs-description: 1.125rem;
+    --fs-phone-description: 1rem;
+    /* Special fonts */
+    --fs-header-link: 1.25rem;
+    --fs-phone-header-link: 1.15rem;
+    --fs-footer-details: 1rem;
+    --fs-phone-footer-details: 0.8rem;
 }
