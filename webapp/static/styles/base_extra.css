@@ -1,5 +1,8 @@
 /* CSS file ONLY for post_login_base.html */
 
+body{
+    overflow-x: hidden;
+}
 
 /* Header */
 header{
@@ -258,11 +261,11 @@ nav.phone{
         height: calc(100vh - 6rem);
         width: 100%;
         background-color: var(--pink);
-        display: block;
         transition: 250ms;
         z-index: 1;
     }
     nav.phone.active{
+        display: block;
         transform: translateX(-100%);
     }
     .header__options-phone{

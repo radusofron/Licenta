@@ -492,14 +492,14 @@ li.contact__list-element{
 /* RESPONSIVE */
 
 /* 0. Header */
-.header-options{
+nav.phone-menu{
     display: none;
 }
 .phone-menu-icon-container{
     display: none;
 }
 /* Menu icon for phone + phone menu */
-@media (max-width: 1100px) and (max-height: 700px), (max-width: 800px){
+@media (max-width: 1150px) and (min-height: 700px), (max-width: 800px){
     .header-background{
         position: absolute;
         top: 0;
@@ -514,6 +514,9 @@ li.contact__list-element{
     }
     .header-background.active{
         transform: translateX(-100%);
+    }
+    .header-options{
+        display: none;
     }
     .account-buttons{
         display: none;
