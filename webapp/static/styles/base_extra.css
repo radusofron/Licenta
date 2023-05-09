@@ -260,12 +260,12 @@ nav.phone{
         left: 100%;
         height: calc(100vh - 6rem);
         width: 100%;
+        display: block;
         background-color: var(--pink);
         transition: 250ms;
         z-index: 1;
     }
     nav.phone.active{
-        display: block;
         transform: translateX(-100%);
     }
     .header__options-phone{
@@ -309,9 +309,6 @@ nav.phone{
 @media (max-width: 900px) and (max-height: 750px){
     .phone-menu-icon-container{
         width: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
     }
     .phone-menu-icon-bar{
         height: 6px;

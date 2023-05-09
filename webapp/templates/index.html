@@ -8,9 +8,11 @@
 {% block title %} Site name {% endblock %}
 
 {% block body %}
-<main>
+<div class="image-container">
     <img class="background-image" src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
         alt="Image of a city" />
+</div>
+<div class="content-container">
     <header>
         <h2 class="site-name-container">
             <a class="site-name intro active">TOYO</a>
@@ -31,19 +33,22 @@
             <span class="phone-menu-icon-bar bottom"></span>
         </div>
     </header>
-    <div class="subtitle">YOUR OWN TRAVEL AGENCY</div>
     <section class="section intro active">
-        <ul class="paragraphs">
-            <li class="paragraph">Made by a traveller for the other travelers</li>
-            <li class="paragraph">Explore the capitals of Europe in a simpler way.</li>
-            <li class="paragraph">No more maps, travel guides or anything like that.</li>
-        </ul>
-        <a class="start-the-journey-button" href="{{ url_for('register_view_blueprint.register_view') }}">
-            Start the journey
-        </a>
+        <div class="subtitle">YOUR OWN TRAVEL AGENCY</div>
+        <div class="intro-container">
+            <ul class="paragraphs">
+                <li class="paragraph">Made by a traveller for the other travelers</li>
+                <li class="paragraph">Explore the capitals of Europe in a simpler way.</li>
+                <li class="paragraph">No more maps, travel guides or anything like that.</li>
+            </ul>
+            <a class="start-the-journey-button" href="{{ url_for('register_view_blueprint.register_view') }}">
+                Start the journey
+            </a>
+        </div>
     </section>
     <section class="section about">
         <div class="gradient"></div>
+        <div class="subtitle about__subtitle">YOUR OWN TRAVEL AGENCY</div>
         <ul class="about__list">
             <li class="about__list-element">
                 <div class="about__icon-container">
@@ -85,6 +90,7 @@
     </section>
     <section class="section destinations">
         <div class="gradient"></div>
+        <div class="subtitle destinations__subtitle">YOUR OWN TRAVEL AGENCY</div>
         <div class="destinations__container">
             <div class="destinations__text">
                 <h3 class="destinations__title">A large variety of cities</h3>
@@ -110,6 +116,7 @@
     </section>
     <section class="section reviews">
         <div class="gradient"></div>
+        <div class="subtitle reviews__subtitle">YOUR OWN TRAVEL AGENCY</div>
         <div class="reviews__container">
             <div class="reviews_text">
                 <h3 class="reviews__title">We are not the only ones praising our app</h3>
@@ -140,6 +147,7 @@
     </section>
     <section class=" section contact">
         <div class="gradient"></div>
+        <div class="subtitle contact__subtitle">YOUR OWN TRAVEL AGENCY</div>
         <div class="contact__container">
             <div class="contact__text">
                 <h3 class="contact__title">Where you can find us?</h3>
@@ -198,5 +206,6 @@
             <a class="sign-up-button" href="{{ url_for('register_view_blueprint.register_view') }}">Sign up</a>
         </div>
     </nav>
-</main>
+</div>
+
 {% endblock %}
