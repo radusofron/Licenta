@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 from controllers.index import index_controller_blueprint
 from controllers.login import login_controller_blueprint
 from controllers.register import register_controller_blueprint
@@ -12,8 +13,7 @@ from datetime import timedelta
 
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
-app.config["SECRET_KEY"] = "a_secrey_key"
-app.config["SESSION_TYPE"] = "SameSite"
+app.config["SECRET_KEY"] = "ae30665140bb47595f0814b9456eb1e4e29f6411a04c52ae"
 app.config["SESSION_COOKIE_PATH"] = "/"
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=7)
 

@@ -1,7 +1,7 @@
-from flask import Blueprint, make_response, jsonify, redirect, request, flash, session
+from flask import Blueprint, redirect, request, flash, session
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_user_username, extract_user_email, insert_user
+from database import dba, extract_user_username, extract_user_email, insert_user, extract_user_id
 
 
 register_controller_blueprint = Blueprint("register_controller_blueprint", __name__)
@@ -38,5 +38,6 @@ def register():
     # Check finished
     insert_user(dba, username, email, password)
     session["logged_in"] = True
+    session["user_id"] = extract_user_id(dba, email)
     return redirect("/home", code=302)
        

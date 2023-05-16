@@ -35,18 +35,18 @@
     </div>
     <ul class="destinations grid-col-span-3 grid-row-span-2">
         <li class="destinations__category visited-destinations">
-            <p class="destinations__number">02</p>
+            <p class="destinations__number">{{visited_destinations}}</p>
             <h3 class="destinations__subtitle">visited destinations</h3>
             <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all
             </a>
         </li>
         <li class="destinations__category wishlisted-destinations">
-            <p class="destinations__number">01</p>
+            <p class="destinations__number">{{wishlisted_destinations}}</p>
             <h3 class="destinations__subtitle">destinations on whishlist</h3>
             <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all</a>
         </li>
         <li class="destinations__category total-destinations">
-            <p class="destinations__number">27</p>
+            <p class="destinations__number">{{total_destinations}}</p>
             <h3 class="destinations__subtitle">total destinations</h3>
             <a class="destinations__see-all-button" href="{{ url_for('home_view_blueprint.home_view') }}">View all</a>
         </li>

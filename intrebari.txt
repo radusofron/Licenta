@@ -1,0 +1,42 @@
+1. Ar fi bine sa tratez si cazurile erro 500 si erro 503?
+
+2. Cand este deadline-ul pentru implementare? Dar pentru lucrarea scrisa?
+
+3. Aveti modele de lucrari ca sa am o idee?
+
+4. Ar fi bine sa pun alte poze de fiecare data pentru destinatii? 
+
+5. Pentru statistici: de pe site + de pe alte site-uri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Times News Roman 12, un rand jumate (1.5)
+justify
+
+La tabele denumirea e deasupra
+
+La restul atasarilor, dedesubt.

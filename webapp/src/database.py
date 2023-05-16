@@ -29,6 +29,17 @@ def login_validation(dba, input_email: str, input_password: str) -> bool:
     return False
 
 
+def extract_user_id(dba, input_email):
+    """Function returns user id from database based on email given
+    """
+    # Extract id
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `id` FROM `users` WHERE `email`=%s", (input_email,))
+    user_id = dba_cursor.fetchone()
+    dba_cursor.close()
+    return user_id[0]
+
+
 def extract_user_username(dba, input_username: str):
     """Function returns user username from database
     """
@@ -67,25 +78,25 @@ def extract_user_max_id(dba):
     """
     # Extract maximum id number
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT MAX(`id`) from `users`")
+    dba_cursor.execute("SELECT MAX(`id`) FROM `users`")
     max_id = dba_cursor.fetchone()
     dba_cursor.close()
-    return max_id
+    return max_id[0]
 
 
 def insert_user(dba, username: str, email: str, password: str):
-    """Function inserts user to the database
+    """Function inserts user to database
     """
     # Extract biggest user id found
     max_id = extract_user_max_id(dba)
 
     # Compute new user id
-    if max_id[0] is None:
+    if max_id is None:
         # Case: first insertion
         new_max_id = 1
     else:
         # Case: the other insertions
-        new_max_id = max_id[0] + 1
+        new_max_id = max_id + 1
 
     # Hash the password
     encrypted_password = generate_password_hash(password)
@@ -98,6 +109,37 @@ def insert_user(dba, username: str, email: str, password: str):
     dba_cursor.execute("INSERT INTO `users` (`id`, `username`, `email`, `password`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, username, email, encrypted_password, date_time))
     dba_cursor.close()
     dba.commit()
+    
+
+def extract_destinations_number(dba):
+    """Function returns total number of destinations
+    """
+    # Extract total number
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*) FROM `destinations`")
+    total_destinations = dba_cursor.fetchone()
+    dba_cursor.close()
+    return total_destinations[0]
+
+
+def extract_wishlisted_destinations_number(dba, user_id):
+    """Function returns total number of wishlisted destinatinos for a user based on user id
+    """
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*) FROM `wishlisted_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
+    wishlisted_destinations = dba_cursor.fetchone()
+    dba_cursor.close()
+    return wishlisted_destinations[0]
+
+
+def extract_visited_destinations_number(dba, user_id):
+    """Function returns total number of visited destinations for a user based on user id
+    """
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
+    visited_destinations = dba_cursor.fetchone()
+    dba_cursor.close()
+    return visited_destinations[0]
 
 
 # Create database object
