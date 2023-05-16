@@ -125,20 +125,30 @@ def extract_destinations_number(dba):
 def extract_wishlisted_destinations_number(dba, user_id):
     """Function returns total number of wishlisted destinatinos for a user based on user id
     """
+    # Extract number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT COUNT(*) FROM `wishlisted_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
     wishlisted_destinations = dba_cursor.fetchone()
     dba_cursor.close()
+
+    # Case: no destinations on wishlist
+    if wishlisted_destinations is None:
+        return 0
     return wishlisted_destinations[0]
 
 
 def extract_visited_destinations_number(dba, user_id):
     """Function returns total number of visited destinations for a user based on user id
     """
+    # Extract number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
     visited_destinations = dba_cursor.fetchone()
     dba_cursor.close()
+
+    # Case: no visited destinations
+    if visited_destinations is None:
+        return 0
     return visited_destinations[0]
 
 

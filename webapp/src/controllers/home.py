@@ -11,6 +11,7 @@ def home() -> Response:
     # Extract total destinations number, wishlisted destinations number and visited destinations number
     total_destinations = extract_destinations_number(dba)
     wishlisted_destinations = extract_wishlisted_destinations_number(dba, session["user_id"])
+    print("Aaaaaaaaaacum e :", wishlisted_destinations, type(wishlisted_destinations))
     visited_destinations = extract_visited_destinations_number(dba, session["user_id"])
 
     # Process total destinations number, wishlisted destinations number and visited destinations number
@@ -20,7 +21,7 @@ def home() -> Response:
         wishlisted_destinations = "0" + str(wishlisted_destinations)
     if len(str(visited_destinations)) == 1:
         visited_destinations = "0" + str(visited_destinations)
-        
+
     return make_response(
         jsonify({"total destinations": total_destinations, "wishlisted destinations": wishlisted_destinations, "visited destinations": visited_destinations}),
         status.HTTP_200_OK,
