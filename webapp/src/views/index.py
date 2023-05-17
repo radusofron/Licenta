@@ -14,6 +14,11 @@ def index_view() -> Response:
     # Session exited
     session["logged_in"] = False
 
+    # Extract data
+    results = index()
+    index_data = json.loads(results.data)
+    most_visited = index_data["most visited"]
+
     return make_response(
-        render_template("index.html")
+        render_template("index.html", most_visited = most_visited)
     )

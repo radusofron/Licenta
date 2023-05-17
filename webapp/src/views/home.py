@@ -11,6 +11,7 @@ home_view_blueprint = Blueprint("home_view_blueprint", __name__)
 @home_view_blueprint.route("/home")
 def home_view() -> Response:
     if session["logged_in"]:
+        # Extract data
         results = home()
         home_data = json.loads(results.data)
         total_destinations = home_data["total destinations"]

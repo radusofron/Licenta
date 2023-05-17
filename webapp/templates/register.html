@@ -20,38 +20,39 @@
                 <div class="username-container">
                     <p class="username">Username</p>
                     {% if messages[0] == "username_error" %}
-                    <input maxlength="40" class="error" name="username" type="text"
+                    <input maxlength="40" autocomplete="off" class="error" name="username" type="text"
                         placeholder="Username already exists!" required>
                     {% else %}
-                    <input maxlength="40" name="username" type="text" placeholder="Your username (individual)" required>
+                    <input maxlength="40" autocomplete="off" name="username" type="text"
+                        placeholder="Your username (individual)" required>
                     {% endif %}
                 </div>
                 <div class="email-container">
                     <p class="email">Email</p>
                     {% if messages[0] == "email_error"%}
-                    <input maxlength="40" class="error" name="email" type="text" placeholder="Email already exists!"
-                        required>
+                    <input maxlength="40" autocomplete="off" class="error" name="email" type="text"
+                        placeholder="Email already exists!" required>
                     {% else %}
-                    <input maxlength="40" name="email" type="text" placeholder="Your email" required>
+                    <input maxlength="40" autocomplete="off" name="email" type="text" placeholder="Your email" required>
                     {% endif %}
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
                     {% if messages[0] == "password_error"%}
-                    <input maxlength="40" class="error" name="password" type="password"
+                    <input maxlength="40" autocomplete="off" class="error" name="password" type="password"
                         placeholder="Password too short!" required>
                     {% else %}
-                    <input maxlength="40" name="password" type="password"
+                    <input maxlength="40" autocomplete="off" name="password" type="password"
                         placeholder="Your password (min. 8 characters)" required>
                     {% endif %}
                 </div>
                 <div class="password-container">
                     <p class="password">Confirm password</p>
                     {% if messages[0] == "passwords_error"%}
-                    <input maxlength="40" class="error" name="password-confirmation" type="password"
+                    <input maxlength="40" autocomplete="off" class="error" name="password-confirmation" type="password"
                         placeholder="Passwords are different!" required>
                     {% else %}
-                    <input maxlength="40" name="password-confirmation" type="password"
+                    <input maxlength="40" autocomplete="off" name="password-confirmation" type="password"
                         placeholder="Repeat your password" required>
                     {% endif %}
                 </div>
@@ -59,20 +60,21 @@
                 <!-- First time displaying the page: -->
                 <div class="username-container">
                     <p class="username">Username</p>
-                    <input maxlength="40" name="username" type="text" placeholder="Your username (individual)" required>
+                    <input maxlength="40" autocomplete="off" name="username" type="text"
+                        placeholder="Your username (individual)" required>
                 </div>
                 <div class="email-container">
                     <p class="email">Email</p>
-                    <input maxlength="40" name="email" type="text" placeholder="Your email" required>
+                    <input maxlength="40" autocomplete="off" name="email" type="text" placeholder="Your email" required>
                 </div>
                 <div class="password-container">
                     <p class="password">Password</p>
-                    <input maxlength="40" name="password" type="password"
+                    <input maxlength="40" autocomplete="off" name="password" type="password"
                         placeholder="Your password (min. 8 characters)" required>
                 </div>
                 <div class="password-container">
                     <p class="password">Confirm password</p>
-                    <input maxlength="40" name="password-confirmation" type="password"
+                    <input maxlength="40" autocomplete="off" name="password-confirmation" type="password"
                         placeholder="Repeat your password" required>
                 </div>
                 {% endif %}
