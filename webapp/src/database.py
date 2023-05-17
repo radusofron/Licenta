@@ -128,9 +128,9 @@ def extract_destinations_number(dba):
     # Extract total number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT COUNT(*) FROM `destinations`")
-    total_destinations = dba_cursor.fetchone()
+    total_destinations_number = dba_cursor.fetchone()
     dba_cursor.close()
-    return total_destinations[0]
+    return total_destinations_number[0]
 
 
 def extract_wishlisted_destinations_number(dba, user_id):
@@ -139,13 +139,13 @@ def extract_wishlisted_destinations_number(dba, user_id):
     # Extract number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT COUNT(*) FROM `wishlisted_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
-    wishlisted_destinations = dba_cursor.fetchone()
+    wishlisted_destinations_number = dba_cursor.fetchone()
     dba_cursor.close()
 
     # Case: no destinations on wishlist
-    if wishlisted_destinations is None:
+    if wishlisted_destinations_number is None:
         return 0
-    return wishlisted_destinations[0]
+    return wishlisted_destinations_number[0]
 
 
 def extract_visited_destinations_number(dba, user_id):
@@ -154,14 +154,36 @@ def extract_visited_destinations_number(dba, user_id):
     # Extract number
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
-    visited_destinations = dba_cursor.fetchone()
+    visited_destinations_number = dba_cursor.fetchone()
     dba_cursor.close()
 
     # Case: no visited destinations
-    if visited_destinations is None:
+    if visited_destinations_number is None:
         return 0
-    return visited_destinations[0]
+    return visited_destinations_number[0]
 
+
+def extract_user_visited_destinations(dba, user_id):
+    """Function returns the names of visited destinations for a user based on user id
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `visited_destinations` `v` ON `d`.`id`=`v`.`destination_id` INNER JOIN `users` `u` ON `v`.`user_id` = `u`.`id` WHERE `u`.`id`=%s;", (user_id, ))
+    visited_destinations = dba_cursor.fetchall()
+    dba_cursor.close()
+    return visited_destinations
+
+
+def extract_user_wishlisted_destinations(dba, user_id):
+    """Function returns the names of visited destinations for a user based on user id
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s;", (user_id, ))
+    visited_destinations = dba_cursor.fetchall()
+    dba_cursor.close()
+    return visited_destinations
+    
 
 # Create database object
 dba = connect_to_dba()

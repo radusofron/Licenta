@@ -23,8 +23,11 @@ def destinations_view() -> Response:
             )
         
         # Case: good option
+        destinations_specific = destinations_data["specific destinations"]
+        destinations_all = destinations_data["all destinations"]
+        print(destinations_specific)
         return make_response(
-            render_template("destinations.html", option = destinations_option)
+            render_template("destinations.html", option = destinations_option, destinations_specific = destinations_specific, destinations_all = destinations_all)
         )
         
     return make_response(
