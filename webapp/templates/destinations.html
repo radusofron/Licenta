@@ -1,0 +1,32 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/destinations.css') }}" />
+{% endblock %}
+
+{% block title %} Site name | Destinations {% endblock %}
+
+{% block content %}
+<main>
+    This is destinations page
+    {% if option == "visited" %}
+    <section class="visited-destinations">
+        These are the visited destinations
+    </section>
+    {% elif option == "wishlisted" %}
+    <section class="wishlisted-destinations">
+        These are the destinations on wishlist
+    </section>
+    {% else %}
+    <section class="most-visited">
+        These are most visited destinations
+    </section>
+    <section class="most-reviewed">
+        These are most reviewed destinations
+    </section>
+    {% endif %}
+    <section class="all-destinations">
+        These are all destinations
+    </section>
+</main>
+{% endblock %}

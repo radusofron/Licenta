@@ -4,10 +4,12 @@ from controllers.index import index_controller_blueprint
 from controllers.login import login_controller_blueprint
 from controllers.register import register_controller_blueprint
 from controllers.home import home_controller_blueprint
+from controllers.destinations import destinations_controller_blueprint
 from views.index import index_view_blueprint
 from views.login import login_view_blueprint
 from views.register import register_view_blueprint
 from views.home import home_view_blueprint
+from views.destinations import destinations_view_blueprint
 from views.error_404 import error_404_view_blueprint
 from datetime import timedelta
 
@@ -25,6 +27,8 @@ app.register_blueprint(register_controller_blueprint)
 app.register_blueprint(register_view_blueprint)
 app.register_blueprint(home_controller_blueprint)
 app.register_blueprint(home_view_blueprint)
+app.register_blueprint(destinations_controller_blueprint)
+app.register_blueprint(destinations_view_blueprint)
 app.register_blueprint(error_404_view_blueprint)
 
 
