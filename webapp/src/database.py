@@ -190,7 +190,7 @@ def extract_most_visited_destinations_names(dba):
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` JOIN `visited_destinations` `v` on `d`.`id` = `v`.`destination_id` GROUP BY `v`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    dba_cursor.execute("SELECT `d`.`name`, COUNT(*) FROM `destinations` `d` JOIN `visited_destinations` `v` on `d`.`id` = `v`.`destination_id` GROUP BY `v`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
     most_visited_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return most_visited_destinations
@@ -201,7 +201,7 @@ def extract_most_reviewed_destinations_names(dba):
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` JOIN `reviews_destinations` `r` on `d`.`id` = `r`.`destination_id` GROUP BY `r`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    dba_cursor.execute("SELECT `d`.`name`, COUNT(*) FROM `destinations` `d` JOIN `reviews_destinations` `r` on `d`.`id` = `r`.`destination_id` GROUP BY `r`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
     most_reviewed_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return most_reviewed_destinations

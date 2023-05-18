@@ -7,12 +7,20 @@ from database import dba, extract_visited_destinations_names, extract_wishlisted
 destinations_controller_blueprint = Blueprint("destinations_controller_blueprint", __name__)
 
 
-def create_specific_destinations(destinations: list):
+def create_specific_destinations(destinations: list, option: int) -> list:
     """Function creates a list containing all the destinations names
 
-    Database's function returns a list with tuples containing the names.
+    Database's function returns a list with tuples containing the names and possibly the correspondent data for every name.
 
-    This function returns a list containing the names. It returns an empty list if no destination was found.
+    This function returns a list containing the names and possibly the data after its correspondent name. It returns an empty list if no destination was found.
+
+    Parameters:
+        destinations: a list with tuples containing the names and possibly the correspondent data for every name
+        option: 1, correspondent data is not added to the list
+                2, correspondent data is added to the list, every data after its correspondent name
+
+    Returns:
+        a list as described above
     """
     specific_destinations = []
 
@@ -20,6 +28,9 @@ def create_specific_destinations(destinations: list):
     if len(destinations):
         for tpl in destinations:
             specific_destinations.append(tpl[0])
+            # This case: add data for destination, too
+            if option == 2:
+                specific_destinations.append(tpl[1])
 
     return specific_destinations
 
@@ -39,27 +50,27 @@ def destinations() -> Response:
     # Case: visited
     elif option == "visited":
         visited_destinations = extract_visited_destinations_names(dba, session["user_id"])
-        specific_destinations = create_specific_destinations(visited_destinations)
+        specific_destinations = create_specific_destinations(visited_destinations, 1)
         
     
     # Case: wishlisted
     elif option == "wishlisted":
         wishlisted_destinations = extract_wishlisted_destinations_names(dba, session["user_id"])
-        specific_destinations = create_specific_destinations(wishlisted_destinations)
+        specific_destinations = create_specific_destinations(wishlisted_destinations, 1)
 
     # Case: most visited and most reviewed
     else:
         most_visited_destinations = extract_most_visited_destinations_names(dba)
-        specific_destinations = create_specific_destinations(most_visited_destinations)
+        specific_destinations = create_specific_destinations(most_visited_destinations, 2)
         # Add a delimiter
         specific_destinations.append(" ")
         # Add to the same list
         most_reviewed_destinations = extract_most_reviewed_destinations_names(dba)
-        specific_destinations.extend(create_specific_destinations(most_reviewed_destinations))
+        specific_destinations.extend(create_specific_destinations(most_reviewed_destinations, 2))
 
     # Common for all cases
     destinations = extract_destinations_names(dba)
-    destinations = create_specific_destinations(destinations)
+    destinations = create_specific_destinations(destinations, 1)
     
     return make_response(
         jsonify({"option": option, "specific destinations": specific_destinations, "all destinations": destinations}),
