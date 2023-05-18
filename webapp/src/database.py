@@ -122,15 +122,19 @@ def insert_user(dba, username: str, email: str, password: str):
     dba.commit()
     
 
-def extract_destinations_number(dba):
-    """Function returns total number of destinations
+def extract_visited_destinations_number(dba, user_id):
+    """Function returns total number of visited destinations for a user based on user id
     """
-    # Extract total number
+    # Extract number
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT COUNT(*) FROM `destinations`")
-    total_destinations_number = dba_cursor.fetchone()
+    dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
+    visited_destinations_number = dba_cursor.fetchone()
     dba_cursor.close()
-    return total_destinations_number[0]
+
+    # Case: no visited destinations
+    if visited_destinations_number is None:
+        return 0
+    return visited_destinations_number[0]
 
 
 def extract_wishlisted_destinations_number(dba, user_id):
@@ -148,22 +152,18 @@ def extract_wishlisted_destinations_number(dba, user_id):
     return wishlisted_destinations_number[0]
 
 
-def extract_visited_destinations_number(dba, user_id):
-    """Function returns total number of visited destinations for a user based on user id
+def extract_destinations_number(dba):
+    """Function returns total number of destinations
     """
-    # Extract number
+    # Extract total number
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` GROUP BY `user_id` HAVING `user_id`=%s", (user_id, ))
-    visited_destinations_number = dba_cursor.fetchone()
+    dba_cursor.execute("SELECT COUNT(*) FROM `destinations`")
+    total_destinations_number = dba_cursor.fetchone()
     dba_cursor.close()
-
-    # Case: no visited destinations
-    if visited_destinations_number is None:
-        return 0
-    return visited_destinations_number[0]
+    return total_destinations_number[0]
 
 
-def extract_user_visited_destinations(dba, user_id):
+def extract_visited_destinations_names(dba, user_id):
     """Function returns the names of visited destinations for a user based on user id
     """
     # Extract names
@@ -174,15 +174,48 @@ def extract_user_visited_destinations(dba, user_id):
     return visited_destinations
 
 
-def extract_user_wishlisted_destinations(dba, user_id):
-    """Function returns the names of visited destinations for a user based on user id
+def extract_wishlisted_destinations_names(dba, user_id):
+    """Function returns the names of wishlisted destinations for a user based on user id
     """
     # Extract names
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s;", (user_id, ))
-    visited_destinations = dba_cursor.fetchall()
+    wishlisted_destinations = dba_cursor.fetchall()
     dba_cursor.close()
-    return visited_destinations
+    return wishlisted_destinations
+
+
+def extract_most_visited_destinations_names(dba):
+    """Function returns the names of most visited destinations
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` JOIN `visited_destinations` `v` on `d`.`id` = `v`.`destination_id` GROUP BY `v`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    most_visited_destinations = dba_cursor.fetchall()
+    dba_cursor.close()
+    return most_visited_destinations
+
+
+def extract_most_reviewed_destinations_names(dba):
+    """Function returns the names of most reviewed destinations
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` JOIN `reviews_destinations` `r` on `d`.`id` = `r`.`destination_id` GROUP BY `r`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    most_reviewed_destinations = dba_cursor.fetchall()
+    dba_cursor.close()
+    return most_reviewed_destinations
+    
+
+def extract_destinations_names(dba):
+    """Function returns the names of all destinations available
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name` FROM `destinations`")
+    total_destinations = dba_cursor.fetchall()
+    dba_cursor.close()
+    return total_destinations
     
 
 # Create database object

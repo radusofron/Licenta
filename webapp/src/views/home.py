@@ -10,16 +10,18 @@ home_view_blueprint = Blueprint("home_view_blueprint", __name__)
 
 @home_view_blueprint.route("/home")
 def home_view() -> Response:
-    if session["logged_in"]:
-        # Extract data
-        results = home()
-        home_data = json.loads(results.data)
-        total_destinations = home_data["total destinations"]
-        wishlisted_destinations = home_data["wishlisted destinations"]
-        visited_destinations = home_data["visited destinations"]
+    # User is not logged in
+    if not session["logged_in"]:
         return make_response(
-            render_template("home.html", total_destinations = total_destinations, wishlisted_destinations = wishlisted_destinations, visited_destinations = visited_destinations)
+            redirect("/login", code=302)
         )
+    
+    # Extract data
+    results = home()
+    home_data = json.loads(results.data)
+    total_destinations = home_data["total destinations"]
+    wishlisted_destinations = home_data["wishlisted destinations"]
+    visited_destinations = home_data["visited destinations"]
     return make_response(
-        redirect("/login", code=302)
+        render_template("home.html", total_destinations = total_destinations, wishlisted_destinations = wishlisted_destinations, visited_destinations = visited_destinations)
     )

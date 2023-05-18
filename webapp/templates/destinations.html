@@ -8,7 +8,6 @@
 
 {% block content %}
 <main>
-    This is destinations page
     {% if option == "visited" %}
     <section class="visited-destinations">
         {% if destinations_specific|length > 0 %}
@@ -34,15 +33,61 @@
         {% endif %}
     </section>
     {% else %}
+
+    {% if destinations_specific|length > 1 %}
+
+    {% if destinations_specific|length == 9 %}
     <section class="most-visited">
-        These are most visited destinations
+        These are most visited destinations:
+        {% for index in range(destinations_specific|length - 4) %}
+        {{ destinations_specific[index] }}
+        {% endfor %}
     </section>
     <section class="most-reviewed">
-        These are most reviewed destinations
+        These are most reviewed destinations:
+        {% for index in range(5, destinations_specific|length) %}
+        {{ destinations_specific[index] }}
+        {% endfor %}
+    </section>
+    {% elif destinations_specific|length == 5 and destinations_specific[0] == " " %}
+    <section class="most-visited">
+        Most visited destinations not found.
+    </section>
+    <section class="most-reviewed">
+        These are most reviewed destinations:
+        {% for index in range(1, destinations_specific|length) %}
+        {{ destinations_specific[index] }}
+        {% endfor %}
+    </section>
+    {% else %}
+    <section class="most-visited">
+        These are most visited destinations:
+        {% for index in range(destinations_specific|length - 1) %}
+        {{ destinations_specific[index] }}
+        {% endfor %}
+    </section>
+    <section class="most-reviewed">
+        Most reviewed destinations not found.
     </section>
     {% endif %}
+
+    {% else %}
+    Most visited destinations and most reviewed destinations not found
+    {% endif %}
+
+    {% endif %}
     <section class="all-destinations">
-        These are all destinations
+        {% if destinations_all|length > 0 %}
+
+        These are all destinations:
+        {% for index in range(destinations_all|length) %}
+        {{ destinations_all[index] }}
+        {% endfor %}
+
+        {% else %}
+        No available destinations.
+
+        {% endif %}
     </section>
 </main>
 {% endblock %}
