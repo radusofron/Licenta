@@ -4,6 +4,18 @@ body{
     overflow-x: hidden;
 }
 
+/* Container used in order to create a responsive menu for phone */
+.content-container-two{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: inherit;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+}
+
 /* Header */
 header{
     padding: 1.5rem 5vw;
@@ -263,7 +275,7 @@ nav.phone{
         display: block;
         background-color: var(--pink);
         transition: 250ms;
-        z-index: 1;
+        z-index: 2  ;
     }
     nav.phone.active{
         transform: translateX(-100%);
