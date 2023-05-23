@@ -153,6 +153,11 @@
 
 
 /* All destinations */
+.all-destinations{
+    padding: 4.5rem 5vw 3rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+}
 .all-destinations__container{
     padding: 4.5rem 0vw 0rem 0vw;
     height: inherit;
@@ -194,6 +199,10 @@ input[type=text]:focus{
     left: 40%;
     width: 60%;
 }
+
+
+
+/* RESPONSIVE */
 @media(max-width: 1400px){
     .all-destinations__container{
         grid-template-columns: repeat(3, 1fr);
@@ -211,6 +220,18 @@ input[type=text]:focus{
     }
 }
 @media(max-width: 600px){
+    /* COMMON */
+    .destinations__subtitle{
+        text-align: center;
+    }
+    .visited-destinations__name, .all-destinations__name{
+       text-align: center;
+    }
+    /* SPECIFIC */
+    .visited-destinations__destination{
+        max-width: 250px;
+        min-width: 250px;
+    }
     .all-destinations__container{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(34, 1fr);
