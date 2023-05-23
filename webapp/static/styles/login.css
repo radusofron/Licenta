@@ -50,7 +50,7 @@ section.main-content{
 }
 input[type=text]{   
     width: 100%;
-    font-size: var(--fs-description);
+    font-size: var(--fs-subtitle);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);
@@ -80,7 +80,7 @@ input[type=text]:focus{
 }
 input[type=password]{
     width: 100%;
-    font-size: var(--fs-description);
+    font-size: var(--fs-subtitle);
     font-weight: var(--medium);
     border: none;
     border-bottom: 0.25rem solid var(--dark-grey);

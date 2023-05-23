@@ -25,7 +25,6 @@
                         href="{{ url_for('home_view_blueprint.home_view') }}">Evaluate</a>
                     <a class="visited-destinations__itineraries-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Itineraries</a>
-                    <div class="destinations__option-cover"></div>
                 </div>
                 <p class="visited-destinations__name">
                     {{ destinations_specific[index] }}
@@ -96,8 +95,10 @@
     {% endif %}
     <section class="all-destinations">
         {% if destinations_all|length > 0 %}
-        <div class="subtitle-container">
-            <h3 class="destinations__subtitle">All destinations</h3>
+        <div class="all-destinations__subtitle-container">
+            <h3 class="destinations__subtitle">Find a destination what suits you...</h3>
+            <input class="all-destinations__input" maxlength="40" autocomplete="off" name="destination" type="text"
+                required>
         </div>
         <div class="all-destinations__container">
             {% for index in range(destinations_all|length) %}
