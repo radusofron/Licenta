@@ -153,6 +153,9 @@ section{
     background-color: var(--white-25);
     border-radius: 0.5rem;
 }
+::-webkit-scrollbar-thumb:hover{
+    background-color: var(--white-50);
+}
 
 
 
