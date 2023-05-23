@@ -173,6 +173,9 @@
     align-items: flex-end;
     gap: 6rem;
 }
+.all-destinations__destination.inactive{
+    display: none;
+}
 input[type=text].all-destinations__input{   
     width: 100%;
     font-size: var(--fs-subtitle);
