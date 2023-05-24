@@ -34,6 +34,7 @@
             {% endfor %}
         </div>
         {% else %}
+        <h3 class="destinations__subtitle">Visited destinations</h3>
         <p class="destinations__results-not-found">No visited destinations found.</p>
         {% endif %}
 
@@ -60,6 +61,7 @@
             {% endfor %}
         </div>
         {% else %}
+        <h3 class="destinations__subtitle">Destinations on wishlist</h3>
         <p class="destinations__results-not-found">No destinations found on wishlist.</p>
         {% endif %}
     </section>
@@ -68,43 +70,123 @@
     {% if destinations_specific|length > 1 %}
 
     {% if destinations_specific|length == 17 %}
+
+    <!-- Case: data available for most visited destinations AND most reviewed destinations -->
+
     <section class="most-visited">
-        These are most visited destinations:
-        {% for index in range(0, destinations_specific|length - 8, 2) %}
-        {{ destinations_specific[index] }} : {{ destinations_specific[index + 1] }}
-        {% endfor %}
+        <h3 class="destinations__subtitle">Most visited destinations</h3>
+        <div class="specific-destinations__container">
+            {% for index in range(0, destinations_specific|length - 9, 2) %}
+            <div class="specific-destinations__destination">
+                <div class="destinations__image-container">
+                    <img class="destinations__image"
+                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                        alt="Image of this destination">
+                    <a class="most-visited-destinations__open-button"
+                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                </div>
+                <p class="specific-destinations__name">
+                    {{ destinations_specific[index] }}
+                    <span class="specific-destinations__data">
+                        {{ destinations_specific[index + 1]}}
+                    </span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     <section class="most-reviewed">
-        These are most reviewed destinations:
-        {% for index in range(9, destinations_specific|length, 2) %}
-        {{ destinations_specific[index] }} : {{ destinations_specific[index + 1] }}
-        {% endfor %}
+        <h3 class="destinations__subtitle">Most reviewed destinations</h3>
+        <div class="specific-destinations__container">
+            {% for index in range(9, destinations_specific|length, 2) %}
+            <div class="specific-destinations__destination">
+                <div class="destinations__image-container">
+                    <img class="destinations__image"
+                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                        alt="Image of this destination">
+                    <a class="most-reviewed-destinations__open-button"
+                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                </div>
+                <p class="specific-destinations__name">
+                    {{ destinations_specific[index] }}
+                    <span class="specific-destinations__data">
+                        {{ destinations_specific[index + 1]}}
+                    </span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     {% elif destinations_specific|length == 9 and destinations_specific[0] == " " %}
+
+    <!-- Case: no data available for most visited destinations -->
+
     <section class="most-visited">
+        <h3 class="destinations__subtitle">Most visited destinations</h3>
         <p class="destinations__results-not-found">Most visited destinations are not available.</p>
     </section>
     <section class="most-reviewed">
-        These are most reviewed destinations:
-        {% for index in range(1, destinations_specific|length, 2) %}
-        {{ destinations_specific[index] }} : {{ destinations_specific[index + 1] }}
-        {% endfor %}
+        <h3 class="destinations__subtitle">Most reviewed destinations</h3>
+        <div class="specific-destinations__container">
+            {% for index in range(1, destinations_specific|length, 2) %}
+            <div class="specific-destinations__destination">
+                <div class="destinations__image-container">
+                    <img class="destinations__image"
+                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                        alt="Image of this destination">
+                    <a class="most-reviewed-destinations__open-button"
+                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                </div>
+                <p class="specific-destinations__name">
+                    {{ destinations_specific[index] }}
+                    <span class="specific-destinations__data">
+                        {{ destinations_specific[index + 1]}}
+                    </span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     {% else %}
+
+    <!-- Case: no data available for most reviewed destinations -->
+
     <section class="most-visited">
-        These are most visited destinations:
-        {% for index in range(0, destinations_specific|length - 1, 2) %}
-        {{ destinations_specific[index] }} : {{ destinations_specific[index + 1] }}
-        {% endfor %}
+        <h3 class="destinations__subtitle">Most visited destinations</h3>
+        <div class="specific-destinations__container">
+            {% for index in range(0, destinations_specific|length - 1, 2) %}
+            <div class="specific-destinations__destination">
+                <div class="destinations__image-container">
+                    <img class="destinations__image"
+                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                        alt="Image of this destination">
+                    <a class="most-visited-destinations__open-button"
+                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                </div>
+                <p class="specific-destinations__name">
+                    {{ destinations_specific[index] }}
+                    <span class="specific-destinations__data">
+                        {{ destinations_specific[index + 1]}}
+                    </span>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     <section class="most-reviewed">
+        <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <p class="destinations__results-not-found">Most reviewed destinations are not available.</p>
     </section>
     {% endif %}
 
     {% else %}
-    <p class="destinations__results-not-found">Most visited and most reviewed destinations are not available.</p>
 
+    <!-- Case: no data available for any of them -->
+
+    <h3 class="destinations__subtitle">Most visited destinations</h3>
+    <p class="destinations__results-not-found">Most visited destinations are not available.</p>
+    <h3 class="destinations__subtitle">Most reviewed destinations</h3>
+    <p class="destinations__results-not-found">Most reviewed destinations are not available.</p>
     {% endif %}
 
     {% endif %}

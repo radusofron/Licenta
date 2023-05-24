@@ -76,8 +76,12 @@
     font-size: var(--fs-title);
     font-weight: var(--semibold);
     color: var(--dark-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .destinations__results-not-found, .all-destinations__results-not-found{
+    padding: 4.5rem 0vw 0rem 0vw;
     color: var(--grey);
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
@@ -118,6 +122,11 @@
 .specific-destinations__destination{
     max-width: 400px;
     min-width: 400px;
+}
+.specific-destinations__data{
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
 }
 
 /* Visited destinations */
