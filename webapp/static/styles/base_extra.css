@@ -150,7 +150,7 @@ footer{
     align-items: center;
     gap: 3rem;
 }
-input[type=text]{   
+input[type=text].footer__review-input{   
     width: 100%;
     font-size: var(--fs-description);
     font-weight: var(--regular);
@@ -163,17 +163,18 @@ input[type=text]{
     color: var(--white);
     transition: 250ms;
 }
-input[type=text]:focus{
+input[type=text].footer__review-input:focus{
     /* Properties when input is focused */
     border-bottom:  0.25rem solid var(--dark-pink);
     outline: none;
 }
-input[type=text]::placeholder{
+input[type=text].footer__review-input::placeholder{
     /* Properties for placeholder */
+    font-style: italic;
     color: var(--white-50);
     transition: 250ms;
 }
-input[type=text]:focus::placeholder{
+input[type=text].footer__review-input:focus::placeholder{
     /* Properties for placeholder when input is focused */
     color: var(--dark-pink);
 }
@@ -198,7 +199,7 @@ input[type=text]:focus::placeholder{
     outline: 0.2rem solid var(--dark-pink);
     background-color: var(--dark-pink);
 }
-input[type=text]:focus + .footer__review-button{
+input[type=text].footer__review-input:focus + .footer__review-button{
     /* Properties for button when input is focused */
     outline: 0.2rem solid var(--dark-pink);
     background-color: var(--dark-pink);
@@ -371,7 +372,7 @@ nav.phone{
     .footer__review-description{
         font-size: var(--fs-phone-description);
     }
-    input[type=text]{   
+    input[type=text].footer__review-input{   
         font-size: var(--fs-phone-description);
     }
     .footer__review-button{

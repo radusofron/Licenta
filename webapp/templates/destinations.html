@@ -97,9 +97,9 @@
     <section class="all-destinations">
         {% if destinations_all|length > 0 %}
         <div class="all-destinations__subtitle-container">
-            <h3 class="destinations__subtitle">Find a destination what suits you...</h3>
-            <input class="all-destinations__input" maxlength="40" autocomplete="off" name="destination" type="text"
-                required>
+            <h3 class="destinations__subtitle">Find a destination that suits you...</h3>
+            <input class="all-destinations__input" maxlength="40" placeholder="Search destinations..."
+                autocomplete="off" name="destination" type="text" required>
         </div>
         <div class="all-destinations__container">
             {% for index in range(destinations_all|length) %}
@@ -117,6 +117,7 @@
             </div>
             {% endfor %}
         </div>
+        <p class="all-destinations__search-results-not-found">Oops! No results found for your search :(</p>
 
         {% else %}
         No available destinations.

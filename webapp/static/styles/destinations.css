@@ -151,7 +151,6 @@
     width: 60%;
 }
 
-
 /* All destinations */
 .all-destinations{
     padding: 4.5rem 5vw 3rem 5vw;
@@ -164,7 +163,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(1fr);
     row-gap: 4.5rem;
     column-gap: 6rem;
 }
@@ -174,6 +173,7 @@
     gap: 6rem;
 }
 .all-destinations__destination.inactive{
+    /* Used when user is searching */
     display: none;
 }
 input[type=text].all-destinations__input{   
@@ -186,9 +186,17 @@ input[type=text].all-destinations__input{
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     color: var(--black);
+    transition: 250ms;
 }
 input[type=text]:focus{
+    /* Properties when input is focused */
     outline: none;
+}
+input[type=text].all-destinations__input::placeholder{
+    /* Properties for placeholder */
+    font-style: italic;
+    color: var(--grey);
+    transition: 250ms;   
 }
 .all-destinations__open-button{
     top: 0;
@@ -202,6 +210,16 @@ input[type=text]:focus{
     left: 40%;
     width: 60%;
 }
+.all-destinations__search-results-not-found{
+    display: none;
+    padding: 0rem 0vw 1.5rem 0vw;
+    color: var(--grey);
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+}
+.all-destinations__search-results-not-found.active{
+    display: block;
+}
 
 
 
@@ -209,13 +227,11 @@ input[type=text]:focus{
 @media(max-width: 1400px){
     .all-destinations__container{
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(12, 1fr);
     }
 }
 @media (max-width: 1000px){
     .all-destinations__container{
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(17, 1fr);
     }
     .all-destinations__subtitle-container{
         flex-direction: column;
@@ -230,13 +246,42 @@ input[type=text]:focus{
     .visited-destinations__name, .all-destinations__name{
        text-align: center;
     }
+
+
     /* SPECIFIC */
+
+    /* Visited destinations */
     .visited-destinations__destination{
         max-width: 250px;
         min-width: 250px;
     }
+    .visited-destinations__open-button, .visited-destinations__evaluate-button, .visited-destinations__itineraries-button{
+        width: 60%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__open-button{
+        left: 40%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__open-button:hover{
+        left: 30%;
+        width: 70%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__evaluate-button{
+        left: 40%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__evaluate-button:hover{
+        left: 30%;
+        width: 70%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__itineraries-button{
+        left: 40%;
+    }
+    .visited-destinations__destination:hover .visited-destinations__itineraries-button:hover{
+        left: 30%;
+        width: 70%;
+    }
+
+    /* All destinations */
     .all-destinations__container{
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(34, 1fr);
     }
 }
