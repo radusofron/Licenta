@@ -28,9 +28,10 @@ def create_specific_destinations(destinations: list, option: int) -> list:
     if len(destinations):
         for tpl in destinations:
             specific_destinations.append(tpl[0])
+            specific_destinations.append(tpl[1])
             # This case: add data for destination, too
             if option == 2:
-                specific_destinations.append(tpl[1])
+                specific_destinations.append(tpl[2])
 
     return specific_destinations
 
@@ -72,7 +73,7 @@ def destinations() -> Response:
     destinations = extract_destinations_names(dba)
     destinations = create_specific_destinations(destinations, 1)
     # Randomize the elements of the list
-    random.shuffle(destinations)
+    # random.shuffle(destinations)
     
     return make_response(
         jsonify({"option": option, "specific destinations": specific_destinations, "all destinations": destinations}),

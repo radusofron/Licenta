@@ -14,11 +14,10 @@
         {% if destinations_specific|length > 0 %}
         <h3 class="destinations__subtitle">Visited destinations</h3>
         <div class="specific-destinations__container">
-            {% for index in range(destinations_specific|length) %}
+            {% for index in range(0, destinations_specific|length, 2) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="visited-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -45,11 +44,10 @@
         {% if destinations_specific|length > 0 %}
         <h3 class="destinations__subtitle">Destinations on wishlist</h3>
         <div class="specific-destinations__container">
-            {% for index in range(destinations_specific|length) %}
+            {% for index in range(0, destinations_specific|length, 2) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="wishlisted-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -69,18 +67,17 @@
 
     {% if destinations_specific|length > 1 %}
 
-    {% if destinations_specific|length == 17 %}
+    {% if destinations_specific|length == 25 %}
 
     <!-- Case: data available for most visited destinations AND most reviewed destinations -->
 
     <section class="most-visited">
         <h3 class="destinations__subtitle">Most visited destinations</h3>
         <div class="specific-destinations__container">
-            {% for index in range(0, destinations_specific|length - 9, 2) %}
+            {% for index in range(0, destinations_specific|length - 13, 3) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="most-visited-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -89,7 +86,7 @@
                     {{ destinations_specific[index] }}
                     <div class="specific-destinations__data-container">
                         <span class="specific-destinations__data-text">
-                            {{ destinations_specific[index + 1]}}
+                            {{ destinations_specific[index + 2] }}
                         </span>
                         <div class="specific-destinations__data-icon-container">
                             <img src="{{url_for('static', filename='/assets/illustrations/eye.png')}}" alt="icon">
@@ -103,11 +100,10 @@
     <section class="most-reviewed">
         <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <div class="specific-destinations__container">
-            {% for index in range(9, destinations_specific|length, 2) %}
+            {% for index in range(13, destinations_specific|length, 3) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="most-reviewed-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -116,7 +112,7 @@
                     {{ destinations_specific[index] }}
                     <div class="specific-destinations__data-container">
                         <span class="specific-destinations__data-text">
-                            {{ destinations_specific[index + 1]}}
+                            {{ destinations_specific[index + 2] }}
                         </span>
                         <div class="specific-destinations__data-icon-container">
                             <img src="{{url_for('static', filename='/assets/illustrations/review.png')}}" alt="icon">
@@ -127,7 +123,7 @@
             {% endfor %}
         </div>
     </section>
-    {% elif destinations_specific|length == 9 and destinations_specific[0] == " " %}
+    {% elif destinations_specific|length == 13 and destinations_specific[0] == " " %}
 
     <!-- Case: no data available for most visited destinations -->
 
@@ -138,11 +134,10 @@
     <section class="most-reviewed">
         <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <div class="specific-destinations__container">
-            {% for index in range(1, destinations_specific|length, 2) %}
+            {% for index in range(1, destinations_specific|length, 3) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="most-reviewed-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -151,7 +146,7 @@
                     {{ destinations_specific[index] }}
                     <div class="specific-destinations__data-container">
                         <span class="specific-destinations__data-text">
-                            {{ destinations_specific[index + 1]}}
+                            {{ destinations_specific[index + 2] }}
                         </span>
                         <div class="specific-destinations__data-icon-container">
                             <img src="{{url_for('static', filename='/assets/illustrations/review.png')}}" alt="icon">
@@ -169,11 +164,10 @@
     <section class="most-visited">
         <h3 class="destinations__subtitle">Most visited destinations</h3>
         <div class="specific-destinations__container">
-            {% for index in range(0, destinations_specific|length - 1, 2) %}
+            {% for index in range(0, destinations_specific|length - 1, 3) %}
             <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{destinations_specific[index + 1]}}"
                         alt="Image of this destination">
                     <a class="most-visited-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
@@ -182,7 +176,7 @@
                     {{ destinations_specific[index] }}
                     <div class="specific-destinations__data-container">
                         <span class="specific-destinations__data-text">
-                            {{ destinations_specific[index + 1]}}
+                            {{ destinations_specific[index + 2] }}
                         </span>
                         <div class="specific-destinations__data-icon-container">
                             <img src="{{url_for('static', filename='/assets/illustrations/eye.png')}}" alt="icon">
@@ -218,11 +212,10 @@
                 autocomplete="off" name="destination" type="text" required>
         </div>
         <div class="all-destinations__container">
-            {% for index in range(destinations_all|length) %}
+            {% for index in range(0, destinations_all|length - 26, 2) %}
             <div class="all-destinations__destination">
                 <div class="destinations__image-container">
-                    <img class="destinations__image"
-                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                    <img class="destinations__image" src="{{ destinations_all[index + 1] }}"
                         alt="Image of this destination">
                     <a class="all-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
