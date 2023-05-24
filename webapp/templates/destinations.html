@@ -85,12 +85,17 @@
                     <a class="most-visited-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
                 </div>
-                <p class="specific-destinations__name">
+                <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
-                    <span class="specific-destinations__data">
-                        {{ destinations_specific[index + 1]}}
-                    </span>
-                </p>
+                    <div class="specific-destinations__data-container">
+                        <span class="specific-destinations__data-text">
+                            {{ destinations_specific[index + 1]}}
+                        </span>
+                        <div class="specific-destinations__data-icon-container">
+                            <img src="{{url_for('static', filename='/assets/illustrations/eye.png')}}" alt="icon">
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -107,12 +112,17 @@
                     <a class="most-reviewed-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
                 </div>
-                <p class="specific-destinations__name">
+                <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
-                    <span class="specific-destinations__data">
-                        {{ destinations_specific[index + 1]}}
-                    </span>
-                </p>
+                    <div class="specific-destinations__data-container">
+                        <span class="specific-destinations__data-text">
+                            {{ destinations_specific[index + 1]}}
+                        </span>
+                        <div class="specific-destinations__data-icon-container">
+                            <img src="{{url_for('static', filename='/assets/illustrations/review.png')}}" alt="icon">
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -137,12 +147,17 @@
                     <a class="most-reviewed-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
                 </div>
-                <p class="specific-destinations__name">
+                <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
-                    <span class="specific-destinations__data">
-                        {{ destinations_specific[index + 1]}}
-                    </span>
-                </p>
+                    <div class="specific-destinations__data-container">
+                        <span class="specific-destinations__data-text">
+                            {{ destinations_specific[index + 1]}}
+                        </span>
+                        <div class="specific-destinations__data-icon-container">
+                            <img src="{{url_for('static', filename='/assets/illustrations/review.png')}}" alt="icon">
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -163,12 +178,17 @@
                     <a class="most-visited-destinations__open-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
                 </div>
-                <p class="specific-destinations__name">
+                <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
-                    <span class="specific-destinations__data">
-                        {{ destinations_specific[index + 1]}}
-                    </span>
-                </p>
+                    <div class="specific-destinations__data-container">
+                        <span class="specific-destinations__data-text">
+                            {{ destinations_specific[index + 1]}}
+                        </span>
+                        <div class="specific-destinations__data-icon-container">
+                            <img src="{{url_for('static', filename='/assets/illustrations/eye.png')}}" alt="icon">
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>

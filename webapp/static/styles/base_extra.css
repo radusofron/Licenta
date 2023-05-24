@@ -276,7 +276,7 @@ nav.phone{
         display: block;
         background-color: var(--pink);
         transition: 250ms;
-        z-index: 2  ;
+        z-index: 4 ;
     }
     nav.phone.active{
         transform: translateX(-100%);
