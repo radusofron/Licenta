@@ -23,7 +23,7 @@ function returnDestinations() {
   let minimumADestinationReturned = false
 
   // Get element used for no results found message
-  const noResultsMessage = document.querySelector(".all-destinations__search-results-not-found")
+  const noResultsMessage = document.querySelector(".all-destinations__results-not-found")
 
   // Search for matches
   destinations.forEach(destination => {
@@ -31,7 +31,7 @@ function returnDestinations() {
     const destinationName = destination["children"][1].textContent.toLowerCase()
 
     // Trim the strings in order to compare them
-    if (destinationName.trim() === input.trim() || destinationName.trim().startsWith(input.trim()) || destinationName.trim().endsWith(input.trim())) {
+    if (destinationName.trim() === input.trim() || destinationName.trim().startsWith(input.trim()) || destinationName.trim().endsWith(input.trim()) || destinationName.trim().includes(input.trim())) {
       // If destination is inactive, make it active
       if (destination.classList[1] === "inactive"){
         destination.classList.remove("inactive");

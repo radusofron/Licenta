@@ -183,7 +183,7 @@ def extract_wishlisted_destinations_names(dba, user_id):
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `v`.`date` DESC", (user_id, ))
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `w`.`date` DESC", (user_id, ))
     wishlisted_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return wishlisted_destinations

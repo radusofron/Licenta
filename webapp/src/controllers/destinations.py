@@ -2,7 +2,7 @@ from flask import Blueprint, make_response, jsonify, session, request
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_visited_destinations_names, extract_wishlisted_destinations_names, extract_most_visited_destinations_names, extract_most_reviewed_destinations_names, extract_destinations_names
-
+import random
 
 destinations_controller_blueprint = Blueprint("destinations_controller_blueprint", __name__)
 
@@ -71,6 +71,8 @@ def destinations() -> Response:
     # Common for all cases
     destinations = extract_destinations_names(dba)
     destinations = create_specific_destinations(destinations, 1)
+    # Randomize the elements of the list
+    random.shuffle(destinations)
     
     return make_response(
         jsonify({"option": option, "specific destinations": specific_destinations, "all destinations": destinations}),

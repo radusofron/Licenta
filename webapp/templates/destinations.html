@@ -13,9 +13,9 @@
     <section class="visited-destinations">
         {% if destinations_specific|length > 0 %}
         <h3 class="destinations__subtitle">Visited destinations</h3>
-        <div class="visited-destinations__container">
+        <div class="specific-destinations__container">
             {% for index in range(destinations_specific|length) %}
-            <div class="visited-destinations__destination">
+            <div class="specific-destinations__destination">
                 <div class="destinations__image-container">
                     <img class="destinations__image"
                         src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
@@ -27,14 +27,14 @@
                     <a class="visited-destinations__itineraries-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Itineraries</a>
                 </div>
-                <p class="visited-destinations__name">
+                <p class="specific-destinations__name">
                     {{ destinations_specific[index] }}
                 </p>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        No destinations visited.
+        <p class="destinations__results-not-found">No visited destinations found.</p>
         {% endif %}
 
 
@@ -42,12 +42,25 @@
     {% elif option == "wishlisted" %}
     <section class="wishlisted-destinations">
         {% if destinations_specific|length > 0 %}
-        These are the destinations on wishlist:
-        {% for index in range(destinations_specific|length) %}
-        {{ destinations_specific[index] }}
-        {% endfor %}
+        <h3 class="destinations__subtitle">Destinations on wishlist</h3>
+        <div class="specific-destinations__container">
+            {% for index in range(destinations_specific|length) %}
+            <div class="specific-destinations__destination">
+                <div class="destinations__image-container">
+                    <img class="destinations__image"
+                        src="{{url_for('static', filename='/assets/photos/destination.jpg')}}"
+                        alt="Image of this destination">
+                    <a class="wishlisted-destinations__open-button"
+                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                </div>
+                <p class="specific-destinations__name">
+                    {{ destinations_specific[index] }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
         {% else %}
-        No destinations on wishlist.
+        <p class="destinations__results-not-found">No destinations found on wishlist.</p>
         {% endif %}
     </section>
     {% else %}
@@ -69,7 +82,7 @@
     </section>
     {% elif destinations_specific|length == 9 and destinations_specific[0] == " " %}
     <section class="most-visited">
-        Most visited destinations not found.
+        <p class="destinations__results-not-found">Most visited destinations are not available.</p>
     </section>
     <section class="most-reviewed">
         These are most reviewed destinations:
@@ -85,12 +98,13 @@
         {% endfor %}
     </section>
     <section class="most-reviewed">
-        Most reviewed destinations not found.
+        <p class="destinations__results-not-found">Most reviewed destinations are not available.</p>
     </section>
     {% endif %}
 
     {% else %}
-    Most visited destinations and most reviewed destinations not found
+    <p class="destinations__results-not-found">Most visited and most reviewed destinations are not available.</p>
+
     {% endif %}
 
     {% endif %}
@@ -117,7 +131,7 @@
             </div>
             {% endfor %}
         </div>
-        <p class="all-destinations__search-results-not-found">Oops! No results found for your search :(</p>
+        <p class="all-destinations__results-not-found">Oops! No results found for your search :(</p>
 
         {% else %}
         No available destinations.
