@@ -164,65 +164,65 @@ def extract_destinations_number(dba):
 
 
 def extract_visited_destinations_names(dba, user_id):
-    """Function returns the names and the cover images of visited destinations for a user based on user id.
+    """Function returns the names of visited destinations for a user based on user id.
 
     It returns the destinations from the newest visited destination to the oldest visited destination.
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name`, `d`.`image_link` FROM `destinations` `d` INNER JOIN `visited_destinations` `v` ON `d`.`id`=`v`.`destination_id` INNER JOIN `users` `u` ON `v`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `v`.`date` DESC", (user_id, ))
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `visited_destinations` `v` ON `d`.`id`=`v`.`destination_id` INNER JOIN `users` `u` ON `v`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `v`.`date` DESC", (user_id, ))
     visited_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return visited_destinations
 
 
 def extract_wishlisted_destinations_names(dba, user_id):
-    """Function returns the names and the cover images of wishlisted destinations for a user based on user id.
+    """Function returns the names of wishlisted destinations for a user based on user id.
 
     It returns the destinations from the newest wishlisted destination to the oldest wishlisted destination.
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name`, `d`.`image_link` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `w`.`date` DESC", (user_id, ))
+    dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `wishlisted_destinations` `w` ON `d`.`id`=`w`.`destination_id` INNER JOIN `users` `u` ON `w`.`user_id` = `u`.`id` WHERE `u`.`id`=%s ORDER BY `w`.`date` DESC", (user_id, ))
     wishlisted_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return wishlisted_destinations
 
 
 def extract_most_visited_destinations_names(dba):
-    """Function returns the names and the cover images of most visited destinations.
+    """Function returns the names of most visited destinations.
 
     It returns the destinations in a decreasing order.
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name`, `d`.`image_link`, COUNT(*) FROM `destinations` `d` JOIN `visited_destinations` `v` on `d`.`id` = `v`.`destination_id` GROUP BY `v`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    dba_cursor.execute("SELECT `d`.`name`, COUNT(*) FROM `destinations` `d` JOIN `visited_destinations` `v` on `d`.`id` = `v`.`destination_id` GROUP BY `v`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
     most_visited_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return most_visited_destinations
 
 
 def extract_most_reviewed_destinations_names(dba):
-    """Function returns the names and the cover images of most reviewed destinations.
+    """Function returns the names of most reviewed destinations.
 
     It returns the destinations in a decreasing order.
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `d`.`name`, `d`.`image_link`, COUNT(*) FROM `destinations` `d` JOIN `reviews_destinations` `r` on `d`.`id` = `r`.`destination_id` GROUP BY `r`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
+    dba_cursor.execute("SELECT `d`.`name`, COUNT(*) FROM `destinations` `d` JOIN `reviews_destinations` `r` on `d`.`id` = `r`.`destination_id` GROUP BY `r`.`destination_id` ORDER BY COUNT(*) DESC LIMIT 4")
     most_reviewed_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return most_reviewed_destinations
     
 
 def extract_destinations_names(dba):
-    """Function returns the names and the cover images of all destinations available
+    """Function returns the names of all destinations available
 
     It returns the destinations in an order in which they are stored in the database.
     """
     # Extract names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `name`, `image_link` FROM `destinations`")
+    dba_cursor.execute("SELECT `name` FROM `destinations`")
     total_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return total_destinations
