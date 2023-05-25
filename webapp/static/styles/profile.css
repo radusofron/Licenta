@@ -1,0 +1,181 @@
+/* GRID system */
+
+main.grid-container{
+    padding: 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 4.5rem;
+}
+
+
+/* STYLE */
+
+
+section.profile-data{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4.5rem;
+}
+/* User photo */
+.profile__photo{
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+.profile__photo-container{
+    width: 30%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+.profile__photo-image{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile__add-photo-button{
+    padding: 0.5rem;
+    height: fit-content;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
+    background-size: 300%;
+    background-position: right;
+    cursor: pointer;
+    transition: 500ms;
+}
+.profile__add-photo-button:hover{
+    background-position: left;
+}
+/* User credentials */
+.profile__credentials{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.profile__username{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; 
+}
+.profile__email{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.profile__credential-subtitle{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+}
+.profile__credential-data{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--medium);
+    color: var(--dark-grey);
+}
+.profile__subtitle{
+    padding: 1.5rem 0vw;
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+form.profile__change-password-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.profile__change-password-info{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+input[type=password].profile__input{
+    width: 100%;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--medium);
+    border: none;
+    border-bottom: 0.25rem solid var(--dark-grey);
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: var(--black);
+    font-family: Verdana;
+}
+input[type=password].profile__input:focus{
+    outline: none;  
+}
+.profile__change-password-button{
+    margin-top: 1.5rem;
+    padding: 1vh 1.3rem;
+    box-sizing: border-box;
+    width: fit-content;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    border-radius: 0.25rem;
+    background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
+    background-size: 300%;
+    background-position: right;
+    color: var(--white);
+    cursor: pointer;
+    transition: 500ms;
+}
+.profile__change-password-button:hover{
+    background-position: left;
+}
+form.profile__delete-account-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.profile__delete-account-info{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+.profile__delete-account-button{
+    margin-top: 1.5rem;
+    padding: 1vh 1.3rem;
+    box-sizing: border-box;
+    width: fit-content;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    border-radius: 0.25rem;
+    background: linear-gradient(45deg, var(--dark-pink), var(--glow-dark-pink), var(--dark-pink), var(--dark-pink));
+    background-size: 300%;
+    background-position: right;
+    color: var(--white);
+    cursor: pointer;
+    transition: 500ms;
+}
+.profile__delete-account-button:hover{
+    background-position: left;
+}
+
+
+.footer__grid-container {
+    column-gap: 4.5rem;
+}
+.footer__subtitle{
+    text-align: left;
+}
+.footer__about-option{
+    text-align: left;
+}
+.footer__review {
+    padding: 3rem 0vw;
+}
+.footer__review-form{
+    align-items: flex-start;
+}
+.footer__review-description{
+    text-align: left;
+}
+.footer__terms{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+.footer__credit{
+    padding: 3rem 0vw;
+    text-align: left;
+}

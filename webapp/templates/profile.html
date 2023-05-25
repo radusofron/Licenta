@@ -1,0 +1,55 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}" />
+{% endblock %}
+
+{% block title %} Site name | Profile {% endblock %}
+
+{% block content %}
+<main class="grid-container">
+    <section class="profile-data">
+        <div class="profile__photo">
+            <div class="profile__photo-container">
+                <img class="profile__photo-image"
+                    src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}" alt="Profile picture">
+            </div>
+            <button class="profile__add-photo-button">
+                <img class="profile__add-photo-image"
+                    src="{{url_for('static', filename='/assets/illustrations/add_photo.png')}}" alt="Add photo">
+            </button>
+        </div>
+        <div class="profile__credentials">
+            <div class="profile__username">
+                <p class="profile__credential-subtitle">Username:</p>
+                <p class="profile__credential-data">test</p>
+            </div>
+            <div class="profile__email">
+                <p class="profile__credential-subtitle">Email:</p>
+                <p class="profile__credential-data">test@gmail.com</p>
+            </div>
+        </div>
+        <form class="profile__change-password-container">
+            <h3 class="profile__subtitle">Change password</h3>
+            <p class="profile__change-password-info">To update your password, please enter your current password and
+                then
+                the new one. </p>
+            <input class="profile__input" maxlength="40" autocomplete="off" name="password" type="password" required>
+            <input class="profile__input" maxlength="40" autocomplete="off" name="new-password" type="password"
+                required>
+            <button class="profile__change-password-button">Change password</button>
+        </form>
+        <form class="profile__delete-account-container">
+            <h3 class="profile__subtitle">Delete account</h3>
+            <p class="profile__delete-account-info">Please be aware that by clicking the Delete Account button below,
+                you will permanently
+                delete your account and all associated data. This action is irreversible. Proceed only if you are
+                certain about deleting your account.</p>
+            <button class="profile__delete-account-button">Delete</button>
+        </form>
+    </section>
+    <section class="profile-statistics">
+        Profile statistics
+    </section>
+</main>
+{% endblock %}

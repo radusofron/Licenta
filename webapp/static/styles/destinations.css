@@ -290,6 +290,35 @@ input[type=text].all-destinations__input::placeholder{
 }
 
 
+/* FOOTER */
+.footer__grid-container {
+    column-gap: 4.5rem;
+}
+.footer__subtitle{
+    text-align: left;
+}
+.footer__about-option{
+    text-align: left;
+}
+.footer__review {
+    padding: 3rem 0vw;
+}
+.footer__review-form{
+    align-items: flex-start;
+}
+.footer__review-description{
+    text-align: left;
+}
+.footer__terms{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+.footer__credit{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+
+
 
 /* RESPONSIVE */
 @media(max-width: 1400px){
