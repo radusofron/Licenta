@@ -401,8 +401,15 @@ main.grid-container{
     .statistics__icon-container{
         display: none;
     }
-
 }
+/* Footer */
+@media (max-width: 750px) {
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
+    }
+}
+
 /* Change font-size */
 @media (max-height: 750px){
     .message-big{

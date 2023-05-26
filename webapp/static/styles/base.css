@@ -53,10 +53,12 @@ a{
     --grey: #8C98AD;
     --dark-grey: #3B3941;
     --turcoise: #7EBDC2;
+    --turcoise-hover-dark: #59ABB1;
     --yellow: #FFBC42;
     --light-pink: #C4A4A4; /* FIGMA */
     --pink: #D47E73; /* FIGMA */
     --pink-hover: #D7897E;
+    --pink-hover-dark: #C55344;
     --pink-0: rgba(215, 137, 126, 0); /* Landing Page Gradient Background Pink */
     --pink-50: rgba(215, 137, 126, 0.5); /* Landing Page Gradient Background Pink */
     --glow-pink: #d49991; /* HOVER FOR PINK */

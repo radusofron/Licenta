@@ -9,6 +9,7 @@
 {% block content %}
 <main class="grid-container">
     <section class="profile-data">
+        <h3 class="profile__subtitle">Profile</h3>
         <div class="profile__photo">
             <div class="profile__photo-container">
                 <img class="profile__photo-image"
@@ -28,9 +29,17 @@
                 <p class="profile__credential-subtitle">Email:</p>
                 <p class="profile__credential-data">test@gmail.com</p>
             </div>
+            <div class="profile__date">
+                <p class="profile__credential-subtitle">Registration date:</p>
+                <p class="profile__credential-data">22.05.2021</p>
+            </div>
         </div>
         <form class="profile__change-password-container">
-            <h3 class="profile__subtitle">Change password</h3>
+            <div class="profile__subtitle-container">
+                <h3 class="profile__subtitle">Change password</h3>
+                <img class="profile__subtitle-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/password.png')}}">
+            </div>
             <p class="profile__change-password-info">To update your password, please enter your current password and
                 then
                 the new one. </p>
@@ -40,7 +49,11 @@
             <button class="profile__change-password-button">Change password</button>
         </form>
         <form class="profile__delete-account-container">
-            <h3 class="profile__subtitle">Delete account</h3>
+            <div class="profile__subtitle-container">
+                <h3 class="profile__subtitle">Delete account</h3>
+                <img class="profile__subtitle-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/danger.png')}}">
+            </div>
             <p class="profile__delete-account-info">Please be aware that by clicking the Delete Account button below,
                 you will permanently
                 delete your account and all associated data. This action is irreversible. Proceed only if you are
@@ -49,7 +62,44 @@
         </form>
     </section>
     <section class="profile-statistics">
-        Profile statistics
+        <h3 class="profile__subtitle">Activity overview</h3>
+        <ul class="profile__stats">
+            <li class="profile__stat">your favourite destination: <span class="profile__stat-data">Lisbon</span></li>
+            <li class="profile__stat">your least favourite destination: <span class="profile__stat-data">Madrid</span>
+            </li>
+            <li class="profile__stat">you have visited <span class="profile__stat-data">37%</span> of all available
+                destinations</li>
+            <li class="profile__stat">you have visited more destinations than <span
+                    class="profile__stat-data">83%</span> of the users</li>
+            <li class="profile__stat stat-with-graph">02 destinations visited in the last 5 years:</li>
+        </ul>
+        <div class="profile__graph">
+            <div class="profile__graph-bar">
+                <span class="profile__graph-year">2019</span>
+                <div class="profile__graph-line" style="height:10%"></div>
+                <span class="profile__graph-number">0</span>
+            </div>
+            <div class="profile__graph-bar">
+                <span class="profile__graph-year">2020</span>
+                <div class="profile__graph-line" style="height:10%"></div>
+                <span class="profile__graph-number">0</span>
+            </div>
+            <div class="profile__graph-bar">
+                <span class="profile__graph-year">2021</span>
+                <div class="profile__graph-line" style="height:10%"></div>
+                <span class="profile__graph-number">0</span>
+            </div>
+            <div class="profile__graph-bar">
+                <span class="profile__graph-year">2022</span>
+                <div class="profile__graph-line contains" style="height:70%"></div>
+                <span class="profile__graph-number contains">2</span>
+            </div>
+            <div class="profile__graph-bar">
+                <span class="profile__graph-year">2023</span>
+                <div class="profile__graph-line" style="height:10%"></div>
+                <span class="profile__graph-number">0</span>
+            </div>
+        </div>
     </section>
 </main>
 {% endblock %}

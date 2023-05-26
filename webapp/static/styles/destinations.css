@@ -234,7 +234,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(1fr);
     row-gap: 4.5rem;
     column-gap: 6rem;
 }
@@ -292,10 +291,13 @@ input[type=text].all-destinations__input::placeholder{
 
 /* FOOTER */
 .footer__grid-container {
-    column-gap: 4.5rem;
+    column-gap: 6rem;
 }
 .footer__subtitle{
     text-align: left;
+}
+.footer__about{
+    padding: 3rem 0vw;
 }
 .footer__about-option{
     text-align: left;
@@ -308,6 +310,9 @@ input[type=text].all-destinations__input::placeholder{
 }
 .footer__review-description{
     text-align: left;
+}
+.footer__bottom{
+    column-gap: 6rem;
 }
 .footer__terms{
     padding: 3rem 0vw;
@@ -325,6 +330,16 @@ input[type=text].all-destinations__input::placeholder{
     .all-destinations__container{
         grid-template-columns: repeat(3, 1fr);
     }
+    .footer__grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .footer__bottom{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    /* Belongs to footer review and footer credit: */
+    .footer__grid-col-span-3{
+        grid-column: span 2;
+    }
 }
 @media (max-width: 1000px){
     .all-destinations__container{
@@ -333,6 +348,12 @@ input[type=text].all-destinations__input::placeholder{
     .all-destinations__subtitle-container{
         flex-direction: column;
         gap: 4.5rem;
+    }
+}
+@media (max-width: 650px){
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
     }
 }
 @media(max-width: 600px){

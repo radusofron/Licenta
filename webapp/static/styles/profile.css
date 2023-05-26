@@ -6,7 +6,7 @@ main.grid-container{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4.5rem;
+    column-gap: 12rem;
 }
 
 
@@ -27,6 +27,7 @@ section.profile-data{
 }
 .profile__photo-container{
     width: 30%;
+    min-width: 150px;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
@@ -55,15 +56,10 @@ section.profile-data{
     flex-direction: column;
     gap: 1.5rem;
 }
-.profile__username{
+.profile__username, .profile__email, .profile__date{
     display: flex;
     align-items: center;
     gap: 1.5rem; 
-}
-.profile__email{
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
 }
 .profile__credential-subtitle{
     font-size: var(--fs-subtitle);
@@ -74,8 +70,13 @@ section.profile-data{
     font-weight: var(--medium);
     color: var(--dark-grey);
 }
-.profile__subtitle{
+.profile__subtitle-container{
     padding: 1.5rem 0vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile__subtitle{
     font-size: var(--fs-title);
     font-weight: var(--semibold);
     color: var(--dark-grey);
@@ -123,6 +124,7 @@ input[type=password].profile__input:focus{
 .profile__change-password-button:hover{
     background-position: left;
 }
+/* User account */
 form.profile__delete-account-container{
     display: flex;
     flex-direction: column;
@@ -153,11 +155,104 @@ form.profile__delete-account-container{
 }
 
 
+section.profile-statistics{
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    overflow-x: hidden;
+}
+ul.profile__stats{
+    list-style: disc inside;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+li.profile__stat{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+li.profile__stat.stat-with-graph{
+    padding: 3rem 0vw 0rem 0vw;
+}
+.profile__stat-data{
+    color: var(--dark-grey);
+}
+.profile__graph{
+    padding: 0rem 0vw 3.75rem 0vw;
+    box-sizing: border-box;
+    max-height: 400px;
+    min-height: 400px;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: space-between;
+    gap: 3rem;
+    overflow-x: scroll;
+}
+.profile__graph::-webkit-scrollbar{
+    height: 1rem;
+}
+.profile__graph::-webkit-scrollbar-track {
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+}
+.profile__graph::-webkit-scrollbar-thumb {
+    opacity: 0.5;
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+    transition: 250ms;
+}
+.profile__graph::-webkit-scrollbar-thumb:hover{
+    background-color: var(--black-50);
+}
+.profile__graph-bar{
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1.5rem;
+}
+.profile__graph-year{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    text-align: center;
+}
+.profile__graph-line{
+    max-width: 50px;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: var(--pink);
+    transition: 250ms;
+}
+.profile__graph-line:hover{
+    background-color: var(--pink-hover-dark);
+}
+.profile__graph-line.contains{
+    background-color: var(--turcoise);
+}
+.profile__graph-line.contains:hover{
+    background-color: var(--turcoise-hover-dark);
+}
+.profile__graph-number{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--bold);
+    text-align: center; 
+    color: var(--dark-grey);
+}
+.profile__graph-number.contains{
+    color: var(--turcoise);
+}
+
+
+/* FOOTER */
 .footer__grid-container {
-    column-gap: 4.5rem;
+    column-gap: 6rem;
 }
 .footer__subtitle{
     text-align: left;
+}
+.footer__about{
+    padding: 3rem 0vw;
 }
 .footer__about-option{
     text-align: left;
@@ -171,6 +266,9 @@ form.profile__delete-account-container{
 .footer__review-description{
     text-align: left;
 }
+.footer__bottom{
+    column-gap: 6rem;
+}
 .footer__terms{
     padding: 3rem 0vw;
     text-align: left;
@@ -178,4 +276,14 @@ form.profile__delete-account-container{
 .footer__credit{
     padding: 3rem 0vw;
     text-align: left;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 650px){
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
+    }
 }
