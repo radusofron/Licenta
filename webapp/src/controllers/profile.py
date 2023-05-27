@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, jsonify, session, request
+from flask import Blueprint, make_response, jsonify, session, request, redirect
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
@@ -28,7 +28,14 @@ def compute_year_n_years_ago(years_ago: int) -> int:
 
 @profile_controller_blueprint.route("/api/profile", methods=['GET', 'POST'])
 def profile() -> Response:
-    # for both GET and POST:
+    # POST request:
+    if request.method == "POST":
+        print("This was a post request")
+        return make_response(
+            redirect("/profile", code=302)
+        )
+    
+    # GET request:
     # Extract user account details
     username = extract_username_by_id(dba, session["user_id"])
     email = extract_email_by_id(dba, session["user_id"])
@@ -55,22 +62,15 @@ def profile() -> Response:
     visited_destinations_last_years = process_destinations_number(str(visited_destinations_last_years))
 
     # Compute the years from the previously extracted year untill now and
-    # extarct the user's visited destinations numbers for the extracted year and for each computed year
+    # extract the user's visited destinations numbers for the extracted year and for each computed year
     years = []
     visited_destinations_per_year = []
     for unit in range(5):
         year = starting_year + unit
         years.append(year)
         visited_destinations_per_year.append(extract_visited_destinations_number_by_date(dba, year, session["user_id"], 2))
-
-    # only for POST:
-    if request.method == "POST":
-        print("This was a post request")
-        return make_response(
-            jsonify({"user profile data": user_profile_data, "visited percentage": visited_percentage, "visited destinations last years": visited_destinations_last_years, "years": years, "visited destinations per year": visited_destinations_per_year}),
-            status.HTTP_200_OK,
-        )
-    
+    print("This is standard")
+        
     return make_response(
         jsonify({"user profile data": user_profile_data, "visited percentage": visited_percentage, "visited destinations last years": visited_destinations_last_years, "years": years, "visited destinations per year": visited_destinations_per_year}),
         status.HTTP_200_OK,

@@ -2,7 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}" />
-<script src="{{ url_for('static', filename='scripts/profile.js') }}" defer></script>
+<script src="{{ url_for('static', filename='scripts/profile.js') }}"></script>
 {% endblock %}
 
 {% block title %} Site name | Profile {% endblock %}
@@ -72,7 +72,6 @@
                 destinations visited in the last 5 years:</li>
         </ul>
         <div class="profile__graph">
-            <!-- height = 10 + 2.57 * {{visited_destinations_per_year[0]}} -->
             {% for index in range(5) %}
             <div class="profile__graph-bar">
                 <span class="profile__graph-year">{{years[index]}}</span>
