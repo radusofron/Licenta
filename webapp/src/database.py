@@ -1,5 +1,6 @@
 import mysql.connector
 import time
+import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -32,7 +33,7 @@ def login_validation(dba, input_email: str, input_password: str) -> bool:
     """Function returns login status
     """
     # Extract user credentials
-    email = extract_user_email(dba, input_email)
+    email = extract_email(dba, input_email)
     if len(email) == 1:
         password = extract_user_password(dba, input_email)
         if check_password_hash(password[0][0], input_password):
@@ -51,8 +52,10 @@ def extract_user_id(dba, input_email):
     return user_id[0]
 
 
-def extract_user_username(dba, input_username: str):
-    """Function returns user username from database
+def extract_username(dba, input_username: str):
+    """Function returns username from database based on username given as input
+
+    Function used for register system.
     """
     # Extract username
     dba_cursor = dba.cursor()
@@ -62,8 +65,10 @@ def extract_user_username(dba, input_username: str):
     return username
 
 
-def extract_user_email(dba, input_email: str):
-    """Function returns user email from database
+def extract_email(dba, input_email: str):
+    """Function returns email from database based on email given as input
+
+    Function used for register and login systems.
     """
     # Extract email
     dba_cursor = dba.cursor()
@@ -74,7 +79,7 @@ def extract_user_email(dba, input_email: str):
 
 
 def extract_user_password(dba, input_email: str):
-    """Function returns user password from database based on email given
+    """Function returns password from database based on email given as input
     """
     # Extract password
     dba_cursor = dba.cursor()
@@ -226,6 +231,77 @@ def extract_destinations_names(dba):
     total_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return total_destinations
+
+
+def extract_username_by_id(dba, user_id):
+    """Function returns username, email and registration date based on id stored in session.
+    """
+    # Extract username
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `username` FROM `users` WHERE `id`=%s", (user_id,))
+    username = dba_cursor.fetchone()
+    dba_cursor.close()
+    return username[0]
+
+
+def extract_email_by_id(dba, user_id):
+    """Function returns username, email and registration date based on id stored in session.
+    """
+    # Extract username
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `email` FROM `users` WHERE `id`=%s", (user_id,))
+    email = dba_cursor.fetchone()
+    dba_cursor.close()
+    return email[0]
+
+
+def extract_registration_date_by_id(dba, user_id):
+    """Function returns username, email and registration date based on id stored in session.
+    """
+    # Extract username
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `date` FROM `users` WHERE `id`=%s", (user_id,))
+    date = dba_cursor.fetchone()
+    dba_cursor.close()
+    return date[0]
+
+
+def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, option: int):
+    """Function returns total number of visited destinations for a user based on user id.
+
+    Parameters:
+        * dba: database object
+        * year: year used in the query
+        * option: function proceeds accordingly based on the selected option; 
+        if option is 1, it returns total number of visited destinations from the year given untill now;
+        if option is 2, it returns total number of visited destinations in that year
+    """
+
+    if option == 1:
+        # First, compute the starting date to be used
+
+        # Create starting date
+        start_date = datetime.datetime(year, 1, 1)
+
+        # Convert starting date to specific format (string)
+        start_date = start_date.strftime('%Y-%m-%d %H:%M:%S')
+
+        # Extract number
+        dba_cursor = dba.cursor()
+        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE `date`>%s AND `user_id`=%s", (start_date, user_id,))
+        visited_destinations_number = dba_cursor.fetchone()
+        dba_cursor.close()
+    else:
+        # Extract number
+        dba_cursor = dba.cursor()
+        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE YEAR(`date`)=%s AND `user_id`=%s", (year, user_id,))
+        visited_destinations_number = dba_cursor.fetchone()
+        dba_cursor.close()
+
+    # Case: no visited destinations from starting date unitll now
+    if visited_destinations_number is None:
+        return 0
+    return visited_destinations_number[0]
     
 
 # Create database object

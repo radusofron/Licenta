@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}" />
+<script src="{{ url_for('static', filename='scripts/profile.js') }}" defer></script>
 {% endblock %}
 
 {% block title %} Site name | Profile {% endblock %}
@@ -23,18 +24,18 @@
         <div class="profile__credentials">
             <div class="profile__username">
                 <p class="profile__credential-subtitle">Username:</p>
-                <p class="profile__credential-data">test</p>
+                <p class="profile__credential-data">{{user_profile_data[0]}}</p>
             </div>
             <div class="profile__email">
                 <p class="profile__credential-subtitle">Email:</p>
-                <p class="profile__credential-data">test@gmail.com</p>
+                <p class="profile__credential-data">{{user_profile_data[1]}}</p>
             </div>
             <div class="profile__date">
                 <p class="profile__credential-subtitle">Registration date:</p>
-                <p class="profile__credential-data">22.05.2021</p>
+                <p class="profile__credential-data">{{user_profile_data[2]}}</p>
             </div>
         </div>
-        <form class="profile__change-password-container">
+        <form class="profile__change-password-container" action="/api/profile" method="post">
             <div class="profile__subtitle-container">
                 <h3 class="profile__subtitle">Change password</h3>
                 <img class="profile__subtitle-icon"
@@ -46,7 +47,7 @@
             <input class="profile__input" maxlength="40" autocomplete="off" name="password" type="password" required>
             <input class="profile__input" maxlength="40" autocomplete="off" name="new-password" type="password"
                 required>
-            <button class="profile__change-password-button">Change password</button>
+            <button type="submit" class="profile__change-password-button">Change password</button>
         </form>
         <form class="profile__delete-account-container">
             <div class="profile__subtitle-container">
@@ -64,42 +65,40 @@
     <section class="profile-statistics">
         <h3 class="profile__subtitle">Activity overview</h3>
         <ul class="profile__stats">
-            <li class="profile__stat">your favourite destination: <span class="profile__stat-data">Lisbon</span></li>
-            <li class="profile__stat">your least favourite destination: <span class="profile__stat-data">Madrid</span>
-            </li>
-            <li class="profile__stat">you have visited <span class="profile__stat-data">37%</span> of all available
+            <li class="profile__stat">you have visited <span class="profile__stat-data">{{visited_percentage}}</span> of
+                all the available
                 destinations</li>
-            <li class="profile__stat">you have visited more destinations than <span
-                    class="profile__stat-data">83%</span> of the users</li>
-            <li class="profile__stat stat-with-graph">02 destinations visited in the last 5 years:</li>
+            <li class="profile__stat"><span class="profile__stat-data">{{visited_destinations_last_years}}</span>
+                destinations visited in the last 5 years:</li>
         </ul>
         <div class="profile__graph">
+            <!-- height = 10 + 2.57 * {{visited_destinations_per_year[0]}} -->
+            {% for index in range(5) %}
             <div class="profile__graph-bar">
-                <span class="profile__graph-year">2019</span>
-                <div class="profile__graph-line" style="height:10%"></div>
-                <span class="profile__graph-number">0</span>
+                <span class="profile__graph-year">{{years[index]}}</span>
+                <div class="profile__graph-line" per-year="{{visited_destinations_per_year[index]}}">
+                </div>
+                <span class=" profile__graph-number">{{visited_destinations_per_year[index]}}</span>
             </div>
-            <div class="profile__graph-bar">
-                <span class="profile__graph-year">2020</span>
-                <div class="profile__graph-line" style="height:10%"></div>
-                <span class="profile__graph-number">0</span>
-            </div>
-            <div class="profile__graph-bar">
-                <span class="profile__graph-year">2021</span>
-                <div class="profile__graph-line" style="height:10%"></div>
-                <span class="profile__graph-number">0</span>
-            </div>
-            <div class="profile__graph-bar">
-                <span class="profile__graph-year">2022</span>
-                <div class="profile__graph-line contains" style="height:70%"></div>
-                <span class="profile__graph-number contains">2</span>
-            </div>
-            <div class="profile__graph-bar">
-                <span class="profile__graph-year">2023</span>
-                <div class="profile__graph-line" style="height:10%"></div>
-                <span class="profile__graph-number">0</span>
-            </div>
+            {% endfor %}
         </div>
+        <h3 class="profile__subtitle evaluations">Evaluations dashboards</h3>
+        <ul class="profile__stats">
+            <li class="profile__stat">you have evaluated <span class="profile__stat-data">75%</span> of all your
+                visited
+                destinations</li>
+            <li class="profile__stat">your favourite destination is <span class="profile__stat-data">Lisbon</span>
+                with
+                an average grade of <span class="profile__stat-data">8.23</span></li>
+            <li class="profile__stat">your least favourite destination: <span class="profile__stat-data">Madrid</span>
+                with
+                an average grade of <span class="profile__stat-data">5.67</span>
+            </li>
+            <li class="profile__stat">based on your ratings, the average grade for all the destinations you have
+                visited
+                is <span class="profile__stat-data">7.22</span>
+            </li>
+        </ul>
     </section>
 </main>
 {% endblock %}

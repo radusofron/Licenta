@@ -1,4 +1,4 @@
-from flask import Blueprint, make_response, jsonify, session, redirect
+from flask import Blueprint, make_response, jsonify, session
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_destinations_number, extract_wishlisted_destinations_number, extract_visited_destinations_number

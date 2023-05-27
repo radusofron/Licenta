@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, request, flash, session
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_user_username, extract_user_email, insert_user, extract_user_id
+from database import dba, extract_username, extract_email, insert_user, extract_user_id
 
 
 register_controller_blueprint = Blueprint("register_controller_blueprint", __name__)
@@ -17,9 +17,9 @@ def register():
     password_confirmation = request.form["password-confirmation"]
 
     # Try to return input username from database
-    username_rows = extract_user_username(dba, username)
+    username_rows = extract_username(dba, username)
     # Try to return input email from database
-    email_rows = extract_user_email(dba, email)
+    email_rows = extract_email(dba, email)
 
     # Check if account can be created and proceed accordingly
     if len(username_rows) == 1:

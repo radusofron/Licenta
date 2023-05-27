@@ -81,6 +81,9 @@ section.profile-data{
     font-weight: var(--semibold);
     color: var(--dark-grey);
 }
+.profile__subtitle.evaluations{
+    padding: 1.5rem 0vw 0rem 0vw;
+}
 form.profile__change-password-container{
     display: flex;
     flex-direction: column;
@@ -172,9 +175,6 @@ li.profile__stat{
     font-weight: var(--semibold);
     color: var(--grey);
 }
-li.profile__stat.stat-with-graph{
-    padding: 3rem 0vw 0rem 0vw;
-}
 .profile__stat-data{
     color: var(--dark-grey);
 }
@@ -240,6 +240,7 @@ li.profile__stat.stat-with-graph{
     color: var(--dark-grey);
 }
 .profile__graph-number.contains{
+    font-size: var(--fs-big-subtitle);
     color: var(--turcoise);
 }
 
