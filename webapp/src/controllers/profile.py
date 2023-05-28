@@ -52,15 +52,13 @@ def profile() -> Response:
                 # If password was validated, proceed accordingly
                 if answear:
                     update_password(dba, new_password, session["user_id"])
-                    flash("password_updated")
+                    flash("success")
                 else:
                     flash("current_password")
 
 
         else:
             print("Delete account procedure ---->")
-
-        print('FORM request...')
 
         return make_response(
             redirect("/profile", code=302)

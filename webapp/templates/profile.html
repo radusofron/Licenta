@@ -9,6 +9,7 @@
 
 {% block content %}
 <main class="grid-container">
+    <!-- Message to be displayed in case of a succesful operation -->
     <section class="profile-data">
         <h3 class="profile__subtitle">Profile</h3>
         <div class="profile__photo">
@@ -41,6 +42,13 @@
                 <img class="profile__subtitle-icon"
                     src="{{url_for('static', filename='/assets/illustrations/password.png')}}">
             </div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% if messages[0] == "success"%}
+            <p class="profile__change-password-success">Your password has been changed successfully!</p>
+            {% endif %}
+            {% endif %}
+            {% endwith %}
             <p class="profile__change-password-info">
                 To update your password, please provide your current password, followed by your new password and
                 confirmation.

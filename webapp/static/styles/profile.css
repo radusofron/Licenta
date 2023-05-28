@@ -290,6 +290,14 @@ li.profile__stat{
 }
 
 
+/* INFO MESSAGE */
+.profile__change-password-success{
+    padding: 0rem 0vw 1.5rem 0vw;
+    color: var(--green);
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+}
+
 
 /* RESPONSIVE */
 @media (max-width: 650px){
