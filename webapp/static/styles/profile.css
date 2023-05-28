@@ -84,6 +84,7 @@ section.profile-data{
 .profile__subtitle.evaluations{
     padding: 1.5rem 0vw 0rem 0vw;
 }
+/* User account */
 form.profile__change-password-container{
     display: flex;
     flex-direction: column;
@@ -109,6 +110,15 @@ input[type=password].profile__input{
 input[type=password].profile__input:focus{
     outline: none;  
 }
+input[type=password].profile__input::placeholder {
+    /* Properties for placeholder */
+    color: var(--grey);
+    font-style: italic;
+    font-weight: var(--regular);
+}
+input[type=password].profile__input.error::placeholder{
+    color: var(--pink);
+}
 .profile__change-password-button{
     margin-top: 1.5rem;
     padding: 1vh 1.3rem;
@@ -127,7 +137,6 @@ input[type=password].profile__input:focus{
 .profile__change-password-button:hover{
     background-position: left;
 }
-/* User account */
 form.profile__delete-account-container{
     display: flex;
     flex-direction: column;

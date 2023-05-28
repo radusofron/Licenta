@@ -21,12 +21,9 @@ def profile_view() -> Response:
     profile_data = json.loads(results.data)
     user_profile_data = profile_data["user profile data"]
     visited_percentage = profile_data["visited percentage"]
-    visited_destinations_last_years = profile_data["visited destinations last years"]
-    years = profile_data["years"]
-    visited_destinations_per_year = profile_data["visited destinations per year"]
+    visited_destinations_graph_data = profile_data["visited destinations graph data"]
   
     return make_response(
         render_template("profile.html", user_profile_data = user_profile_data, visited_percentage = visited_percentage, 
-                        visited_destinations_last_years = visited_destinations_last_years, years = years, 
-                        visited_destinations_per_year = visited_destinations_per_year)
+                        visited_destinations_graph_data = visited_destinations_graph_data)
     )

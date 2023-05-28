@@ -288,13 +288,13 @@ def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, op
 
         # Extract number
         dba_cursor = dba.cursor()
-        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE `date`>%s AND `user_id`=%s", (start_date, user_id,))
+        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE `date`>%s AND `user_id`=%s", (start_date, user_id))
         visited_destinations_number = dba_cursor.fetchone()
         dba_cursor.close()
     else:
         # Extract number
         dba_cursor = dba.cursor()
-        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE YEAR(`date`)=%s AND `user_id`=%s", (year, user_id,))
+        dba_cursor.execute("SELECT COUNT(*) FROM `visited_destinations` WHERE YEAR(`date`)=%s AND `user_id`=%s", (year, user_id))
         visited_destinations_number = dba_cursor.fetchone()
         dba_cursor.close()
 
@@ -302,6 +302,19 @@ def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, op
     if visited_destinations_number is None:
         return 0
     return visited_destinations_number[0]
+
+
+def update_password(dba, new_password: str, user_id: int):
+    """Function updates user's password.
+    """
+    # Hash the password
+    encrypted_new_password = generate_password_hash(new_password)
+
+    # Update password
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("UPDATE `users` SET `password`=%s WHERE `id`=%s", (encrypted_new_password, user_id))
+    dba_cursor.close()
+    dba.commit()
     
 
 # Create database object

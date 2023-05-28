@@ -26,8 +26,10 @@ window.addEventListener("load", function() {
             // color - default
         }
         else {
+            // height grow coefficient
+            height_coefficient = 95/35
             // height
-            const height = 5 + 2.71 * visitedDestinationsPerYears[index]
+            const height = 5 + height_coefficient * visitedDestinationsPerYears[index]
             graphLines[index].style.height = height.toString() + "%"
             // color
             graphLines[index].classList.add("contains")

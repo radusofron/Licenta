@@ -41,25 +41,60 @@
                 <img class="profile__subtitle-icon"
                     src="{{url_for('static', filename='/assets/illustrations/password.png')}}">
             </div>
-            <p class="profile__change-password-info">To update your password, please enter your current password and
-                then
-                the new one. </p>
-            <input class="profile__input" maxlength="40" autocomplete="off" name="password" type="password" required>
+            <p class="profile__change-password-info">
+                To update your password, please provide your current password, followed by your new password and
+                confirmation.
+            </p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <!-- Possible error: -->
+            {% if messages[0] == "current_password"%}
+            <input class="profile__input error" maxlength="40" autocomplete="off" name="password" type="password"
+                placeholder="Current passwordd is incorrect!" required>
+            {% else %}
+            <input class="profile__input" maxlength="40" autocomplete="off" name="password" type="password"
+                placeholder="Current password" required>
+            {% endif %}
+            {% if messages[0] == "password_error"%}
+            <input class="profile__input error" maxlength="40" autocomplete="off" name="new-password" type="password"
+                placeholder="New password too short!" required>
+            {% else %}
             <input class="profile__input" maxlength="40" autocomplete="off" name="new-password" type="password"
-                required>
+                placeholder="New password (min. 8 characters)" required>
+            {% endif %}
+            {% if messages[0] == "passwords_error"%}
+            <input class="profile__input error" maxlength="40" autocomplete="off" name="new-password-confirmation"
+                placeholder="New passwords are different!" type="password" required>
+            {% else %}
+            <input class="profile__input" maxlength="40" autocomplete="off" name="new-password-confirmation"
+                placeholder="Repeat new password" type="password" required>
+            {% endif %}
+            {% else %}
+            <!-- Definitely no error: -->
+            <input class="profile__input" maxlength="40" autocomplete="off" name="password" type="password"
+                placeholder="Current password" required>
+            <input class="profile__input" maxlength="40" autocomplete="off" name="new-password" type="password"
+                placeholder="New password (min. 8 characters)" required>
+            <input class="profile__input" maxlength="40" autocomplete="off" name="new-password-confirmation"
+                placeholder="Repeat new password" type="password" required>
+            {% endif %}
+            {% endwith %}
             <button type="submit" class="profile__change-password-button">Change password</button>
         </form>
-        <form class="profile__delete-account-container">
+        <form class="profile__delete-account-container" action="/api/profile" method="post">
             <div class="profile__subtitle-container">
                 <h3 class="profile__subtitle">Delete account</h3>
                 <img class="profile__subtitle-icon"
                     src="{{url_for('static', filename='/assets/illustrations/danger.png')}}">
             </div>
-            <p class="profile__delete-account-info">Please be aware that by clicking the Delete Account button below,
-                you will permanently
-                delete your account and all associated data. This action is irreversible. Proceed only if you are
-                certain about deleting your account.</p>
-            <button class="profile__delete-account-button">Delete</button>
+            <p class="profile__delete-account-info">
+                Please be aware that by clicking the Delete Account button below, you will permanently delete your
+                account and all associated data. This action is irreversible.
+                However, please note that your ratings for destinations will be retained in our databases for
+                statistical purposes and to provide valuable insights to other users, even after the deletion. Proceed
+                only if you are certain about deleting your account.
+            </p>
+            <button class="profile__delete-account-button">Delete account</button>
         </form>
     </section>
     <section class="profile-statistics">
@@ -68,16 +103,18 @@
             <li class="profile__stat">you have visited <span class="profile__stat-data">{{visited_percentage}}</span> of
                 all the available
                 destinations</li>
-            <li class="profile__stat"><span class="profile__stat-data">{{visited_destinations_last_years}}</span>
-                destinations visited in the last 5 years:</li>
+            <li class="profile__stat">
+                <span class="profile__stat-data">{{visited_destinations_graph_data.last_years}}</span>
+                destinations visited in the last 5 years:
+            </li>
         </ul>
         <div class="profile__graph">
             {% for index in range(5) %}
             <div class="profile__graph-bar">
-                <span class="profile__graph-year">{{years[index]}}</span>
-                <div class="profile__graph-line" per-year="{{visited_destinations_per_year[index]}}">
+                <span class="profile__graph-year">{{visited_destinations_graph_data.years[index]}}</span>
+                <div class="profile__graph-line" per-year="{{visited_destinations_graph_data.per_year[index]}}">
                 </div>
-                <span class=" profile__graph-number">{{visited_destinations_per_year[index]}}</span>
+                <span class=" profile__graph-number">{{visited_destinations_graph_data.per_year[index]}}</span>
             </div>
             {% endfor %}
         </div>
