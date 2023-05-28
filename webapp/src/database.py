@@ -317,18 +317,29 @@ def update_password(dba, new_password: str, user_id: int):
     dba.commit()
 
 
-def delete_account_and_data(dba, user_id: int):
+def delete_account_and_associated_data(dba, user_id: int):
     """Function deletes user's account.
     """
+    # Open cursor
+    dba_cursor = dba.cursor()
+
     # 1. Delete data from users table
+    dba_cursor.execute("DELETE FROM `users` WHERE id=%s;", (user_id,))
 
     # 2. Delete data from visited destinations table
-
+    dba_cursor.execute("DELETE FROM `visited_destinations` WHERE user_id=%s;", (user_id,))
+    
     # 3. Delete data from wishlisted destinations table
-
+    dba_cursor.execute("DELETE FROM `wishlisted_destinations` WHERE user_id=%s;", (user_id,))
+    
     # 4. Delete data from reviews destinations table
+    dba_cursor.execute("DELETE FROM `reviews_destinations` WHERE user_id=%s;", (user_id,))
 
     # TODO 5. Delete data from travel itineraries table / json file
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
     
 
 # Create database object
