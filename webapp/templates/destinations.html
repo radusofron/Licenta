@@ -73,7 +73,7 @@
 
     <!-- Case: data available for most visited destinations AND most reviewed destinations -->
 
-    <section class="most-visited">
+    <section class="most-visited" id="most_visited">
         <h3 class="destinations__subtitle">Most visited destinations</h3>
         <div class="specific-destinations__container">
             {% for index in range(0, destinations_specific|length - 9, 2) %}
@@ -100,7 +100,7 @@
             {% endfor %}
         </div>
     </section>
-    <section class="most-reviewed">
+    <section class="most-reviewed" id="most_reviewed">
         <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <div class="specific-destinations__container">
             {% for index in range(9, destinations_specific|length, 2) %}
@@ -131,11 +131,11 @@
 
     <!-- Case: no data available for most visited destinations -->
 
-    <section class="most-visited">
+    <section class="most-visited" id="most_visited">
         <h3 class="destinations__subtitle">Most visited destinations</h3>
         <p class="destinations__results-not-found">Most visited destinations are not available.</p>
     </section>
-    <section class="most-reviewed">
+    <section class="most-reviewed" id="most_reviewed">
         <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <div class="specific-destinations__container">
             {% for index in range(1, destinations_specific|length, 2) %}
@@ -166,7 +166,7 @@
 
     <!-- Case: no data available for most reviewed destinations -->
 
-    <section class="most-visited">
+    <section class="most-visited" id="most_visited">
         <h3 class="destinations__subtitle">Most visited destinations</h3>
         <div class="specific-destinations__container">
             {% for index in range(0, destinations_specific|length - 1, 2) %}
@@ -193,7 +193,7 @@
             {% endfor %}
         </div>
     </section>
-    <section class="most-reviewed">
+    <section class="most-reviewed" id="most_reviewed">
         <h3 class="destinations__subtitle">Most reviewed destinations</h3>
         <p class="destinations__results-not-found">Most reviewed destinations are not available.</p>
     </section>
