@@ -11,6 +11,8 @@ def index() -> Response:
     # Extract most visited destinations
     most_visited = extract_most_visited_destinations(dba)
 
+    # TODO -> extract 3 websites reviews
+
     # Process the list (case: there are not 3 visited destinations yet)
     while len(most_visited) < 3:
         most_visited.append(tuple(["no data available"]))

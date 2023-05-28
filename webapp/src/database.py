@@ -315,6 +315,20 @@ def update_password(dba, new_password: str, user_id: int):
     dba_cursor.execute("UPDATE `users` SET `password`=%s WHERE `id`=%s", (encrypted_new_password, user_id))
     dba_cursor.close()
     dba.commit()
+
+
+def delete_account_and_data(dba, user_id: int):
+    """Function deletes user's account.
+    """
+    # 1. Delete data from users table
+
+    # 2. Delete data from visited destinations table
+
+    # 3. Delete data from wishlisted destinations table
+
+    # 4. Delete data from reviews destinations table
+
+    # TODO 5. Delete data from travel itineraries table / json file
     
 
 # Create database object

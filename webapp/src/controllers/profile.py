@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
+from database import dba, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
 import datetime
 
 
@@ -31,6 +31,7 @@ def profile() -> Response:
     # POST request:
     if request.method == "POST":
         # Identify form
+        # 1. Change password
         if "password" in request.form:
             # Extract change password input data
             current_password = request.form["password"]
@@ -55,10 +56,14 @@ def profile() -> Response:
                     flash("success")
                 else:
                     flash("current_password")
-
-
+        # 2. Delete account
         else:
-            print("Delete account procedure ---->")
+            delete_account_and_data(dba, session["user_id"])
+            # Redirect user to landing page
+            return make_response(
+                redirect("/index", code=302)
+            )
+
 
         return make_response(
             redirect("/profile", code=302)

@@ -46,6 +46,7 @@ capitals = ["Amsterdam",
     "Warsaw",
     "Zagreb"]
 
+# TODO -> delete current photos before downloading the new ones
 
 # Connect to dba
 dba = mysql.connector.connect(host='localhost', password='mysqlradu', user='radu', database='travel_with_us')
