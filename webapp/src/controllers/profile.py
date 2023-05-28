@@ -31,8 +31,13 @@ def profile() -> Response:
     # POST request:
     if request.method == "POST":
         # Identify form
-        # 1. Change password
-        if "password" in request.form:
+        # 1. Upload photo
+        if "upload" in request.form:
+            photo = request.files['photo']
+            print(photo)
+            # TODO -> validate file size using javascript before enable upload photo button
+        # 2. Change password
+        elif "change" in request.form:
             # Extract change password input data
             current_password = request.form["password"]
             new_password = request.form["new-password"]
@@ -56,15 +61,15 @@ def profile() -> Response:
                     flash("success")
                 else:
                     flash("current_password")
-        # 2. Delete account
-        else:
+        # 3. Delete account
+        elif "delete" in request.form:
             delete_account_and_associated_data(dba, session["user_id"])
             # Redirect user to landing page
             return make_response(
                 redirect("/", code=302)
             )
 
-
+        # Redirect user to the same page
         return make_response(
             redirect("/profile", code=302)
         )
@@ -76,7 +81,7 @@ def profile() -> Response:
     date = extract_registration_date_by_id(dba, session["user_id"])
 
     # Convert date to string format
-    date = date.strftime('%Y-%m-%d %H:%M:%S') # type: ignore
+    date = date.strftime('%d.%m.%Y  %H:%M:%S') # type: ignore
     
     # Create a list with them
     user_profile_data = [username, email, date]

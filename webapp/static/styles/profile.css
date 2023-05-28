@@ -20,7 +20,12 @@ section.profile-data{
     gap: 4.5rem;
 }
 /* User photo */
-.profile__photo{
+form.profile__photo{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.profile__top-container{
     display: flex;
     align-items: flex-end;
     gap: 1.5rem;
@@ -37,10 +42,12 @@ section.profile-data{
     border-radius: 50%;
     object-fit: cover;
 }
-.profile__add-photo-button{
+label.profile__add-photo-button{
     padding: 0.5rem;
     height: fit-content;
+    width: fit-content;
     border-radius: 50%;
+    display: block;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
     background-size: 300%;
     background-position: right;
@@ -48,6 +55,24 @@ section.profile-data{
     transition: 500ms;
 }
 .profile__add-photo-button:hover{
+    background-position: left;
+}
+.profile__upload-photo-button{
+    padding: 1vh 1.3rem;
+    box-sizing: border-box;
+    width: calc(30% + 1.5rem + 0.5rem + 55px);
+    min-width: calc(150px + 1.5rem + 0.5rem + 55px);
+    border-radius: 0.5rem;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--white);
+    background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
+    background-size: 300%;
+    background-position: right;
+    cursor: pointer;
+    transition: 500ms;
+}
+.profile__upload-photo-button:hover{
     background-position: left;
 }
 /* User credentials */
@@ -300,6 +325,13 @@ li.profile__stat{
 
 
 /* RESPONSIVE */
+@media (max-width: 1000px){
+    main.grid-container{
+        display: flex;
+        flex-direction: column;
+        gap: 12rem;
+    }
+}
 @media (max-width: 650px){
     .footer__bottom{
         flex-direction: column;
