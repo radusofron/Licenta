@@ -101,7 +101,7 @@ def extract_user_max_id(dba):
 
 
 def insert_user(dba, username: str, email: str, password: str):
-    """Function inserts user to database
+    """Function inserts user to database.
     """
     # Extract biggest user id found
     max_id = extract_user_max_id(dba)
@@ -231,6 +231,29 @@ def extract_destinations_names(dba):
     total_destinations = dba_cursor.fetchall()
     dba_cursor.close()
     return total_destinations
+
+
+def update_photo_relative_path(dba, relative_path, user_id):
+    """Function updates user's profile picture extension to database.
+    """
+    # Update photo extension
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("UPDATE `users` SET `photo_path`=%s WHERE `id`=%s", (relative_path, user_id,))
+    dba_cursor.close()
+    dba.commit()
+
+
+def extract_photo_relative_path(dba, user_id):
+    """Function returns user's profile picture relative path from database.
+    
+    Function returns an empty list if no profile picture was uploaded before.
+    """
+    # Extract photo extension
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `photo_path` FROM `users` WHERE `id`=%s", (user_id,))
+    relative_path = dba_cursor.fetchone()
+    dba_cursor.close()
+    return relative_path
 
 
 def extract_username_by_id(dba, user_id):

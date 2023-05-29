@@ -1,8 +1,10 @@
-from flask import Blueprint, make_response, jsonify, session, request, redirect, flash
+from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, current_app
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
+from werkzeug.utils import secure_filename
+from database import dba, update_photo_relative_path, extract_photo_relative_path, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
 import datetime
+from PIL import Image
 
 
 profile_controller_blueprint = Blueprint("profile_controller_blueprint", __name__)
@@ -30,12 +32,41 @@ def compute_year_n_years_ago(years_ago: int) -> int:
 def profile() -> Response:
     # POST request:
     if request.method == "POST":
+
         # Identify form
         # 1. Upload photo
         if "upload" in request.form:
-            photo = request.files['photo']
-            print(photo)
-            # TODO -> validate file size using javascript before enable upload photo button
+                # Get photo
+                photo = request.files["photo"]
+
+                # Check photo name to exists
+                if photo.filename:
+                    # Extract photo name in order to extract photo extension
+                    photo_name = secure_filename(photo.filename)
+                    photo_extension = photo_name[(photo_name.rfind(".") + 1):]
+                    
+                    # Determine photo path and name
+                    photo_relative_path = current_app.config["UPLOAD_FOLDER"] + str(session["user_id"]) + "." + photo_extension
+                    print(photo_relative_path)
+                    
+                    # Save file
+                    photo.save(photo_relative_path)
+
+                    # Resize file
+                    image = Image.open(photo_relative_path)
+
+                    # Set the new size
+                    new_size = (750, 750)
+
+                    # Resize the image
+                    resized_photo = image.resize(new_size)
+
+                    # Save the resized image
+                    resized_photo.save(photo_relative_path)
+
+                    # Insert photo path
+                    update_photo_relative_path(dba, photo_relative_path, session["user_id"])
+
         # 2. Change password
         elif "change" in request.form:
             # Extract change password input data
@@ -61,6 +92,7 @@ def profile() -> Response:
                     flash("success")
                 else:
                     flash("current_password")
+
         # 3. Delete account
         elif "delete" in request.form:
             delete_account_and_associated_data(dba, session["user_id"])
@@ -79,6 +111,14 @@ def profile() -> Response:
     username = extract_username_by_id(dba, session["user_id"])
     email = extract_email_by_id(dba, session["user_id"])
     date = extract_registration_date_by_id(dba, session["user_id"])
+    photo_path = extract_photo_relative_path(dba, session["user_id"])
+
+    # TODO -> incarc poza corespunzator sau poza clasica altfel
+    # Check if photo exists
+    if photo_path is None:
+        print("Nu avem poza de profil")
+    else:
+        print("Avem poza de profil")
 
     # Convert date to string format
     date = date.strftime('%d.%m.%Y  %H:%M:%S') # type: ignore

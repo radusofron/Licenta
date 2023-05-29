@@ -64,9 +64,12 @@ function displayErrorMessage(errorMessage, errorType) {
         errorMessage.textContent = "You don't have a selected photo anymore. Please choose one!"
     }
     if (errorType == 2) {
-        errorMessage.textContent = "The selected photo exceeds the file size limit. Please choose a smaller photo!"
+        errorMessage.textContent = "The selected photo does not have a valid extension. Please choose a file with a valid image extension!"
     }
     if (errorType == 3) {
+        errorMessage.textContent = "The selected photo exceeds the file size limit. Please choose a smaller photo!"
+    }
+    if (errorType == 4) {
         errorMessage.textContent = "Please select only one photo for upload!"
     }
     // Change message color
@@ -83,6 +86,10 @@ function displayNoErrorMessage(noErrorMessage){
     noErrorMessage.textContent = "Your photo is ready for upload."
     noErrorMessage.style.color = "var(--green)"
 
+}
+
+function getFileExtension(fileName) {
+    return fileName.slice(fileName.lastIndexOf("."))
 }
 
 // Function validates photo uploading
@@ -114,31 +121,54 @@ function photoUploadValidations() {
         else {
             // Case: only one photo chosen
             if (inputPhoto.files.length == 1) {
-                // Get input photo
+                // Get input file
                 const photo = inputPhoto.files[0]
                 
-                // Photo size in KB
+                // Get input file name
+                const photoName = photo["name"]
+                
+                // Get input file extension
+                const photoExtension = getFileExtension(photoName)
+
+                // Array containing all the possible file extensions for photos
+                const photoExtensions = [
+                    '.apng', '.avif', '.bmp', '.gif', '.ico', '.cur', '.jpg', '.jpeg',
+                    '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.svgz', '.tiff', '.tif','.xbm', '.webp'
+                  ];
+                
+                // File size in KB
                 const photo_size = photo.size / 1024
                 // Maximum size in KB (=5MB)
                 const size_limit = 5000
     
-                // Check if input photo satisfies the conditions
+                // Check if input file satisfies the conditions:
+                // 1. is smaller than maximum size
+                // 2. is a photo
                 if (photo_size < size_limit) {
-                    uploadPhoto.disabled =  false;
-                    styleEnabledButton(uploadPhoto)
-                    displayNoErrorMessage(infoMessagePhoto)
+                    if (photoExtensions.includes(photoExtension)) {
+                        uploadPhoto.disabled =  false;
+                        styleEnabledButton(uploadPhoto)
+                        displayNoErrorMessage(infoMessagePhoto)
+                    }
+                    // Case: wrong photo extension
+                    else {
+                        uploadPhoto.disabled =  true;
+                        styleDisabledButton(uploadPhoto)
+                        displayErrorMessage(infoMessagePhoto, 2)
+                    }
                 }
+                // Case: photo size too big
                 else {
                     uploadPhoto.disabled =  true;
                     styleDisabledButton(uploadPhoto)
-                    displayErrorMessage(infoMessagePhoto, 2)
+                    displayErrorMessage(infoMessagePhoto, 3)
                 }
             }
             // Case: more photo chosen
             else {
                 uploadPhoto.disabled =  true;
                 styleDisabledButton(uploadPhoto)
-                displayErrorMessage(infoMessagePhoto, 3)
+                displayErrorMessage(infoMessagePhoto, 4)
             }
             
         }
