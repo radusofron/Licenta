@@ -19,14 +19,14 @@
                         src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
                         alt="Profile picture">
                 </div>
-                <input name="photo" type="file" id="upload-file-button" accept="image/png, image/jpeg" hidden required>
+                <input name="photo" type="file" id="upload-file-button" accept="image/*" multiple="false" hidden>
                 <label for="upload-file-button" class="profile__add-photo-button">
                     <img class="profile__add-photo-image"
                         src="{{url_for('static', filename='/assets/illustrations/add_photo.png')}}" alt="Add photo">
                 </label>
             </div>
-            <button type="submit" class="profile__upload-photo-button" name="upload">Upload photo</button>
-
+            <p class="profile__add-photo-info"></p>
+            <button type="submit" class="profile__upload-photo-button disabled" name="upload">Upload photo</button>
         </form>
         <div class="profile__credentials">
             <div class="profile__username">

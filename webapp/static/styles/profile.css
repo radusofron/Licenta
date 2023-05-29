@@ -48,7 +48,7 @@ label.profile__add-photo-button{
     width: fit-content;
     border-radius: 50%;
     display: block;
-    background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
+    background: linear-gradient(45deg, var(--light-pink), var(--glow-light-pink), var(--light-pink), var(--light-pink));
     background-size: 300%;
     background-position: right;
     cursor: pointer;
@@ -56,6 +56,16 @@ label.profile__add-photo-button{
 }
 .profile__add-photo-button:hover{
     background-position: left;
+}
+.profile__add-photo-info{
+    /* INFO message */
+    display: none;
+    color: var(--light-pink);
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+}
+.profile__add-photo-info.active{
+    display: block;
 }
 .profile__upload-photo-button{
     padding: 1vh 1.3rem;
@@ -66,7 +76,7 @@ label.profile__add-photo-button{
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--white);
-    background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
+    background: linear-gradient(45deg, var(--light-pink), var(--glow-light-pink), var(--light-pink), var(--light-pink));
     background-size: 300%;
     background-position: right;
     cursor: pointer;
@@ -74,6 +84,10 @@ label.profile__add-photo-button{
 }
 .profile__upload-photo-button:hover{
     background-position: left;
+}
+.profile__upload-photo-button.disabled{
+    background: var(--black-12-5);
+    cursor: default;
 }
 /* User credentials */
 .profile__credentials{
@@ -114,6 +128,13 @@ form.profile__change-password-container{
     display: flex;
     flex-direction: column;
     gap: 3rem;
+}
+.profile__change-password-success{
+    /* INFO message */
+    padding: 0rem 0vw 1.5rem 0vw;
+    color: var(--green);
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
 }
 .profile__change-password-info{
     font-size: var(--fs-description);
@@ -314,14 +335,6 @@ li.profile__stat{
     text-align: left;
 }
 
-
-/* INFO MESSAGE */
-.profile__change-password-success{
-    padding: 0rem 0vw 1.5rem 0vw;
-    color: var(--green);
-    font-size: var(--fs-subtitle);
-    font-weight: var(--semibold);
-}
 
 
 /* RESPONSIVE */
