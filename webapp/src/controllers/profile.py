@@ -12,13 +12,28 @@ profile_controller_blueprint = Blueprint("profile_controller_blueprint", __name_
 
 
 def resize_profile_picture(photo_relative_path: str):
-    """Function resizes the given image
+    """Function resizes the given image if it is big
     """
     # Resize file
     image = Image.open(photo_relative_path)
 
+    # Get file dimensions
+    width, height = image.size
+
+    # Compute dimension coefficient
+    if width >= height:
+        coefficient = width / height
+    else:
+        coefficient = height / width
+
+
     # Set the new size
-    new_size = (750, 750)
+    if width >= height and height > 750:
+        new_size = (int(750 * coefficient), 750)
+    elif height > width and width > 750:
+        new_size = (750, int(750 * coefficient))
+    else:
+        return
 
     # Resize the image
     resized_photo = image.resize(new_size)
@@ -39,7 +54,7 @@ def remove_profile_picture():
     # Iterate through files of the folder
     for file in files:
         filename = file[:file.find(".")]
-        if filename == session["user_id"]:
+        if filename == str(session["user_id"]):
             os.remove(folder_path + "/" + file)
 
 
@@ -88,7 +103,7 @@ def profile() -> Response:
                     # Save file
                     photo.save(photo_relative_path)
                     
-                    # Resize photo to reduce its size
+                    # Resize photo to reduce its size if it's possible
                     resize_profile_picture(photo_relative_path)
 
                     # Insert photo path
@@ -124,7 +139,7 @@ def profile() -> Response:
         elif "delete" in request.form:
             # Remove account profile picture
             remove_profile_picture()
-            
+
             # Delete account from database
             delete_account_and_associated_data(dba, session["user_id"])
 
