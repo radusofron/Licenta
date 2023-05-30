@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/destination_details.css') }}" />
+<script src="{{ url_for('static', filename='scripts/destination_details.js') }}" defer></script>
 {% endblock %}
 
 {% block title %} Site name | Destination details {% endblock %}
@@ -17,15 +18,19 @@
     </div>
     <div class="destination__middle-container">
         <ul class="destination__options">
-            <li class="destination__option">Travel itineraries</li>
-            <li class="destination__option">Description</li>
-            <li class="destination__option">Photos</li>
-            <li class="destination__option">Statistics</li>
-            <li class="destination__option">Reviews</li>
-            <li class="destination__option">Weather & more</li>
+            <li class="destination__option travel-itineraries active">Travel itineraries</li>
+            <li class="destination__option wikipedia">Description</li>
+            <li class="destination__option photos">Photos</li>
+            <li class="destination__option statistics">Statistics</li>
+            <li class="destination__option reviews">Reviews</li>
+            <li class="destination__option weather">Weather & more</li>
         </ul>
     </div>
-    <!-- <section class="destination__travel-itineraries">Travel-itineraries</section> -->
-    <section class="destination__wikipedia">Wikipedia</section>
+    <section class="section travel-itineraries active">Travel itineraries</section>
+    <section class="section wikipedia">Wikipedia</section>
+    <section class="section photos">Photos</section>
+    <section class="section statistics">Statistics</section>
+    <section class="section reviews">Reviews</section>
+    <section class="section weather">Weather</section>
 </main>
 {% endblock %}

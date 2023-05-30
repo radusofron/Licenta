@@ -2,7 +2,8 @@
 
 // Function finds the section containing a class named "active"
 function findActiveSection(sections) {
-    targetClassName = "active"
+    const targetClassName = "active"
+    let activeSection = ""
     sections.forEach(section => {
         if (section.className.includes(targetClassName)) {
             activeSection = section
@@ -23,7 +24,7 @@ function addActiveSection(section) {
 
 // Function finds the header option containing a class named "active" if exists one
 function findActiveOption() {
-    activeOption = document.querySelector(".header-option.active")
+    let activeOption = document.querySelector(".header-option.active")
     return activeOption
 }
 
