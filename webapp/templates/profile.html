@@ -15,9 +15,13 @@
         <form class="profile__photo" action="/api/profile" method="post" enctype="multipart/form-data">
             <div class="profile__top-container">
                 <div class="profile__photo-container">
+                    {% if has_profile_picture %}
                     <img class="profile__photo-image"
-                        src="{{url_for('static', filename='/assets/photos/landing_page_photo.jpg')}}"
+                        src="{{url_for('static', filename='/assets/user_photos/' + user_profile_data[0])}}"
                         alt="Profile picture">
+                    {% else %}
+                    <div class="profile__photo-like">{{user_profile_data[0]}}</div>
+                    {% endif %}
                 </div>
                 <input name="photo" type="file" id="upload-file-button" accept="image/*" multiple="false" hidden>
                 <label for="upload-file-button" class="profile__add-photo-button">
@@ -31,15 +35,15 @@
         <div class="profile__credentials">
             <div class="profile__username">
                 <p class="profile__credential-subtitle">Username:</p>
-                <p class="profile__credential-data">{{user_profile_data[0]}}</p>
+                <p class="profile__credential-data">{{user_profile_data[1]}}</p>
             </div>
             <div class="profile__email">
                 <p class="profile__credential-subtitle">Email:</p>
-                <p class="profile__credential-data">{{user_profile_data[1]}}</p>
+                <p class="profile__credential-data">{{user_profile_data[2]}}</p>
             </div>
             <div class="profile__date">
                 <p class="profile__credential-subtitle">Registration date:</p>
-                <p class="profile__credential-data">{{user_profile_data[2]}}</p>
+                <p class="profile__credential-data">{{user_profile_data[3]}}</p>
             </div>
         </div>
         <form class="profile__change-password-container" action="/api/profile" method="post">

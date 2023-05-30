@@ -233,27 +233,31 @@ def extract_destinations_names(dba):
     return total_destinations
 
 
-def update_photo_relative_path(dba, relative_path, user_id):
-    """Function updates user's profile picture extension to database.
+def update_profile_picture_relative_path(dba, photo_name, user_id):
+    """Function updates user's profile picture name to database.
     """
-    # Update photo extension
+    # Update photo name
     dba_cursor = dba.cursor()
-    dba_cursor.execute("UPDATE `users` SET `photo_path`=%s WHERE `id`=%s", (relative_path, user_id,))
+    dba_cursor.execute("UPDATE `users` SET `photo_name`=%s WHERE `id`=%s", (photo_name, user_id,))
     dba_cursor.close()
     dba.commit()
 
 
-def extract_photo_relative_path(dba, user_id):
-    """Function returns user's profile picture relative path from database.
+def extract_photo_name(dba, user_id):
+    """Function returns user's profile picture name from database.
     
-    Function returns an empty list if no profile picture was uploaded before.
+    It returns 0 if photo name cell is null.
     """
     # Extract photo extension
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `photo_path` FROM `users` WHERE `id`=%s", (user_id,))
-    relative_path = dba_cursor.fetchone()
+    dba_cursor.execute("SELECT `photo_name` FROM `users` WHERE `id`=%s", (user_id,))
+    photo_name = dba_cursor.fetchone()
     dba_cursor.close()
-    return relative_path
+    
+    # Case: photo name not found
+    if photo_name[0] is None:
+        return 0
+    return photo_name[0]
 
 
 def extract_username_by_id(dba, user_id):

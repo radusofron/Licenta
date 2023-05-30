@@ -42,6 +42,18 @@ form.profile__photo{
     border-radius: 50%;
     object-fit: cover;
 }
+.profile__photo-like{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    font-size: var(--fs-big-title);
+    font-weight: var(--semibold);
+    background-color: var(--black-12-5);
+    color: var(--light-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 label.profile__add-photo-button{
     padding: 0.5rem;
     height: fit-content;

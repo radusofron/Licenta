@@ -1,13 +1,46 @@
-from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, current_app
+from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, current_app, url_for
 from flask_api import status
 from flask.wrappers import Response
 from werkzeug.utils import secure_filename
-from database import dba, update_photo_relative_path, extract_photo_relative_path, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
+from database import dba, update_profile_picture_relative_path, extract_photo_name, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
 import datetime
 from PIL import Image
+import os
 
 
 profile_controller_blueprint = Blueprint("profile_controller_blueprint", __name__)
+
+
+def resize_profile_picture(photo_relative_path: str):
+    """Function resizes the given image
+    """
+    # Resize file
+    image = Image.open(photo_relative_path)
+
+    # Set the new size
+    new_size = (750, 750)
+
+    # Resize the image
+    resized_photo = image.resize(new_size)
+
+    # Save the resized image
+    resized_photo.save(photo_relative_path)
+
+
+def remove_profile_picture():
+    """Function removes user's previous profile picture if it exists or the last profile picture when an account is deleted.
+    """
+    # Designated folder for profile picture
+    folder_path = current_app.config["UPLOAD_FOLDER"]
+
+    # List files of the folder
+    files = os.listdir(folder_path)
+
+    # Iterate through files of the folder
+    for file in files:
+        filename = file[:file.find(".")]
+        if filename == session["user_id"]:
+            os.remove(folder_path + "/" + file)
 
 
 def process_destinations_number(destinations_number: str) -> str:
@@ -41,31 +74,25 @@ def profile() -> Response:
 
                 # Check photo name to exists
                 if photo.filename:
-                    # Extract photo name in order to extract photo extension
+                    # First, remove user's previous photo stored
+                    remove_profile_picture()   
+
+                    # Then, extract photo name in order to extract photo extension
                     photo_name = secure_filename(photo.filename)
                     photo_extension = photo_name[(photo_name.rfind(".") + 1):]
                     
-                    # Determine photo path and name
-                    photo_relative_path = current_app.config["UPLOAD_FOLDER"] + str(session["user_id"]) + "." + photo_extension
-                    print(photo_relative_path)
+                    # Compute photo path and photo new name
+                    photo_new_name = str(session["user_id"]) + "." + photo_extension
+                    photo_relative_path = current_app.config["UPLOAD_FOLDER"] +  photo_new_name
                     
                     # Save file
                     photo.save(photo_relative_path)
-
-                    # Resize file
-                    image = Image.open(photo_relative_path)
-
-                    # Set the new size
-                    new_size = (750, 750)
-
-                    # Resize the image
-                    resized_photo = image.resize(new_size)
-
-                    # Save the resized image
-                    resized_photo.save(photo_relative_path)
+                    
+                    # Resize photo to reduce its size
+                    resize_profile_picture(photo_relative_path)
 
                     # Insert photo path
-                    update_photo_relative_path(dba, photo_relative_path, session["user_id"])
+                    update_profile_picture_relative_path(dba, photo_new_name, session["user_id"])
 
         # 2. Change password
         elif "change" in request.form:
@@ -95,7 +122,12 @@ def profile() -> Response:
 
         # 3. Delete account
         elif "delete" in request.form:
+            # Remove account profile picture
+            remove_profile_picture()
+            
+            # Delete account from database
             delete_account_and_associated_data(dba, session["user_id"])
+
             # Redirect user to landing page
             return make_response(
                 redirect("/", code=302)
@@ -108,23 +140,26 @@ def profile() -> Response:
     
     # GET request:
     # Extract user account details
+    photo_name = extract_photo_name(dba, session["user_id"])
     username = extract_username_by_id(dba, session["user_id"])
     email = extract_email_by_id(dba, session["user_id"])
     date = extract_registration_date_by_id(dba, session["user_id"])
-    photo_path = extract_photo_relative_path(dba, session["user_id"])
 
-    # TODO -> incarc poza corespunzator sau poza clasica altfel
-    # Check if photo exists
-    if photo_path is None:
-        print("Nu avem poza de profil")
+    # If photo name not found, upload default profile picture
+    if photo_name == 0:
+        # Default profile picture
+        profile_picture = str(username)[:2].upper()
+        has_profile_picture = False
     else:
-        print("Avem poza de profil")
+        # Existent profile picture
+        profile_picture = str(photo_name)
+        has_profile_picture = True
 
     # Convert date to string format
     date = date.strftime('%d.%m.%Y  %H:%M:%S') # type: ignore
     
     # Create a list with them
-    user_profile_data = [username, email, date]
+    user_profile_data = [profile_picture, username, email, date]
 
     # Extract user's visited destinations number and total number
     visited_destinations = extract_visited_destinations_number(dba, session["user_id"])
@@ -156,7 +191,7 @@ def profile() -> Response:
     visited_destinations_graph_data["per_year"] = visited_destinations_per_year
         
     return make_response(
-        jsonify({"user profile data": user_profile_data, "visited percentage": visited_percentage, "visited destinations graph data": visited_destinations_graph_data}),
+        jsonify({"user profile data": user_profile_data, "has profile picture": has_profile_picture ,"visited percentage": visited_percentage, "visited destinations graph data": visited_destinations_graph_data}),
         status.HTTP_200_OK,
     )
 
