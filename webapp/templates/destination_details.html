@@ -1,0 +1,31 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/destination_details.css') }}" />
+{% endblock %}
+
+{% block title %} Site name | Destination details {% endblock %}
+
+{% block content %}
+<main>
+    <div class="destination__top-container">
+        <h3 class="destination__title">Lisbon</h3>
+        <form class="destination__buttons">
+            <button class="destination__button-wishlist" type="submit" name="wishlist">Add to wishlist</button>
+            <button class="destination__button-visited" type="submit" name="visited">Marked as visited</button>
+        </form>
+    </div>
+    <div class="destination__middle-container">
+        <ul class="destination__options">
+            <li class="destination__option">Travel itineraries</li>
+            <li class="destination__option">Description</li>
+            <li class="destination__option">Photos</li>
+            <li class="destination__option">Statistics</li>
+            <li class="destination__option">Reviews</li>
+            <li class="destination__option">Weather & more</li>
+        </ul>
+    </div>
+    <!-- <section class="destination__travel-itineraries">Travel-itineraries</section> -->
+    <section class="destination__wikipedia">Wikipedia</section>
+</main>
+{% endblock %}

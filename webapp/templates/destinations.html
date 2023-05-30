@@ -21,7 +21,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="visited-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                     <a class="visited-destinations__evaluate-button"
                         href="{{ url_for('home_view_blueprint.home_view') }}">Evaluate</a>
                     <a class="visited-destinations__itineraries-button"
@@ -52,7 +52,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="wishlisted-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                 </div>
                 <p class="specific-destinations__name">
                     {{ destinations_specific[index] }}
@@ -83,7 +83,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="most-visited-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                 </div>
                 <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
@@ -110,7 +110,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="most-reviewed-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                 </div>
                 <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
@@ -145,7 +145,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="most-reviewed-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                 </div>
                 <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
@@ -176,7 +176,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_specific[index] + '.jpg')}}"
                         loading="lazy" alt="Image of this destination">
                     <a class="most-visited-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_specific[index] }}">Open</a>
                 </div>
                 <div class="specific-destinations__name">
                     {{ destinations_specific[index] }}
@@ -225,7 +225,7 @@
                         src="{{url_for('static', filename='/assets/photos/' + destinations_all[index] + '.jpg')}}"
                         alt="Image of this destination">
                     <a class="all-destinations__open-button"
-                        href="{{ url_for('home_view_blueprint.home_view') }}">Open</a>
+                        href="/destination?city={{ destinations_all[index] }}">Open</a>
                 </div>
                 <p class="all-destinations__name">
                     {{ destinations_all[index] }}

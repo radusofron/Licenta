@@ -1,0 +1,81 @@
+/* COMMON */
+
+/* Top container */
+.destination__top-container{
+    padding: 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.destination__title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+form.destination__buttons{
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+}
+button{
+    padding: 0.4rem 1.3rem;
+    box-sizing: border-box;
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    border-radius: 0.5rem;
+    color: var(--white);
+    cursor: pointer;
+    transition: 250ms;
+}
+button.destination__button-wishlist{
+    border: 0.2rem solid var(--light-pink);
+    background-color: var(--light-pink);
+}
+button.destination__button-wishlist:hover{
+    background-color: var(--white);
+    color: var(--light-pink);
+}
+button.destination__button-visited{
+    border: 0.2rem solid var(--turcoise);
+    background-color: var(--turcoise);
+}
+button.destination__button-visited:hover{
+    background-color: var(--white);
+    color: var(--turcoise);
+}
+
+
+/* Middle container */
+.destination__middle-container{
+    border-top: 1.5rem solid var(--background-grey);
+    padding: 1.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.destination__options{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.destination__option{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    cursor: pointer;
+}
+
+
+/* Bottom container */
+section{
+    padding: 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+/* DIFFERENT */

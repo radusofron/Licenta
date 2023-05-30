@@ -7,7 +7,7 @@ import random
 destinations_controller_blueprint = Blueprint("destinations_controller_blueprint", __name__)
 
 
-def create_specific_destinations(destinations: list, option: int) -> list:
+def create_list_with_destinations(destinations: list, option: int) -> list:
     """Function creates a list containing all the destinations names
 
     Database's function returns a list with tuples containing the names and possibly the correspondent data for every name.
@@ -50,27 +50,27 @@ def destinations() -> Response:
     # Case: visited
     elif option == "visited":
         visited_destinations = extract_visited_destinations_names(dba, session["user_id"])
-        specific_destinations = create_specific_destinations(visited_destinations, 1)
+        specific_destinations = create_list_with_destinations(visited_destinations, 1)
         
     
     # Case: wishlisted
     elif option == "wishlisted":
         wishlisted_destinations = extract_wishlisted_destinations_names(dba, session["user_id"])
-        specific_destinations = create_specific_destinations(wishlisted_destinations, 1)
+        specific_destinations = create_list_with_destinations(wishlisted_destinations, 1)
 
     # Case: most visited and most reviewed
     else:
         most_visited_destinations = extract_most_visited_destinations_names(dba)
-        specific_destinations = create_specific_destinations(most_visited_destinations, 2)
+        specific_destinations = create_list_with_destinations(most_visited_destinations, 2)
         # Add a delimiter
         specific_destinations.append(" ")
         # Add to the same list
         most_reviewed_destinations = extract_most_reviewed_destinations_names(dba)
-        specific_destinations.extend(create_specific_destinations(most_reviewed_destinations, 2))
+        specific_destinations.extend(create_list_with_destinations(most_reviewed_destinations, 2))
 
     # Common for all cases
     destinations = extract_destinations_names(dba)
-    destinations = create_specific_destinations(destinations, 1)
+    destinations = create_list_with_destinations(destinations, 1)
     # Randomize the destinations
     random.shuffle(destinations)
     
