@@ -60,6 +60,53 @@ function displayOptionAndSection(option, sections) {
 }
 
 
+// Function creates average grades graph
+function createGradesGraph() {
+    // Get graph lines
+    const graphLines = document.querySelectorAll(".statistics__line")
+
+    // Define average grade per field array
+    const gradePerField = []
+
+    // Extract per-year attribute values (i.e. visited destinations per year)
+    graphLines.forEach(graphLine => {
+        gradePerField.push(graphLine.getAttribute("grade"))
+        graphLine.removeAttribute("grade")
+     });
+
+    // Set specific heights and colors for graph lines
+    for (let index = 0; index < gradePerField.length; index++)
+    {
+        // Convert visited destinations per year from string to int
+        gradePerField[index] = parseInt(gradePerField[index])
+
+        // Case: no evaluations yet
+        if (gradePerField[index] == 0) {
+            graphLines[index].style.height = "5%"
+            graphLines[index].classList.add("empty")
+        }
+        else {
+            // Compute height
+            height_computed = gradePerField[index] * 8
+
+            // Set height
+            graphLines[index].style.height = height_computed.toString() + "%"
+
+            // Set color after grade
+            if (gradePerField[index] < 5) {
+                graphLines[index].classList.add("bad")
+            }
+            if (gradePerField[index] >= 5 && gradePerField[index] < 10) {
+                graphLines[index].classList.add("good")
+            }
+            if (gradePerField[index] == 10) {
+                graphLines[index].classList.add("perfect")
+            }
+        }
+    }
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -72,4 +119,6 @@ window.addEventListener("load", function() {
     destinationOptions.forEach(option => {
             option.addEventListener("click", () => displayOptionAndSection(option, sections))
         });
+
+    createGradesGraph()
   });

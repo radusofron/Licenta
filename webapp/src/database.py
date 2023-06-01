@@ -41,7 +41,7 @@ def login_validation(dba, input_email: str, input_password: str) -> bool:
     return False
 
 
-def extract_user_id(dba, input_email):
+def extract_user_id(dba, input_email: str):
     """Function returns user id from database based on email given
     """
     # Extract id
@@ -127,7 +127,7 @@ def insert_user(dba, username: str, email: str, password: str):
     dba.commit()
     
 
-def extract_visited_destinations_number(dba, user_id):
+def extract_visited_destinations_number(dba, user_id: int) -> int:
     """Function returns total number of visited destinations for a user based on user id
     """
     # Extract number
@@ -142,7 +142,7 @@ def extract_visited_destinations_number(dba, user_id):
     return visited_destinations_number[0]
 
 
-def extract_wishlisted_destinations_number(dba, user_id):
+def extract_wishlisted_destinations_number(dba, user_id: int) -> int:
     """Function returns total number of wishlisted destinatinos for a user based on user id
     """
     # Extract number
@@ -157,7 +157,7 @@ def extract_wishlisted_destinations_number(dba, user_id):
     return wishlisted_destinations_number[0]
 
 
-def extract_destinations_number(dba):
+def extract_destinations_number(dba) -> int:
     """Function returns total number of destinations
     """
     # Extract total number
@@ -168,7 +168,7 @@ def extract_destinations_number(dba):
     return total_destinations_number[0]
 
 
-def extract_visited_destinations_names(dba, user_id):
+def extract_visited_destinations_names(dba, user_id: int):
     """Function returns the names of visited destinations for a user based on user id.
 
     It returns the destinations from the newest visited destination to the oldest visited destination.
@@ -181,7 +181,7 @@ def extract_visited_destinations_names(dba, user_id):
     return visited_destinations
 
 
-def extract_wishlisted_destinations_names(dba, user_id):
+def extract_wishlisted_destinations_names(dba, user_id: int):
     """Function returns the names of wishlisted destinations for a user based on user id.
 
     It returns the destinations from the newest wishlisted destination to the oldest wishlisted destination.
@@ -233,7 +233,7 @@ def extract_destinations_names(dba):
     return total_destinations
 
 
-def update_profile_picture_relative_path(dba, photo_name, user_id):
+def update_profile_picture_relative_path(dba, photo_name: str, user_id: int):
     """Function updates user's profile picture name to database.
     """
     # Update photo name
@@ -243,7 +243,7 @@ def update_profile_picture_relative_path(dba, photo_name, user_id):
     dba.commit()
 
 
-def extract_photo_name(dba, user_id):
+def extract_photo_name(dba, user_id: int):
     """Function returns user's profile picture name from database.
     
     It returns 0 if photo name cell is null.
@@ -260,8 +260,8 @@ def extract_photo_name(dba, user_id):
     return photo_name[0]
 
 
-def extract_username_by_id(dba, user_id):
-    """Function returns username, email and registration date based on id stored in session.
+def extract_username_by_id(dba, user_id: int):
+    """Function returns username based on id stored in session.
     """
     # Extract username
     dba_cursor = dba.cursor()
@@ -271,8 +271,8 @@ def extract_username_by_id(dba, user_id):
     return username[0]
 
 
-def extract_email_by_id(dba, user_id):
-    """Function returns username, email and registration date based on id stored in session.
+def extract_email_by_id(dba, user_id: int):
+    """Function returns email based on id stored in session.
     """
     # Extract username
     dba_cursor = dba.cursor()
@@ -282,8 +282,8 @@ def extract_email_by_id(dba, user_id):
     return email[0]
 
 
-def extract_registration_date_by_id(dba, user_id):
-    """Function returns username, email and registration date based on id stored in session.
+def extract_registration_date_by_id(dba, user_id: int):
+    """Function returns registration date based on id stored in session.
     """
     # Extract username
     dba_cursor = dba.cursor()
@@ -293,7 +293,7 @@ def extract_registration_date_by_id(dba, user_id):
     return date[0]
 
 
-def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, option: int):
+def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, option: int) -> int:
     """Function returns total number of visited destinations for a user based on user id.
 
     Parameters:
@@ -325,7 +325,7 @@ def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, op
         visited_destinations_number = dba_cursor.fetchone()
         dba_cursor.close()
 
-    # Case: no visited destinations from starting date unitll now
+    # Case: no visited destinations from starting date untill now
     if visited_destinations_number is None:
         return 0
     return visited_destinations_number[0]
@@ -367,7 +367,52 @@ def delete_account_and_associated_data(dba, user_id: int):
     # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
+
+
+def extract_destination_id_by_name(dba, destination_name: str) -> int:
+    """Function returns destination's id for a given destination name.
+    """
+    # Extract average grades
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `id` FROM destinations WHERE `name`=%s", (destination_name,))
+    destination_id = dba_cursor.fetchone()
+    dba_cursor.close()
     
+    # Case: no id returned
+    if destination_id is None:
+        return 0
+    return destination_id[0]
+
+
+def extract_destination_average_grades(dba, destination_id: int) -> list[tuple]:
+    """Function returns average grades for a given destination id.
+    """
+    # Extract average grades
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT AVG(`grade_attractions`), AVG(`grade_acommodation`), AVG(`grade_culture`), AVG(`grade_entertainment`), AVG(`grade_food_and_drink`), AVG(`grade_history`), AVG(`grade_natural_beauty`), AVG(`grade_night_life`), AVG(`grade_transport`), AVG(`grade_safety`) FROM `grades_destinations` GROUP BY `destination_id` HAVING `destination_id`=%s", (destination_id,))
+    average_grades = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    # Case: no grades untill now
+    if average_grades is None:
+        return []
+    return average_grades
+
+
+def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
+    """Function returns all the reviews for a given destiantion id. 
+    """
+     # Extract reviews
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`review`, `r`.`date` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s", (destination_id,))
+    reviews = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    # Case: no reviews untill now
+    if reviews is None:
+        return []
+    return reviews
+
 
 # Create database object
 dba = connect_to_dba()

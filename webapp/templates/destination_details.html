@@ -18,15 +18,15 @@
     </div>
     <div class="destination__middle-container">
         <ul class="destination__options">
-            <li class="destination__option travel-itineraries active">Travel itineraries</li>
+            <li class="destination__option travel-itineraries">Travel itineraries</li>
             <li class="destination__option wikipedia">Description</li>
             <li class="destination__option photos">Photos</li>
-            <li class="destination__option statistics">Statistics</li>
+            <li class="destination__option statistics active">Statistics</li>
             <li class="destination__option reviews">Reviews</li>
             <li class="destination__option weather">Weather & more</li>
         </ul>
     </div>
-    <section class="section travel-itineraries active">Travel itineraries</section>
+    <section class="section travel-itineraries">Travel itineraries</section>
     <section class="section wikipedia">
         <p class="section__description">Find out more about this city. Dive into comprehensive information
             about the
@@ -56,19 +56,33 @@
             </ul>
         </div>
     </section>
-    <section class="section statistics">
+    <section class="section statistics active">
+        {% if statistics.grades[0] > 0 %}
         <p class="section__description">The following statistics are derived from users' evaluations, providing valuable
             insights into the city's offerings.</p>
-        <div class="photos__content">stats</div>
+        {% else %}
+        <p class="section__description no-data">At the moment, this city does not have any available statistics
+            due to the absence of users' evaluations.</p>
+        {% endif %}
+        <div class="statistics__content">
+            {% for index in range(10) %}
+            <div class="statistics__column">
+                <span class="statistics__field">{{statistics.names[index]}}</span>
+                <div class="statistics__line" grade="{{statistics.grades[index]}}">
+                </div>
+                <span class="statistics__line-number">{{statistics.grades[index]}}</span>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     <section class="section reviews">
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
             users.</p>
-        <div class="photos__content">reviews</div>
+        <div class="reviews__content">reviews</div>
     </section>
     <section class="section weather">
         <p class="section__description">Stay updated with the latest weather conditions in the city.</p>
-        <div class="photos__content">photos</div>
+        <div class="weather__content">photos</div>
     </section>
 </main>
 {% endblock %}

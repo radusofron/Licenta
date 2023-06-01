@@ -180,7 +180,7 @@ def profile() -> Response:
     visited_destinations = extract_visited_destinations_number(dba, session["user_id"])
     all_destinations = extract_destinations_number(dba)
     # Compute stat with them
-    visited_percentage = round(int(visited_destinations) * 100 / int(all_destinations), 2) # type: ignore
+    visited_percentage = round(int(visited_destinations) * 100 / int(all_destinations), 2)
     visited_percentage = str(visited_percentage) + "%"
 
     # Extract starting year for the stats

@@ -74,6 +74,12 @@ a{
     --black-12-5: rgb(0, 0, 0, 0.125);
     --black-25: rgb(0, 0, 0, 0.25);
     --black-50: rgb(0, 0, 0, 0.5);
+    --stat-bad: #F1D4D0;
+    --stat-bad-hover: #E2A9A1;
+    --stat-good: #D47E73;
+    --stat-good-hover: #C55344;
+    --stat-perfect: #9C3D30;
+    --stat-perfect-hover: #6D2A22;
     --regular: 400;
     --medium: 500;
     --semibold: 600;
