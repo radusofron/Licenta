@@ -1,8 +1,14 @@
 /* COMMON */
 
+/* For position: sticky; */
+.content-container-two{
+    overflow: visible;
+}
+
 /* Top container */
 .destination__top-container{
     padding: 4.5rem 5vw;
+    border-bottom: 1.5rem solid var(--background-grey);
     box-sizing: border-box;
     width: 100%;    
     display: flex;
@@ -49,8 +55,8 @@ button.destination__button-visited:hover{
 
 /* Middle container */
 .destination__middle-container{
-    border-top: 1.5rem solid var(--background-grey);
-    border-bottom: 1.5rem solid var(--white);
+    position: sticky;
+    top: 0;
     padding: 3rem 5vw;
     box-sizing: border-box;
     width: 100%;
@@ -58,6 +64,7 @@ button.destination__button-visited:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 2;
 }
 .destination__options{
     display: flex;
@@ -73,15 +80,20 @@ button.destination__button-visited:hover{
     cursor: pointer;
     transition: 250ms;
 }
+.destination__option:hover{
+    color: var(--grey);
+}
 .destination__option.active{
     text-decoration-color: var(--pink);
+}
+.destination__option.active:hover{
+    color: var(--dark-grey);
 }
 
 
 /* Bottom container */
 section{
-    position: relative;
-    padding: 0rem 5vw 4.5rem 5vw;
+    padding: 1.5rem 5vw 4.5rem 5vw;
     box-sizing: border-box;
     width: 100%;
     display: none;
@@ -101,6 +113,7 @@ section.active{
     align-items: stretch;
     gap: 4.5rem;
 }
+
 
 /* For Wikipedia section */
 section.section.wikipedia.active{
@@ -140,6 +153,7 @@ section.section.wikipedia.active{
 .wikipedia__content > p.mw-empty-elt{
     display: none;
 }
+
 
 /* For Photos section */
 .photos__content{
@@ -195,6 +209,7 @@ li.photos__website-bullet{
 }
 
 
+
 /* FOOTER */
 .footer__grid-container {
     column-gap: 6rem;
@@ -230,6 +245,14 @@ li.photos__website-bullet{
 }
 
 
+
+/* RESPONSIVE */
+/* For phone menu */
+@media (max-width: 900px) {
+    .content-container-two{
+        overflow: hidden;
+    }
+}
 @media (max-width: 650px){
     .footer__bottom{
         flex-direction: column;
