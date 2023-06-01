@@ -21,8 +21,8 @@
             <li class="destination__option travel-itineraries">Travel itineraries</li>
             <li class="destination__option wikipedia">Description</li>
             <li class="destination__option photos">Photos</li>
-            <li class="destination__option statistics active">Statistics</li>
-            <li class="destination__option reviews">Reviews</li>
+            <li class="destination__option statistics">Statistics</li>
+            <li class="destination__option reviews active">Reviews</li>
             <li class="destination__option weather">Weather & more</li>
         </ul>
     </div>
@@ -56,7 +56,7 @@
             </ul>
         </div>
     </section>
-    <section class="section statistics active">
+    <section class="section statistics">
         {% if statistics.grades[0] > 0 %}
         <p class="section__description">The following statistics are derived from users' evaluations, providing valuable
             insights into the city's offerings.</p>
@@ -75,26 +75,30 @@
             {% endfor %}
         </div>
     </section>
-    <section class="section reviews">
+    <section class="section reviews active">
         {% if reviews | length > 0 %}
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
             users.</p>
         <div class="reviews__content">
             {% for index in range(reviews.username | length) %}
-            <div class="reviews__review-details">
-                <div class="reviews__photo-container">
-                    {% if reviews.photo_name[index] == "0" %}
-                    <div class="profile__photo-like">{{reviews.username[index][:2]}}</div>
-                    {% else %}
-                    <img class="reviews__photo"
-                        src="{{url_for('static', filename='/assets/user_photos/' + reviews.photo_name[index])}}"
-                        alt="reviews.username[index]'s profile picture">
-                    {% endif %}
+            <div class="reviews__review-card">
+                <div class="reviews__review-details">
+                    <div class="reviews__user-data">
+                        <div class="reviews__photo-container">
+                            {% if reviews.photo_name[index] == "0" %}
+                            <div class="profile__photo-like">{{reviews.username[index][:2]}}</div>
+                            {% else %}
+                            <img class="reviews__photo"
+                                src="{{url_for('static', filename='/assets/user_photos/' + reviews.photo_name[index])}}"
+                                alt="reviews.username[index]'s profile picture">
+                            {% endif %}
+                        </div>
+                        <p class="reviews__user">{{reviews.username[index]}}</p>
+                    </div>
+                    <p class="reviews__date">{{reviews.date[index]}}</p>
                 </div>
-                <p class="reviews__user">{{reviews.username[index]}}</p>
-                <p class="reviews__date">{{reviews.date[index]}}</p>
+                <div class="reviews__text">{{reviews.review[index]}}</div>
             </div>
-            <div class="reviews__text">{{reviews.review[index]}}</div>
             {% endfor %}
         </div>
         {% else %}

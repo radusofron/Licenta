@@ -122,23 +122,23 @@ def change_date_format(date) -> str:
 
     # Different years
     if date.year < current_date.year:
-        return str(current_date.year - date.year) + " years ago"
+        return str(current_date.year - date.year) + " year(s) ago"
     
     # Different months
     if date.month < current_date.year:
-        return str(current_date.month - date.month) + " months ago"
+        return str(current_date.month - date.month) + " month(s) ago"
     
     # Different days
     if date.day < current_date.day:
-        return str(current_date.day - date.day) + " days ago"
+        return str(current_date.day - date.day) + " day(s) ago"
 
     # Different hours
     if date.hour < current_date.day:
-        return str(current_date.hour - date.hour) + " hours ago"
+        return str(current_date.hour - date.hour) + " hour(s) ago"
     
     # Different minutes
     if date.minute < current_date.minute:
-        return str(current_date.minute - date.minute) + " minutes ago"
+        return str(current_date.minute - date.minute) + " minute(s) ago"
     
     return "Now"
         
@@ -212,7 +212,6 @@ def destination_details() -> Response:
 
     # 3. Get statistics
     statistics = get_statistics_grades(option)
-    print(statistics)
 
     # 4. Get reviews
     reviews = get_reviews_and_associated_data(option)
