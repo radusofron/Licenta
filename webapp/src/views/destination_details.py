@@ -27,6 +27,10 @@ def destination_details_view() -> Response:
             redirect("/destinations?option=all", code=302)
         )
 
+    # Case: good option
+    wikipedia = destination_data["wikipedia"]
+    websites_links = destination_data["websites links"]
+
     return make_response(
-        render_template("destination_details.html")
+        render_template("destination_details.html", city_name = option, wikipedia = wikipedia, websites_links = websites_links)
     )

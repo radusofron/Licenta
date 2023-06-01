@@ -5,12 +5,12 @@
 <script src="{{ url_for('static', filename='scripts/destination_details.js') }}" defer></script>
 {% endblock %}
 
-{% block title %} Site name | Destination details {% endblock %}
+{% block title %} Site name | {{city_name}} {% endblock %}
 
 {% block content %}
 <main>
     <div class="destination__top-container">
-        <h3 class="destination__title">Lisbon</h3>
+        <h3 class="destination__title">{{ city_name }}</h3>
         <form class="destination__buttons">
             <button class="destination__button-wishlist" type="submit" name="wishlist">Add to wishlist</button>
             <button class="destination__button-visited" type="submit" name="visited">Marked as visited</button>
@@ -27,10 +27,48 @@
         </ul>
     </div>
     <section class="section travel-itineraries active">Travel itineraries</section>
-    <section class="section wikipedia">Wikipedia</section>
-    <section class="section photos">Photos</section>
-    <section class="section statistics">Statistics</section>
-    <section class="section reviews">Reviews</section>
-    <section class="section weather">Weather</section>
+    <section class="section wikipedia">
+        <p class="section__description">Find out more about this city. Dive into comprehensive information
+            about the
+            city, sourced from Wikipedia.</p>
+        <div class="wikipedia__content">{{wikipedia | safe}}</div>
+    </section>
+    <section class="section photos">
+        <p class="section__description">Discover the city's visual wonders. Explore a collection of breathtaking photos
+            showcasing its essence.</p>
+        <div class="photos__content">
+            {% for index in range(20) %}
+            <div class="photos__photo-container">
+                <img class="photos__photo"
+                    src="{{url_for('static', filename='/assets/cities_photos/' + city_name + '/' ~ index + '.jpg')}}"
+                    alt="Image of this destination">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="photos__more-photos">
+            <p class="photos__more-photos-message">If you want to see more beautiful photos of {{ city_name
+                }}, we recommend you to visit the following websites by clicking them: </p>
+            <ul class="photos__website-links">
+                <li class="photos__website-bullet"><a class="photos__website-link" href="{{websites_links[0]}}"
+                        target="_blank">Pexels</a></li>
+                <li class="photos__website-bullet"><a class="photos__website-link" href="{{websites_links[1]}}"
+                        target="_blank">Unsplash</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="section statistics">
+        <p class="section__description">The following statistics are derived from users' evaluations, providing valuable
+            insights into the city's offerings.</p>
+        <div class="photos__content">stats</div>
+    </section>
+    <section class="section reviews">
+        <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
+            users.</p>
+        <div class="photos__content">reviews</div>
+    </section>
+    <section class="section weather">
+        <p class="section__description">Stay updated with the latest weather conditions in the city.</p>
+        <div class="photos__content">photos</div>
+    </section>
 </main>
 {% endblock %}

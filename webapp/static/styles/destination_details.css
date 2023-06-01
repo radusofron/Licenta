@@ -50,9 +50,11 @@ button.destination__button-visited:hover{
 /* Middle container */
 .destination__middle-container{
     border-top: 1.5rem solid var(--background-grey);
-    padding: 1.5rem 5vw;
+    border-bottom: 1.5rem solid var(--white);
+    padding: 3rem 5vw;
     box-sizing: border-box;
     width: 100%;
+    background-color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,7 +65,7 @@ button.destination__button-visited:hover{
     gap: 3rem;
 }
 .destination__option{
-    font-size: var(--fs-subtitle);
+    font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
     text-decoration: underline 4px var(--white);
@@ -78,13 +80,159 @@ button.destination__button-visited:hover{
 
 /* Bottom container */
 section{
-    padding: 4.5rem 5vw;
+    position: relative;
+    padding: 0rem 5vw 4.5rem 5vw;
     box-sizing: border-box;
     width: 100%;
     display: none;
 }
+.section__description{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+
+
 
 /* DIFFERENT */
 section.active{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4.5rem;
+}
+
+/* For Wikipedia section */
+section.section.wikipedia.active{
+    gap: 4rem;
+}
+.wikipedia__content > *{
+    padding: 0.5rem 0vw;
+    font-size: 1.2rem;
+    font-weight: var(--medium);
+    color: var(--dark-grey);
+}
+.wikipedia__content > h1{
+    padding: 3rem 0vw;
+    font-size: 2rem;
+    font-weight: var(--semibold);
+}
+.wikipedia__content > h2{
+    padding: 2.5rem 0vw;
+    font-size: 1.8rem;
+    font-weight: var(--semibold);
+}
+.wikipedia__content > h3{
+    padding: 2rem 0vw;
+    font-size: 1.6rem;
+    font-weight: var(--semibold);
+}
+.wikipedia__content > h4{
+    padding: 1.5rem 0vw;
+    font-size: 1.4rem;
+    font-weight: var(--semibold);
+}
+.wikipedia__content > p{
+    padding: 0.5rem 0vw;
+    font-size: 1.2rem;
+    font-weight: var(--medium);
+}
+.wikipedia__content > p.mw-empty-elt{
+    display: none;
+}
+
+/* For Photos section */
+.photos__content{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 6rem;
+    row-gap: 4.5rem;
+}
+.photos__photo-container{
+    aspect-ratio: 1.5/1;
+    border-radius: 0.5rem;
+    max-width: 800px;
+    min-width: 400px;
+    overflow: hidden;
+}
+.photos__photo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 500ms;
+}
+.photos__photo:hover{
+    transform: scale(1.2);
+}
+.photos__more-photos{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.photos__more-photos-message{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+ul.photos__website-links{
+    list-style: disc inside;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+li.photos__website-bullet{
+    color: var(--grey);
+}
+.photos__website-link{
+    text-decoration: underline;
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--blue);
+    transition: 250ms;
+}
+.photos__website-link:hover{
+    color: var(--grey);
+}
+
+
+/* FOOTER */
+.footer__grid-container {
+    column-gap: 6rem;
+}
+.footer__subtitle{
+    text-align: left;
+}
+.footer__about{
+    padding: 3rem 0vw;
+}
+.footer__about-option{
+    text-align: left;
+}
+.footer__review {
+    padding: 3rem 0vw;
+}
+.footer__review-form{
+    align-items: flex-start;
+}
+.footer__review-description{
+    text-align: left;
+}
+.footer__bottom{
+    column-gap: 6rem;
+}
+.footer__terms{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+.footer__credit{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+
+
+@media (max-width: 650px){
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
+    }
 }
