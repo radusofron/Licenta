@@ -76,15 +76,20 @@ def get_wiki_content(city: str):
     return content
 
 
-def get_statistics_grades(city: str):
+def get_statistics_grades(city: str) -> dict:
     """Function extracts statistics for a given city
     """
+    statistics = {"names": [], "grades": []}
+    statistics["names"] = ["Attractions", "Accomodation", "Culture", "Entertainment", "Food and drink", 
+              "History", "Natural beauty", "Night life", "Transport", "Safety"]
+    statistics["grades"] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
     # Extract destination id
     destination_id = extract_destination_id_by_name(dba, city)
     
     # Case: wrong city
     if not destination_id:
-        return []
+        return statistics
     
     # City exists
     # Extract desitnation grades
@@ -92,7 +97,7 @@ def get_statistics_grades(city: str):
     
     # Case: destination has no grades
     if not len(grades):
-        return []
+        return statistics
     
     # Create a list with floats
     float_grades = []
@@ -104,10 +109,13 @@ def get_statistics_grades(city: str):
         float_grades[index] = float(float_grades[index])
         float_grades[index] = round(float_grades[index], 1)
 
-    return float_grades
+    # Update dictionary
+    statistics["grades"] = float_grades
+
+    return statistics
 
 
-def change_date_format(date):
+def change_date_format(date) -> str:
     """Function recieves a date and returns the time passed from that date untill now
     """
     current_date = datetime.now()
@@ -135,7 +143,7 @@ def change_date_format(date):
     return "Now"
         
 
-def get_reviews_and_associated_data(city: str):
+def get_reviews_and_associated_data(city: str) -> dict:
     """Function extracts reviews for a given city
     """
     # Extract destination id
@@ -153,7 +161,7 @@ def get_reviews_and_associated_data(city: str):
     if not len(reviews_rows):
         return dict()
     
-    # Create a dictionary
+    # Create dictionary
     reviews = {"username": [], "photo_name": [], "review": [], "date": []}
     for row in reviews_rows:
         reviews["username"].append(str(row[0]))
@@ -175,10 +183,10 @@ def get_reviews_and_associated_data(city: str):
     return reviews
 
 
-def get_weather(city: str):
+def get_weather_details(city: str) -> dict:
     """Function extracts weather information for a given city
     """
-    pass
+    return dict()
 
 
 @destination_details_controller_blueprint.route("/api/destination_details")
@@ -202,18 +210,15 @@ def destination_details() -> Response:
     websites_links.append("https://www.pexels.com/search/" + option + "/")
     websites_links.append("https://unsplash.com/s/photos/" + option)
 
-    # 3. Get statistics 
-    statistics = dict()
-    statistics["names"] = ["Attractions", "Accomodation", "Culture", "Entertainment", "Food and drink", 
-              "History", "Natural beauty", "Night life", "Transport", "Safety"]
-    statistics["grades"] = get_statistics_grades(option)
-    for _ in range(10):
-        statistics["grades"].append(0)
+    # 3. Get statistics
+    statistics = get_statistics_grades(option)
+    print(statistics)
 
     # 4. Get reviews
     reviews = get_reviews_and_associated_data(option)
     
     # 5. Get weather information
+    weather = get_weather_details(option)
         
     return make_response(
         jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews}),
