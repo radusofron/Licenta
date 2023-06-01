@@ -213,7 +213,7 @@ li.photos__website-bullet{
 
 /* For Statistics section */
 .statistics__content{
-    padding: 1.5rem 0vw 3.75rem 0vw;
+    padding: 3.75rem 0vw;
     max-height: 500px;
     min-height: 500px;
     width: 100%;

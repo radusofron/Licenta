@@ -76,9 +76,31 @@
         </div>
     </section>
     <section class="section reviews">
+        {% if reviews | length > 0 %}
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
             users.</p>
-        <div class="reviews__content">reviews</div>
+        <div class="reviews__content">
+            {% for index in range(reviews.username | length) %}
+            <div class="reviews__review-details">
+                <div class="reviews__photo-container">
+                    {% if reviews.photo_name[index] == "0" %}
+                    <div class="profile__photo-like">{{reviews.username[index][:2]}}</div>
+                    {% else %}
+                    <img class="reviews__photo"
+                        src="{{url_for('static', filename='/assets/user_photos/' + reviews.photo_name[index])}}"
+                        alt="reviews.username[index]'s profile picture">
+                    {% endif %}
+                </div>
+                <p class="reviews__user">{{reviews.username[index]}}</p>
+                <p class="reviews__date">{{reviews.date[index]}}</p>
+            </div>
+            <div class="reviews__text">{{reviews.review[index]}}</div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="section__description no-data">At the moment, there are no reviews available for this city as no one
+            has submitted one yet.</p>
+        {% endif %}
     </section>
     <section class="section weather">
         <p class="section__description">Stay updated with the latest weather conditions in the city.</p>

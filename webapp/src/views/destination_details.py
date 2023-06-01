@@ -31,8 +31,9 @@ def destination_details_view() -> Response:
     wikipedia = destination_data["wikipedia"]
     websites_links = destination_data["websites links"]
     statistics = destination_data["statistics"]
+    reviews = destination_data["reviews"]
 
     return make_response(
         render_template("destination_details.html", city_name = option, wikipedia = wikipedia, websites_links = websites_links,
-                        statistics = statistics)
+                        statistics = statistics, reviews = reviews)
     )

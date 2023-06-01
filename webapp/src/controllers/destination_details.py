@@ -3,6 +3,7 @@ from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews
 import requests
+from datetime import datetime
 
 
 destination_details_controller_blueprint = Blueprint("destination_details_controller_blueprint", __name__)
@@ -106,6 +107,34 @@ def get_statistics_grades(city: str):
     return float_grades
 
 
+def change_date_format(date):
+    """Function recieves a date and returns the time passed from that date untill now
+    """
+    current_date = datetime.now()
+
+    # Different years
+    if date.year < current_date.year:
+        return str(current_date.year - date.year) + " years ago"
+    
+    # Different months
+    if date.month < current_date.year:
+        return str(current_date.month - date.month) + " months ago"
+    
+    # Different days
+    if date.day < current_date.day:
+        return str(current_date.day - date.day) + " days ago"
+
+    # Different hours
+    if date.hour < current_date.day:
+        return str(current_date.hour - date.hour) + " hours ago"
+    
+    # Different minutes
+    if date.minute < current_date.minute:
+        return str(current_date.minute - date.minute) + " minutes ago"
+    
+    return "Now"
+        
+
 def get_reviews_and_associated_data(city: str):
     """Function extracts reviews for a given city
     """
@@ -127,16 +156,23 @@ def get_reviews_and_associated_data(city: str):
     # Create a dictionary
     reviews = {"username": [], "photo_name": [], "review": [], "date": []}
     for row in reviews_rows:
-        reviews["username"].append(row[0])
+        reviews["username"].append(str(row[0]))
         reviews["photo_name"].append(row[1])
-        reviews["review"].append(row[2])
+        reviews["review"].append(str(row[2]))
         reviews["date"].append(row[3])
 
-    print(reviews)
-    # Add usernames
-    return []
-    
+    # If user has no photo change photo_name to 0, otherwise transform to string
+    for index in range(len(reviews["photo_name"])):
+        if reviews["photo_name"][index] is None:
+            reviews["photo_name"][index] = "0"
+        else:
+            reviews["photo_name"][index] = str(reviews["photo_name"][index])
 
+    # Change date format
+    for index in range(len(reviews["date"])):
+        reviews["date"][index] = change_date_format(reviews["date"][index])
+    
+    return reviews
 
 
 def get_weather(city: str):
@@ -180,6 +216,6 @@ def destination_details() -> Response:
     # 5. Get weather information
         
     return make_response(
-        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics}),
+        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews}),
         status.HTTP_200_OK,
     )
