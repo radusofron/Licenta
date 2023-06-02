@@ -5,11 +5,6 @@ from PIL import Image
 import os
 
 
-# Unsplash keys
-acces_key = "3uY2o4LBYoeowPX3Fhv7E8T-1m3OLpa04DLwJ7eV5Ms"
-secret_key = "Vi4KCDIN62dTQf4-fPKRBX0dGE0bUpUOZRWJUyMH6vU"
-
-
 # Capitals of Europe
 cities = [
     "Amsterdam",
@@ -71,18 +66,27 @@ def prepare_folder(city: str):
 def extract_city_photos(cities: list[str]):
     """Function extracts 20 photos for every city.
     """
+    # Read Unsplash API key
+    try:
+        with open("webapp/static/API_keys/Unsplash.txt", "r") as file:
+            key = file.read()
+            print(key, type(key))
+    except:
+        return None
+
+    # For every city, get 20 photos and store them in an appropriate folder
     for city in cities:
 
         # Prepare city folder
         prepare_folder(city)
 
         # Extract content using Unsplash API
-        api_url = f"https://api.unsplash.com/search/photos?page=1&per_page=20&order_by=relevant&orientation=landscape&query={city}&client_id=3uY2o4LBYoeowPX3Fhv7E8T-1m3OLpa04DLwJ7eV5Ms"
+        api_url = f"https://api.unsplash.com/search/photos?page=1&per_page=20&order_by=relevant&orientation=landscape&query={city}&client_id={key}"
         response = requests.get(api_url)
 
         # Exit if request was not successfull
         if response.status_code != 200:
-            print("A iesit ca nu mai am request-uri disponibile.")
+            print("No more available requests in this hour!")
             return None
 
         # Jsonify content
@@ -95,21 +99,22 @@ def extract_city_photos(cities: list[str]):
             # Write image
             try:
                 with open("webapp/static/assets/cities_photos/" + city + "/" + str(index) + ".jpg", "wb") as file:
-                    # Extract image
+                    # Create request
                     response_two = requests.get(image_url, stream=True)
                     file.write(response_two.content)
             except:
                 print("Something went wrong...")
 
-        # Wait to prevent crashes
-        time.sleep(1)
+            # Wait to prevent crashes
+            time.sleep(2)
 
 
 def resize_images(cities: list[str]):
     """Function resizes all the 20 photos for every city. (Dimension decreasing)
     """
+     # For every city, extract its 20 photos and set new dimensions (size decreasing)
     for city in cities:
-        print("City: ", city)
+        print("\nCity: ", city)
         for index in range(20):
             print("\tImage: ", index)
             # Open the image file
@@ -125,6 +130,10 @@ def resize_images(cities: list[str]):
             resized_image.save("webapp/static/assets/cities_photos/" + city + "/" + str(index) + ".jpg")
 
 
-# extract_city_photos(cities)
-resize_images(cities)
+def main():
+    # extract_city_photos(cities)
+    resize_images(cities)
+
+
+main()
 

@@ -4,6 +4,8 @@ from flask.wrappers import Response
 from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews
 import requests
 from datetime import datetime
+import os
+import json
 
 
 destination_details_controller_blueprint = Blueprint("destination_details_controller_blueprint", __name__)
@@ -183,10 +185,106 @@ def get_reviews_and_associated_data(city: str) -> dict:
     return reviews
 
 
-def get_weather_details(city: str) -> dict:
-    """Function extracts weather information for a given city
+def update_weather(city: str):
+    """Function retrieves and updates the weather details of a given city at most once per hour to avoid excesive API calls.
+
+    Function writes weather details in a correspondent JSON file.
     """
-    return dict()
+    # Read Weather Map API key
+    try:
+        with open("webapp/static/API_keys/OpenWeatherMap.txt", "r") as file:
+            key = file.read()
+    except:
+        return None
+
+    # Create json name and json path
+    json_name = city + ".json"
+    json_path = "webapp/static/destinations_data/" + json_name
+
+    if os.path.exists(json_path):
+        # Case: check last update
+
+        last_modification_timestamp = os.path.getmtime(json_path)
+        # Convert from timestamp to datetime
+        last_modification_time = datetime.fromtimestamp(last_modification_timestamp)
+
+        # Calcualte time elapsed since the last modification
+        current_date = datetime.now()
+        # Return time elapsed in seconds
+        time_elapsed = (current_date - last_modification_time).total_seconds()
+        # Convert to hours
+        hours_elapsed = time_elapsed /  3600
+
+        # Check if an hour has elapsed since the last modification
+        if hours_elapsed < 1:
+            # Case: no update
+            return None
+        
+    # Case: update
+    # Create url
+    url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={key}&units=metric"
+    # Create request
+    response = requests.get(url)
+    # Get json format
+    response = response.json()
+
+    # Write weather data in correspondent json file
+    try:
+        with open(json_path, "w") as file:
+            json.dump(response, file)
+    except:
+        return None
+    
+
+def read_weather(city: str) -> dict:
+    """Function reads weather details from a correspondent JSON file and processes the required 
+    information for website.
+    """
+    # Create json name and json path
+    json_name = city + ".json"
+    json_path = "webapp/static/destinations_data/" + json_name
+
+    # Extract wether details
+    try:
+        with open(json_path, "r") as file:
+            weather_details = json.load(file)
+    except:
+        return {}
+    
+    # Create a list containing 40 dicitonaries, one for every 3 hours
+    days = {"today": [], "tomorrow": [], "3day": [], "4day": []}
+
+    # Extract current date
+    current_date = datetime.now()
+
+    for index in range(40):
+
+        # Convert timestamp to datetime
+        weather_date = datetime.fromtimestamp(weather_details["list"][index]["dt"])
+
+        # Create a dictionary for every day
+        if weather_date.day == current_date.day:
+            days["today"].append(weather_date.hour)
+            days["today"].append(weather_details["list"][index]["main"]["temp"])
+            days["today"].append(weather_details["list"][index]["main"]["feels_like"])
+            days["today"].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days["tomorrow"]) < 32:
+            days["tomorrow"].append(weather_date.hour)
+            days["tomorrow"].append(weather_details["list"][index]["main"]["temp"])
+            days["tomorrow"].append(weather_details["list"][index]["main"]["feels_like"])
+            days["tomorrow"].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days["3day"]) < 32:
+            days["3day"].append(weather_date.hour)
+            days["3day"].append(weather_details["list"][index]["main"]["temp"])
+            days["3day"].append(weather_details["list"][index]["main"]["feels_like"])
+            days["3day"].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days["4day"]) < 32:
+            days["4day"].append(weather_date.hour)
+            days["4day"].append(weather_details["list"][index]["main"]["temp"])
+            days["4day"].append(weather_details["list"][index]["main"]["feels_like"])
+            days["4day"].append(weather_details["list"][index]["weather"][0]["main"])
+    
+    return days
 
 
 @destination_details_controller_blueprint.route("/api/destination_details")
@@ -216,10 +314,12 @@ def destination_details() -> Response:
     # 4. Get reviews
     reviews = get_reviews_and_associated_data(option)
     
-    # 5. Get weather information
-    weather = get_weather_details(option)
+    # 5. Update weather and get weather details
+    update_weather(option)
+    weather = read_weather(option)
+    
         
     return make_response(
-        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews}),
+        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather": weather}),
         status.HTTP_200_OK,
     )

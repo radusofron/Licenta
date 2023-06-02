@@ -22,8 +22,8 @@
             <li class="destination__option wikipedia">Description</li>
             <li class="destination__option photos">Photos</li>
             <li class="destination__option statistics">Statistics</li>
-            <li class="destination__option reviews active">Reviews</li>
-            <li class="destination__option weather">Weather & more</li>
+            <li class="destination__option reviews">Reviews</li>
+            <li class="destination__option weather active">Weather & more</li>
         </ul>
     </div>
     <section class="section travel-itineraries">Travel itineraries</section>
@@ -62,7 +62,7 @@
             insights into the city's offerings.</p>
         {% else %}
         <p class="section__description no-data">At the moment, this city does not have any available statistics
-            due to the absence of users' evaluations.</p>
+            due to the absence of users' evaluations. :(</p>
         {% endif %}
         <div class="statistics__content">
             {% for index in range(10) %}
@@ -75,7 +75,7 @@
             {% endfor %}
         </div>
     </section>
-    <section class="section reviews active">
+    <section class="section reviews">
         {% if reviews | length > 0 %}
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
             users.</p>
@@ -103,11 +103,12 @@
         </div>
         {% else %}
         <p class="section__description no-data">At the moment, there are no reviews available for this city as no one
-            has submitted one yet.</p>
+            has submitted one yet. :(</p>
         {% endif %}
     </section>
-    <section class="section weather">
-        <p class="section__description">Stay updated with the latest weather conditions in the city.</p>
+    <section class="section weather active">
+        <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the weather
+            forecast for the next 5 days:</p>
         <div class="weather__content">photos</div>
     </section>
 </main>
