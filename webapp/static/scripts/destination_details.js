@@ -107,6 +107,31 @@ function createGradesGraph() {
 }
 
 
+// Function sets different colors for profile pictures of the users
+// which do not have one
+function setProfilePictureColors() {
+    const profilePicturesLike = document.querySelectorAll(".profile__photo-like")
+
+    // Check if there are profile pictures like and proceed accrodingly
+    if (profilePicturesLike.length > 0) {
+        profilePicturesLike.forEach(profilePictureLike => {
+            // Randomize
+            let colorOption = Math.floor(Math.random() * 5)
+            // Set color
+            if ([0, 1].includes(colorOption)) {
+                profilePictureLike.classList.add("one")
+            }
+            if (colorOption == 2) {
+                profilePictureLike.classList.add("two")
+            }
+            if ([3, 4].includes(colorOption)) {
+                profilePictureLike.classList.add("three")
+            }
+        });
+    }
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -121,4 +146,5 @@ window.addEventListener("load", function() {
         });
 
     createGradesGraph()
+    setProfilePictureColors()
   });

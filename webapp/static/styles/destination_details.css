@@ -224,6 +224,13 @@ li.photos__website-bullet{
     justify-content: space-between;
     gap: 3rem;
     overflow-x: scroll;
+    transition: 250ms;
+}
+.statistics__content:hover{
+    background-color: var(--background-grey-hover);
+}
+.statistics__content:hover > .statistics__column{
+    background-color: var(--background-grey-hover);
 }
 .statistics__content::-webkit-scrollbar{
     height: 1rem;
@@ -249,6 +256,7 @@ li.photos__website-bullet{
     flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: center;
+    transition: 250ms;
 }
 .statistics__field{
     height: 10%;
@@ -306,6 +314,7 @@ section.section.reviews.active{
 .reviews__review-card{
     padding: 1.5rem 1.5rem;
     border-radius: 0.5rem;
+    background-color: var(--white);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -342,12 +351,22 @@ section.section.reviews.active{
     border-radius: 50%;
     font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
-    background-color: var(--pink-hover-dark);
-    color: var(--light-pink);
     display: flex;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+}
+.profile__photo-like.one{
+    background-color: var(--pink);
+    color: var(--white-75);
+}
+.profile__photo-like.two{
+    background-color: var(--light-pink);
+    color: var(--white-75);
+}
+.profile__photo-like.three{
+    background-color: var(--pink-hover-dark);
+    color: var(--white-75);
 }
 .reviews__user{
     justify-self: flex-start;
@@ -361,7 +380,7 @@ section.section.reviews.active{
     color: var(--grey);
 }
 .reviews__text{
-    font-size: var(--fs-subtitle);
+    font-size: var(--fs-review);
     font-weight: var(--medium);
     color: var(--dark-grey);
 }

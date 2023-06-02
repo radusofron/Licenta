@@ -125,7 +125,7 @@ def change_date_format(date) -> str:
         return str(current_date.year - date.year) + " year(s) ago"
     
     # Different months
-    if date.month < current_date.year:
+    if date.month < current_date.month:
         return str(current_date.month - date.month) + " month(s) ago"
     
     # Different days
@@ -133,7 +133,7 @@ def change_date_format(date) -> str:
         return str(current_date.day - date.day) + " day(s) ago"
 
     # Different hours
-    if date.hour < current_date.day:
+    if date.hour < current_date.hour:
         return str(current_date.hour - date.hour) + " hour(s) ago"
     
     # Different minutes

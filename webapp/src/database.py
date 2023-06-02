@@ -169,9 +169,7 @@ def extract_destinations_number(dba) -> int:
 
 
 def extract_visited_destinations_names(dba, user_id: int):
-    """Function returns the names of visited destinations for a user based on user id.
-
-    It returns the destinations from the newest visited destination to the oldest visited destination.
+    """Function returns the names of visited destinations for a user based on user id starting with the newest added.
     """
     # Extract names
     dba_cursor = dba.cursor()
@@ -182,9 +180,7 @@ def extract_visited_destinations_names(dba, user_id: int):
 
 
 def extract_wishlisted_destinations_names(dba, user_id: int):
-    """Function returns the names of wishlisted destinations for a user based on user id.
-
-    It returns the destinations from the newest wishlisted destination to the oldest wishlisted destination.
+    """Function returns the names of wishlisted destinations for a user based on user id starting with the newest added.
     """
     # Extract names
     dba_cursor = dba.cursor()
@@ -245,8 +241,6 @@ def update_profile_picture_relative_path(dba, photo_name: str, user_id: int):
 
 def extract_photo_name(dba, user_id: int):
     """Function returns user's profile picture name from database.
-    
-    It returns 0 if photo name cell is null.
     """
     # Extract photo extension
     dba_cursor = dba.cursor()
@@ -400,11 +394,11 @@ def extract_destination_average_grades(dba, destination_id: int) -> list[tuple]:
 
 
 def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
-    """Function returns all the reviews for a given destiantion id. 
+    """Function returns all the reviews for a given destiantion id starting with the newest.
     """
      # Extract reviews
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`review`, `r`.`date` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s", (destination_id,))
+    dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`review`, `r`.`date` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s ORDER BY `r`.`date` DESC", (destination_id,))
     reviews = dba_cursor.fetchall()
     dba_cursor.close()
 

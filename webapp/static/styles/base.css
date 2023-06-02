@@ -50,6 +50,7 @@ a{
     --blue: #608DB8;
     --light-blue: #7294B9;
     --background-grey: #F2F2F2;
+    --background-grey-hover: #EBEBEB;
     --grey: #8C98AD;
     --dark-grey: #3B3941;
     --turcoise: #7EBDC2;
@@ -70,16 +71,17 @@ a{
     --white-12-5: rgb(255, 255, 255, 0.125);
     --white-25: rgb(255, 255, 255, 0.25);
     --white-50: rgb(255, 255, 255, 0.5);
+    --white-75: rgb(255, 255, 255, 0.75);
     --black: #000000;
     --black-12-5: rgb(0, 0, 0, 0.125);
     --black-25: rgb(0, 0, 0, 0.25);
     --black-50: rgb(0, 0, 0, 0.5);
-    --stat-bad: #F1D4D0;
-    --stat-bad-hover: #E2A9A1;
-    --stat-good: #D47E73;
-    --stat-good-hover: #C55344;
-    --stat-perfect: #9C3D30;
-    --stat-perfect-hover: #6D2A22;
+    --stat-bad: #CF7063;
+    --stat-bad-hover: #BB493A;
+    --stat-good: #4CB944;
+    --stat-good-hover: #3D9537;
+    --stat-perfect: #FFBC42;
+    --stat-perfect-hover: #FFA90A;
     --regular: 400;
     --medium: 500;
     --semibold: 600;
@@ -89,6 +91,7 @@ a{
     --fs-title: 2rem;
     --fs-big-subtitle: 1.6rem;
     --fs-subtitle: 1.4rem;
+    --fs-review: 1.25rem;
     --fs-description: 1.125rem;
     --fs-phone-description: 1rem;
     /* Special fonts */
