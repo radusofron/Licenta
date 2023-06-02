@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def connect_to_dba():
-    """Function connects to database
+    """Function connects to database.
     """
     # Database connection details
     dba_host = 'localhost'
@@ -19,7 +19,7 @@ def connect_to_dba():
 
 
 def extract_most_visited_destinations(dba):
-    """Function returns most visited destinations on our website
+    """Function returns most visited destinations on our website.
     """
     # Extract them
     dba_cursor = dba.cursor()
@@ -30,7 +30,7 @@ def extract_most_visited_destinations(dba):
 
 
 def login_validation(dba, input_email: str, input_password: str) -> bool:
-    """Function returns login status
+    """Function returns login status.
     """
     # Extract user credentials
     email = extract_email(dba, input_email)
@@ -42,7 +42,7 @@ def login_validation(dba, input_email: str, input_password: str) -> bool:
 
 
 def extract_user_id(dba, input_email: str):
-    """Function returns user id from database based on email given
+    """Function returns user id from database based on email given.
     """
     # Extract id
     dba_cursor = dba.cursor()
@@ -53,7 +53,7 @@ def extract_user_id(dba, input_email: str):
 
 
 def extract_username(dba, input_username: str):
-    """Function returns username from database based on username given as input
+    """Function returns username from database based on username given as input.
 
     Function used for register system.
     """
@@ -66,7 +66,7 @@ def extract_username(dba, input_username: str):
 
 
 def extract_email(dba, input_email: str):
-    """Function returns email from database based on email given as input
+    """Function returns email from database based on email given as input.
 
     Function used for register and login systems.
     """
@@ -79,7 +79,7 @@ def extract_email(dba, input_email: str):
 
 
 def extract_user_password(dba, input_email: str):
-    """Function returns password from database based on email given as input
+    """Function returns password from database based on email given as input.
     """
     # Extract password
     dba_cursor = dba.cursor()
@@ -90,7 +90,7 @@ def extract_user_password(dba, input_email: str):
 
 
 def extract_user_max_id(dba):
-    """Function returns the biggest user id from database
+    """Function returns the biggest user id from database.
     """
     # Extract maximum id number
     dba_cursor = dba.cursor()
@@ -128,7 +128,7 @@ def insert_user(dba, username: str, email: str, password: str):
     
 
 def extract_visited_destinations_number(dba, user_id: int) -> int:
-    """Function returns total number of visited destinations for a user based on user id
+    """Function returns total number of visited destinations of a user based on user id.
     """
     # Extract number
     dba_cursor = dba.cursor()
@@ -143,7 +143,7 @@ def extract_visited_destinations_number(dba, user_id: int) -> int:
 
 
 def extract_wishlisted_destinations_number(dba, user_id: int) -> int:
-    """Function returns total number of wishlisted destinatinos for a user based on user id
+    """Function returns total number of wishlisted destinatinos of a user based on user id.
     """
     # Extract number
     dba_cursor = dba.cursor()
@@ -158,7 +158,7 @@ def extract_wishlisted_destinations_number(dba, user_id: int) -> int:
 
 
 def extract_destinations_number(dba) -> int:
-    """Function returns total number of destinations
+    """Function returns total number of destinations.
     """
     # Extract total number
     dba_cursor = dba.cursor()
@@ -169,7 +169,7 @@ def extract_destinations_number(dba) -> int:
 
 
 def extract_visited_destinations_names(dba, user_id: int):
-    """Function returns the names of visited destinations for a user based on user id starting with the newest added.
+    """Function returns the names of visited destinations of a user based on user id starting with the newest added.
     """
     # Extract names
     dba_cursor = dba.cursor()
@@ -180,7 +180,7 @@ def extract_visited_destinations_names(dba, user_id: int):
 
 
 def extract_wishlisted_destinations_names(dba, user_id: int):
-    """Function returns the names of wishlisted destinations for a user based on user id starting with the newest added.
+    """Function returns the names of wishlisted destinations of a user based on user id starting with the newest added.
     """
     # Extract names
     dba_cursor = dba.cursor()
@@ -217,7 +217,7 @@ def extract_most_reviewed_destinations_names(dba):
     
 
 def extract_destinations_names(dba):
-    """Function returns the names of all destinations available
+    """Function returns the names of all destinations available.
 
     It returns the destinations in an order in which they are stored in the database.
     """
@@ -288,7 +288,7 @@ def extract_registration_date_by_id(dba, user_id: int):
 
 
 def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, option: int) -> int:
-    """Function returns total number of visited destinations for a user based on user id.
+    """Function returns total number of visited destinations by a user based on user id and other parameters.
 
     Parameters:
         * dba: database object
@@ -319,10 +319,51 @@ def extract_visited_destinations_number_by_date(dba, year: int, user_id: int, op
         visited_destinations_number = dba_cursor.fetchone()
         dba_cursor.close()
 
-    # Case: no visited destinations from starting date untill now
+    # Case: no visited destinations found for correspondent option
     if visited_destinations_number is None:
         return 0
     return visited_destinations_number[0]
+
+
+def extract_evaluated_destinations_number(dba, user_id: int) -> int:
+    """Function returns total number of evaluated destinations by an user based on user id.
+    """
+    # Extract username
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*) FROM `grades_destinations` WHERE `user_id`=%s", (user_id,))
+    evaluated_destinations_number = dba_cursor.fetchone()
+    dba_cursor.close()
+    
+    # Case: no evaluated destinations found for user
+    if evaluated_destinations_number is None:
+        return 0
+    return evaluated_destinations_number[0]
+
+
+def extract_evaluated_destinations_total_grade(dba, user_id: int) -> list[tuple[int, int]]:
+    """Function returns sum of the grades for every evaluated destinations by an user.
+    """
+    # Extract sums
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `destination_id`, (`grade_attractions` + `grade_acommodation` + `grade_culture` + `grade_entertainment` + `grade_food_and_drink` + `grade_history` + `grade_natural_beauty` + `grade_night_life` + `grade_transport` + `grade_safety`) FROM `grades_destinations` WHERE `user_id`=%s GROUP BY `destination_id`", (user_id,))
+    evaluated_destinations_grades_sum = dba_cursor.fetchall()
+    dba_cursor.close()
+    return evaluated_destinations_grades_sum
+
+
+def extract_destination_name_by_id(dba, destination_id: int) -> str:
+    """Function returns destination's name for a given destination id.
+    """
+    # Extract average grades
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name` FROM destinations WHERE `id`=%s", (destination_id,))
+    destination_name = dba_cursor.fetchone()
+    dba_cursor.close()
+    
+    # Case: no id returned
+    if destination_name is None:
+        return ""
+    return destination_name[0]
 
 
 def update_password(dba, new_password: str, user_id: int):

@@ -2,7 +2,7 @@ from flask import Blueprint, make_response, jsonify, session, request, redirect,
 from flask_api import status
 from flask.wrappers import Response
 from werkzeug.utils import secure_filename
-from database import dba, update_profile_picture_relative_path, extract_photo_name, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date
+from database import dba, update_profile_picture_relative_path, extract_photo_name, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date, extract_evaluated_destinations_number, extract_evaluated_destinations_total_grade, extract_destination_name_by_id
 import datetime
 from PIL import Image
 import os
@@ -118,15 +118,14 @@ def change_password():
 
 
 # GET functions
-def get_visited_percentage() -> str:
+def get_visited_percentage(visited_destinations: int) -> str:
     """Function calculates the percentage of destinations visited by the user out of the total available 
     destinations.
     """
-    # Extract user's visited destinations number and total number
-    visited_destinations = extract_visited_destinations_number(dba, session["user_id"])
+    # Extract total number of destinations
     all_destinations = extract_destinations_number(dba)
     
-    # Compute stat with them
+    # Compute percentage
     visited_percentage = round(visited_destinations * 100 / all_destinations, 2)
     visited_percentage = str(visited_percentage) + "%"
 
@@ -177,6 +176,69 @@ def get_visited_graph_data() -> dict:
     visited_destinations_graph_data["per_year"] = visited_destinations_per_year
 
     return visited_destinations_graph_data
+
+
+def get_evaluation_percentage(visited_destinations: int) -> str:
+    """Function calculates the percentage of destinations evaluated by the user out of the total visited
+    destinations.
+    """
+    # Extract user's evaluated destinations number
+    evaluated_destinations = extract_evaluated_destinations_number(dba, session["user_id"])
+
+    # Compute percentage
+    evaluated_percentage = round(evaluated_destinations * 100 / max(visited_destinations, 1), 2)
+    evaluated_percentage = str(evaluated_percentage) + "%"
+
+    return evaluated_percentage
+
+
+def get_evaluation_data() -> dict:
+    # Get destinations grades sum
+    evaluated_destinations_grades_sum = extract_evaluated_destinations_total_grade(dba, session["user_id"])
+
+    # Case: no destinations evaluated
+    if not len(evaluated_destinations_grades_sum):
+        return dict()
+    
+    # Case: maximum a desitnation evaluated
+    if len(evaluated_destinations_grades_sum) <= 1:
+        return dict()
+
+    # Evaluation fields
+    total = 10
+
+    # Calculate favourite destination and average grade
+    favourite_destination = [0, 0]
+    average_grade = 0
+    for destination in evaluated_destinations_grades_sum:
+        average_grade += destination[1]
+        if destination[1] > favourite_destination[1]:
+            favourite_destination[1] = destination[1]
+            favourite_destination[0] = destination[0]
+    average_grade = round(average_grade / (total * len(evaluated_destinations_grades_sum)), 2)
+        
+    # Calculate least favourite destination
+    least_favourite_destination = [0, 0]
+    for destination in evaluated_destinations_grades_sum:
+        if destination[1] < favourite_destination[1]:
+            least_favourite_destination[1] = destination[1]
+            least_favourite_destination[0] = destination[0]
+
+    # Extract names for favourite destination and least favourite destination
+    favourite_destination_name = extract_destination_name_by_id(dba, favourite_destination[0])
+    least_favourite_destination_name = extract_destination_name_by_id(dba, least_favourite_destination[0])
+
+    # Calculate average grades for favourite destination and least favourite destination
+    favourite_destination_grade = round(favourite_destination[1] / total)
+    least_favourite_destination_grade = round(least_favourite_destination[1] / total, 2)
+    
+    # Create dictionary with them
+    evaluation_stats = dict()
+    evaluation_stats["most"] = [favourite_destination_name, favourite_destination_grade]
+    evaluation_stats["least"] = [least_favourite_destination_name, least_favourite_destination_grade]
+    evaluation_stats["average"] = average_grade
+
+    return evaluation_stats
 
 
 @profile_controller_blueprint.route("/api/profile", methods=['GET', 'POST'])
@@ -234,16 +296,23 @@ def profile() -> Response:
     # Create a list with them
     user_profile_data = [profile_picture, username, email, date]
 
+    # Get user's visited destinations number
+    visited_destinations_number = extract_visited_destinations_number(dba, session["user_id"])
+
     # Visited destinations section
     # 1. Get visited percentage
-    visited_percentage = get_visited_percentage()
+    visited_percentage = get_visited_percentage(visited_destinations_number)
     # 2. Get graph data
     visited_graph_data = get_visited_graph_data()
 
     # Evaluation section
+    # 1. Get evaluation percentage
+    evaluated_percentage = get_evaluation_percentage(visited_destinations_number)
+    # 2. Get favourite destination, least favourite destination, their average grades and general average grade
+    evaluation_data = get_evaluation_data()
         
     return make_response(
-        jsonify({"user profile data": user_profile_data, "has profile picture": has_profile_picture ,"visited percentage": visited_percentage, "visited graph data": visited_graph_data}),
+        jsonify({"user profile data": user_profile_data, "has profile picture": has_profile_picture ,"visited percentage": visited_percentage, "visited graph data": visited_graph_data, "evaluated percentage": evaluated_percentage, "evaluation data": evaluation_data}),
         status.HTTP_200_OK,
     )
 
