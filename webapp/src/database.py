@@ -250,7 +250,7 @@ def extract_photo_name(dba, user_id: int):
     
     # Case: photo name not found
     if photo_name[0] is None:
-        return 0
+        return None
     return photo_name[0]
 
 
