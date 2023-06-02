@@ -249,7 +249,7 @@ li.photos__website-bullet{
     background-color: var(--black-50);
 }
 .statistics__column{
-    min-width: 150px;
+    min-width: 148px;
     border-radius: 1rem;
     background-color: var(--background-grey);
     display: flex;
@@ -303,25 +303,18 @@ li.photos__website-bullet{
 }
 
 /* For Reviews section */
-section.section.reviews.active{
-    gap: 3rem;
-}
 .reviews__content{
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 4.5rem;
 }
 .reviews__review-card{
-    padding: 1.5rem 1.5rem;
-    border-radius: 0.5rem;
     background-color: var(--white);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     transition: 250ms;
-}
-.reviews__review-card:hover{
-    background-color: var(--background-grey);
 }
 .reviews__review-details{
     display: flex;
@@ -383,6 +376,76 @@ section.section.reviews.active{
     font-size: var(--fs-review);
     font-weight: var(--medium);
     color: var(--dark-grey);
+}
+
+/* For Weather section */
+.weather__content{
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+.weather__day-container{
+    padding: 0rem 0vw 3.75rem 0vw;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    overflow-x: scroll;
+}
+.weather__day-container::-webkit-scrollbar{
+    height: 1rem;
+}
+.weather__day-container::-webkit-scrollbar-track {
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+}
+.weather__day-container::-webkit-scrollbar-thumb {
+    opacity: 0.5;
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+    transition: 250ms;
+}
+.weather__day-container::-webkit-scrollbar-thumb:hover{
+    background-color: var(--black-50);
+}
+.weather__day-subtitle{
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.weather__per-hours-container{
+    display: flex;
+    gap: 9rem;
+}
+.weather__hour-container{
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.weather__icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weather__hour{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    text-align: center;
+}
+.weather__temperature{
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    text-align: center;
+}
+.weather__feels-like{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--grey);
+    text-align: center;
 }
 
 

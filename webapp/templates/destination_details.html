@@ -108,8 +108,26 @@
     </section>
     <section class="section weather active">
         <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the weather
-            forecast for the next 5 days:</p>
-        <div class="weather__content">photos</div>
+            forecast for the next 4 days:</p>
+        <div class="weather__content">
+            {% for index in range(weather | length)%}
+            <div class="weather__day-container">
+                <p class="weather__day-subtitle">Today</p>
+                <ul class="weather__per-hours-container">
+                    # TODO -> nu prea merge sa le scot + ca nu am nici zilelel la vreme in date
+                    <li class="weather__hour-container">
+                        <span class="weather__hour">12:00</span>
+                        <div class="weather__icon-container">
+                            <img class="weather__icon"
+                                src="{{url_for('static', filename='/assets/illustrations/sun.png')}}">
+                        </div>
+                        <span class="weather__temperature">23°</span>
+                        <span class="weather__feels-like">Feels like: 23°</span>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
     </section>
 </main>
 {% endblock %}

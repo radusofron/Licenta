@@ -252,7 +252,7 @@ def read_weather(city: str) -> dict:
         return {}
     
     # Create a list containing 40 dicitonaries, one for every 3 hours
-    days = {"today": [], "tomorrow": [], "3day": [], "4day": []}
+    days = {1: [], 2: [], 3: [], 4: []}
 
     # Extract current date
     current_date = datetime.now()
@@ -262,27 +262,27 @@ def read_weather(city: str) -> dict:
         # Convert timestamp to datetime
         weather_date = datetime.fromtimestamp(weather_details["list"][index]["dt"])
 
-        # Create a dictionary for every day
+        # Create a dictionary for every day and convert temperatures to int
         if weather_date.day == current_date.day:
-            days["today"].append(weather_date.hour)
-            days["today"].append(weather_details["list"][index]["main"]["temp"])
-            days["today"].append(weather_details["list"][index]["main"]["feels_like"])
-            days["today"].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days["tomorrow"]) < 32:
-            days["tomorrow"].append(weather_date.hour)
-            days["tomorrow"].append(weather_details["list"][index]["main"]["temp"])
-            days["tomorrow"].append(weather_details["list"][index]["main"]["feels_like"])
-            days["tomorrow"].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days["3day"]) < 32:
-            days["3day"].append(weather_date.hour)
-            days["3day"].append(weather_details["list"][index]["main"]["temp"])
-            days["3day"].append(weather_details["list"][index]["main"]["feels_like"])
-            days["3day"].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days["4day"]) < 32:
-            days["4day"].append(weather_date.hour)
-            days["4day"].append(weather_details["list"][index]["main"]["temp"])
-            days["4day"].append(weather_details["list"][index]["main"]["feels_like"])
-            days["4day"].append(weather_details["list"][index]["weather"][0]["main"])
+            days[1].append(weather_date.hour)
+            days[1].append(round(weather_details["list"][index]["main"]["temp"]))
+            days[1].append(round(weather_details["list"][index]["main"]["feels_like"]))
+            days[1].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days[2]) < 32:
+            days[2].append(weather_date.hour)
+            days[2].append(round(weather_details["list"][index]["main"]["temp"]))
+            days[2].append(round(weather_details["list"][index]["main"]["feels_like"]))
+            days[2].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days[3]) < 32:
+            days[3].append(weather_date.hour)
+            days[3].append(round(weather_details["list"][index]["main"]["temp"]))
+            days[3].append(round(weather_details["list"][index]["main"]["feels_like"]))
+            days[3].append(weather_details["list"][index]["weather"][0]["main"])
+        elif len(days[4]) < 32:
+            days[4].append(weather_date.hour)
+            days[4].append(round(weather_details["list"][index]["main"]["temp"]))
+            days[4].append(round(weather_details["list"][index]["main"]["feels_like"]))
+            days[4].append(weather_details["list"][index]["weather"][0]["main"])
     
     return days
 
@@ -317,7 +317,6 @@ def destination_details() -> Response:
     # 5. Update weather and get weather details
     update_weather(option)
     weather = read_weather(option)
-    
         
     return make_response(
         jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather": weather}),
