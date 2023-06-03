@@ -3,7 +3,7 @@ from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import json
 
@@ -236,7 +236,7 @@ def update_weather(city: str):
         return None
     
 
-def read_weather(city: str) -> dict:
+def read_weather(city: str) -> list:
     """Function reads weather details from a correspondent JSON file and processes the required 
     information for website.
     """
@@ -249,10 +249,13 @@ def read_weather(city: str) -> dict:
         with open(json_path, "r") as file:
             weather_details = json.load(file)
     except:
-        return {}
+        return []
     
-    # Create a list containing 40 dicitonaries, one for every 3 hours
-    days = {1: [], 2: [], 3: [], 4: []}
+    # Create a list for every day
+    day_1 = []
+    day_2 = []
+    day_3 = []
+    day_4 = []
 
     # Extract current date
     current_date = datetime.now()
@@ -262,28 +265,53 @@ def read_weather(city: str) -> dict:
         # Convert timestamp to datetime
         weather_date = datetime.fromtimestamp(weather_details["list"][index]["dt"])
 
-        # Create a dictionary for every day and convert temperatures to int
+        # Create a dictionary for every day, modify hour format and convert temperatures to int
         if weather_date.day == current_date.day:
-            days[1].append(weather_date.hour)
-            days[1].append(round(weather_details["list"][index]["main"]["temp"]))
-            days[1].append(round(weather_details["list"][index]["main"]["feels_like"]))
-            days[1].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days[2]) < 32:
-            days[2].append(weather_date.hour)
-            days[2].append(round(weather_details["list"][index]["main"]["temp"]))
-            days[2].append(round(weather_details["list"][index]["main"]["feels_like"]))
-            days[2].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days[3]) < 32:
-            days[3].append(weather_date.hour)
-            days[3].append(round(weather_details["list"][index]["main"]["temp"]))
-            days[3].append(round(weather_details["list"][index]["main"]["feels_like"]))
-            days[3].append(weather_details["list"][index]["weather"][0]["main"])
-        elif len(days[4]) < 32:
-            days[4].append(weather_date.hour)
-            days[4].append(round(weather_details["list"][index]["main"]["temp"]))
-            days[4].append(round(weather_details["list"][index]["main"]["feels_like"]))
-            days[4].append(weather_details["list"][index]["weather"][0]["main"])
+            day_1.append((str(weather_date.hour) + ":00").zfill(5))
+            day_1.append(weather_details["list"][index]["weather"][0]["main"])
+            day_1.append(round(weather_details["list"][index]["main"]["temp"]))
+            day_1.append(round(weather_details["list"][index]["main"]["feels_like"]))
+        elif len(day_2) < 32:
+            day_2.append((str(weather_date.hour) + ":00").zfill(5))
+            day_2.append(weather_details["list"][index]["weather"][0]["main"])
+            day_2.append(round(weather_details["list"][index]["main"]["temp"]))
+            day_2.append(round(weather_details["list"][index]["main"]["feels_like"]))
+        elif len(day_3) < 32:
+            day_3.append((str(weather_date.hour) + ":00").zfill(5))
+            day_3.append(weather_details["list"][index]["weather"][0]["main"])
+            day_3.append(round(weather_details["list"][index]["main"]["temp"]))
+            day_3.append(round(weather_details["list"][index]["main"]["feels_like"]))
+        elif len(day_4) < 32:
+            day_4.append((str(weather_date.hour) + ":00").zfill(5))
+            day_4.append(weather_details["list"][index]["weather"][0]["main"])
+            day_4.append(round(weather_details["list"][index]["main"]["temp"]))
+            day_4.append(round(weather_details["list"][index]["main"]["feels_like"]))
     
+    # Create a list containing all the lists
+    days = [day_1, day_2, day_3, day_4]
+
+    return days
+
+
+def get_weather_days() -> list:
+    """Function returns the days for which the weather is available.
+    """
+    # Already know the first 2 days
+    days = ["Today", "Tomorrow"]
+
+    # Extract current date
+    current_date = datetime.now()
+
+    # Calculate the last 2 days and modify their format
+    date_3 = current_date + timedelta(days = 2)
+    day_3 = str(date_3.day).zfill(2) + "." + str(date_3.month).zfill(2)
+    date_4 = current_date + timedelta(days = 3)
+    day_4 = str(date_4.day).zfill(2) + "." + str(date_4.month).zfill(2)
+    
+    # Add them to list
+    days.append(day_3)
+    days.append(day_4)
+
     return days
 
 
@@ -314,11 +342,14 @@ def destination_details() -> Response:
     # 4. Get reviews
     reviews = get_reviews_and_associated_data(option)
     
-    # 5. Update weather and get weather details
+    # 5. Update weather, get weather details, calculate weather days and create dictionary with data
     update_weather(option)
     weather = read_weather(option)
+    days = get_weather_days()
+    weather_data = {"names": days, "weather": weather}
+
         
     return make_response(
-        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather": weather}),
+        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
         status.HTTP_200_OK,
     )

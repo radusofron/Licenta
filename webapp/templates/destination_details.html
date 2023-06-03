@@ -23,7 +23,7 @@
             <li class="destination__option photos">Photos</li>
             <li class="destination__option statistics">Statistics</li>
             <li class="destination__option reviews">Reviews</li>
-            <li class="destination__option weather active">Weather & more</li>
+            <li class="destination__option weather active">Weather</li>
         </ul>
     </div>
     <section class="section travel-itineraries">Travel itineraries</section>
@@ -110,20 +110,45 @@
         <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the weather
             forecast for the next 4 days:</p>
         <div class="weather__content">
-            {% for index in range(weather | length)%}
+            {% for index in range(weather_data.names | length)%}
             <div class="weather__day-container">
-                <p class="weather__day-subtitle">Today</p>
+                <p class="weather__day-subtitle">{{weather_data.names[index]}}</p>
                 <ul class="weather__per-hours-container">
-                    # TODO -> nu prea merge sa le scot + ca nu am nici zilelel la vreme in date
+                    {% for index_2 in range(0, weather_data.weather[index] | length, 4) %}
                     <li class="weather__hour-container">
-                        <span class="weather__hour">12:00</span>
+                        <span class="weather__hour">{{weather_data.weather[index][index_2]}}</span>
                         <div class="weather__icon-container">
-                            <img class="weather__icon"
-                                src="{{url_for('static', filename='/assets/illustrations/sun.png')}}">
+                            {% if weather_data.weather[index][index_2 + 1] == "Clear" %}
+                            {% if weather_data.weather[index][index_2] <= "06:00" or
+                                weather_data.weather[index][index_2]> "20:00" %} <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/moon.png')}}">
+                                {% else %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/sun.png')}}">
+                                {% endif %}
+                                {% elif weather_data.weather[index][index_2 + 1] == "Clouds" %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/clouds.png')}}">
+                                {% elif weather_data.weather[index][index_2 + 1] == "Rain" or
+                                weather_data.weather[index][index_2 + 1] == "Drizzle" %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/rain.png')}}">
+                                {% elif weather_data.weather[index][index_2 + 1] == "Snow" %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/snow.png')}}">
+                                {% elif weather_data.weather[index][index_2 + 1] == "Thunderstorm" %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/thunderstorm.png')}}">
+                                {% else %}
+                                <img class="weather__icon"
+                                    src="{{url_for('static', filename='/assets/illustrations/fog.png')}}">
+                                {% endif %}
                         </div>
-                        <span class="weather__temperature">23°</span>
-                        <span class="weather__feels-like">Feels like: 23°</span>
+                        <span class="weather__temperature">{{weather_data.weather[index][index_2 + 2]}}°</span>
+                        <span class="weather__feels-like">Feels like: {{weather_data.weather[index][index_2 +
+                            3]}}°</span>
                     </li>
+                    {% endfor %}
                 </ul>
             </div>
             {% endfor %}

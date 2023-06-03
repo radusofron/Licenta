@@ -32,9 +32,9 @@ def destination_details_view() -> Response:
     websites_links = destination_data["websites links"]
     statistics = destination_data["statistics"]
     reviews = destination_data["reviews"]
-    weather = destination_data["weather"]
+    weather_data = destination_data["weather data"]
 
     return make_response(
         render_template("destination_details.html", city_name = option, wikipedia = wikipedia, websites_links = websites_links,
-                        statistics = statistics, reviews = reviews, weather = weather)
+                        statistics = statistics, reviews = reviews, weather_data = weather_data)
     )
