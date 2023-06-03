@@ -1,29 +1,75 @@
 {% extends "post_login_base.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/evaluate.css') }}" />
-<script src="{{ url_for('static', filename='scripts/evaluate.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/destination_evaluate.css') }}" />
+<script src="{{ url_for('static', filename='scripts/destination_evaluate.js') }}" defer></script>
 {% endblock %}
 
-{% block title %} Site name | city_name {% endblock %}
+{% block title %} Site name | Evaluation {{option}} {% endblock %}
 
 {% block content %}
 <main>
-    <div class="destination__top-container">
-        <h3 class="destination__title"> city_name</h3>
+    <div class="evaluate__top-container">
+        <h3 class="evaluate__destination-title"> {{option}}</h3>
+        <p class="evaluate__visited-date">You marked this destination as visited on {{visited_date}}.</p>
     </div>
-    <div class="destination__middle-container">
-        <ul class="destination__options">
-            <li class="destination__option help">Help the community</li>
-            <li class="destination__option evaluate">Description</li>
-            <li class="destination__option review">Leave a review</li>
+    <div class="evaluate__middle-container">
+        <ul class="evaluate__options">
+            <li class="evaluate__option help active">Help the community</li>
+            <li class="evaluate__option evaluate">Evaluate</li>
+            <li class="evaluate__option review">Leave a review</li>
         </ul>
     </div>
-    <section class="section help">
-        Help the community
+    <section class="section help active">
+        <div class="help__intro">
+            <h3 class="help__title">
+                Your opinion matters! Help build a vibrant travel community.
+            </h3>
+            <p class="help__intro-text">
+                Your evaluation and your reviews can make a significant impact on the travel
+                community.
+                By sharing your experiences and opinions about the destinations you have visited, you can help other
+                travelers to make informed decisions and create memorable trips.
+            </p>
+        </div>
+        <div class="help__tutorial">
+            <h3 class="help__title">What you have to do?</h3>
+            <ol class="help__tutorial-ideas">
+                <li class="help__tutorial-idea">
+                    Visit the <span class="tutorial-idea-important">Evaluation</span> section to rate the destination
+                    on 10 criteria. Our grading system ranges from 1 to 10, with 1 being the lowest grade and 10 being
+                    the highest. Once you have completed the evaluation, submit it. Be assured that your evaluation will
+                    remain private and confidential, accessible only to you. <span class="tutorial-idea-important">It's
+                        important to note that once you submit
+                        your evaluation, it cannot be modified.</span>
+                </li>
+                <li class="help__tutorial-idea">
+                    Visit the <span class="tutorial-idea-important">Leave a Review</span> section and share your
+                    thoughts about the city. Feel free to express your opinions and experiences. Once you submit your
+                    review, it will be published for everyone to see. <span class="tutorial-idea-important">Please
+                        remember that your review cannot be edited
+                        or modified after submission, so choose your words wisely.</span>
+                </li>
+            </ol>
+        </div>
     </section>
     <section class="section evaluate">
-        Give grades.
+        <p class="evaluate__description">Rate each aspect on a scale of 1 to 10.</p>
+        <form class="evaluate__rows">
+            {% for index in range(10) %}
+            <div class="evaluate__row">
+                <span class="evaluate__aspect">{{aspects[index]}}</span>
+                <div class="evaluate__grade-container">
+                    {% for grade in range(1, 11, 1) %}
+                    <input type="checkbox" value="{{grade}}" id="{{index}}{{grade}}" hidden>
+                    <label for="{{index}}{{grade}}" class="evaluate__grade">{{grade}}</label>
+                    {% if grade < 10 %} <span class="evaluate__dot">.</span>
+                        {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </form>
     </section>
     <section class="section review">
         Leave review

@@ -391,7 +391,7 @@ li.photos__website-bullet{
     color: var(--grey);
 }
 .reviews__text{
-    font-size: var(--fs-review);
+    font-size: var(--fs-read);
     font-weight: var(--medium);
     color: var(--dark-grey);
 }

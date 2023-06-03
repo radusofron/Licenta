@@ -439,7 +439,7 @@ def extract_destination_average_grades(dba, destination_id: int) -> list[tuple]:
 def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
     """Function returns all the reviews for a given destiantion id, starting with the newest.
     """
-     # Extract reviews
+    # Extract reviews
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`review`, `r`.`date` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s ORDER BY `r`.`date` DESC", (destination_id,))
     reviews = dba_cursor.fetchall()
@@ -564,9 +564,25 @@ def delete_visited_destination_for_user(dba, user_id: int, destination_name: str
     # Delete visited destination for user
     dba_cursor.execute("DELETE FROM `visited_destinations` WHERE `user_id`=%s AND `destination_id`=%s;", (user_id, destination_id))
 
+    # TODO -> delete the evaluation and review from database, too
+    
     # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
+
+
+def extract_visited_destination_date_for_user(dba, user_id: int, destination_name: str):
+    """Function returns the date when the destination was visited by the user.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+    
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `date` FROM `visited_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
+    visited_date = dba_cursor.fetchone()
+    dba_cursor.close()
+
+    return visited_date[0]
 
 
 # Create database object

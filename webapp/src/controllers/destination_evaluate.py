@@ -1,11 +1,11 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user
+from database import dba, extract_destinations_names, extract_visited_destination_date_for_user
 from datetime import datetime
 
 
-evaluate_controller_blueprint = Blueprint("evaluate_controller_blueprint", __name__)
+destination_evaluate_controller_blueprint = Blueprint("destination_controller_blueprint", __name__)
 
 
 def create_list_with_destinations(destinations: list) -> list:
@@ -54,8 +54,24 @@ def validate_url_parameters():
     return action
 
 
-@evaluate_controller_blueprint.route("/api/evaluate", methods=['GET', 'POST'])
-def evaluate() -> Response:
+def get_visited_date(city: str):
+    """Function extracts and processes the date when the destination was marked as visited by the user
+    """
+    visited_date = extract_visited_destination_date_for_user(dba, session["user_id"], city)
+    visited_date = visited_date.strftime('%d %b %Y')  # type: ignore
+    return visited_date
+
+
+def get_evaluation_aspects() -> list[str]:
+    """Function extracts evaluation aspects
+    """
+    aspects = ["Attractions", "Accomodation", "Culture", "Entertainment", "Food and drink", 
+              "History", "Natural beauty", "Night life", "Transport", "Safety"]
+    return aspects
+
+
+@destination_evaluate_controller_blueprint.route("/api/evaluate", methods=['GET', 'POST'])
+def destination_evaluate() -> Response:
     # POST request:
     if request.method == "POST":
 
@@ -78,8 +94,17 @@ def evaluate() -> Response:
         )
 
     # Case: city exists
+
+    # Save city in session
+    session["current_city"] = option
+
+    # 1. Get visited destination date
+    visited_date = get_visited_date(option)
+
+    # 2. Get evaluation content
+    aspects = get_evaluation_aspects()
         
     return make_response(
-        jsonify({"option": option}),
+        jsonify({"option": option, "visited date": visited_date, "aspects": aspects}),
         status.HTTP_200_OK,
     )

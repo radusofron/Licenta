@@ -283,7 +283,7 @@ def profile() -> Response:
         has_profile_picture = True
 
     # Convert date to string format
-    date = date.strftime('%d.%m.%Y  %H:%M:%S') # type: ignore
+    date = date.strftime('%d %b %Y at %H:%M:%S') # type: ignore
 
     # Create a list with them
     user_profile_data = [profile_picture, username, email, date]

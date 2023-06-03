@@ -1,0 +1,227 @@
+/* COMMON */
+
+/* For position: sticky; */
+.content-container-two{
+    overflow: visible;
+}
+
+
+/* Top container */
+
+.evaluate__top-container{
+    padding: 4.5rem 5vw;
+    border-bottom: 1.5rem solid var(--background-grey);
+    box-sizing: border-box;
+    width: 100%;    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.evaluate__destination-title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.evaluate__visited-date{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--turcoise);
+}
+
+
+/* Middle container */
+.evaluate__middle-container{
+    position: sticky;
+    top: 0;
+    padding: 3rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+.evaluate__options{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.evaluate__option{
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    text-decoration: underline 4px var(--white);
+    text-underline-offset: 8px;
+    cursor: pointer;
+    transition: 250ms;
+}
+.evaluate__option:hover{
+    color: var(--grey);
+}
+.evaluate__option.active{
+    text-decoration-color: var(--turcoise);
+}
+.evaluate__option.active:hover{
+    color: var(--dark-grey);
+}
+
+
+/* Bottom container */
+section{
+    padding: 1.5rem 5vw 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: none;
+}
+
+
+
+/* DIFFERENT */
+section.active{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4.5rem;
+}
+
+/* For Help the community section */
+.help__intro{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.help__title{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.help__intro-text{
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    color: var(--grey);
+}
+.help__tutorial{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+ol.help__tutorial-ideas {
+    list-style: decimal inside;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+li.help__tutorial-idea {
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    color: var(--grey);
+}
+.tutorial-idea-important{
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+
+/* For Evaluate section */
+.evaluate__description{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+form.evaluate__rows{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.evaluate__row{
+    display: flex;
+    align-items: center;
+}
+.evaluate__aspect{
+    max-width: 250px;
+    min-width: 250px;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.evaluate__grade-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.evaluate__grade{
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 1rem;
+    border-radius: 50%;
+    max-width: 25px;
+    min-width: 25px;
+    aspect-ratio: 1 / 1;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 250ms;
+}
+.evaluate__grade:hover{
+    background-color: var(--turcoise);
+}
+.evaluate__dot{
+    font-weight: var(--extrabold);
+}
+
+
+/* FOOTER */
+.footer__grid-container {
+    column-gap: 6rem;
+}
+.footer__subtitle{
+    text-align: left;
+}
+.footer__about{
+    padding: 3rem 0vw;
+}
+.footer__about-option{
+    text-align: left;
+}
+.footer__review {
+    padding: 3rem 0vw;
+}
+.footer__review-form{
+    align-items: flex-start;
+}
+.footer__review-description{
+    text-align: left;
+}
+.footer__bottom{
+    column-gap: 6rem;
+}
+.footer__terms{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+.footer__credit{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+
+
+
+/* RESPONSIVE */
+/* For phone menu */
+@media (max-width: 900px) {
+    .content-container-two{
+        overflow: hidden;
+    }
+}
+@media (max-width: 650px){
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
+    }
+}
