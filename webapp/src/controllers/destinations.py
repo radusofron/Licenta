@@ -49,14 +49,13 @@ def destinations() -> Response:
     
     # Case: visited
     elif option == "visited":
-        visited_destinations = extract_visited_destinations_names(dba, session["user_id"])
-        specific_destinations = create_list_with_destinations(visited_destinations, 1)
+        visited_destinations = session["visited_destinations"]
+        specific_destinations = visited_destinations
         
-    
     # Case: wishlisted
     elif option == "wishlisted":
-        wishlisted_destinations = extract_wishlisted_destinations_names(dba, session["user_id"])
-        specific_destinations = create_list_with_destinations(wishlisted_destinations, 1)
+        wishlisted_destinations = session["wishlisted_destinations"]
+        specific_destinations = wishlisted_destinations
 
     # Case: most visited and most reviewed
     else:

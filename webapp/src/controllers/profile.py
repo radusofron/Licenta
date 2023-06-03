@@ -142,14 +142,6 @@ def compute_year_n_years_ago(years_ago: int) -> int:
     return start_year
 
 
-def process_destinations_number(destinations_number: str) -> str:
-    """Function adds a 0 in front of 1 digit strings
-    """
-    if len(destinations_number) == 1:
-        destinations_number = "0" + destinations_number
-    return destinations_number
-
-
 def get_visited_graph_data() -> dict:
     """
     """
@@ -158,7 +150,7 @@ def get_visited_graph_data() -> dict:
 
     # Extract user's visited destinations number starting from the previously extracted year and process it
     visited_destinations_last_years = extract_visited_destinations_number_by_date(dba, starting_year, session["user_id"], 1)
-    visited_destinations_last_years = process_destinations_number(str(visited_destinations_last_years))
+    visited_destinations_last_years = str(visited_destinations_last_years).zfill(2)
 
     # Compute the years from the previously extracted year untill now and
     # extract the user's visited destinations numbers for the extracted year and for each computed year

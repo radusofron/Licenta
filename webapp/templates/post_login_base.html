@@ -9,6 +9,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/base_extra.css') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='/assets/icon/website.ico')}}">
     <script src="{{ url_for('static', filename='scripts/post_login_base.js') }}" defer></script>
     {% block head %} {% endblock %}
     <title>{% block title %} {% endblock %}</title>
