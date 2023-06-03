@@ -1,0 +1,32 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/evaluate.css') }}" />
+<script src="{{ url_for('static', filename='scripts/evaluate.js') }}" defer></script>
+{% endblock %}
+
+{% block title %} Site name | city_name {% endblock %}
+
+{% block content %}
+<main>
+    <div class="destination__top-container">
+        <h3 class="destination__title"> city_name</h3>
+    </div>
+    <div class="destination__middle-container">
+        <ul class="destination__options">
+            <li class="destination__option help">Help the community</li>
+            <li class="destination__option evaluate">Description</li>
+            <li class="destination__option review">Leave a review</li>
+        </ul>
+    </div>
+    <section class="section help">
+        Help the community
+    </section>
+    <section class="section evaluate">
+        Give grades.
+    </section>
+    <section class="section review">
+        Leave review
+    </section>
+</main>
+{% endblock %}
