@@ -1,7 +1,7 @@
-from flask import Blueprint, make_response, jsonify, session, request
+from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews
+from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user
 import requests
 from datetime import datetime, timedelta
 import os
@@ -55,6 +55,40 @@ def validate_url_parameters():
     action = city
 
     return action
+
+
+def check_for_POST_messages():
+    """Function check for messages recieved from a previous POST request.
+
+    If there are messages, function proceeds accordingly to them modifying session data.
+    """
+    messages = get_flashed_messages()
+    if messages:
+        # Proceed as the action says
+        if messages[0] == "add to wishlist":
+            session["wishlisted_destinations"].insert(0, messages[1])
+        elif messages[0] == "remove from wishlist":
+            session["wishlisted_destinations"].remove(messages[1])
+        elif messages[0] == "mark as visited":
+            session["visited_destinations"].insert(0, messages[1])
+        elif messages[0] == "remove from visited":
+            session["visited_destinations"].remove(messages[1])
+
+
+def check_visited_status(city: str) -> bool:
+    """Function determines whether the city has been marked as visited by the user or not
+    """
+    if city in session["visited_destinations"]:
+        return True
+    return False
+
+
+def check_wishlisted_status(city: str) -> bool:
+    """Function determines whether the city has beenadded to wishlist by the user or not
+    """
+    if city in session["wishlisted_destinations"]:
+        return True
+    return False
 
 
 def get_wiki_content(city: str):
@@ -238,7 +272,7 @@ def update_weather(city: str):
 
 def read_weather(city: str) -> list:
     """Function reads weather details from a correspondent JSON file and processes the required 
-    information for website.
+    information for website
     """
     # Create json name and json path
     json_name = city + ".json"
@@ -294,7 +328,7 @@ def read_weather(city: str) -> list:
 
 
 def get_weather_days() -> list:
-    """Function returns the days for which the weather is available.
+    """Function returns the days for which the weather is available
     """
     # Already know the first 2 days
     days = ["Today", "Tomorrow"]
@@ -315,8 +349,41 @@ def get_weather_days() -> list:
     return days
 
 
-@destination_details_controller_blueprint.route("/api/destination_details")
+@destination_details_controller_blueprint.route("/api/destination_details", methods=['GET', 'POST'])
 def destination_details() -> Response:
+    # POST request:
+    if request.method == "POST":
+
+        # Identify form
+        # 1. Add to wishlist
+        if "add-wishlist" in request.form:
+            insert_wishlisted_destination_for_user(dba, session["user_id"], session["current_city"])
+            flash("add to wishlist")
+
+        # 2. Remove from wishlist
+        elif "remove-wishlist" in request.form:
+            delete_wishlisted_destination_for_user(dba, session["user_id"], session["current_city"])
+            flash("remove from wishlist")
+
+        # 3. Mark as visited
+        elif "mark-visited" in request.form:
+            insert_visited_destination_for_user(dba, session["user_id"], session["current_city"])
+            flash("mark as visited")
+
+        # 4. Remove from visited
+        elif "remove-visited" in request.form:
+            delete_visited_destination_for_user(dba, session["user_id"], session["current_city"])
+            flash("remove from visited")
+
+        # Send city and action via flash
+        flash(session["current_city"])
+
+        return make_response(
+            redirect("/destination?city=" + session["current_city"], code=302)
+        )
+
+    # GET request:
+
     # Check validation status
     option = validate_url_parameters()
 
@@ -328,6 +395,17 @@ def destination_details() -> Response:
         )
 
     # Case: city exists
+    # Check for possible messages recieved from a previous POST request
+    check_for_POST_messages()
+
+    # Save city in session
+    session["current_city"] = option
+
+    # 0. Get city status for user
+    city_status = dict()
+    city_status["visited"] = check_visited_status(option)
+    city_status["wishlisted"] = check_wishlisted_status(option)
+
     # 1. Get Wikipedia content
     wikipedia = get_wiki_content(option)
 
@@ -350,6 +428,6 @@ def destination_details() -> Response:
 
         
     return make_response(
-        jsonify({"option": option, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
+        jsonify({"option": option, "city status": city_status , "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
         status.HTTP_200_OK,
     )

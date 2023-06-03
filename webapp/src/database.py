@@ -101,7 +101,7 @@ def extract_user_max_id(dba):
 
 
 def insert_user(dba, username: str, email: str, password: str):
-    """Function inserts user to database.
+    """Function inserts an user into the database.
     """
     # Extract biggest user id found
     max_id = extract_user_max_id(dba)
@@ -123,6 +123,8 @@ def insert_user(dba, username: str, email: str, password: str):
     # Insert user
     dba_cursor = dba.cursor()
     dba_cursor.execute("INSERT INTO `users` (`id`, `username`, `email`, `password`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, username, email, encrypted_password, date_time))
+    
+    # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
     
@@ -367,7 +369,7 @@ def extract_destination_name_by_id(dba, destination_id: int) -> str:
 
 
 def update_password(dba, new_password: str, user_id: int):
-    """Function updates user's password.
+    """Function updates the password of an user in the database.
     """
     # Hash the password
     encrypted_new_password = generate_password_hash(new_password)
@@ -380,7 +382,7 @@ def update_password(dba, new_password: str, user_id: int):
 
 
 def delete_account_and_associated_data(dba, user_id: int):
-    """Function deletes user's account.
+    """Function deletes the account of an user from database.
     """
     # Open cursor
     dba_cursor = dba.cursor()
@@ -405,7 +407,7 @@ def delete_account_and_associated_data(dba, user_id: int):
 
 
 def extract_destination_id_by_name(dba, destination_name: str) -> int:
-    """Function returns destination's id for a given destination name.
+    """Function returns the id of a destination based on its name.
     """
     # Extract average grades
     dba_cursor = dba.cursor()
@@ -420,7 +422,7 @@ def extract_destination_id_by_name(dba, destination_name: str) -> int:
 
 
 def extract_destination_average_grades(dba, destination_id: int) -> list[tuple]:
-    """Function returns average grades for a given destination id.
+    """Function returns the average grades for a given destination id.
     """
     # Extract average grades
     dba_cursor = dba.cursor()
@@ -435,7 +437,7 @@ def extract_destination_average_grades(dba, destination_id: int) -> list[tuple]:
 
 
 def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
-    """Function returns all the reviews for a given destiantion id starting with the newest.
+    """Function returns all the reviews for a given destiantion id, starting with the newest.
     """
      # Extract reviews
     dba_cursor = dba.cursor()
@@ -447,6 +449,124 @@ def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
     if reviews is None:
         return []
     return reviews
+
+
+def extract_max_id_from_wishlisted_destinations(dba):
+    """Function returns maximum id from the wishlisted destinations table.
+    """
+    # Extract maximum id
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT MAX(`id`) FROM `wishlisted_destinations`")
+    max_id = dba_cursor.fetchone()
+    dba_cursor.close()
+    return max_id[0]
+
+
+def insert_wishlisted_destination_for_user(dba, user_id: int, destination_name: str):
+    """Function inserts a wishlisted destination for an user into the database.
+    """
+    # Extract biggest id found in the table
+    max_id = extract_max_id_from_wishlisted_destinations(dba)
+
+    # Compute new id
+    if max_id is None:
+        # Case: first insertion
+        new_max_id = 1
+    else:
+        # Case: the other insertions
+        new_max_id = max_id + 1
+
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Insert wishlisted destinations   
+    dba_cursor.execute("INSERT INTO `wishlisted_destinations` (`id`, `user_id`, `destination_id`, `date`) VALUES (%s, %s, %s, %s)", (new_max_id, user_id, destination_id, date))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def delete_wishlisted_destination_for_user(dba, user_id: int, destination_name: str):
+    """Function deletes a wishlisted destination for an user from database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Delete wishlisted destination for user
+    dba_cursor.execute("DELETE FROM `wishlisted_destinations` WHERE `user_id`=%s AND `destination_id`=%s;", (user_id, destination_id))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def extract_max_id_from_visited_destinations(dba):
+    """Function returns maximum id from the visited destinations table.
+    """
+    # Extract maximum id
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT MAX(`id`) FROM `visited_destinations`")
+    max_id = dba_cursor.fetchone()
+    dba_cursor.close()
+    return max_id[0]
+
+
+def insert_visited_destination_for_user(dba, user_id: int, destination_name: str):
+    """Function inserts a visited destination for an user into the database.
+    """
+    # Extract biggest id found in the table
+    max_id = extract_max_id_from_visited_destinations(dba)
+
+    # Compute new id
+    if max_id is None:
+        # Case: first insertion
+        new_max_id = 1
+    else:
+        # Case: the other insertions
+        new_max_id = max_id + 1
+
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Insert visited desitnations   
+    dba_cursor.execute("INSERT INTO `visited_destinations` (`id`, `user_id`, `destination_id`, `date`) VALUES (%s, %s, %s, %s)", (new_max_id, user_id, destination_id, date))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def delete_visited_destination_for_user(dba, user_id: int, destination_name: str):
+    """Function deletes a visited destination for an user from database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Delete visited destination for user
+    dba_cursor.execute("DELETE FROM `visited_destinations` WHERE `user_id`=%s AND `destination_id`=%s;", (user_id, destination_id))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
 
 
 # Create database object

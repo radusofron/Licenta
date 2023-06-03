@@ -11,9 +11,21 @@
 <main>
     <div class="destination__top-container">
         <h3 class="destination__title">{{ city_name }}</h3>
-        <form class="destination__buttons">
-            <button class="destination__button-wishlist" type="submit" name="wishlist">Add to wishlist</button>
-            <button class="destination__button-visited" type="submit" name="visited">Marked as visited</button>
+        <form class="destination__buttons" action="/api/destination_details" method="post">
+            {% if city_status.wishlisted == True %}
+            <button class="destination__button-wishlist true" type="submit" name="remove-wishlist">Remove from
+                wishlist</button>
+            {% else %}
+            <button class="destination__button-wishlist false" type="submit" name="add-wishlist">Add to
+                wishlist</button>
+            {% endif %}
+            {% if city_status.visited == True %}
+            <button class="destination__button-visited true" type="submit" name="remove-visited">Remove from
+                visited</button>
+            {% else %}
+            <button class="destination__button-visited false" type="submit" name="mark-visited">Mark as
+                visited</button>
+            {% endif %}
         </form>
     </div>
     <div class="destination__middle-container">

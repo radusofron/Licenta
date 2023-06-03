@@ -132,6 +132,37 @@ function setProfilePictureColors() {
 }
 
 
+// Function disables action buttons starting with the second click made
+function disableActionButtons() {
+     // Get action buttons
+     const addToWishlist = document.querySelector(".destination__button-wishlist")
+     const markAsVisited = document.querySelector(".destination__button-visited")
+     // Variables to know when a second click is made
+     let secondClickWishlist = 0
+     let secondClickVisited = 0
+ 
+     addToWishlist.addEventListener("click", function() {
+        // Disable the other action button
+        markAsVisited.disabled = true
+
+        secondClickWishlist++;
+        // On second click, disable the button
+        if (secondClickWishlist == 2) {
+            addToWishlist.disabled = true
+         }
+     });
+     markAsVisited.addEventListener("click", function() {
+        // Disable the other action button
+        addToWishlist.disabled = true
+
+        secondClickVisited++;
+        if (secondClickVisited == 2) {
+            markAsVisited.disabled = true
+         }
+     });
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -147,4 +178,6 @@ window.addEventListener("load", function() {
 
     createGradesGraph()
     setProfilePictureColors()
+    disableActionButtons()
+   
   });

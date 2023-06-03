@@ -32,22 +32,40 @@ button{
     font-weight: var(--semibold);
     border-radius: 0.5rem;
     color: var(--white);
+    display: flex;
+    align-items: center;
     cursor: pointer;
     transition: 250ms;
 }
-button.destination__button-wishlist{
+button.destination__button-wishlist.true{
+    border: 0.2rem solid var(--pink);
+    background-color: var(--pink);
+}
+button.destination__button-wishlist.true:hover{
+    background-color: var(--white);
+    color: var(--pink);
+}
+button.destination__button-wishlist.false{
     border: 0.2rem solid var(--light-pink);
     background-color: var(--light-pink);
 }
-button.destination__button-wishlist:hover{
+button.destination__button-wishlist.false:hover{
     background-color: var(--white);
     color: var(--light-pink);
 }
-button.destination__button-visited{
+button.destination__button-visited.true{
+    border: 0.2rem solid var(--pink);
+    background-color: var(--pink);
+}
+button.destination__button-visited.true:hover{
+    background-color: var(--white);
+    color: var(--pink);
+}
+button.destination__button-visited.false{
     border: 0.2rem solid var(--turcoise);
     background-color: var(--turcoise);
 }
-button.destination__button-visited:hover{
+button.destination__button-visited.false:hover{
     background-color: var(--white);
     color: var(--turcoise);
 }
