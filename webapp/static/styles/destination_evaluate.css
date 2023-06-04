@@ -133,16 +133,24 @@ form.evaluate__rows{
     flex-direction: column;
 }
 .evaluate__row{
-    padding: 1.3rem 0vw;
-    border-top: 0.2rem solid var(--white);
-    border-bottom: 0.2rem solid var(--white);
+    padding: 1.35rem 0vw;
+    border-top: 0.15rem solid var(--white);
+    border-bottom: 0.15rem solid var(--white);
     display: flex;
     align-items: center;
     transition: 250ms;
 }
+form.evaluate__rows .evaluate__row:first-child{
+    padding-top: 0rem;
+    border-top: 0rem;
+}
+form.evaluate__rows .evaluate__row:last-of-type{
+    padding-bottom: 0rem;
+    border-bottom: 0rem;
+}
 .evaluate__row:hover{
-    border-top: 0.2rem solid var(--turcoise);
-    border-bottom: 0.2rem solid var(--turcoise);
+    border-top: 0.15rem solid var(--turcoise);
+    border-bottom: 0.15rem solid var(--turcoise);
 }
 .evaluate__aspect{
     max-width: 250px;
@@ -195,7 +203,7 @@ button{
 }
 button.evaluate__button{
     align-self: flex-start;
-    margin-top: 3rem;
+    margin-top: 4.5rem;
     outline: 0.2rem solid var(--turcoise);
     background-color: var(--turcoise);
 }
