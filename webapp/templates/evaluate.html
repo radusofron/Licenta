@@ -22,9 +22,12 @@
     </div>
     <section class="section help active">
         <div class="help__intro">
-            <h3 class="help__title">
-                Your opinion matters! Help build a vibrant travel community.
-            </h3>
+            <div class="help__intro-title-container">
+                <h3 class="help__title">
+                    Your opinion matters! Help build a vibrant travel community.
+                </h3>
+                <img class="help__icon" src="{{url_for('static', filename='/assets/illustrations/community.png')}}">
+            </div>
             <p class="help__intro-text">
                 Your evaluation and your reviews can make a significant impact on the travel
                 community.
@@ -33,20 +36,24 @@
             </p>
         </div>
         <div class="help__tutorial">
-            <h3 class="help__title">What you have to do?</h3>
+            <div class="help__tutorial-title-container">
+                <h3 class="help__title">What you have to do?</h3>
+                <img class="help__icon" src="{{url_for('static', filename='/assets/illustrations/tasks.png')}}">
+            </div>
             <ol class="help__tutorial-ideas">
                 <li class="help__tutorial-idea">
                     Visit the <span class="tutorial-idea-important">Evaluation</span> section to rate the destination
                     on 10 criteria. Our grading system ranges from 1 to 10, with 1 being the lowest grade and 10 being
                     the highest. Once you have completed the evaluation, submit it. Be assured that your evaluation will
-                    remain private and confidential, accessible only to you. <span class="tutorial-idea-important">It's
+                    remain private and confidential, accessible only to you. <br> <span
+                        class="tutorial-idea-important">It's
                         important to note that once you submit
                         your evaluation, it cannot be modified.</span>
                 </li>
                 <li class="help__tutorial-idea">
                     Visit the <span class="tutorial-idea-important">Leave a Review</span> section and share your
                     thoughts about the city. Feel free to express your opinions and experiences. Once you submit your
-                    review, it will be published for everyone to see. <span class="tutorial-idea-important">Please
+                    review, it will be published for everyone to see. <br> <span class="tutorial-idea-important">Please
                         remember that your review cannot be edited
                         or modified after submission, so choose your words wisely.</span>
                 </li>

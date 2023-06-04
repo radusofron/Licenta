@@ -91,8 +91,13 @@ section.active{
     flex-direction: column;
     gap: 3rem;
 }
+.help__intro-title-container{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
 .help__title{
-    font-size: var(--fs-subtitle);
+    font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
 }
@@ -106,11 +111,16 @@ section.active{
     flex-direction: column;
     gap: 3rem;
 }
+.help__tutorial-title-container{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
 ol.help__tutorial-ideas {
     list-style: decimal inside;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 3rem;
 }
 li.help__tutorial-idea {
     font-size: var(--fs-read);
