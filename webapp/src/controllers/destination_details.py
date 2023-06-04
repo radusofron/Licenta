@@ -425,7 +425,10 @@ def destination_details() -> Response:
     weather = read_weather(option)
     days = get_weather_days()
     weather_data = {"names": days, "weather": weather}
-
+    # Case: weather not available for today anymore
+    if not len(weather_data["weather"][0]):
+        weather_data["names"].remove("Today")
+        del weather_data["weather"][0]
         
     return make_response(
         jsonify({"option": option, "city status": city_status , "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),

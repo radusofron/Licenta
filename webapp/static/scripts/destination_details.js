@@ -163,6 +163,37 @@ function disableActionButtons() {
 }
 
 
+// Function applies a specific style to the sticky element when it reaches the top of the page.
+function setStyletToStickyElement () {
+    // Get sticky element
+    const stickyElement = document.querySelector(".destination__middle-container")
+
+    let isAtTheTop = false
+
+    // Change style if window was scrolled
+    document.addEventListener("scroll", () => {
+        // Get sticky element position
+        positions = stickyElement.getBoundingClientRect()
+        
+        // When sticky element is at the top, apply style
+        if (positions.top == 0) {
+            if (isAtTheTop == false) {
+                stickyElement.style.boxShadow = "0rem 0.25rem 1rem #D47E73"
+                isAtTheTop = true
+            }
+        }
+        // Else remove style
+        else {
+            if (isAtTheTop == true) {
+                stickyElement.style.boxShadow = ""
+                isAtTheTop = false
+            }
+        }
+    });
+}
+
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -179,5 +210,6 @@ window.addEventListener("load", function() {
     createGradesGraph()
     setProfilePictureColors()
     disableActionButtons()
-   
+    setStyletToStickyElement()
+    
   });

@@ -40,7 +40,6 @@ function addActiveOption(option) {
     option.classList.add("active")
 }
 
-
 // Function starts when an option is clicked
 function displayOptionAndSection(option, sections) {
     // For sections
@@ -129,7 +128,6 @@ function changeCheckboxesStatus(checkboxes) {
     });
 }
 
-
 // Function extracts all the checkboxes for every row in the table
 function getCheckboxes() {
     // Checkboxes names
@@ -140,6 +138,36 @@ function getCheckboxes() {
         let checkboxes = document.getElementsByName(names[index])
         changeCheckboxesStatus(checkboxes)
     }
+}
+
+
+// Function applies a specific style to the sticky element when it reaches the top of the page.
+function setStyletToStickyElement () {
+    // Get sticky element
+    const stickyElement = document.querySelector(".evaluate__middle-container")
+
+    let isAtTheTop = false
+
+    // Change style if window was scrolled
+    document.addEventListener("scroll", () => {
+        // Get sticky element position
+        positions = stickyElement.getBoundingClientRect()
+        
+        // When sticky element is at the top, apply style
+        if (positions.top == 0) {
+            if (isAtTheTop == false) {
+                stickyElement.style.boxShadow = "0rem 0.25rem 1rem #7EBDC2"
+                isAtTheTop = true
+            }
+        }
+        // Else remove style
+        else {
+            if (isAtTheTop == true) {
+                stickyElement.style.boxShadow = ""
+                isAtTheTop = false
+            }
+        }
+    });
 }
 
 
@@ -157,4 +185,5 @@ window.addEventListener("load", function() {
         });
 
     getCheckboxes()
+    setStyletToStickyElement()
   });
