@@ -61,7 +61,7 @@
                 <span class="evaluate__aspect">{{aspects[index]}}</span>
                 <div class="evaluate__grade-container">
                     {% for grade in range(1, 11, 1) %}
-                    <input type="checkbox" value="{{grade}}" id="{{index}}{{grade}}" hidden>
+                    <input type="checkbox" value="{{grade}}" id="{{index}}{{grade}}" name="{{aspects[index]}}" hidden>
                     <label for="{{index}}{{grade}}" class="evaluate__grade">{{grade}}</label>
                     {% if grade < 10 %} <span class="evaluate__dot">.</span>
                         {% endif %}
@@ -69,6 +69,7 @@
                 </div>
             </div>
             {% endfor %}
+            <button type="submit" class="evaluate__button disabled" name="evaluate" disabled>Send evaluation</button>
         </form>
     </section>
     <section class="section review">

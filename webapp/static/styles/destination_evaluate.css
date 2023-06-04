@@ -131,11 +131,18 @@ li.help__tutorial-idea {
 form.evaluate__rows{
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
 }
 .evaluate__row{
+    padding: 1.3rem 0vw;
+    border-top: 0.2rem solid var(--white);
+    border-bottom: 0.2rem solid var(--white);
     display: flex;
     align-items: center;
+    transition: 250ms;
+}
+.evaluate__row:hover{
+    border-top: 0.2rem solid var(--turcoise);
+    border-bottom: 0.2rem solid var(--turcoise);
 }
 .evaluate__aspect{
     max-width: 250px;
@@ -151,8 +158,6 @@ form.evaluate__rows{
     align-items: center;
 }
 .evaluate__grade{
-    appearance: none;
-    -webkit-appearance: none;
     padding: 1rem;
     border-radius: 50%;
     max-width: 25px;
@@ -161,7 +166,6 @@ form.evaluate__rows{
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
-    background-color: var(--white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -171,8 +175,43 @@ form.evaluate__rows{
 .evaluate__grade:hover{
     background-color: var(--turcoise);
 }
+input[type=checkbox]:checked + .evaluate__grade{
+    background-color: var(--turcoise);
+}
 .evaluate__dot{
     font-weight: var(--extrabold);
+}
+button{
+    padding: 0.4rem 1.3rem;
+    box-sizing: border-box;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    border-radius: 0.25rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 250ms;
+}
+button.evaluate__button{
+    align-self: flex-start;
+    margin-top: 3rem;
+    outline: 0.2rem solid var(--turcoise);
+    background-color: var(--turcoise);
+}
+button.evaluate__button:hover{
+    background-color: var(--white);
+    color: var(--turcoise);
+}
+button.evaluate__button.disabled{
+    outline: 0.2rem solid var(--black-12-5);
+    background-color: var(--black-12-5);
+    cursor: default;
+}
+button.evaluate__button.disabled:hover{
+    outline: 0.2rem solid var(--black-12-5);
+    background-color: var(--black-12-5);
+    color: var(--white);
 }
 
 
