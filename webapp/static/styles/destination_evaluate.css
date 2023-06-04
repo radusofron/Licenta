@@ -138,7 +138,7 @@ form.evaluate__rows{
     border-bottom: 0.15rem solid var(--white);
     display: flex;
     align-items: center;
-    transition: 250ms;
+    transition: 125ms;
 }
 form.evaluate__rows .evaluate__row:first-child{
     padding-top: 0rem;
@@ -221,6 +221,51 @@ button.evaluate__button.disabled:hover{
     background-color: var(--black-12-5);
     color: var(--white);
 }
+
+/* For Leave a review section */
+.review__description{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+form.review__form{
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+input[type=text].review__input{   
+    width: 100%;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--medium);
+    border: none;
+    border-bottom: 0.25rem solid var(--dark-grey);
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: var(--black);
+    transition: 250ms;
+}
+input[type=text]:focus{
+    /* Properties when input is focused */
+    outline: none;
+}
+input[type=text].review__input::placeholder{
+    /* Properties for placeholder */
+    font-style: italic;
+    color: var(--grey);
+    transition: 250ms;   
+}
+button.review__button{
+    align-self: flex-start;
+    outline: 0.2rem solid var(--turcoise);
+    background-color: var(--turcoise);
+}
+button.review__button:hover{
+    align-self: flex-start;
+    background-color: var(--white);
+    color: var(--turcoise);
+}
+
 
 
 /* FOOTER */

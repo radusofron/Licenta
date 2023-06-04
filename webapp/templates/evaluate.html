@@ -73,7 +73,14 @@
         </form>
     </section>
     <section class="section review">
-        Leave review
+        <p class="review__description">Share your personal insights, memorable moments, and honest opinions about the
+            city you've explored.
+        </p>
+        <form class="review__form">
+            <input maxlength="512" autocomplete="off" class="review__input" placeholder="Write your review here..."
+                name="review" type="text" required>
+            <button type="submit" class="review__button" name="review">Send review</button>
+        </form>
     </section>
 </main>
 {% endblock %}
