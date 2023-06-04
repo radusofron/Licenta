@@ -62,7 +62,7 @@
     </section>
     <section class="section evaluate">
         <p class="evaluate__description">Rate each aspect on a scale of 1 to 10.</p>
-        <form class="evaluate__rows">
+        <form class="evaluate__rows" action="/api/evaluate" method="post">
             {% for index in range(10) %}
             <div class="evaluate__row">
                 <span class="evaluate__aspect">{{aspects[index]}}</span>

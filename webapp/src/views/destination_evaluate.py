@@ -32,5 +32,5 @@ def destination_evaluate_view() -> Response:
     aspects = evaluation_data["aspects"]
 
     return make_response(
-        render_template("evaluate.html", option = option, visited_date = visited_date, aspects = aspects)
+        render_template("destination_evaluate.html", option = option, visited_date = visited_date, aspects = aspects)
     )

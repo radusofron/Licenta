@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_visited_destination_date_for_user
+from database import dba, extract_destinations_names, extract_visited_destination_date_for_user, insert_visited_destination_evaluation_by_user
 from datetime import datetime
 
 
@@ -54,14 +54,6 @@ def validate_url_parameters():
     return action
 
 
-def get_visited_date(city: str):
-    """Function extracts and processes the date when the destination was marked as visited by the user
-    """
-    visited_date = extract_visited_destination_date_for_user(dba, session["user_id"], city)
-    visited_date = visited_date.strftime('%d %b %Y')  # type: ignore
-    return visited_date
-
-
 def get_evaluation_aspects() -> list[str]:
     """Function extracts evaluation aspects
     """
@@ -70,12 +62,41 @@ def get_evaluation_aspects() -> list[str]:
     return aspects
 
 
+def extract_grades() -> list[int]:
+    """Function extracts the grades given by an user
+    """
+    # Extract aspects in order to extract the grades
+    aspects = get_evaluation_aspects()
+
+    # Extract grades
+    grades = []
+    for aspect in aspects:
+        grades.append(int(request.form[aspect]))
+    
+    return grades
+
+
+def get_visited_date(city: str):
+    """Function extracts and processes the date when the destination was marked as visited by the user
+    """
+    visited_date = extract_visited_destination_date_for_user(dba, session["user_id"], city)
+    visited_date = visited_date.strftime('%d %b %Y')  # type: ignore
+    return visited_date
+
+
 @destination_evaluate_controller_blueprint.route("/api/evaluate", methods=['GET', 'POST'])
 def destination_evaluate() -> Response:
     # POST request:
     if request.method == "POST":
 
         # Identify form
+        # 1. Send evaluation
+        if "evaluate" in request.form:
+            # Extract grades
+            grades = extract_grades()
+
+            # Insert evaluation
+            insert_visited_destination_evaluation_by_user(dba, session["user_id"], session["current_city"], grades)
 
         return make_response(
             redirect("/evaluate?city=" + session["current_city"], code=302)

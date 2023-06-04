@@ -585,5 +585,47 @@ def extract_visited_destination_date_for_user(dba, user_id: int, destination_nam
     return visited_date[0]
 
 
+def extract_max_id_from_grades_destinations(dba):
+    """Function returns maximum id from the grades destinations table.
+    """
+    # Extract maximum id
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT MAX(`id`) FROM `grades_destinations`")
+    max_id = dba_cursor.fetchone()
+    dba_cursor.close()
+    return max_id[0]
+
+
+def insert_visited_destination_evaluation_by_user(dba, user_id: int, destination_name: str, grades: list):
+    """Function inserts the grades given by an user for a visited destination into the database.
+    """
+    # Extract biggest id found in the table
+    max_id = extract_max_id_from_grades_destinations(dba)
+
+    # Compute new id
+    if max_id is None:
+        # Case: first insertion
+        new_max_id = 1
+    else:
+        # Case: the other insertions
+        new_max_id = max_id + 1
+
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Insert visited desitnations   
+    dba_cursor.execute("INSERT INTO `grades_destinations` (`id`, `user_id`, `destination_id`, `grade_attractions`, `grade_acommodation`, `grade_culture`, `grade_entertainment`, `grade_food_and_drink`, `grade_history`, `grade_natural_beauty`, `grade_night_life`, `grade_transport`, `grade_safety`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (new_max_id, user_id, destination_id, grades[0], grades[1], grades[2], grades[3], grades[4], grades[5], grades[6], grades[7], grades[8], grades[9], date))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
 # Create database object
 dba = connect_to_dba()
