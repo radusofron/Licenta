@@ -363,3 +363,55 @@ li.profile__stat{
         gap: 0rem;
     }
 }
+
+/* Change font-size */
+@media (max-height: 750px) {
+    .profile__photo-like{
+        font-size: var(--fs-title);
+    }
+    .profile__add-photo-info{
+        font-size: var(--fs-description);
+    }
+    .profile__upload-photo-button{
+        font-size: var(--fs-description);
+    }
+    .profile__credential-subtitle{
+        font-size: var(--fs-description);
+    }
+    .profile__credential-data{
+        font-size: var(--fs-description);
+    }
+    .profile__subtitle{
+        font-size: var(--fs-big-subtitle);
+    }
+    .profile__change-password-success{
+        font-size: var(--fs-description);
+    }
+    .profile__change-password-info{
+        font-size: var(--fs-phone-description);
+    }
+    input[type=password].profile__input{
+        font-size: var(--fs-description);
+    }
+    .profile__change-password-button{
+        font-size: var(--fs-description);
+    }
+    .profile__delete-account-info{
+        font-size: var(--fs-phone-description);
+    }
+    .profile__delete-account-button{
+        font-size: var(--fs-description);
+    }
+    li.profile__stat{
+        font-size: var(--fs-description);
+    }
+    .profile__graph-year{
+        font-size: var(--fs-description);
+    }
+    .profile__graph-number{
+        font-size: var(--fs-description);
+    }
+    .profile__graph-number.contains{
+        font-size: var(--fs-subtitle);
+    }
+}

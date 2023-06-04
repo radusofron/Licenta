@@ -408,3 +408,25 @@ input[type=text].all-destinations__input::placeholder{
         grid-template-columns: 1fr;
     }
 }
+
+/* Change font-size */
+@media (max-height: 750px) {
+    .destinations__subtitle{
+        font-size: var(--fs-big-subtitle);
+    }
+    .visited-destinations__open-button, .visited-destinations__evaluate-button, .visited-destinations__itineraries-button, .wishlisted-destinations__open-button, .most-visited-destinations__open-button, .most-reviewed-destinations__open-button, .all-destinations__open-button{
+        font-size: var(--fs-description);
+    }
+    .specific-destinations__name, .all-destinations__name{
+        font-size: var(--fs-big-subtitle);
+    }
+    .destinations__results-not-found, .all-destinations__results-not-found{
+        font-size: var(--fs-description);
+    }
+    .specific-destinations__data-text{
+        font-size: var(--fs-subtitle);
+    }
+    input[type=text].all-destinations__input{   
+        font-size: var(--fs-description);
+    }
+}

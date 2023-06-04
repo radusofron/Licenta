@@ -315,15 +315,76 @@ button.review__button:hover{
 
 
 /* RESPONSIVE */
+@media (max-width: 950px) {
+    .evaluate__row{
+        overflow-x: scroll;
+    }
+}
 /* For phone menu */
 @media (max-width: 900px) {
     .content-container-two{
         overflow: hidden;
     }
 }
-@media (max-width: 650px){
+@media (max-width: 750px) {
+    .evaluate__top-container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+    .evaluate__middle-container{
+        overflow-x: scroll;
+    }
+    section{
+        padding-top: 3rem;
+    }
+    .evaluate__option{
+        white-space: nowrap;
+    }
+}
+@media (max-width: 650px) {
     .footer__bottom{
         flex-direction: column;
         gap: 0rem;
+    }
+}
+
+/* Change font-size */
+@media(max-height: 750px) {
+    .evaluate__destination-title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .evaluate__visited-date{
+        font-size: var(--fs-phone-description);
+    }
+    .evaluate__option{
+        font-size: var(--fs-subtitle);
+    }
+    .help__title{
+        font-size: var(--fs-subtitle);
+    }
+    .help__intro-text{
+        font-size: var(--fs-phone-description);
+    }
+    li.help__tutorial-idea {
+        font-size: var(--fs-phone-description);
+    }
+    .evaluate__description{
+        font-size: var(--fs-description);
+    }
+    .evaluate__aspect{
+        font-size: var(--fs-description);
+    }
+    .evaluate__grade{
+        font-size: var(--fs-description);
+    }
+    button{
+        font-size: var(--fs-description);
+    }
+    .review__description{
+        font-size: var(--fs-description);
+    }
+    input[type=text].review__input{   
+        font-size: var(--fs-description);
     }
 }
