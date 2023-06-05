@@ -59,6 +59,17 @@
         </div>
     </section>
     <section class="section evaluate">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% if messages[0] == "evaluation submitted" %}
+        <p class="evaluate__description success">Thank you for submitting your evaluation! Your raitings have been
+            successfully recorded!</p>
+        {% elif messages[0] == "evaluation updated" %}
+        <p class="evaluate__description success">Your raitings have been successfully updated!</p>
+        {% endif %}
+        {% endif %}
+        {% endwith %}
+
         {% if user_feedback.evaluation | length %}
         <div class="evaluate__already">
             <p class="evaluate__description">You have already submitted an evaluation for this city:</p>
@@ -99,6 +110,17 @@
         </form>
     </section>
     <section class="section review">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% if messages[0] == "review submitted" %}
+        <p class="evaluate__description success">Thank you for submitting your review! Your feedback has been
+            successfully recorded!</p>
+        {% elif messages[0] == "review updated" %}
+        <p class="evaluate__description success">Your review has been successfully updated!</p>
+        {% endif %}
+        {% endif %}
+        {% endwith %}
+
         {% if user_feedback.review | length %}
         <div class="review__already">
             <p class="review__description">You have already submitted a review for this city:

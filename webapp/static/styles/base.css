@@ -82,11 +82,13 @@ a{
     --stat-good-hover: #3D9537;
     --stat-perfect: #FFBC42;
     --stat-perfect-hover: #FFA90A;
+    
     --regular: 400;
     --medium: 500;
     --semibold: 600;
     --bold: 700;
     --extrabold: 800;
+
     --fs-big-title: 3rem;
     --fs-title: 2rem;
     --fs-big-subtitle: 1.6rem;

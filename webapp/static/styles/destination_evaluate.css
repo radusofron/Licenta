@@ -138,6 +138,9 @@ li.help__tutorial-idea {
     font-weight: var(--semibold);
     color: var(--grey);
 }
+.evaluate__description.success{
+    color: var(--turcoise);
+}
 .evaluate__already{
     display: flex;
     flex-direction: column;
