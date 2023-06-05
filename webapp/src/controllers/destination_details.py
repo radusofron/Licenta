@@ -57,6 +57,18 @@ def validate_url_parameters():
     return action
 
 
+def create_folder(city: str):
+    """Function creates a folder for every city (if the city already has a folder, then it skips that city).
+    """
+
+    # Create folder path
+    folder_path = "webapp/static/destinations_data/" + city
+
+    # Check if folder exists, otherwise, create it
+    if not os.path.exists(folder_path):
+        os.mkdir(folder_path)
+
+
 def check_for_POST_messages():
     """Function check for messages recieved from a previous POST request.
 
@@ -232,12 +244,12 @@ def update_weather(city: str):
         return None
 
     # Create json name and json path
-    json_name = city + ".json"
-    json_path = "webapp/static/destinations_data/" + json_name
+    json_name = "weather" + ".json"
+    json_path = "webapp/static/destinations_data/" + city + "/" + json_name
+    print(json_path)
 
     if os.path.exists(json_path):
         # Case: check last update
-
         last_modification_timestamp = os.path.getmtime(json_path)
         # Convert from timestamp to datetime
         last_modification_time = datetime.fromtimestamp(last_modification_timestamp)
@@ -275,8 +287,8 @@ def read_weather(city: str) -> list:
     information for website
     """
     # Create json name and json path
-    json_name = city + ".json"
-    json_path = "webapp/static/destinations_data/" + json_name
+    json_name = "weather" + ".json"
+    json_path = "webapp/static/destinations_data/" + city + "/" + json_name
 
     # Extract wether details
     try:
@@ -395,6 +407,10 @@ def destination_details() -> Response:
         )
 
     # Case: city exists
+
+    # Create city folder if not found
+    create_folder(option)
+
     # Check for possible messages recieved from a previous POST request
     check_for_POST_messages()
 
