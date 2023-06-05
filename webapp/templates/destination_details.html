@@ -34,7 +34,7 @@
     {% if "mark as visited" in messages: %}
     <div class="modal__background-grey"></div>
     <dialog open class="modal">
-        <p class="modal__title">Destination has been marked as visited !
+        <p class="modal__title">Destination added to visited list.
         </p>
         <div class="modal__buttons-container">
             <a class="modal__button now" href="/evaluate?city={{city_name}}">Evaluate
@@ -51,7 +51,7 @@
     {% if "remove from visited" in messages: %}
     <div class="modal__background-grey"></div>
     <dialog open class="modal">
-        <p class="modal__title">Destination has been removed from visited !
+        <p class="modal__title">Destination removed from visited list.
         </p>
         <a class="modal__button close">Ok</a>
     </dialog>

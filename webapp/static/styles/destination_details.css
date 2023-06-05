@@ -76,8 +76,7 @@ button.destination__button-visited.false:hover{
     left: 0;
     min-width: 100%;
     min-height: 100%;
-    opacity: 0.5;
-    background-color: var(--dark-grey);
+    background-color: var(--black-50);
     z-index: 3;
 }
 .modal__background-grey.inactive{
@@ -89,8 +88,8 @@ dialog[open].modal{
     padding: 3rem;
     box-sizing: border-box;
     width: 750px;
-    border-radius: 0.5rem;
-    box-shadow: 0rem 0rem 2rem var(--dark-grey);
+    border-radius: 1rem;
+    box-shadow: 0rem 0rem 2rem var(--black-25);
     display: flex;
     flex-direction: column;
     align-items: center;
