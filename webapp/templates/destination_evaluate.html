@@ -36,20 +36,20 @@
             </p>
         </div>
         <div class="help__tutorial">
-            <div class="help__tutorial-title-container">
-                <h3 class="help__title">What you have to do?</h3>
-                <img class="help__icon" src="{{url_for('static', filename='/assets/illustrations/tasks.png')}}">
-            </div>
+            <h3 class="help__title">What you have to do?</h3>
             <ol class="help__tutorial-ideas">
                 <li class="help__tutorial-idea">
                     Visit the <span class="tutorial-idea-important">Evaluation</span> section to rate this city
                     on 10 criteria. Our grading system ranges from 1 to 10, with 1 being the lowest grade and 10 being
-                    the highest. Once you have completed the evaluation, submit it. Be assured that your evaluation will
-                    remain private and confidential, accessible only to you. You can also update your evaluation at any
-                    time if your opinion changes or if you want to provide further feedback.
+                    the highest. Once you have completed the evaluation, submit it. While your raitings will be made
+                    available to the others, rest assured that your identity will remain confidential. You can also
+                    update
+                    your evaluation at any
+                    time if your opinion changes or if you want to provide further feedback. Your updated evaluation
+                    will replace the previous one.
                 </li>
                 <li class="help__tutorial-idea">
-                    Visit the <span class="tutorial-idea-important">Leave a Review</span> section and share your
+                    Visit the <span class="tutorial-idea-important">Leave a review</span> section and share your
                     thoughts about the city. Feel free to express your opinions and experiences. Once you submit your
                     review, it will be published for everyone to see. You can also update your review later if you wish
                     to provide additional insights or make any changes. Your updated review will replace the previous
@@ -60,13 +60,21 @@
     </section>
     <section class="section evaluate">
         {% if user_feedback.evaluation | length %}
-        <p class="evaluate__description">You have already submitted an evaluation for this city. Here is your previous
-            one: </p>
-        {% for index in range(10) %}
-        {{aspects[index]}} : {{user_feedback.evaluation[index]}}
-        {% endfor %}
+        <div class="evaluate__already">
+            <p class="evaluate__description">You have already submitted an evaluation for this city:</p>
+            <div class="evaluate__previous-grades">
+                {% for index in range(10) %}
+                <p class="evaluate__previous-grade">
+                    {{aspects[index]}} : {{user_feedback.evaluation[index]}}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+        <p class="evaluate__description"> However, you can still
+            modify your evaluation if you wish. As you have done before, rate each aspect on a scale of 1 to 10:</p>
+        {% else %}
+        <p class="evaluate__description"> Rate each aspect on a scale of 1 to 10:</p>
         {% endif %}
-        <p class="evaluate__description">Rate each aspect on a scale of 1 to 10.</p>
         <form class="evaluate__rows" action="/api/evaluate" method="post">
             {% for index in range(10) %}
             <div class="evaluate__row">
@@ -92,13 +100,20 @@
     </section>
     <section class="section review">
         {% if user_feedback.review | length %}
-        <p class="review__description">You have already submitted a review for this city. Here is your previous one:
+        <div class="review__already">
+            <p class="review__description">You have already submitted a review for this city:
+            </p>
+            <p class="review__previous">" {{user_feedback.review}} "</p>
+        </div>
+        <p class="review__description">However, you can still
+            modify your evaluation if you wish. Share your updated personal insights, memorable moments, and honest
+            opinions about the city you've explored.
         </p>
-        {{user_feedback.review}}
-        {% endif %}
+        {% else %}
         <p class="review__description">Share your personal insights, memorable moments, and honest opinions about the
             city you've explored.
         </p>
+        {% endif %}
         <form class="review__form" action="/api/evaluate" method="post">
             <input maxlength="512" autocomplete="off" class="review__input" placeholder="Write your review here..."
                 name="review" type="text" required>

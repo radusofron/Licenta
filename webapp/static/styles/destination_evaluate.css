@@ -93,7 +93,7 @@ section.active{
 }
 .help__intro-title-container{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 3rem;
 }
 .help__title{
@@ -137,6 +137,21 @@ li.help__tutorial-idea {
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--grey);
+}
+.evaluate__already{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.evaluate__previous-grades{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.evaluate__previous-grade{
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
 }
 form.evaluate__rows{
     display: flex;
@@ -238,6 +253,17 @@ button.evaluate__button.disabled:hover{
     font-weight: var(--semibold);
     color: var(--grey);
 }
+.review__already{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.review__previous{
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    color: var(--dark-grey);
+    font-style: italic;
+}
 form.review__form{
     display: flex;
     flex-direction: column;
@@ -316,7 +342,7 @@ button.review__button:hover{
 
 /* RESPONSIVE */
 @media (max-width: 950px) {
-    .evaluate__row{
+    .evaluate__grade-container{
         overflow-x: scroll;
     }
 }
