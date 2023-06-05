@@ -544,7 +544,7 @@ def insert_visited_destination_for_user(dba, user_id: int, destination_name: str
     # Open cursor
     dba_cursor = dba.cursor()
 
-    # Insert visited desitnations   
+    # Insert visited destinations   
     dba_cursor.execute("INSERT INTO `visited_destinations` (`id`, `user_id`, `destination_id`, `date`) VALUES (%s, %s, %s, %s)", (new_max_id, user_id, destination_id, date))
 
     # Close cursor and commit changes
@@ -562,9 +562,13 @@ def delete_visited_destination_for_user(dba, user_id: int, destination_name: str
     dba_cursor = dba.cursor()
 
     # Delete visited destination for user
-    dba_cursor.execute("DELETE FROM `visited_destinations` WHERE `user_id`=%s AND `destination_id`=%s;", (user_id, destination_id))
+    dba_cursor.execute("DELETE FROM `visited_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
 
-    # TODO -> delete the evaluation and review from database, too
+    # Delete evaluation done by the user
+    dba_cursor.execute("DELETE FROM `grades_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
+
+    # Delete review given by the user 
+    dba_cursor.execute("DELETE FROM `reviews_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
     
     # Close cursor and commit changes
     dba_cursor.close()
@@ -619,8 +623,127 @@ def insert_visited_destination_evaluation_by_user(dba, user_id: int, destination
     # Open cursor
     dba_cursor = dba.cursor()
 
-    # Insert visited desitnations   
+    # Insert evaluation   
     dba_cursor.execute("INSERT INTO `grades_destinations` (`id`, `user_id`, `destination_id`, `grade_attractions`, `grade_acommodation`, `grade_culture`, `grade_entertainment`, `grade_food_and_drink`, `grade_history`, `grade_natural_beauty`, `grade_night_life`, `grade_transport`, `grade_safety`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (new_max_id, user_id, destination_id, grades[0], grades[1], grades[2], grades[3], grades[4], grades[5], grades[6], grades[7], grades[8], grades[9], date))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def extract_visited_destination_evaluation_by_user(dba, user_id: int, destination_name: str):
+    """Function returns the grades given by an user for a visited destination from the database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract grades
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `grade_attractions`, `grade_acommodation`, `grade_culture`, `grade_entertainment`, `grade_food_and_drink`, `grade_history`, `grade_natural_beauty`, `grade_night_life`, `grade_transport`, `grade_safety` FROM `grades_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
+    grades = dba_cursor.fetchone()
+    dba_cursor.close()
+
+    # Case: no evaluation found
+    if grades is None:
+        return tuple()
+
+    return grades
+
+
+def update_visited_destination_evaluation_by_user(dba, user_id: int, destination_name: str, grades: list):
+    """Function updates the grades given by an user for a visited destination into the database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Update evaluation   
+    dba_cursor.execute("UPDATE `grades_destinations` SET `grade_attractions`=%s, `grade_acommodation`=%s, `grade_culture`=%s, `grade_entertainment`=%s, `grade_food_and_drink`=%s, `grade_history`=%s, `grade_natural_beauty`=%s, `grade_night_life`=%s, `grade_transport`=%s, `grade_safety`=%s, `date`=%s WHERE `user_id`=%s AND `destination_id`=%s", (grades[0], grades[1], grades[2], grades[3], grades[4], grades[5], grades[6], grades[7], grades[8], grades[9], date, user_id, destination_id))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def extract_max_id_from_reviews_destinations(dba):
+    """Function returns maximum id from the reviews destinations table.
+    """
+    # Extract maximum id
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT MAX(`id`) FROM `reviews_destinations`")
+    max_id = dba_cursor.fetchone()
+    dba_cursor.close()
+    return max_id[0]
+
+
+def insert_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str):
+    """Function inserts the review given by an user for a visited destination into the database.
+    """
+    # Extract biggest id found in the table
+    max_id = extract_max_id_from_reviews_destinations(dba)
+
+    # Compute new id
+    if max_id is None:
+        # Case: first insertion
+        new_max_id = 1
+    else:
+        # Case: the other insertions
+        new_max_id = max_id + 1
+
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Insert review   
+    dba_cursor.execute("INSERT INTO `reviews_destinations` (`id`, `user_id`, `destination_id`, `review`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, user_id, destination_id, review, date))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def extract_visited_destination_review_by_user(dba, user_id: int, destination_name: str):
+    """Function returns the review given by an user for a visited destination from the database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract review
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `review` FROM `reviews_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
+    review = dba_cursor.fetchone()
+    dba_cursor.close()
+
+    # Case: no review found
+    if review is None:
+        return ""
+    return review[0]
+
+
+def update_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str):
+    """Function updates the review given by an user for a visited destination into the database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Update review   
+    dba_cursor.execute("UPDATE `reviews_destinations` SET `review`=%s, `date`=%s WHERE `user_id`=%s AND `destination_id`=%s", (review, date, user_id, destination_id))
 
     # Close cursor and commit changes
     dba_cursor.close()
