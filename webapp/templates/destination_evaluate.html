@@ -137,8 +137,11 @@
         </p>
         {% endif %}
         <form class="review__form" action="/api/evaluate" method="post">
-            <input maxlength="512" autocomplete="off" class="review__input" placeholder="Write your review here..."
-                name="review" type="text" required>
+            <div class="review__input-container">
+                <input maxlength="512" autocomplete="off" class="review__input" placeholder="Write your review here..."
+                    name="review" type="text" required>
+                <span class="review__input-remaining">Characters left: 512</span>
+            </div>
             {% if user_feedback.review | length %}
             <button type="submit" class="review__button" name="update-review">Send review</button>
             {% else %}

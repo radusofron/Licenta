@@ -272,6 +272,17 @@ form.review__form{
     flex-direction: column;
     gap: 4.5rem;
 }
+.review__input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.review__input-remaining{
+    padding: 0rem 5px;
+    font-size: var(--fs-phone-description);
+    font-weight: var(--medium);
+    color: var(--grey);
+}
 input[type=text].review__input{   
     width: 100%;
     font-size: var(--fs-subtitle);
@@ -401,6 +412,9 @@ button.review__button:hover{
     .evaluate__description{
         font-size: var(--fs-description);
     }
+    .evaluate__previous-grade{
+        font-size: var(--fs-description);
+    }
     .evaluate__aspect{
         font-size: var(--fs-description);
     }
@@ -412,6 +426,12 @@ button.review__button:hover{
     }
     .review__description{
         font-size: var(--fs-description);
+    }
+    .review__previous{
+        font-size: var(--fs-description);
+    }
+    .review__input-remaining{
+        font-size: var(--fs-phone-description);
     }
     input[type=text].review__input{   
         font-size: var(--fs-description);

@@ -171,6 +171,46 @@ function setStyletToStickyElement () {
 }
 
 
+// Function to display the remaining characters for the user's review
+function displayCharactersLeft() {
+    // Set maximum length
+    const maxLength = 512
+
+    // Get input element
+    const reviewInput = document.querySelector(".review__input")
+
+    // Get element for display
+    const charactersRemaining = document.querySelector(".review__input-remaining")
+
+    // Add an event listener for input element
+    reviewInput.addEventListener("input", function() {
+        // Extract text review
+        const review = reviewInput.value
+
+        // Case: nothing found
+        if (review === "") {
+             charactersRemaining.innerHTML = "Characters left: 512"
+        }
+        // Case: user writes
+        else {
+            // Calculate the difference
+            const diff = maxLength - review.length
+
+            // Change color when no character remained
+            if (diff == 0) {
+                charactersRemaining.style.color = "#D47E73"
+            }
+            if (diff == 1) {
+                charactersRemaining.style.color = "#8C98AD"
+            }
+            
+            // Display the remaining characters
+            charactersRemaining.innerHTML = "Characters left: " + diff.toString()
+        }
+    });
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get evaluation options
@@ -186,4 +226,5 @@ window.addEventListener("load", function() {
 
     getCheckboxes()
     setStyletToStickyElement()
+    displayCharactersLeft()
   });
