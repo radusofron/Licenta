@@ -193,6 +193,25 @@ function setStyletToStickyElement () {
 }
 
 
+// Function closes the modal when the user clicks on the close button.
+function exitModal() {
+    // Get modal
+    const modal = document.querySelector(".modal")
+
+    // Get background element
+    const background = document.querySelector(".modal__background-grey")
+
+    // Get close button
+    const closeButton = document.querySelector(".modal__button.close")
+    
+    // Add event listener for button
+    closeButton.addEventListener("click", function() {
+        // Hide them
+        modal.close()
+        background.classList.add("inactive")
+    });
+}
+
 
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
@@ -211,5 +230,5 @@ window.addEventListener("load", function() {
     setProfilePictureColors()
     disableActionButtons()
     setStyletToStickyElement()
-    
+    exitModal()
   });

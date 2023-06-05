@@ -69,6 +69,73 @@ button.destination__button-visited.false:hover{
     background-color: var(--white);
     color: var(--turcoise);
 }
+/* Style for dialog element (modal) */
+.modal__background-grey{
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 0.5;
+    background-color: var(--dark-grey);
+    z-index: 3;
+}
+.modal__background-grey.inactive{
+    display: none;
+}
+dialog[open].modal{
+    position: absolute;
+    left: calc(50% - 375px);
+    padding: 3rem;
+    box-sizing: border-box;
+    width: 750px;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 2rem var(--dark-grey);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    z-index: 3;
+}
+.modal__title{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    text-align: center;
+}
+.modal__buttons-container{
+    display: flex;
+    gap: 3rem;
+}
+.modal__button{
+    text-decoration: none;
+    padding: 0.4rem 1.3rem;
+    box-sizing: border-box;
+    max-width: fit-content;
+    min-width: fit-content;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    border-radius: 0.5rem;
+    color: var(--white);
+    cursor: pointer;
+    transition: 250ms;
+}
+.modal__button.now{
+    border: 0.2rem solid var(--turcoise);
+    background-color: var(--turcoise);
+}
+.modal__button:hover{
+    background-color: var(--white);
+    color: var(--turcoise)
+}
+.modal__button.close{
+    border: 0.2rem solid var(--pink);
+    background-color: var(--pink);
+}
+.modal__button.close:hover{
+    background-color: var(--white);
+    color: var(--pink);
+}
 
 
 /* Middle container */

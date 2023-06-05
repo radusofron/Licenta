@@ -28,6 +28,37 @@
             {% endif %}
         </form>
     </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages: %}
+    {% if "mark as visited" in messages: %}
+    <div class="modal__background-grey"></div>
+    <dialog open class="modal">
+        <p class="modal__title">Destination has been marked as visited !
+        </p>
+        <div class="modal__buttons-container">
+            <a class="modal__button now" href="/evaluate?city={{city_name}}">Evaluate
+                now</a>
+            <a class="modal__button close">Ok</a>
+        </div>
+    </dialog>
+    {% endif %}
+    {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages: %}
+    {% if "remove from visited" in messages: %}
+    <div class="modal__background-grey"></div>
+    <dialog open class="modal">
+        <p class="modal__title">Destination has been removed from visited !
+        </p>
+        <a class="modal__button close">Ok</a>
+    </dialog>
+    {% endif %}
+    {% endif %}
+    {% endwith %}
+
     <div class="destination__middle-container">
         <ul class="destination__options">
             <li class="destination__option travel-itineraries active">Travel itineraries</li>
@@ -46,7 +77,8 @@
         <div class="wikipedia__content">{{wikipedia | safe}}</div>
     </section>
     <section class="section photos">
-        <p class="section__description">Discover the city's visual wonders. Explore a collection of breathtaking photos
+        <p class="section__description">Discover the city's visual wonders. Explore a collection of breathtaking
+            photos
             showcasing its essence.</p>
         <div class="photos__content">
             {% for index in range(20) %}
@@ -70,7 +102,8 @@
     </section>
     <section class="section statistics">
         {% if statistics.grades[0] > 0 %}
-        <p class="section__description">The following statistics are derived from users' evaluations, providing valuable
+        <p class="section__description">The following statistics are derived from users' evaluations, providing
+            valuable
             insights into the city's offerings.</p>
         {% else %}
         <p class="section__description no-data">At the moment, this city does not have any available statistics
@@ -89,7 +122,8 @@
     </section>
     <section class="section reviews">
         {% if reviews | length > 0 %}
-        <p class="section__description">The following reviews offer real-life experiences and opinions shared by other
+        <p class="section__description">The following reviews offer real-life experiences and opinions shared by
+            other
             users.</p>
         <div class="reviews__content">
             {% for index in range(reviews.username | length) %}
@@ -114,12 +148,14 @@
             {% endfor %}
         </div>
         {% else %}
-        <p class="section__description no-data">At the moment, there are no reviews available for this city as no one
+        <p class="section__description no-data">At the moment, there are no reviews available for this city as no
+            one
             has submitted one yet. :(</p>
         {% endif %}
     </section>
     <section class="section weather">
-        <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the weather
+        <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the
+            weather
             forecast for the next 4 days:</p>
         <div class="weather__content">
             {% for index in range(weather_data.names | length)%}
