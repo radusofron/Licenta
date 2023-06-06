@@ -44,6 +44,20 @@ cities = [
     "Zagreb"]
 
 
+def prepare_folder(city: str):
+    """Function creates a folder named "covers" where there will be a cover photo for every city.
+    
+    If the folder already exists, function skips.
+    """
+
+    # Create folder path
+    folder_path = "webapp/static/assets/cities_photos/covers"
+
+    # Check if folder exists, otherwise, create it
+    if not os.path.exists(folder_path):
+        os.mkdir(folder_path)
+
+
 def extract_city_cover_photo(cities):
     """Function extracts a cover photo for every city.
     """
@@ -51,7 +65,6 @@ def extract_city_cover_photo(cities):
     try:
         with open("webapp/static/API_keys/Unsplash.txt", "r") as file:
             key = file.read()
-            print(key, type(key))
     except:
         return None
     
@@ -79,7 +92,7 @@ def extract_city_cover_photo(cities):
 
         # Write images
         try:
-            with open("webapp/static/assets/cities_photos/covers" + city + ".jpg", "wb") as file:
+            with open("webapp/static/assets/cities_photos/covers/" + city + ".jpg", "wb") as file:
                 # Create request
                 response_two = requests.get(image_url, stream=True)
                 file.write(response_two.content)

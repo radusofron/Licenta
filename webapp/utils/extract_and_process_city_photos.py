@@ -70,7 +70,6 @@ def extract_city_photos(cities: list[str]):
     try:
         with open("webapp/static/API_keys/Unsplash.txt", "r") as file:
             key = file.read()
-            print(key, type(key))
     except:
         return None
 
