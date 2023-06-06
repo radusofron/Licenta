@@ -69,7 +69,15 @@
             <li class="destination__option weather">Weather</li>
         </ul>
     </div>
-    <section class="section travel-itineraries active">Travel itineraries</section>
+    <section class="section travel-itineraries active">
+        <p class="section__description">We provide you with a vast selection of up to 500 touristic
+            objectives.</p>
+        <ol class="travel-itineraries__touristic-objectives">
+            {% for obj in touristic_objectives %}
+            <li class="travel-itineraries__objective">{{obj[0]}}</li>
+            {% endfor %}
+        </ol>
+    </section>
     <section class="section wikipedia">
         <p class="section__description">Find out more about this city. Dive into comprehensive information
             about the

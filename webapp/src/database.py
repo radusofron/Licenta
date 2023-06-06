@@ -750,5 +750,20 @@ def update_visited_destination_review_by_user(dba, user_id: int, destination_nam
     dba.commit()
 
 
+def extract_touristic_objectives_names_and_details(dba, destination_name: str):
+    """Function extracts the touristic objectives' names and details of a destination from database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+    
+    # Extract touristic objectives
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name` FROM `touristic_objectives` WHERE destination_id=%s", (destination_id,))
+    touristic_objectives = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    return touristic_objectives
+
+
 # Create database object
 dba = connect_to_dba()

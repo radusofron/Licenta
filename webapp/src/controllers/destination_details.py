@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user
+from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names_and_details
 import requests
 from datetime import datetime, timedelta
 import os
@@ -422,21 +422,24 @@ def destination_details() -> Response:
     city_status["visited"] = check_visited_status(option)
     city_status["wishlisted"] = check_wishlisted_status(option)
 
-    # 1. Get Wikipedia content
+    # 1. Get touristic objectives
+    touristic_objectives = extract_touristic_objectives_names_and_details(dba, option)
+
+    # 2. Get Wikipedia content
     wikipedia = get_wiki_content(option)
 
-    # 2. Create websites for photos links
+    # 3. Create websites for photos links
     websites_links = []
     websites_links.append("https://www.pexels.com/search/" + option + "/")
     websites_links.append("https://unsplash.com/s/photos/" + option)
 
-    # 3. Get statistics
+    # 4. Get statistics
     statistics = get_statistics_grades(option)
 
-    # 4. Get reviews
+    # 5. Get reviews
     reviews = get_reviews_and_associated_data(option)
     
-    # 5. Update weather, get weather details, calculate weather days and create dictionary with data
+    # 6. Update weather, get weather details, calculate weather days and create dictionary with data
     update_weather(option)
     weather = read_weather(option)
     days = get_weather_days()
@@ -447,6 +450,6 @@ def destination_details() -> Response:
         del weather_data["weather"][0]
         
     return make_response(
-        jsonify({"option": option, "city status": city_status , "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
+        jsonify({"option": option, "city status": city_status , "touristic objectives": touristic_objectives, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
         status.HTTP_200_OK,
     )
