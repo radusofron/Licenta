@@ -60,6 +60,26 @@ function displayOptionAndSection(option, sections) {
 }
 
 
+// Function displays algorithm details
+function displayAlgorithmInformation() {
+    // Get info icons
+    const cardinalDirectionsIcon = document.getElementById("info-1")
+    const kMeansIcon = document.getElementById("info-2")
+
+    // Get info containers
+    const cardinalDirectionsInfo = document.getElementById("details-1")
+    const kMeansInfo = document.getElementById("details-2")
+
+    cardinalDirectionsIcon.addEventListener("click", function() {
+        cardinalDirectionsInfo.classList.toggle("active")
+    });
+
+    kMeansIcon.addEventListener("click", function() {
+        kMeansInfo.classList.toggle("active")
+    })
+}
+
+
 // Function creates average grades graph
 function createGradesGraph() {
     // Get graph lines
@@ -198,6 +218,11 @@ function exitModal() {
     // Get modal
     const modal = document.querySelector(".modal")
 
+    // Case: no modal displayed
+    if (modal == null) {
+        return
+    }
+
     // Get background element
     const background = document.querySelector(".modal__background-grey")
 
@@ -226,6 +251,7 @@ window.addEventListener("load", function() {
             option.addEventListener("click", () => displayOptionAndSection(option, sections))
         });
 
+    displayAlgorithmInformation()
     createGradesGraph()
     setProfilePictureColors()
     disableActionButtons()

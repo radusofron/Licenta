@@ -349,6 +349,11 @@ input[type=checkbox].travel-itineraries__objective-checkbox:checked{
     border: 0.2rem solid var(--pink);
     background-color: var(--pink);
 }
+.travel-itineraries__algorithm-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 .travel-itineraries__algorithm{
     display: flex;
     align-items: center;
@@ -367,6 +372,13 @@ input[type=radio]:checked ~ .travel-itineraries__algorithm-name{
 }
 .travel-itineraries__algorithm-info-icon{
     cursor: pointer;
+}
+.travel-itineraries__algorithm-details{
+    display: none;
+    font-size: var(--fs-description);
+}
+.travel-itineraries__algorithm-details.active{
+    display: block;
 }
 button.travel-itineraries__generate-button{
     align-self: flex-start;
