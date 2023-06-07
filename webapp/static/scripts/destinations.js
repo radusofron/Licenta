@@ -69,5 +69,5 @@ window.addEventListener("load", function() {
     const searchBar = document.querySelector(".all-destinations__input")
 
     // Add an event listener for search bar
-    searchBar.addEventListener("input", () => returnDestinations(searchBar))
+    searchBar.addEventListener("input", () => returnDestinations())
   });

@@ -60,6 +60,71 @@ function displayOptionAndSection(option, sections) {
 }
 
 
+// Function returns touristic objectives which match the search
+function returnTouristicObjectives() {
+    // Get touristic objectives
+    const objectives = document.querySelectorAll(".travel-itineraries__objective")
+
+    // Get search bar input
+    const inputExtracted = document.querySelector(".travel-itineraries__input").value
+    // Transform input to lowercase input
+    const input = inputExtracted.toLowerCase()
+
+    // Check if input is empty; if so, display all the touristic objectives again and stop
+    if (input.trim() === "") {
+        objectives.forEach(objective => {
+          // If destination is inactive, make it active
+          if (objective.classList[1] === "inactive") {
+            objective.classList.remove("inactive");
+          }
+        });
+        return
+    }
+
+    // Variable used to know if no objective will be returned
+    let minimumAnObjectiveReturned = false
+
+    // Get element used for no results found message
+    const noResultsMessage = document.querySelector(".travel-itineraries__results-not-found")
+
+    // Search for matches
+    objectives.forEach(objective => {
+        // Extract touristic objective from HTML
+        const objectiveName = objective["children"][0].textContent.toLowerCase()
+
+        // Trim the strings in order to compare them
+        if (objectiveName.trim() === input.trim() || objectiveName.trim().startsWith(input.trim()) || objectiveName.trim().endsWith(input.trim()) || objectiveName.trim().includes(input.trim())) {
+            // If destination is inactive, make it active
+            if (objective.classList[1] === "inactive"){
+                objective.classList.remove("inactive");
+            }
+        }
+        else {
+        // If destination is active, make it inactive
+        if (objective.classList[1] !== "inactive") {
+            objective.classList.add("inactive");
+        }
+        }
+        // Check if there is at least a destination which will be displayed (does not have "inactive" class)
+        if (!objective.classList.contains("inactive")) {
+            minimumAnObjectiveReturned = true
+        }
+    });
+
+    // Check if no results were found in order to display appropiate message
+    if (minimumAnObjectiveReturned) {
+        if (noResultsMessage.classList.contains("active")) {
+            noResultsMessage.classList.remove("active")
+        }
+    }
+    else {
+        if (!noResultsMessage.classList.contains("active")){
+            noResultsMessage.classList.add("active")
+        }
+    }
+}
+
+
 // Function displays algorithm details
 function displayAlgorithmInformation() {
     // Get info icons
@@ -250,6 +315,11 @@ window.addEventListener("load", function() {
     destinationOptions.forEach(option => {
             option.addEventListener("click", () => displayOptionAndSection(option, sections))
         });
+    
+    // Get search bar
+    const searchBar = document.querySelector(".travel-itineraries__input")
+    // Add an event listener for search bar
+    searchBar.addEventListener("input", () => returnTouristicObjectives(searchBar))
 
     displayAlgorithmInformation()
     createGradesGraph()

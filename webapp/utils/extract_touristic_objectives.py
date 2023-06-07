@@ -95,6 +95,9 @@ def get_city_coordinates(city: str) -> tuple:
     # Get coordinates
     latitude = response["results"][0]["geometry"]["lat"]
     longitude = response["results"][0]["geometry"]["lng"]
+
+    # TODO -> insert city coordinates in destinations table
+
     return (longitude, latitude)
 
 
@@ -110,7 +113,7 @@ def get_city_touristic_objectives(dba, city: str):
     # Data for API
     category = "tourism"
     meters = 5000
-    limit = 250
+    limit = 500
 
     # Extract coordinates of the city
     coordinates = get_city_coordinates(city)

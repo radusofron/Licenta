@@ -328,6 +328,9 @@ li.travel-itineraries__objective{
     align-items: flex-start;
     gap: 1.5rem;
 }
+li.travel-itineraries__objective.inactive{
+    display: none;
+}
 .travel-itineraries__objective-text{
     transition: 250ms;
 }
@@ -348,6 +351,15 @@ input[type=checkbox].travel-itineraries__objective-checkbox:hover{
 input[type=checkbox].travel-itineraries__objective-checkbox:checked{
     border: 0.2rem solid var(--pink);
     background-color: var(--pink);
+}
+.travel-itineraries__results-not-found{
+    display: none;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+.travel-itineraries__results-not-found.active{
+    display: block;
 }
 .travel-itineraries__algorithm-container{
     display: flex;

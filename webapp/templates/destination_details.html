@@ -100,6 +100,7 @@
                                 name="objective">
                         </li>
                         {% endfor %}
+                        <p class="travel-itineraries__results-not-found">No results found for your search :(</p>
                     </ol>
                 </div>
             </div>
@@ -116,8 +117,8 @@
                     </div>
                     <p class="travel-itineraries__algorithm-details" id="details-1">
                         This method groups the attractions based on cardinal directions (North, South, East, West,
-                        North-East and so on). It will categorize the attractions into distinct regions based on their
-                        general compass direction.
+                        Northeast and so on). It will categorize the attractions into distinct regions based on their
+                        general compass direction. The number of regions will be equal to the number of days chosen.
                     </p>
                 </div>
                 <div class="travel-itineraries__algorithm-container">
@@ -133,9 +134,10 @@
                     </div>
                     <p class="travel-itineraries__algorithm-details" id="details-2">
                         This method groups the attractions based on their coordinates using the K-Means clustering
-                        algorithm. It will create clusters based on the proximity of attractions to each other, without
-                        explicitly
-                        considering cardinal directions.
+                        algorithm. It will create clusters based on their proximity to each other in terms of their
+                        coordinates. It does not explicitly consider cardinal directions, but focuses on grouping
+                        attractions that are close to each other geographically. The number of clusters will be equal to
+                        the number of days chosen.
                     </p>
                 </div>
             </div>
