@@ -84,13 +84,10 @@ def extract_city_cover_photo(cities):
         # Get json format
         json_data = response.json()
 
-        # Extract data needed
+        # Extract image url
         image_url = json_data["results"][0]["urls"]["raw"]
 
-        # Insert url into dba
-        dba_cursor.execute("UPDATE `destinations` SET `image_link`=%s WHERE `name`=%s", (image_url, city,))
-
-        # Write images
+        # Write image
         try:
             with open("webapp/static/assets/cities_photos/covers/" + city + ".jpg", "wb") as file:
                 # Create request
@@ -105,6 +102,9 @@ def extract_city_cover_photo(cities):
     # Close cursor and commit the changes
     dba_cursor.close()
     dba.commit()
+
+    # Close connection to database
+    dba.close()
 
 
 def resize_images(cities: list[str]):

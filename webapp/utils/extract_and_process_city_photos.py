@@ -1,4 +1,3 @@
-import mysql.connector
 import requests
 import time
 from PIL import Image

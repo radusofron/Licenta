@@ -10,6 +10,7 @@ cities = [
     "Berlin",
     "Bern",
     "Bratislava",
+    "Bucharest",
     "Brussels",
     "Budapest",
     "Chisinau",
@@ -78,7 +79,6 @@ def get_city_coordinates(city: str) -> tuple:
     try:
         with open("webapp/static/API_keys/OpenCage.txt", "r") as file:
             key = file.read()
-            print(key, type(key))
     except:
         return ()
 
@@ -98,19 +98,18 @@ def get_city_coordinates(city: str) -> tuple:
     return (longitude, latitude)
 
 
-def get_city_touristic_objectives(city: str):
+def get_city_touristic_objectives(dba, city: str):
     """Function retrives 500 touristic objectives for a given city, then inserts them into the database.
     """
     try:
         with open("webapp/static/API_keys/Geoapify.txt", "r") as file:
             key = file.read()
-            print(key, type(key))
     except:
         return ()
 
     # Data for API
     category = "tourism"
-    meters = 7500
+    meters = 5000
 
     # Extract coordinates of the city
     coordinates = get_city_coordinates(city)
@@ -126,8 +125,6 @@ def get_city_touristic_objectives(city: str):
     touristic_objectives = dict()
     index = 0
 
-    # Connect to database (creating database object)
-    dba = connect_to_dba()
     # Open cursor
     dba_cursor = dba.cursor()
 
@@ -165,5 +162,34 @@ def get_city_touristic_objectives(city: str):
     dba.commit()
 
 
-for city in cities:
-    get_city_touristic_objectives(city)
+def delete_previous_touristic_objectives(dba):
+    """Function deletes the previously added touristic objectives from the database.
+    """
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Delete from database
+    dba_cursor.execute("DELETE FROM `touristic_objectives`")
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def main():
+    # Connect to database (creating database object)
+    dba = connect_to_dba()
+
+    # Delete all the data from database
+    delete_previous_touristic_objectives(dba)
+
+    # Extract toursitic objectives for every city
+    for city in cities:
+        print("For city: ", city)
+        get_city_touristic_objectives(dba, city)
+
+    # Close connection to database
+    dba.close()
+
+
+main()
