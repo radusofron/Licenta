@@ -203,25 +203,200 @@ section.active{
 
 
 /* For Travel itineraries section */
-ol.travel-itineraries__touristic-objectives{
-    list-style-type: decimal;
-    list-style-position: inside;
-    border: 0.25rem solid var(--dark-grey);
-    padding: 1.5rem;
-    box-sizing: border-box;
-    width: 50%;
-    height: 600px;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: scroll;
-}
-li.travel-itineraries__objective{
-    font-size: var(--fs-description);
+.travel-itineraries__intro{
+    font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
 }
+form.travel-itineraries__steps{
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+.travel-itineraries__step{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.travel-itineraries__days-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 3rem;
+    row-gap: 1.5rem;
+}
+.travel-itineraries__day{
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+input[type=radio]{
+    appearance: none;
+    border: 0.2rem solid var(--dark-grey);
+    min-width: 25px;
+    max-width: 25px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: 250ms;
+}
+input[type=radio]:hover{
+    border: 0.2rem solid var(--grey);
+}
+input[type=radio]:hover ~ .travel-itineraries__day-text{
+    color: var(--grey);
+}
+input[type=radio]:checked{
+    border: 0.2rem solid var(--pink);
+    background-color: var(--pink);
+}
+input[type=radio]:checked ~ .travel-itineraries__day-text{
+    color: var(--pink);
+}
+.travel-itineraries__day-text{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    transition: 250ms;
+}
+.travel-itineraries__objectives-container{
+    width: calc(50% + 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+input[type=text].travel-itineraries__input{   
+    width: 100%;
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    border: none;
+    border-bottom: 0.25rem solid var(--dark-grey);
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: var(--black);
+    transition: 250ms;
+}
+input[type=text]:focus{
+    /* Properties when input is focused */
+    outline: none;
+}
+input[type=text].travel-itineraries__input::placeholder{
+    /* Properties for placeholder */
+    font-style: italic;
+    color: var(--grey);
+    transition: 250ms;   
+}
+ol.travel-itineraries__objectives{
+    list-style-type: decimal;
+    list-style-position: inside;
+    padding-right: 3.75rem;
+    box-sizing: border-box;
+    min-height: 400px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: scroll;
+}
+ol.travel-itineraries__objectives::-webkit-scrollbar{
+    width: 25px;
+}
+ol.travel-itineraries__objectives::-webkit-scrollbar-track {
+    background-color: var(--black-12-5);
+    border-radius: 25px;
+}
+ol.travel-itineraries__objectives::-webkit-scrollbar-thumb {
+    opacity: 0.5;
+    background-color: var(--black-12-5);
+    border-radius: 25px;
+    transition: 250ms;
+}
+ol.travel-itineraries__objectives::-webkit-scrollbar-thumb:hover{
+    background-color: var(--black-50);
+}
+li.travel-itineraries__objective{
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+.travel-itineraries__objective-text{
+    transition: 250ms;
+}
+input[type=checkbox].travel-itineraries__objective-checkbox{
+    appearance: none;
+    border: 0.2rem solid var(--dark-grey);
+    min-width: 25px;
+    max-width: 25px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.5rem;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: 250ms;
+}
+input[type=checkbox].travel-itineraries__objective-checkbox:hover{
+    border: 0.2rem solid var(--grey);
+}
+input[type=checkbox].travel-itineraries__objective-checkbox:checked{
+    border: 0.2rem solid var(--pink);
+    background-color: var(--pink);
+}
+.travel-itineraries__algorithm{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.travel-itineraries__algorithm-name{
+    font-size: var(--fs-read);
+    color: var(--dark-grey);
+    transition: 250ms;
+}
+input[type=radio]:hover ~ .travel-itineraries__algorithm-name{
+    color: var(--grey);
+}
+input[type=radio]:checked ~ .travel-itineraries__algorithm-name{
+    color: var(--pink);
+}
+.travel-itineraries__algorithm-info-icon{
+    cursor: pointer;
+}
+button.travel-itineraries__generate-button{
+    align-self: flex-start;
+    font-size: var(--fs-read);
+    border: 0.2rem solid var(--dark-grey);
+    background-color: var(--dark-grey);
+    color: var(--white);
+}
+button.travel-itineraries__generate-button:hover{
+    background-color: var(--white);
+    color: var(--dark-grey);
+}
+.travel-itineraries__disclaimer{
+    color: var(--grey);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.travel-itineraries__disclaimer-title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.travel-itineraries__disclaimer-description{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+}
+
 
 /* For Wikipedia section */
 section.section.wikipedia.active{

@@ -110,12 +110,13 @@ def get_city_touristic_objectives(dba, city: str):
     # Data for API
     category = "tourism"
     meters = 5000
+    limit = 250
 
     # Extract coordinates of the city
     coordinates = get_city_coordinates(city)
 
     # Create url
-    url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{coordinates[0]},{coordinates[1]},{meters}&limit=500&lang=en&apiKey={key}"
+    url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{coordinates[0]},{coordinates[1]},{meters}&limit={limit}&lang=en&apiKey={key}"
     # Create request
     response = requests.get(url)
     # Get json format

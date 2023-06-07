@@ -70,13 +70,80 @@
         </ul>
     </div>
     <section class="section travel-itineraries active">
-        <p class="section__description">We provide you with a vast selection of up to 500 touristic
-            objectives.</p>
-        <ol class="travel-itineraries__touristic-objectives">
-            {% for obj in touristic_objectives %}
-            <li class="travel-itineraries__objective">{{obj[0]}}</li>
-            {% endfor %}
-        </ol>
+        <p class="section__description">Create a personalized travel plan for {{city_name}}. We offer you a vast
+            selection of up to 250 touristic
+            objectives to choose from.</p>
+        <p class="travel-itineraries__intro">Follow these simple steps to design your travel itineray:</p>
+        <form class="travel-itineraries__steps">
+            <div class="travel-itineraries__step">
+                1. Choose the number of days for your trip:
+                <div class="travel-itineraries__days-container">
+                    {% for day in range(2, 8, 1) %}
+                    <div class="travel-itineraries__day">
+                        <input class="travel-itineraries__day-radio" type="radio" value="{{day}}" id="{{day}}"
+                            name="days">
+                        <span class="travel-itineraries__day-text">{{day}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="travel-itineraries__step">
+                2. Select your preferred touristic objectives from our list:
+                <div class="travel-itineraries__objectives-container">
+                    <input class="travel-itineraries__input" maxlength="40" placeholder="Search..." autocomplete="off"
+                        name="destination" type="text">
+                    <ol class="travel-itineraries__objectives">
+                        {% for obj in touristic_objectives %}
+                        <li class="travel-itineraries__objective">
+                            <span class="travel-itineraries__objective-text">{{obj[0]}}</span>
+                            <input class="travel-itineraries__objective-checkbox" type="checkbox" id="{{obj[0]}}"
+                                name="objective">
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            <div class="travel-itineraries__step">
+                3. Choose your preferred method of organizing your touristic attractions:
+                <div class="travel-itineraries__algorithm">
+                    <input class="travel-itineraries__algorithm-radio" type="radio" value="coordinates" id="coordinates"
+                        name="algorithm">
+                    <span class="travel-itineraries__algorithm-name">Group by Cardinal Directions
+                    </span>
+                    <img class="travel-itineraries__algorithm-info-icon" id="1"
+                        src="{{url_for('static', filename='/assets/illustrations/information.png')}}">
+                </div>
+                <div class="travel-itineraries__algorithm">
+                    <input class="travel-itineraries__algorithm-radio" type="radio" value="kmeans" id="kmeans"
+                        name="algorithm">
+                    <span class="travel-itineraries__algorithm-name">Group by geographical proximity (Coordinate
+                        Clustering using K-Means
+                        algortihm)
+                    </span>
+                    <img class="travel-itineraries__algorithm-info-icon" id="2"
+                        src="{{url_for('static', filename='/assets/illustrations/information.png')}}">
+                </div>
+            </div>
+            <div class="travel-itineraries__step">
+                4. Once you have made your selections, click on the button below. Please
+                note that the generation process may take a while, depending on the complexity of your chosen options.
+                <button class="travel-itineraries__generate-button" type="submit" name="generate">Generate travel
+                    itinerary</button>
+            </div>
+        </form>
+        <div class="travel-itineraries__disclaimer">
+            <h3 class="travel-itineraries__disclaimer-title">Disclaimer <img class="travel-itineraries__disclaimer-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/disclaimer.png')}}"></h3>
+            <p class="travel-itineraries__disclaimer-description">
+                Please note that the grouping results provided by our website may not always be perfect or optimal.
+                The clustering algorithms used are designed to group attractions based on certain criteria, but the
+                accuracy and efficiency of the groups may vary depending on the data and algorithm chosen. We strive
+                to provide the best results possible, but it's important to keep in mind that individual preferences
+                and subjective factors may influence the suitability of the generated groups for your specific
+                travel itinerary. We recommend reviewing and adjusting the suggested groups based on your personal
+                preferences and needs.
+            </p>
+        </div>
     </section>
     <section class="section wikipedia">
         <p class="section__description">Find out more about this city. Dive into comprehensive information
