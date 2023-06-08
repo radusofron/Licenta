@@ -96,7 +96,7 @@ def get_city_coordinates(city: str) -> tuple:
     latitude = response["results"][0]["geometry"]["lat"]
     longitude = response["results"][0]["geometry"]["lng"]
 
-    # TODO -> insert city coordinates in destinations table
+    
 
     return (longitude, latitude)
 
@@ -129,12 +129,6 @@ def get_city_touristic_objectives(dba, city: str):
     touristic_objectives = dict()
     index = 0
 
-    # Open cursor
-    dba_cursor = dba.cursor()
-
-    # Extract city ID
-    destination_id = extract_destination_id_by_name(dba, city)
-
     # Process every touristic objective found
     for touristic_objective in response["features"]:
         # New dictionary, one for every touristic objective
@@ -156,9 +150,8 @@ def get_city_touristic_objectives(dba, city: str):
             new_data["coordinates"]["longitude"] = float(touristic_objective["geometry"]["coordinates"][0])
             new_data["coordinates"]["latitude"] = float(touristic_objective["geometry"]["coordinates"][1])
             new_data["place_id"] = touristic_objective["properties"]["place_id"]
-
-            # Write in database
-            dba_cursor.execute("INSERT INTO `touristic_objectives` (`destination_id`, `name`, `address`, `longitude`, `latitude`, `opening_hours`, `place_id`) VALUES (%s, %s, %s, %s, %s, %s, %s)", (destination_id, new_data["name"], new_data["address"], new_data["coordinates"]["longitude"], new_data["coordinates"]["latitude"], new_data["opening_hours"], new_data["place_id"]))
+            
+            # TODO -> databse function
 
     
     # Close cursor and commit changes
