@@ -750,8 +750,8 @@ def update_visited_destination_review_by_user(dba, user_id: int, destination_nam
     dba.commit()
 
 
-def extract_touristic_objectives_names_and_details(dba, destination_name: str):
-    """Function extracts the touristic objectives' names and details of a destination from database.
+def extract_touristic_objectives_names(dba, destination_name: str):
+    """Function returns the touristic objectives' names and details of a destination from database.
     """
     # Extract destination id
     destination_id = extract_destination_id_by_name(dba, destination_name)
@@ -763,6 +763,18 @@ def extract_touristic_objectives_names_and_details(dba, destination_name: str):
     dba_cursor.close()
 
     return touristic_objectives
+
+
+def extract_touristic_objective_coordinates_by_name(dba, objective_name: str):
+    """Function returns the details of a touristic objective from database.
+    """
+    # Extract details
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name`, `address`, `longitude`, `latitude`, `opening_hours` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
+    details = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    return details
 
 
 # Create database object

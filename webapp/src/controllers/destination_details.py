@@ -1,11 +1,16 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names_and_details
+from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names, extract_touristic_objective_coordinates_by_name
 import requests
 from datetime import datetime, timedelta
 import os
 import json
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+import uuid
+import urllib.parse
 
 
 destination_details_controller_blueprint = Blueprint("destination_details_controller_blueprint", __name__)
@@ -57,7 +62,7 @@ def validate_url_parameters():
     return action
 
 
-def create_folder(city: str):
+def create_city_folder(city: str):
     """Function creates a folder for every city (if the city already has a folder, then it skips that city).
     """
 
@@ -360,19 +365,85 @@ def get_weather_days() -> list:
     return days
 
 
-def validate_travel_itinerary_data():
+def colors_for_clusters(clusters):
+    """Function sets different colors for clusters representation
     """
+    colors = []
+    for point in clusters:
+        if point == 0:
+            colors.append("#608DB8")
+        elif point == 1:
+            colors.append("#BB493A")
+        elif point == 2:
+            colors.append("#FFA90A")
+        elif point == 3:
+            colors.append("#3D9537")
+        elif point == 4:
+            colors.append("#3B3941")
+        elif point == 5:
+            colors.append("#F397D6")
+        elif point == 6:
+            colors.append("#8338EC")
+            
+    return colors
+
+
+def create_user_folder(folder_name: str):
+    """Function creates a folder for an user containing his travel itineraries representations.
+
+    If user already has a folder, then nothing happens.
     """
-    print(request.form)
-    # if request.form["days"]:
-    #     print(request.form["days"])
-    # else:
-    #     print("Numarul de zile nu a fost selectat")
-    # if request.form["algorithm"]:
-    #     print(request.form["algorithm"])
-    # else:
-    #     print("Algoritmul nu a fost selectat")
-    # TODO -> de scris aici pana diseara
+
+    # Create folder path
+    folder_path = "webapp/static/user_data/" + folder_name
+
+    # Check if folder exists, otherwise, create it
+    if not os.path.exists(folder_path):
+        os.mkdir(folder_path)
+
+
+def create_travel_itinerary(days: int, objectives: list[str], algorithm: str):
+    """Function creates travel itinerary based on user's options
+    """
+    # Extract touristic objectives details
+    objectives_details = []
+    for objective in objectives:
+        objectives_details.extend(extract_touristic_objective_coordinates_by_name(dba, objective))
+    
+    # Create pandas dataframe
+    df = pd.DataFrame(objectives_details, columns=["Name", "Address", "Longitude", "Latitude", "Opening_hours"])
+    # Convert from string to float
+    df["Longitude"] = df["Longitude"].astype(float)
+    df["Latitude"] = df["Latitude"].astype(float)
+
+    if algorithm == "kmeans":
+        # Group touristic objectives using kmeans
+        km = KMeans(n_clusters=days, init='k-means++', random_state=1)
+        clusters = km.fit_predict(df[["Longitude", "Latitude"]])
+
+        # Convert to list
+        clusters = clusters.tolist()
+
+        # Insert itinerary into the database
+        # TODO insert
+
+        # Set colors for clusters
+        colors = colors_for_clusters(clusters)
+
+        # Create cluster representation
+        figure = plt.figure(edgecolor="#3B3941")
+        plt.scatter(df["Longitude"], df["Latitude"], color = colors)
+
+        # Save representation
+        create_user_folder(str(session["user_id"]))
+        # Create itinerary id (= name)
+        figure_name = urllib.parse.quote(str(uuid.uuid4()))
+        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + figure_name +  ".png")
+
+        # Return itinerary id
+        return figure_name
+
+    return ""
 
 
 @destination_details_controller_blueprint.route("/api/destination_details", methods=['GET', 'POST'])
@@ -403,8 +474,18 @@ def destination_details() -> Response:
 
         # 5. Generate travel itinerary
         elif "generate" in request.form:
-            print("Generam traseu de calatorie pentru ", session["current_city"])
-            validate_travel_itinerary_data()
+            # Extract form data
+            days = int(request.form["days"])
+            objectives = request.form.getlist("objective")
+            algorithm = request.form["algorithm"]
+
+            # Create itinerary
+            itinerary_id = create_travel_itinerary(days, objectives, algorithm)
+
+            # TODO -> verificare in /itinerary sa aiba user-ul acces la itinerariul respectiv
+            return make_response(
+                redirect("/itinerary?id=" + itinerary_id, code=302)
+            )
 
         # Send city and action via flash
         flash(session["current_city"])
@@ -428,7 +509,7 @@ def destination_details() -> Response:
     # Case: city exists
 
     # Create city folder if not found
-    create_folder(option)
+    create_city_folder(option)
 
     # Check for possible messages recieved from a previous POST request
     check_for_POST_messages()
@@ -442,7 +523,7 @@ def destination_details() -> Response:
     city_status["wishlisted"] = check_wishlisted_status(option)
 
     # 1. Get touristic objectives
-    touristic_objectives = extract_touristic_objectives_names_and_details(dba, option)
+    touristic_objectives = extract_touristic_objectives_names(dba, option)
 
     # 2. Get Wikipedia content
     wikipedia = get_wiki_content(option)

@@ -92,13 +92,13 @@
                 objective for each day you have selected for your travel itinerary:
                 <div class="travel-itineraries__objectives-container">
                     <input class="travel-itineraries__input" maxlength="40" placeholder="Search..." autocomplete="off"
-                        name="destination" type="text">
+                        type="text">
                     <ol class="travel-itineraries__objectives">
                         {% for obj in touristic_objectives %}
                         <li class="travel-itineraries__objective">
                             <span class="travel-itineraries__objective-text">{{obj[0]}}</span>
                             <input class="travel-itineraries__objective-checkbox" type="checkbox" id="{{obj[0]}}"
-                                name="objective">
+                                name="objective" value="{{obj[0]}}">
                         </li>
                         {% endfor %}
                         <p class="travel-itineraries__results-not-found">No results found for your search :(</p>
