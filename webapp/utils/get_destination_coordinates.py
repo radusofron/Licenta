@@ -1,7 +1,6 @@
-import mysql.connector
 import requests
 import urllib.parse
-from utils_database import dba, update_destination_coordinates
+from utils_database import dba, update_destination_coordinates, close_connection_to_dba
 
 
 cities = [
@@ -43,9 +42,8 @@ cities = [
 
 
 def get_destination_coordinates(city: str):
-    """Function retrieves the coordinates (latitude and longitude) of a given city.
-    
-    Function is called in get_city_touristic_objectives.
+    """Function retrieves the coordinates (latitude and longitude) of a given city, then inserts them into
+    the database.
     """
     # Read OpenCage Geocoding API key
     try:
@@ -74,8 +72,12 @@ def get_destination_coordinates(city: str):
 
 
 def main():
+    # Extract coordinates for every city
     for city in cities:
         get_destination_coordinates(city)
+
+    # Close database connection
+    close_connection_to_dba(dba)
 
 
 main()

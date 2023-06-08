@@ -1,6 +1,5 @@
-import mysql.connector
 import requests
-import urllib.parse
+from utils_database import dba, extract_destination_coordinates, delete_previous_touristic_objectives, insert_touristic_objective, close_connection_to_dba
 
 
 cities = [
@@ -41,66 +40,6 @@ cities = [
     "Zagreb"]
 
 
-def connect_to_dba():
-    """Function connects to database.
-    """
-    # Database connection details
-    dba_host = 'localhost'
-    dba_user = 'radu'
-    dba_password = 'mysqlradu'
-    dba_name = 'travel_with_us'
-    
-    # Connect to database
-    dba = mysql.connector.connect(host=dba_host, password=dba_password, user=dba_user, database=dba_name)
-    return dba
-
-
-def extract_destination_id_by_name(dba, destination_name: str) -> int:
-    """Function returns the id of a destination based on its name.
-    """
-    # Extract average grades
-    dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `id` FROM destinations WHERE `name`=%s", (destination_name,))
-    destination_id = dba_cursor.fetchone()
-    dba_cursor.close()
-    
-    # Case: no id returned
-    if destination_id is None:
-        return 0
-    return destination_id[0]
-
-
-def get_city_coordinates(city: str) -> tuple:
-    """Function retrieves the coordinates (latitude and longitude) of a given city.
-    
-    Function is called in get_city_touristic_objectives.
-    """
-    # Read OpenCage Geocoding API key
-    try:
-        with open("webapp/static/API_keys/OpenCage.txt", "r") as file:
-            key = file.read()
-    except:
-        return ()
-
-    # URI Encoding for city name
-    city = urllib.parse.quote(city)
-
-    # Create url
-    url = f"https://api.opencagedata.com/geocode/v1/json?q={city}&key={key}&limit=1&pretty=1"
-    # Create request
-    response = requests.get(url)
-    # Get json format
-    response = response.json()
-
-    # Get coordinates
-    latitude = response["results"][0]["geometry"]["lat"]
-    longitude = response["results"][0]["geometry"]["lng"]
-
-    
-
-    return (longitude, latitude)
-
-
 def get_city_touristic_objectives(dba, city: str):
     """Function retrives 500 touristic objectives for a given city, then inserts them into the database.
     """
@@ -116,7 +55,7 @@ def get_city_touristic_objectives(dba, city: str):
     limit = 500
 
     # Extract coordinates of the city
-    coordinates = get_city_coordinates(city)
+    coordinates = extract_destination_coordinates(dba, city)
 
     # Create url
     url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{coordinates[0]},{coordinates[1]},{meters}&limit={limit}&lang=en&apiKey={key}"
@@ -151,33 +90,12 @@ def get_city_touristic_objectives(dba, city: str):
             new_data["coordinates"]["latitude"] = float(touristic_objective["geometry"]["coordinates"][1])
             new_data["place_id"] = touristic_objective["properties"]["place_id"]
             
-            # TODO -> databse function
-
-    
-    # Close cursor and commit changes
-    dba_cursor.close()
-    dba.commit()
-
-
-def delete_previous_touristic_objectives(dba):
-    """Function deletes the previously added touristic objectives from the database.
-    """
-    # Open cursor
-    dba_cursor = dba.cursor()
-
-    # Delete from database
-    dba_cursor.execute("DELETE FROM `touristic_objectives`")
-
-    # Close cursor and commit changes
-    dba_cursor.close()
-    dba.commit()
+            # Insert touristic objective into the database
+            insert_touristic_objective(dba, city, new_data)
 
 
 def main():
-    # Connect to database (creating database object)
-    dba = connect_to_dba()
-
-    # Delete all the data from database
+    # Delete all the touristic objectives from database
     delete_previous_touristic_objectives(dba)
 
     # Extract toursitic objectives for every city
@@ -185,8 +103,8 @@ def main():
         print("For city: ", city)
         get_city_touristic_objectives(dba, city)
 
-    # Close connection to database
-    dba.close()
+    # Close database connection
+    close_connection_to_dba(dba)
 
 
 main()

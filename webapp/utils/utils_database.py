@@ -87,5 +87,11 @@ def delete_previous_touristic_objectives(dba):
     dba.commit()
 
 
+def close_connection_to_dba(dba):
+    """Function closes the connection with the database.
+    """
+    dba.close()
+
+
 # Connect to database (creating database object)
 dba = connect_to_dba()
