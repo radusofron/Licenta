@@ -395,13 +395,22 @@ input[type=radio]:checked ~ .travel-itineraries__algorithm-name{
 button.travel-itineraries__generate-button{
     align-self: flex-start;
     font-size: var(--fs-read);
-    border: 0.2rem solid var(--dark-grey);
+    outline: 0.2rem solid var(--dark-grey);
     background-color: var(--dark-grey);
     color: var(--white);
 }
 button.travel-itineraries__generate-button:hover{
     background-color: var(--white);
     color: var(--dark-grey);
+}
+button.travel-itineraries__generate-button.disabled{
+    outline: 0.2rem solid var(--black-12-5);
+    background-color: var(--black-12-5);
+    cursor: default;
+}
+button.travel-itineraries__generate-button.disabled:hover{
+    background-color: var(--black-12-5);
+    color: var(--white);
 }
 .travel-itineraries__disclaimer{
     color: var(--grey);

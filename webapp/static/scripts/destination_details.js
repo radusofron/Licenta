@@ -145,6 +145,110 @@ function displayAlgorithmInformation() {
 }
 
 
+/* TRAVEL ITINERARY */
+// Function styles disabled upload photo button
+function styleDisabledButton(button) {
+    if (! button.classList.contains("disabled")) {
+        button.classList.add("disabled")
+    }
+}
+
+// Function styles enabled upload photo button
+function styleEnabledButton(button) {
+    if (button.classList.contains("disabled")) {
+        button.classList.remove("disabled")
+    }
+}
+
+// Function validates wheter the button can be clicked or not based on the following conditions:
+// - number of days has to be selected
+// - number of tourisitc objectives has to be at least equal with the number of days selected
+// - algorithm has to be chosen
+// It enables or disables the button accordingly.
+function validateTravelItinerary(daysNumber, objectivesButtons, generateButton, daysButtonsChecked, algorithmsButtonsChecked) {
+        
+    // Initially, number of touristic objectives checked is 0
+    let buttonsChecked = 0
+
+    // Find how many touristic objectives are checked
+    objectivesButtons.forEach(otherObjectiveButton => {
+        if (otherObjectiveButton.checked) {
+            buttonsChecked ++;
+        }
+    });
+
+    // Check conditions to be satisfied
+    if (buttonsChecked >= daysNumber && algorithmsButtonsChecked && daysButtonsChecked) {
+        generateButton.disabled = false
+        styleEnabledButton(generateButton)
+    }
+    else {
+        generateButton.disabled = true
+        styleDisabledButton(generateButton)
+    }
+}
+
+// Function extracts travel itinerary buttons and detects changes
+function getTravelItineraryButtons() {
+    // Get days radio buttons
+    const daysButtons = document.querySelectorAll(".travel-itineraries__day-radio")
+    // Get algorithms radio buttons
+    const algorithmsButtons = document.querySelectorAll(".travel-itineraries__algorithm-radio")
+    // Get touristic objectives checkbox buttons
+    const objectivesButtons = document.querySelectorAll(".travel-itineraries__objective-checkbox")
+
+    // Get generate button
+    const generateButton = document.querySelector(".travel-itineraries__generate-button")
+
+    // Boolean variables 
+    let daysButtonsChecked = false
+    let algorithmsButtonsChecked = false
+    
+    // Initial number of days
+    let daysNumber = 0
+
+    // Determine wheter a radio button for days has been checked or not
+    daysButtons.forEach(dayButton => {
+        dayButton.addEventListener("change", function() {
+            // Get nummber of days chosen
+            daysNumber = dayButton.value
+            
+            // If a radio button is checked, then condition is satisfied
+            if (dayButton.checked && daysButtonsChecked == false) {
+                daysButtonsChecked = true
+            }
+
+            // Case: user changed the number of days or the number of days is his last choice
+            validateTravelItinerary(daysNumber, objectivesButtons, generateButton, daysButtonsChecked, algorithmsButtonsChecked)
+        });
+    });
+
+    // Determine wheter a radio buttons for algorithms has been checked or not
+    algorithmsButtons.forEach(algorithmButton => {
+        algorithmButton.addEventListener("change", function() {
+           // If a radio button is checked, then the condition is satisfied
+            if (algorithmButton.checked && algorithmsButtonsChecked == false) {
+                algorithmsButtonsChecked = true
+            }
+
+            // Case: user changed the algortihm or the algorithm is his last choice
+            validateTravelItinerary(daysNumber, objectivesButtons, generateButton, daysButtonsChecked, algorithmsButtonsChecked)
+        });
+    });
+
+    // Determine wheter there are enough touristic objectives checked
+    objectivesButtons.forEach(objectiveButton => {
+        objectiveButton.addEventListener("change", function() {
+
+            // Case: user changed the number of touristic objectives or the number of tourisitc 
+            // objectives is his last choice
+            validateTravelItinerary(daysNumber, objectivesButtons, generateButton, daysButtonsChecked, algorithmsButtonsChecked)
+        });
+    });
+
+}
+
+
 // Function creates average grades graph
 function createGradesGraph() {
     // Get graph lines
@@ -249,11 +353,22 @@ function disableActionButtons() {
 
 
 // Function applies a specific style to the sticky element when it reaches the top of the page.
-function setStyletToStickyElement () {
+function setStyleToStickyElement () {
     // Get sticky element
     const stickyElement = document.querySelector(".destination__middle-container")
 
     let isAtTheTop = false
+
+    // Change style if sticky element is already at the top
+    // Get sticky element position
+    positions = stickyElement.getBoundingClientRect()
+    // If sticky element at the top, apply style
+    if (positions.top == 0) {
+        if (isAtTheTop == false) {
+            stickyElement.style.boxShadow = "0rem 0.25rem 1rem #D47E73"
+            isAtTheTop = true
+        }
+    }
 
     // Change style if window was scrolled
     document.addEventListener("scroll", () => {
@@ -321,10 +436,12 @@ window.addEventListener("load", function() {
     // Add an event listener for search bar
     searchBar.addEventListener("input", () => returnTouristicObjectives(searchBar))
 
-    displayAlgorithmInformation()
+    // Order: after importance
+    disableActionButtons()
+    exitModal()
+    setStyleToStickyElement()
     createGradesGraph()
     setProfilePictureColors()
-    disableActionButtons()
-    setStyletToStickyElement()
-    exitModal()
+    getTravelItineraryButtons()
+    displayAlgorithmInformation()
   });

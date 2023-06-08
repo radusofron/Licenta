@@ -246,7 +246,6 @@ def update_weather(city: str):
     # Create json name and json path
     json_name = "weather" + ".json"
     json_path = "webapp/static/destinations_data/" + city + "/" + json_name
-    print(json_path)
 
     if os.path.exists(json_path):
         # Case: check last update
@@ -361,6 +360,21 @@ def get_weather_days() -> list:
     return days
 
 
+def validate_travel_itinerary_data():
+    """
+    """
+    print(request.form)
+    # if request.form["days"]:
+    #     print(request.form["days"])
+    # else:
+    #     print("Numarul de zile nu a fost selectat")
+    # if request.form["algorithm"]:
+    #     print(request.form["algorithm"])
+    # else:
+    #     print("Algoritmul nu a fost selectat")
+    # TODO -> de scris aici pana diseara
+
+
 @destination_details_controller_blueprint.route("/api/destination_details", methods=['GET', 'POST'])
 def destination_details() -> Response:
     # POST request:
@@ -386,6 +400,11 @@ def destination_details() -> Response:
         elif "remove-visited" in request.form:
             delete_visited_destination_for_user(dba, session["user_id"], session["current_city"])
             flash("remove from visited")
+
+        # 5. Generate travel itinerary
+        elif "generate" in request.form:
+            print("Generam traseu de calatorie pentru ", session["current_city"])
+            validate_travel_itinerary_data()
 
         # Send city and action via flash
         flash(session["current_city"])

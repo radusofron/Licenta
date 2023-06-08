@@ -74,7 +74,7 @@
             selection of up to 250 touristic
             objectives to choose from.</p>
         <p class="travel-itineraries__intro">Follow these simple steps to design your travel itineray:</p>
-        <form class="travel-itineraries__steps">
+        <form class="travel-itineraries__steps" action="/api/destination_details" method="post">
             <div class="travel-itineraries__step">
                 1. Choose the number of days for your trip:
                 <div class="travel-itineraries__days-container">
@@ -88,7 +88,8 @@
                 </div>
             </div>
             <div class="travel-itineraries__step">
-                2. Select your preferred touristic objectives from our list:
+                2. Select your preferred touristic objectives from our list. Make sure to choose at least one touristic
+                objective for each day you have selected for your travel itinerary:
                 <div class="travel-itineraries__objectives-container">
                     <input class="travel-itineraries__input" maxlength="40" placeholder="Search..." autocomplete="off"
                         name="destination" type="text">
@@ -144,8 +145,10 @@
             <div class="travel-itineraries__step">
                 4. Once you have made your selections, click on the button below. Please
                 note that the generation process may take a while, depending on the complexity of your chosen options.
-                <button class="travel-itineraries__generate-button" type="submit" name="generate">Generate travel
-                    itinerary</button>
+                <button class="travel-itineraries__generate-button disabled" type="submit" name="generate">Generate
+                    travel
+                    itinerary
+                </button>
             </div>
         </form>
         <div class="travel-itineraries__disclaimer">
