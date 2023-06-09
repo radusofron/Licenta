@@ -1,0 +1,13 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/itineraries.css') }}" />
+{% endblock %}
+
+{% block title %} Site name | Itineraries {% endblock %}
+
+{% block content %}
+<main>
+    Sunt pe itineraries, mai exact pe {{option}}
+</main>
+{% endblock %}

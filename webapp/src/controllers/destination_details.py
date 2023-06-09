@@ -38,7 +38,7 @@ def validate_url_parameters():
     """Function validates url parameters. All possible cases included
     """
     # Extract city
-    city = request.args.get("city")
+    city = request.args.get("id")
 
     # Extract available destinations 
     destinations = extract_destinations_names(dba)

@@ -792,7 +792,19 @@ def insert_itinerary_for_user(dba, itinerary_name: str, user_id: int, destiantio
     # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
-    
+
+
+def extract_itineraries_names(dba, user_id: int):
+    """Function returns the names of all the travel itineraries of an user.
+    """
+    # Extract travel itineraries names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name` FROM `itineraries` WHERE `user_id`=%s", (user_id,))
+    itineraries_names = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    return itineraries_names
+
 
 # Create database object
 dba = connect_to_dba()
