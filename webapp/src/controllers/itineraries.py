@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_itineraries_id
+from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id
 
 itineraries_controller_blueprint = Blueprint("itineraries_controller_blueprint", __name__)
 
@@ -49,8 +49,30 @@ def validate_url_parameters():
     return option
 
 
+def get_itineraries():
+    """Function extracts and processes all the travel itineraries of an user
+    """
+    # Extarct itineraries main details
+    itineraries = extract_itineraries_main_details(dba, session["user_id"])
+
+    # Modify the existing itineraries:
+    # 1. Add city name
+    # 2. If an itinerary has no name, set its id as the name
+    # 3. Convert date to string format
+    formatted_itineraries = []
+    for itinerary in itineraries:
+        destination_name = extract_destination_name_by_id(dba, itinerary[2]) # type: ignore
+        if itinerary[1] == "":
+            formatted_itinerary = (itinerary[0], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
+        else:
+            formatted_itinerary = (itinerary[1], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
+        formatted_itineraries.append(formatted_itinerary)
+
+    return formatted_itineraries
+            
+    
 @itineraries_controller_blueprint.route("/api/itineraries")
-def itineraries() -> Response:
+def itineraries_details() -> Response:
 
     # GET request:
 
@@ -65,9 +87,14 @@ def itineraries() -> Response:
         )
     
     # Case: all itineraries
+    if option == "all":
+        itineraries = get_itineraries()
+        return make_response(
+            jsonify({"option": option, "itineraries": itineraries}),
+            status.HTTP_200_OK,
+        )
     
-    # Case: itinerary exists
-
+    # Case: specific itinerary
     return make_response(
         jsonify({"option": option}),
         status.HTTP_200_OK,

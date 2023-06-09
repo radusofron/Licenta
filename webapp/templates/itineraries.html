@@ -8,6 +8,14 @@
 
 {% block content %}
 <main>
-    Sunt pe itineraries, mai exact pe {{option}}
+    {% if option == "all" %}
+    <h3 class="itineraries__title">Itineraries</h3>
+    <section class="itineraries__intro"></section>
+    <section class="itineraries__grid-container">
+        {% for itinerary in itineraries %}
+        {{itinerary[0]}}, {{itinerary[1]}}, {{itinerary[2]}}
+        {% endfor %}
+    </section>
+    {% endif %}
 </main>
 {% endblock %}

@@ -1,4 +1,4 @@
-from controllers.itineraries import itineraries
+from controllers.itineraries import itineraries_details
 from flask import Blueprint, make_response, render_template, session, redirect
 from flask.wrappers import Response
 from flask_api import status
@@ -9,7 +9,7 @@ itineraries_view_blueprint = Blueprint("itineraries_view_blueprint", __name__)
 
 
 @itineraries_view_blueprint.route("/itineraries")
-def itineraries_view() -> Response:
+def itineraries_details_view() -> Response:
     # User is not logged in
     if not session["logged_in"]:
         return make_response(
@@ -17,7 +17,7 @@ def itineraries_view() -> Response:
         )
     
     # Extract data
-    results = itineraries()
+    results = itineraries_details()
     itineraries_data = json.loads(results.data)
     option = itineraries_data["option"]
     
@@ -27,8 +27,14 @@ def itineraries_view() -> Response:
             redirect("/home", code=302)
         )
 
-    # Case: good option
+    # Case: all itineraries
+    if option == "all":
+        itineraries = itineraries_data["itineraries"]
+
+    # Case: specific itinerary
+    else:
+        itineraries = ""
 
     return make_response(
-        render_template("itineraries.html", option = option)
+        render_template("itineraries.html", option = option, itineraries = itineraries)
     )

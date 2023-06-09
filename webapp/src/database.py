@@ -800,13 +800,25 @@ def insert_itinerary_for_user(dba, itinerary: dict, user_id: int, destiantion_na
 def extract_itineraries_id(dba, user_id: int):
     """Function returns the ids of all the travel itineraries of an user.
     """
-    # Extract travel itineraries names
+    # Extract travel itineraries ids
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `id` FROM `itineraries` WHERE `user_id`=%s", (user_id,))
     itineraries_ids = dba_cursor.fetchall()
     dba_cursor.close()
 
     return itineraries_ids
+
+
+def extract_itineraries_main_details(dba, user_id: int):
+    """Function returns the ids, names, for which cities and dates of all the travel itineraries of an user.
+    """
+    # Extract travel itineraries ids, names, dates
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `id`, `name`, `destination_id`, `date` FROM `itineraries` WHERE `user_id`=%s ORDER BY `date` DESC", (user_id,))
+    itineraries_main_details = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    return itineraries_main_details
 
 
 # Create database object
