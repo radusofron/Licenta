@@ -143,7 +143,18 @@
                 </div>
             </div>
             <div class="travel-itineraries__step">
-                4. Once you have made your selections, click on the button below. Please
+                4. (Optional) You can add a name and a description for your travel itinerary. This will help you easily
+                identify it among other itineraries:
+                <div class="travel-itineraries__optional-container">
+                    <input maxlength="64" autocomplete="off" class="optional__name-input" placeholder="Name" name="name"
+                        type="text">
+                    <input maxlength="256" autocomplete="off" class="optional__description-input"
+                        placeholder="Description" name="description" type="text">
+                </div>
+            </div>
+            <div class="travel-itineraries__step">
+                5. Once you have completed the steps, click on the
+                button below. Please
                 note that the generation process may take a while, depending on the complexity of your chosen options.
                 <button class="travel-itineraries__generate-button disabled" type="submit" name="generate">Generate
                     travel

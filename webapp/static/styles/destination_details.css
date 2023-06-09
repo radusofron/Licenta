@@ -269,8 +269,7 @@ input[type=radio]:checked ~ .travel-itineraries__day-text{
     flex-direction: column;
     gap: 3rem;
 }
-input[type=text].travel-itineraries__input{   
-    width: 100%;
+input[type=text]{   
     font-size: var(--fs-read);
     font-weight: var(--medium);
     border: none;
@@ -285,11 +284,14 @@ input[type=text]:focus{
     /* Properties when input is focused */
     outline: none;
 }
-input[type=text].travel-itineraries__input::placeholder{
+input[type=text]::placeholder{
     /* Properties for placeholder */
     font-style: italic;
     color: var(--grey);
     transition: 250ms;   
+}
+input[type=text].travel-itineraries__input{
+    width: 100%;
 }
 ol.travel-itineraries__objectives{
     list-style-type: decimal;
@@ -391,6 +393,17 @@ input[type=radio]:checked ~ .travel-itineraries__algorithm-name{
 }
 .travel-itineraries__algorithm-details.active{
     display: block;
+}
+.travel-itineraries__optional-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+input[type=text].optional__name-input{
+    width: calc(50% + 3rem);
+}
+input[type=text].optional__description-input{
+    width: calc(50% + 3rem);
 }
 button.travel-itineraries__generate-button{
     align-self: flex-start;

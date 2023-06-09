@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_itineraries_names
+from database import dba, extract_itineraries_id
 
 itineraries_controller_blueprint = Blueprint("itineraries_controller_blueprint", __name__)
 
@@ -29,8 +29,8 @@ def validate_url_parameters():
     option = request.args.get("id")
 
     # Extract user's itineraries
-    itineraries_names = extract_itineraries_names(dba, session["user_id"])
-    itineraries_names = create_list_with_itineraries(itineraries_names)
+    itineraries_ids = extract_itineraries_id(dba, session["user_id"])
+    itineraries_ids = create_list_with_itineraries(itineraries_ids)
 
     # Case: no paramater given
     if option is None:
@@ -38,10 +38,10 @@ def validate_url_parameters():
         return action
     
     # Add parameter all as a valid option
-    itineraries_names.append("all")
+    itineraries_ids.append("all")
 
     # Case: wrong itinerary id
-    if option not in itineraries_names:
+    if option not in itineraries_ids:
         action = "redirect"
         return action
     

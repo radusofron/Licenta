@@ -38,7 +38,7 @@ def validate_url_parameters():
     """Function validates url parameters. All possible cases included
     """
     # Extract city
-    city = request.args.get("id")
+    city = request.args.get("city")
 
     # Extract available destinations 
     destinations = extract_destinations_names(dba)
@@ -403,7 +403,7 @@ def create_user_folder(folder_name: str):
         os.mkdir(folder_path)
 
 
-def create_travel_itinerary(days: int, objectives: list[str], algorithm: str):
+def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, itinerary: dict):
     """Function creates travel itinerary based on user's options
     """
     # Extract touristic objectives details
@@ -455,16 +455,16 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str):
 
         # Save representation
         create_user_folder(str(session["user_id"]))
-        # Create itinerary id (= name)
-        itinerary_name = urllib.parse.quote(str(uuid.uuid4()))
-        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + itinerary_name +  ".png")
+        # Create itinerary id
+        itinerary["id"] = urllib.parse.quote(str(uuid.uuid4()))
+        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + itinerary["id"] +  ".png")
 
         # Insert itinerary into the database
-        insert_itinerary_for_user(dba, itinerary_name, session["user_id"], session["current_city"], 
+        insert_itinerary_for_user(dba, itinerary, session["user_id"], session["current_city"], 
                                   objectives_groups)
 
         # Return itinerary id
-        return itinerary_name
+        return itinerary["id"]
 
     return ""
 
@@ -501,12 +501,16 @@ def destination_details() -> Response:
             days = int(request.form["days"])
             objectives = request.form.getlist("objective")
             algorithm = request.form["algorithm"]
+            # Create dictionary to store itinerary details
+            itinerary = dict()
+            itinerary["name"] = request.form.get("name", "")
+            itinerary["description"] = request.form.get("description", "")
 
             # Create itinerary
-            itinerary_name = create_travel_itinerary(days, objectives, algorithm)
+            itinerary_id = create_travel_itinerary(days, objectives, algorithm, itinerary)
 
             return make_response(
-                redirect("/itinerary?id=" + itinerary_name, code=302)
+                redirect("/itineraries?id=" + itinerary_id, code=302)
             )
 
         # Send city and action via flash

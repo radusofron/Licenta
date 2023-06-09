@@ -777,33 +777,36 @@ def extract_touristic_objective_coordinates_by_name(dba, objective_name: str):
     return details
 
 
-def insert_itinerary_for_user(dba, itinerary_name: str, user_id: int, destiantion_name: str, objectives_groups: dict):
+def insert_itinerary_for_user(dba, itinerary: dict, user_id: int, destiantion_name: str, objectives_groups: dict):
     """Function inserts a travel itinerary for an user into the database.
     """
     # Extract destination id
     destination_id = extract_destination_id_by_name(dba, destiantion_name)
 
+    # Extract date
+    date = time.strftime('%Y-%m-%d %H:%M:%S')
+
     # Open cursor
     dba_cursor = dba.cursor()
 
-    # Update review   
-    dba_cursor.execute("INSERT INTO `itineraries` (`name`, `user_id`, `destination_id`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`, `day7`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (itinerary_name, user_id, destination_id, objectives_groups["day1"], objectives_groups["day2"], objectives_groups["day3"], objectives_groups["day4"], objectives_groups["day5"], objectives_groups["day6"], objectives_groups["day7"]))
+    # Insert itinerary   
+    dba_cursor.execute("INSERT INTO `itineraries` (`id`, `name`, `description`, `user_id`, `destination_id`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`, `day7`, `date`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (itinerary["id"], itinerary["name"], itinerary["description"], user_id, destination_id, objectives_groups["day1"], objectives_groups["day2"], objectives_groups["day3"], objectives_groups["day4"], objectives_groups["day5"], objectives_groups["day6"], objectives_groups["day7"], date))
 
     # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
 
 
-def extract_itineraries_names(dba, user_id: int):
-    """Function returns the names of all the travel itineraries of an user.
+def extract_itineraries_id(dba, user_id: int):
+    """Function returns the ids of all the travel itineraries of an user.
     """
     # Extract travel itineraries names
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `name` FROM `itineraries` WHERE `user_id`=%s", (user_id,))
-    itineraries_names = dba_cursor.fetchall()
+    dba_cursor.execute("SELECT `id` FROM `itineraries` WHERE `user_id`=%s", (user_id,))
+    itineraries_ids = dba_cursor.fetchall()
     dba_cursor.close()
 
-    return itineraries_names
+    return itineraries_ids
 
 
 # Create database object
