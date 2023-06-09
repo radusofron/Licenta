@@ -1,13 +1,14 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names, extract_touristic_objective_coordinates_by_name
+from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names, extract_touristic_objective_coordinates_by_name, insert_itinerary_for_user
 import requests
 from datetime import datetime, timedelta
 import os
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
 from sklearn.cluster import KMeans
 import uuid
 import urllib.parse
@@ -411,7 +412,7 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str):
         objectives_details.extend(extract_touristic_objective_coordinates_by_name(dba, objective))
     
     # Create pandas dataframe
-    df = pd.DataFrame(objectives_details, columns=["Name", "Address", "Longitude", "Latitude", "Opening_hours"])
+    df = pd.DataFrame(objectives_details, columns=["Name", "Longitude", "Latitude"])
     # Convert from string to float
     df["Longitude"] = df["Longitude"].astype(float)
     df["Latitude"] = df["Latitude"].astype(float)
@@ -424,24 +425,46 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str):
         # Convert to list
         clusters = clusters.tolist()
 
-        # Insert itinerary into the database
-        # TODO insert
+        # Group objectives by clusters
+        # Create a string containing all the objectives of a group, for every group
+        objectives_groups = {"day1": "", "day2": "", "day3": "", "day4": "", "day5": "", "day6": "", "day7": ""}
+        # The objectives of a group are delimitated using 
+        delimiter = "####"
+        for index in range(len(objectives)):
+            if clusters[index] == 0:
+                objectives_groups["day1"] = objectives_groups["day1"] + objectives[index] + delimiter
+            elif clusters[index] == 1:
+                objectives_groups["day2"] = objectives_groups["day2"] + objectives[index] + delimiter
+            elif clusters[index] == 2:
+                objectives_groups["day3"] = objectives_groups["day3"] + objectives[index] + delimiter
+            elif clusters[index] == 3:
+                objectives_groups["day4"] = objectives_groups["day4"] + objectives[index] + delimiter
+            elif clusters[index] == 4:
+                objectives_groups["day5"] = objectives_groups["day5"] + objectives[index] + delimiter
+            elif clusters[index] == 5:
+                objectives_groups["day6"] = objectives_groups["day6"] + objectives[index] + delimiter
+            elif clusters[index] == 6:
+                objectives_groups["day7"] = objectives_groups["day7"] + objectives[index] + delimiter
 
         # Set colors for clusters
         colors = colors_for_clusters(clusters)
 
         # Create cluster representation
-        figure = plt.figure(edgecolor="#3B3941")
+        matplotlib.use("agg")
         plt.scatter(df["Longitude"], df["Latitude"], color = colors)
 
         # Save representation
         create_user_folder(str(session["user_id"]))
         # Create itinerary id (= name)
-        figure_name = urllib.parse.quote(str(uuid.uuid4()))
-        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + figure_name +  ".png")
+        itinerary_name = urllib.parse.quote(str(uuid.uuid4()))
+        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + itinerary_name +  ".png")
+
+        # Insert itinerary into the database
+        insert_itinerary_for_user(dba, itinerary_name, session["user_id"], session["current_city"], 
+                                  objectives_groups)
 
         # Return itinerary id
-        return figure_name
+        return itinerary_name
 
     return ""
 
@@ -480,11 +503,10 @@ def destination_details() -> Response:
             algorithm = request.form["algorithm"]
 
             # Create itinerary
-            itinerary_id = create_travel_itinerary(days, objectives, algorithm)
+            itinerary_name = create_travel_itinerary(days, objectives, algorithm)
 
-            # TODO -> verificare in /itinerary sa aiba user-ul acces la itinerariul respectiv
             return make_response(
-                redirect("/itinerary?id=" + itinerary_id, code=302)
+                redirect("/itinerary?id=" + itinerary_name, code=302)
             )
 
         # Send city and action via flash

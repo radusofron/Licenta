@@ -770,12 +770,29 @@ def extract_touristic_objective_coordinates_by_name(dba, objective_name: str):
     """
     # Extract details
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `name`, `address`, `longitude`, `latitude`, `opening_hours` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
+    dba_cursor.execute("SELECT `name`, `longitude`, `latitude` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
     details = dba_cursor.fetchall()
     dba_cursor.close()
 
     return details
 
+
+def insert_itinerary_for_user(dba, itinerary_name: str, user_id: int, destiantion_name: str, objectives_groups: dict):
+    """Function inserts a travel itinerary for an user into the database.
+    """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destiantion_name)
+
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Update review   
+    dba_cursor.execute("INSERT INTO `itineraries` (`name`, `user_id`, `destination_id`, `day1`, `day2`, `day3`, `day4`, `day5`, `day6`, `day7`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (itinerary_name, user_id, destination_id, objectives_groups["day1"], objectives_groups["day2"], objectives_groups["day3"], objectives_groups["day4"], objectives_groups["day5"], objectives_groups["day6"], objectives_groups["day7"]))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+    
 
 # Create database object
 dba = connect_to_dba()
