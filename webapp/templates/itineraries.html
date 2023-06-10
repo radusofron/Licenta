@@ -12,16 +12,28 @@
 {% if option == "all" %}
 <main class="itineraries">
     <h3 class="itineraries__title">Itineraries</h3>
-    <p class="itineraries__intro">View and manage all the travel itineraries you have created. If you wanna learn
-        more about...</p>
+    <p class="itineraries__intro">
+        Tip: If you're curious about how we compute your travel itineraries and would like to
+        learn how you can create even better travel plans, we invite you to explore our <a
+            class="itineraries__intro-link" href="/home">dedicated page</a>.
+    </p>
+    <p class="itineraries__intro">
+        Your travel itineraries:
+    </p>
     <section class="itineraries__grid-container">
         {% for itinerary in itineraries %}
         <div class="itineraries__itinerary">
             <div class="itineraries__itinerary-text">
                 <p class="itineraries__itinerary-name">{{itinerary[0]}}</p>
                 <ul class="itineraries__itinerary-details">
-                    <li class="itineraries__itinerary-detail">City: {{itinerary[1]}}</li>
-                    <li class="itineraries__itinerary-detail">Created on: {{itinerary[2]}}</li>
+                    <li class="itineraries__itinerary-detail">
+                        <span class="itineraries__itinerary-important-detail">City:</span>
+                        {{itinerary[1]}}
+                    </li>
+                    <li class="itineraries__itinerary-detail">
+                        <span class="itineraries__itinerary-important-detail">Created on:</span>
+                        {{itinerary[2]}}
+                    </li>
                 </ul>
             </div>
             <div class="itineraries__itinerary-open-button-container">

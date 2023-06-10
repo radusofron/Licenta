@@ -11,23 +11,23 @@ window.addEventListener("load", function() {
     for (let index = 0; index <= buttons.length; index++) {
         if (number % 5 == 0) {
             buttons[index].style.backgroundColor = "#608DB8"
-            containers[index].style.borderRightColor = "#608DB8"
+            containers[index].style.borderRight = "1.5rem solid #608DB8"
         }
         if (number % 5 == 1) {
             buttons[index].style.backgroundColor = "#7EBDC2"
-            containers[index].style.borderRightColor = "#7EBDC2"
+            containers[index].style.borderRight = "1.5rem solid #7EBDC2"
         }
         if (number % 5 == 2) {
             buttons[index].style.backgroundColor = "#8C98AD"
-            containers[index].style.borderRightColor = "#8C98AD"
+            containers[index].style.borderRight = "1.5rem solid #8C98AD"
         }
         if (number % 5 == 3) {
             buttons[index].style.backgroundColor = "#C4A4A4"
-            containers[index].style.borderRightColor = "#C4A4A4"
+            containers[index].style.borderRight = "1.5rem solid #C4A4A4"
         }
         if (number % 5 == 4) {
             buttons[index].style.backgroundColor = "#D47E73"
-            containers[index].style.borderRightColor = "#D47E73"
+            containers[index].style.borderRight = "1.5rem solid #D47E73"
         }
         number++
     }

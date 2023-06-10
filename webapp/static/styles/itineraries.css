@@ -19,6 +19,14 @@ main.itineraries{
     font-weight: var(--semibold);
     color: var(--grey);
 }
+.itineraries__intro-link{
+    color: var(--blue);
+    text-decoration: underline;
+    transition: 250ms;
+}
+.itineraries__intro-link:hover{
+    color: var(--grey);
+}
 /* Content */
 .itineraries__grid-container{
     display: grid;
@@ -41,7 +49,6 @@ main.itineraries{
     width: 100%;
     height: 100%;
     padding: 3rem 2.5vw 3rem 2.5vw;
-    border-right: 1.5rem solid;
     box-sizing: border-box;
     color: var(--dark-grey);
     display: flex;
@@ -78,6 +85,9 @@ main.itineraries{
 .itineraries__itinerary-detail{
     font-size: var(--fs-description);
     font-weight: var(--medium);
+}
+.itineraries__itinerary-important-detail{
+    font-weight: var(--semibold);
 }
 .itineraries__itinerary-open-button-container{
     position: absolute;
