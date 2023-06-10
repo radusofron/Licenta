@@ -1,0 +1,105 @@
+/* All itineraries */
+
+main.itineraries{
+    padding: 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+/* Intro */
+.itineraries__title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.itineraries__intro{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+/* Content */
+.itineraries__grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 6rem;
+    row-gap: 4.5rem;
+}
+.itineraries__itinerary{
+    position: relative;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 1.5rem var(--black-25);
+    display: flex;
+    overflow: hidden;
+    transition: 250ms;
+}
+.itineraries__itinerary:hover > .itineraries__itinerary-open-button-container{
+    left: 50%;
+}
+.itineraries__itinerary:hover > .itineraries__itinerary-open-button-container:hover{
+    left: 40%;
+    width: 60%;
+}
+.itineraries__itinerary-text{
+    padding: 3rem 2.5vw 3rem 2.5vw;
+    box-sizing: border-box;
+    color: var(--dark-grey);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    transition: 250ms;
+}
+.itineraries__itinerary-text::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    height: 100%;
+    width: 50%;
+    opacity: 0.5;
+    background-color: var(--dark-grey);
+    transition: 250ms;
+}
+.itineraries__itinerary:hover .itineraries__itinerary-text::before{
+    left: 0;
+}
+.itineraries__itinerary-name{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+}
+.itineraries__itinerary-details{
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+.itineraries__itinerary-detail{
+    font-size: var(--fs-description);
+    font-weight: var(--medium);
+}
+.itineraries__itinerary-open-button-container{
+    position: absolute;
+    left: 100%;
+    height: 100%;
+    width: 50%;
+    transition: 250ms;
+    z-index: 3;
+}
+.itineraries__open-button{
+    height: 100%;
+    width: 100%;
+    padding: 0.4rem 1.3rem;
+    box-sizing: border-box;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 250ms;
+}

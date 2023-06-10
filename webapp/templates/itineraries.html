@@ -2,20 +2,34 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/itineraries.css') }}" />
+<script src="{{ url_for('static', filename='scripts/itineraries.js') }}" defer></script>
 {% endblock %}
 
 {% block title %} Site name | Itineraries {% endblock %}
 
 {% block content %}
-<main>
-    {% if option == "all" %}
+
+{% if option == "all" %}
+<main class="itineraries">
     <h3 class="itineraries__title">Itineraries</h3>
-    <section class="itineraries__intro"></section>
+    <p class="itineraries__intro">View and manage all the travel itineraries you have created. If you wanna learn
+        more about...</p>
     <section class="itineraries__grid-container">
         {% for itinerary in itineraries %}
-        {{itinerary[0]}}, {{itinerary[1]}}, {{itinerary[2]}}
+        <div class="itineraries__itinerary">
+            <div class="itineraries__itinerary-text">
+                <p class="itineraries__itinerary-name">{{itinerary[0]}}</p>
+                <ul class="itineraries__itinerary-details">
+                    <li class="itineraries__itinerary-detail">City: {{itinerary[1]}}</li>
+                    <li class="itineraries__itinerary-detail">Created on: {{itinerary[2]}}</li>
+                </ul>
+            </div>
+            <div class="itineraries__itinerary-open-button-container">
+                <a class="itineraries__open-button">Open</a>
+            </div>
+        </div>
         {% endfor %}
     </section>
-    {% endif %}
 </main>
+{% endif %}
 {% endblock %}
