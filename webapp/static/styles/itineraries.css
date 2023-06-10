@@ -37,12 +37,11 @@ main.itineraries{
 .itineraries__itinerary:hover > .itineraries__itinerary-open-button-container{
     left: 50%;
 }
-.itineraries__itinerary:hover > .itineraries__itinerary-open-button-container:hover{
-    left: 40%;
-    width: 60%;
-}
 .itineraries__itinerary-text{
+    width: 100%;
+    height: 100%;
     padding: 3rem 2.5vw 3rem 2.5vw;
+    border-right: 1.5rem solid;
     box-sizing: border-box;
     color: var(--dark-grey);
     display: flex;
