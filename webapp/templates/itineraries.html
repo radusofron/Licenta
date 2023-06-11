@@ -17,6 +17,11 @@
         learn how you can create even better travel plans, we invite you to explore our <a
             class="itineraries__intro-link" href="/home">dedicated page</a>.
     </p>
+    {% if itineraries | length == 0 %}
+    <p class="itineraries__intro">
+        It seems like you have not created any travel itineraries yet. :(
+    </p>
+    {% else %}
     <p class="itineraries__intro">
         Your travel itineraries:
     </p>
@@ -24,24 +29,30 @@
         {% for itinerary in itineraries %}
         <div class="itineraries__itinerary">
             <div class="itineraries__itinerary-text">
-                <p class="itineraries__itinerary-name">{{itinerary[0]}}</p>
+                <p class="itineraries__itinerary-name">{{itinerary[1]}}</p>
                 <ul class="itineraries__itinerary-details">
                     <li class="itineraries__itinerary-detail">
                         <span class="itineraries__itinerary-important-detail">City:</span>
-                        {{itinerary[1]}}
+                        {{itinerary[2]}}
                     </li>
                     <li class="itineraries__itinerary-detail">
                         <span class="itineraries__itinerary-important-detail">Created on:</span>
-                        {{itinerary[2]}}
+                        {{itinerary[3]}}
                     </li>
                 </ul>
             </div>
             <div class="itineraries__itinerary-open-button-container">
-                <a class="itineraries__open-button">Open</a>
+                <a class="itineraries__open-button" href="/itineraries?id={{itinerary[0]}}">Open</a>
             </div>
         </div>
         {% endfor %}
     </section>
+    {% endif %}
 </main>
+{% else %}
+<main class="itineraries">{{itineraries}}</main>
+
 {% endif %}
+
+
 {% endblock %}

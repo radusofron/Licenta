@@ -33,7 +33,7 @@ def itineraries_details_view() -> Response:
 
     # Case: specific itinerary
     else:
-        itineraries = ""
+        itineraries = option
 
     return make_response(
         render_template("itineraries.html", option = option, itineraries = itineraries)

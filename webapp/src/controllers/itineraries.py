@@ -63,9 +63,9 @@ def get_itineraries():
     for itinerary in itineraries:
         destination_name = extract_destination_name_by_id(dba, itinerary[2]) # type: ignore
         if itinerary[1] == "":
-            formatted_itinerary = (itinerary[0], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
+            formatted_itinerary = (itinerary[0], itinerary[0], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
         else:
-            formatted_itinerary = (itinerary[1], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
+            formatted_itinerary = (itinerary[0], itinerary[1], destination_name, itinerary[3].strftime('%d %b %Y at %H:%M:%S')) #type: ignore
         formatted_itineraries.append(formatted_itinerary)
 
     return formatted_itineraries

@@ -112,3 +112,77 @@ main.itineraries{
     cursor: pointer;
     transition: 250ms;
 }
+
+/* FOOTER */
+.footer__grid-container {
+    column-gap: 6rem;
+}
+.footer__subtitle{
+    text-align: left;
+}
+.footer__about{
+    padding: 3rem 0vw;
+}
+.footer__about-option{
+    text-align: left;
+}
+.footer__review {
+    padding: 3rem 0vw;
+}
+.footer__review-form{
+    align-items: flex-start;
+}
+.footer__review-description{
+    text-align: left;
+}
+.footer__bottom{
+    column-gap: 6rem;
+}
+.footer__terms{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+.footer__credit{
+    padding: 3rem 0vw;
+    text-align: left;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 1400px) {
+    .itineraries__grid-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 850px) {
+    .itineraries__grid-container{
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 650px){
+    .footer__bottom{
+        flex-direction: column;
+        gap: 0rem;
+    }
+}
+
+
+/* Change font-size */
+@media (max-height: 750px) {
+    .itineraries__title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .itineraries__intro{
+        font-size: var(--fs-description);
+    }
+    .itineraries__itinerary-name{
+        font-size: var(--fs-description);
+    }
+    .itineraries__itinerary-detail{
+        font-size: var(--fs-phone-description);
+    }
+    .itineraries__open-button{
+        font-size: var(--fs-description);
+    }
+}
