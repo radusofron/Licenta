@@ -2,8 +2,19 @@ from flask import Blueprint, make_response, jsonify, session, request, redirect
 from flask_api import status
 from flask.wrappers import Response
 from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id, extract_itinerary, extract_touristic_objectives_details_by_name, delete_itinerary_for_user
+import os
+
 
 itineraries_controller_blueprint = Blueprint("itineraries_controller_blueprint", __name__)
+
+
+def remove_itinerary_representation():
+    """Function removes the representation of a specific itinerary create by the user
+    """
+    # Designated file path
+    file_path = "webapp/static/user_data/" + str(session["user_id"]) + "/" + str(session["current_itinerary"]) +  ".png"
+    os.remove(file_path)
+
 
 def create_list_with_itineraries(itineraries: list) -> list:
     """Function creates a list containing all the destinations names
@@ -125,8 +136,13 @@ def itineraries_details() -> Response:
 
         # Delete itineray
         if session["current_itinerary"] != "":
+
+            # Delete representation
+            remove_itinerary_representation()
+
+            # Delete from database
             delete_itinerary_for_user(dba, session["current_itinerary"])
-            
+
         return make_response(
             redirect("/itineraries?id=all", code=302)
         )

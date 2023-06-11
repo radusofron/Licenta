@@ -399,7 +399,8 @@ def delete_account_and_associated_data(dba, user_id: int):
     # 4. Delete data from reviews destinations table
     dba_cursor.execute("DELETE FROM `reviews_destinations` WHERE user_id=%s;", (user_id,))
 
-    # TODO 5. Delete data from travel itineraries table / json file
+    # 5. Delete data from travel itineraries table
+    dba_cursor.execute("DELETE FROM `itineraries` WHERE user_id=%s;", (user_id,))
 
     # Close cursor and commit changes
     dba_cursor.close()

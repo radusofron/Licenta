@@ -12,6 +12,14 @@ profile_controller_blueprint = Blueprint("profile_controller_blueprint", __name_
 
 
 # POST functions
+def remove_itineraries_representation():
+    """Function removes all the representations of the itineraries created by the user
+    """
+    # Designated file path
+    folder_path = "webapp/static/user_data/" + str(session["user_id"])
+    os.remove(folder_path)
+
+
 def remove_profile_picture():
     """Function removes user's previous profile picture if it exists or the last profile picture when an account is deleted.
     """
@@ -249,7 +257,11 @@ def profile() -> Response:
 
         # 3. Delete account
         elif "delete" in request.form:
-            # Remove account profile picture
+
+            # Delete itineraries' representation
+            remove_itineraries_representation()
+
+            # Delete account profile picture
             remove_profile_picture()
 
             # Delete account from database
