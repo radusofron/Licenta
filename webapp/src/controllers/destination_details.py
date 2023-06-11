@@ -450,8 +450,13 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
         colors = colors_for_clusters(clusters)
 
         # Create cluster representation
+        # 1. Set backend for writing to file
         matplotlib.use("agg")
-        plt.scatter(df["Longitude"], df["Latitude"], color = colors)
+        # Set colors and create figure
+        plt.figure(facecolor = "#F2F2F2")
+        axes = plt.axes()
+        axes.scatter(df["Longitude"], df["Latitude"], color = colors, alpha=0.5)
+        axes.set_facecolor("#F2F2F2")
 
         # Save representation
         create_user_folder(str(session["user_id"]))

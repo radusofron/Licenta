@@ -51,22 +51,38 @@
 </main>
 {% else %}
 <main class="itinerary">
-    <h3 class="itinerary__title">{{itinerary.details[0]}}</h3>
-    <p class="itinerary__description">{{itinerary.details[1]}}</p>
-    <div class="itinerary__details">
-        <div class="itinerary__detail">
-            <img class="itinerary__detail-icon" src="{{url_for('static', filename='/assets/illustrations/city.png')}}">
-            <p class="itinerary__detail-text">
-                {{itinerary.details[2]}}
-            </p>
+    <section class="itinerary__main">
+        <h3 class="itinerary__title">{{itinerary.details[0]}}</h3>
+        <p class="itinerary__description">{{itinerary.details[1]}}</p>
+        <div class="itinerary__details">
+            <div class="itinerary__detail">
+                <img class="itinerary__detail-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/city.png')}}" alt="City: ">
+                <p class="itinerary__detail-text">
+                    {{itinerary.details[2]}}
+                </p>
+            </div>
+            <div class="itinerary__detail">
+                <img class="itinerary__detail-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/date.png')}}" alt="Created on: ">
+                <p class="itinerary__detail-text">
+                    {{itinerary.details[3]}}
+                </p>
+            </div>
         </div>
-        <div class="itinerary__detail">
-            <img class="itinerary__detail-icon" src="{{url_for('static', filename='/assets/illustrations/date.png')}}">
-            <p class="itinerary__detail-text">
-                {{itinerary.details[3]}}
-            </p>
+    </section>
+    <section class="itinerary__representation">
+        <h3 class="representation__title">A visual representation</h3>
+        <p class="representaion__intro">Have a look at the arrangement of your touristic objectives, illustrating how
+            they were
+            grouped by our algorithm for your customized travel plan.</p>
+        <div class="representation__image-container">
+            <img class="representation__image"
+                src="{{url_for('static', filename='/user_data/' + session.user_id | string + '/' + option + '.png')}}"
+                alt="A graphic representation of the touristic objectives of this travel itinerary"
+                alt="Representation">
         </div>
-    </div>
+    </section>
     <ul class="itinerary__days">
         {% for index in range(itinerary.days | length) %}
         <li class="itinerary__day">
@@ -95,9 +111,6 @@
         </li>
         {% endfor %}
     </ul>
-    <div class="itinerary__representation">
-        image
-    </div>
     <div class="itinerary__delete">
         delete
     </div>
