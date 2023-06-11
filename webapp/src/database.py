@@ -844,6 +844,19 @@ def extract_touristic_objectives_details_by_name(dba, objective_name: str):
 
     return details
 
+def delete_itinerary_for_user(dba, itinerary_id: str):
+    """Function deletes a travel itinerary for an user from database.
+    """
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Delete visited destination for user
+    dba_cursor.execute("DELETE FROM `itineraries` WHERE `id`=%s", (itinerary_id, ))
+    
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
 
 # Create database object
 dba = connect_to_dba()

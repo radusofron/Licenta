@@ -1,7 +1,7 @@
-from flask import Blueprint, make_response, jsonify, session, request
+from flask import Blueprint, make_response, jsonify, session, request, redirect
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id, extract_itinerary, extract_touristic_objectives_details_by_name
+from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id, extract_itinerary, extract_touristic_objectives_details_by_name, delete_itinerary_for_user
 
 itineraries_controller_blueprint = Blueprint("itineraries_controller_blueprint", __name__)
 
@@ -76,7 +76,6 @@ def get_itinerary(option: str):
     """
     # Extract itinerary
     itinerary = list(extract_itinerary(dba, session["user_id"], option)) # type: ignore
-    print(itinerary)
 
     # Modify the existing itinerary
     # 1. If itinerary has no name, set its id as the name
@@ -116,13 +115,22 @@ def get_itinerary(option: str):
         for objective in day:
             formatted_itinerary["objectives_details"].append(extract_touristic_objectives_details_by_name(dba, objective))
 
-    print(formatted_itinerary)
     return formatted_itinerary
 
     
-@itineraries_controller_blueprint.route("/api/itineraries")
+@itineraries_controller_blueprint.route("/api/itineraries", methods=['GET', 'POST'])
 def itineraries_details() -> Response:
+    # POST request:
+    if request.method == "POST":
 
+        # Delete itineray
+        if session["current_itinerary"] != "":
+            delete_itinerary_for_user(dba, session["current_itinerary"])
+            
+        return make_response(
+            redirect("/itineraries?id=all", code=302)
+        )
+    
     # GET request:
 
     # Check validation status
@@ -137,13 +145,24 @@ def itineraries_details() -> Response:
     
     # Case: all itineraries
     if option == "all":
+
+        # Clear the session
+        session["current_itinerary"] = ""
+
+        # Get all the itineraries
         itineraries = get_itineraries()
+
         return make_response(
             jsonify({"option": option, "itineraries": itineraries}),
             status.HTTP_200_OK,
         )
     
     # Case: specific itinerary
+
+    # Save itinerary in session
+    session["current_itinerary"] = option
+
+    # Get specific itinerary
     itinerary = get_itinerary(option)
 
     return make_response(
