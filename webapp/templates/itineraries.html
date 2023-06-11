@@ -111,12 +111,14 @@
         </li>
         {% endfor %}
     </ul>
-    <div class="itinerary__delete">
-        delete
-    </div>
-    <div class="itinerary__more">
-        more
-    </div>
+    <section class="itinerary__delete">
+        <h3 class="delete__title">Delete itinerary</h3>
+        <p class="delete__intro">Remove the itinerary from your list. Please note that this action is irreversible and
+            will permanently delete the travel itinerary.</p>
+        <form class="delete__form" action="/api/itineraries" method="post">
+            <button class="delete__button">Delete itinerary</button>
+        </form>
+    </section>
 </main>
 
 {% endif %}

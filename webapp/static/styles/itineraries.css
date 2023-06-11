@@ -178,7 +178,7 @@ section.itinerary__representation{
     width: fit-content;
 }
 .representation__image{
-    border-radius: 0.5rem;
+    border-radius: 1rem;
 }
 
 /* Program */
@@ -228,6 +228,44 @@ li.itinerary__day{
     color: var(--grey); 
     display: flex;
     gap: 0.5rem;
+}
+
+/* Delete */
+section.itinerary__delete{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.delete__title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);  
+}
+.delete__intro{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--grey);  
+}
+form.delete__form{
+    align-self: flex-start;
+}
+button.delete__button{
+    padding: 0.4rem 1.3rem;
+    box-sizing: border-box;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    border-radius: 0.5rem;
+    border: 0.2rem solid var(--dark-pink);
+    background-color: var(--dark-pink);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 250ms;
+}
+button.delete__button:hover{
+    background-color: var(--white);
+    color: var(--dark-pink);
 }
 
 
