@@ -30,11 +30,12 @@ def itineraries_details_view() -> Response:
     # Case: all itineraries
     if option == "all":
         itineraries = itineraries_data["itineraries"]
+        return make_response(
+            render_template("itineraries.html", option = option, itineraries = itineraries)
+        )
 
     # Case: specific itinerary
-    else:
-        itineraries = option
-
+    itinerary = itineraries_data["itinerary"]
     return make_response(
-        render_template("itineraries.html", option = option, itineraries = itineraries)
+        render_template("itineraries.html", option = option, itinerary = itinerary)
     )

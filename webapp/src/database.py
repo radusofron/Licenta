@@ -766,15 +766,15 @@ def extract_touristic_objectives_names(dba, destination_name: str):
 
 
 def extract_touristic_objective_coordinates_by_name(dba, objective_name: str):
-    """Function returns the details of a touristic objective from database.
+    """Function returns the coordinates of a touristic objective from database.
     """
-    # Extract details
+    # Extract coordinates
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `name`, `longitude`, `latitude` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
-    details = dba_cursor.fetchall()
+    coordinates = dba_cursor.fetchall()
     dba_cursor.close()
 
-    return details
+    return coordinates
 
 
 def insert_itinerary_for_user(dba, itinerary: dict, user_id: int, destiantion_name: str, objectives_groups: dict):
@@ -819,6 +819,30 @@ def extract_itineraries_main_details(dba, user_id: int):
     dba_cursor.close()
 
     return itineraries_main_details
+
+
+def extract_itinerary(dba, user_id: int, itinerary_id: str):
+    """Function returns a specific itinerary of an user based on its id from database.
+    """
+    # Extract itinerary
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT * FROM `itineraries` WHERE `user_id`=%s AND `id`=%s", (user_id, itinerary_id))
+    itinerary = dba_cursor.fetchone()
+    dba_cursor.close()
+
+    return itinerary
+
+
+def extract_touristic_objectives_details_by_name(dba, objective_name: str):
+    """Function returns the details of a touristic objective from database.
+    """
+    # Extract details
+    dba_cursor = dba.cursor(buffered = True)
+    dba_cursor.execute("SELECT `address`, `opening_hours` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
+    details = dba_cursor.fetchone()
+    dba_cursor.close()
+
+    return details
 
 
 # Create database object

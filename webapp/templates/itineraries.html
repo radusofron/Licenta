@@ -50,7 +50,61 @@
     {% endif %}
 </main>
 {% else %}
-<main class="itineraries">{{itineraries}}</main>
+<main class="itinerary">
+    <h3 class="itinerary__title">{{itinerary.details[0]}}</h3>
+    <p class="itinerary__description">{{itinerary.details[1]}}</p>
+    <div class="itinerary__details">
+        <div class="itinerary__detail">
+            <img class="itinerary__detail-icon" src="{{url_for('static', filename='/assets/illustrations/city.png')}}">
+            <p class="itinerary__detail-text">
+                {{itinerary.details[2]}}
+            </p>
+        </div>
+        <div class="itinerary__detail">
+            <img class="itinerary__detail-icon" src="{{url_for('static', filename='/assets/illustrations/date.png')}}">
+            <p class="itinerary__detail-text">
+                {{itinerary.details[3]}}
+            </p>
+        </div>
+    </div>
+    <ul class="itinerary__days">
+        {% for index in range(itinerary.days | length) %}
+        <li class="itinerary__day">
+            <h3 class="itinerary__day-title">Day {{index + 1}}</h3>
+            <div class="itinerary__day-objectives">
+                {% for index2 in range(itinerary.days[index] | length) %}
+                <div class="itinerary__objective-container">
+                    <p class="itinerary__objective-name">{{index2 + 1}}. {{itinerary.days[index][index2]}}</p>
+                    <div class="itinerary__objective-details">
+                        <p class="itinerary__objective-detail">
+                            <span class="itinerary__objective-detail-title">Address:</span>
+                            {{itinerary.objectives_details[index2][0]}}
+                        </p>
+                        <p class="itinerary__objective-detail">
+                            <span class="itinerary__objective-detail-title">Opening hours:</span>
+                            {% if itinerary.objectives_details[index2][1] == None %}
+                            no data available
+                            {% else %}
+                            {{itinerary.objectives_details[index2][1]}}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="itinerary__representation">
+        image
+    </div>
+    <div class="itinerary__delete">
+        delete
+    </div>
+    <div class="itinerary__more">
+        more
+    </div>
+</main>
 
 {% endif %}
 

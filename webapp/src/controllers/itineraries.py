@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id
+from database import dba, extract_itineraries_id, extract_itineraries_main_details, extract_destination_name_by_id, extract_itinerary, extract_touristic_objectives_details_by_name
 
 itineraries_controller_blueprint = Blueprint("itineraries_controller_blueprint", __name__)
 
@@ -70,6 +70,55 @@ def get_itineraries():
 
     return formatted_itineraries
             
+
+def get_itinerary(option: str):
+    """Function extracts and processes a specific itinerary of an user
+    """
+    # Extract itinerary
+    itinerary = list(extract_itinerary(dba, session["user_id"], option)) # type: ignore
+    print(itinerary)
+
+    # Modify the existing itinerary
+    # 1. If itinerary has no name, set its id as the name
+    # 2. If itinerary has no description, set standard description
+    # 3. Add city name
+    # 4. Convert date to string format
+    # 5. Parse the touristic objectives rows
+
+    formatted_itinerary = {"details": [], "days": [], "objectives_details": []}
+
+    # 1:
+    if itinerary[1] == "":
+       formatted_itinerary["details"].append(itinerary[0])
+    else: 
+        formatted_itinerary["details"].append(itinerary[1])
+
+    # 2:
+    if itinerary[2] == "":
+        formatted_itinerary["details"].append("no description provided")
+    else:
+        formatted_itinerary["details"].append(itinerary[2])
+
+    # 3:
+    destination_name = extract_destination_name_by_id(dba, itinerary[4]) # type: ignore
+    formatted_itinerary["details"].append(destination_name)
+
+    # 4:
+    formatted_itinerary["details"].append(itinerary[12].strftime('%d %b %Y at %H:%M:%S')) # type: ignore
+
+    # 5:
+    for index in range(5, 12):
+        if itinerary[index] != "":
+            formatted_itinerary["days"].append(str(itinerary[index]).split("####")[:-1])
+    
+    # Get touristic objectives details
+    for day in formatted_itinerary["days"]:
+        for objective in day:
+            formatted_itinerary["objectives_details"].append(extract_touristic_objectives_details_by_name(dba, objective))
+
+    print(formatted_itinerary)
+    return formatted_itinerary
+
     
 @itineraries_controller_blueprint.route("/api/itineraries")
 def itineraries_details() -> Response:
@@ -95,7 +144,9 @@ def itineraries_details() -> Response:
         )
     
     # Case: specific itinerary
+    itinerary = get_itinerary(option)
+
     return make_response(
-        jsonify({"option": option}),
+        jsonify({"option": option, "itinerary": itinerary}),
         status.HTTP_200_OK,
     )
