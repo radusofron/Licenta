@@ -127,14 +127,13 @@
             <ul class="reviews__list">
                 {% for index in range(3) %}
                 <li class="reviews__list-element">
-                    <p class="reviews__person">Username</p>
+                    <p class="reviews__person">{{reviews[index][0]}}</p>
                     <div class="reviews__review">
                         <div class="reviews__review-icon-container">
                             <img class="reviews__review-icon"
                                 src="{{url_for('static', filename='/assets/illustrations/quote.png')}}">
                         </div>
-                        <p class="reviews__review-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae,
-                            quasi ex quo iusto unde eveniet cumque.</p>
+                        <p class="reviews__review-text">{{reviews[index][1]}}</p>
                         <div class="reviews__review-icon-container">
                             <img class="reviews__review-icon"
                                 src="{{url_for('static', filename='/assets/illustrations/quote.png')}}">
@@ -161,8 +160,8 @@
                     </div>
                     <p class="contact__name">Address</p>
                     <div class="contact__details">
-                        <p class="contact__detail">Country: name</p>
-                        <p class="contact__detail">City: name</p>
+                        <p class="contact__detail">Country: Romania</p>
+                        <p class="contact__detail">City: Iasi</p>
                         <p class="contact__detail">Street: name</p>
                     </div>
                 </li>

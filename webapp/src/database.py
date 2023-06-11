@@ -18,15 +18,26 @@ def connect_to_dba():
     return dba
 
 
-def extract_most_visited_destinations(dba):
-    """Function returns most visited destinations on our website.
+def extract_the_three_most_visited_destinations(dba):
+    """Function returns the three most visited destinations on the website.
     """
-    # Extract them
+    # Extract destinations
     dba_cursor = dba.cursor()
     dba_cursor.execute("SELECT `d`.`name` FROM `destinations` `d` INNER JOIN `visited_destinations` `v` ON `d`.`id`=`v`.`destination_id` GROUP BY `destination_id` ORDER BY COUNT(*) DESC LIMIT 3")
     most_visited = dba_cursor.fetchall()
     dba_cursor.close()
     return most_visited
+
+
+def extract_three_most_recent_website_reviews(dba):
+    """Function returns the three most recent reviews about the website.
+    """
+    # Extract reviews
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `u`.`username`, `r`.`review` FROM `users` `u` INNER JOIN `reviews_website` `r` ON `u`.`id` = `r`.`user_id`  WHERE LENGTH(`r`.`review`) < 100 ORDER BY `r`.`date` DESC LIMIT 3")
+    reviews = dba_cursor.fetchall()
+    dba_cursor.close()
+    return reviews
 
 
 def login_validation(dba, input_email: str, input_password: str) -> bool:

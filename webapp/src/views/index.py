@@ -18,7 +18,8 @@ def index_view() -> Response:
     results = index()
     index_data = json.loads(results.data)
     most_visited = index_data["most visited"]
+    reviews = index_data["reviews"]
 
     return make_response(
-        render_template("index.html", most_visited = most_visited)
+        render_template("index.html", most_visited = most_visited, reviews = reviews)
     )
