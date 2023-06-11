@@ -15,9 +15,18 @@ profile_controller_blueprint = Blueprint("profile_controller_blueprint", __name_
 def remove_itineraries_representation():
     """Function removes all the representations of the itineraries created by the user
     """
-    # Designated file path
+    # Designated folder path
     folder_path = "webapp/static/user_data/" + str(session["user_id"])
-    os.remove(folder_path)
+    
+    # List files of the folder
+    files = os.listdir(folder_path)
+
+    # Remove every file of the folder
+    for file in files:
+        os.remove(folder_path + "/" + file)
+
+    # Remove empty folder
+    os.rmdir(folder_path)
 
 
 def remove_profile_picture():
