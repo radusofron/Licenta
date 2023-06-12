@@ -399,11 +399,19 @@ input[type=radio]:checked ~ .travel-itineraries__algorithm-name{
     flex-direction: column;
     gap: 3rem;
 }
-input[type=text].optional__name-input{
+.optional__name-container, .optional__description-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+input[type=text].optional__name-input, input[type=text].optional__description-input{
     width: calc(50% + 3rem);
 }
-input[type=text].optional__description-input{
-    width: calc(50% + 3rem);
+.optional__name-input-remaining, .optional__description-input-remaining{
+    padding: 0rem 5px;
+    font-size: var(--fs-phone-description);
+    font-weight: var(--medium);
+    color: var(--grey);
 }
 button.travel-itineraries__generate-button{
     align-self: flex-start;
@@ -869,6 +877,9 @@ li.photos__website-bullet{
         font-size: var(--fs-description);
     }
     .travel-itineraries__algorithm-details{
+        font-size: var(--fs-phone-description);
+    }
+    .optional__name-input-remaining, .optional__description-input-remaining{
         font-size: var(--fs-phone-description);
     }
     button.travel-itineraries__generate-button{

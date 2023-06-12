@@ -125,26 +125,6 @@ function returnTouristicObjectives() {
 }
 
 
-// Function displays algorithm details
-function displayAlgorithmInformation() {
-    // Get info icons
-    const cardinalDirectionsIcon = document.getElementById("info-1")
-    const kMeansIcon = document.getElementById("info-2")
-
-    // Get info containers
-    const cardinalDirectionsInfo = document.getElementById("details-1")
-    const kMeansInfo = document.getElementById("details-2")
-
-    cardinalDirectionsIcon.addEventListener("click", function() {
-        cardinalDirectionsInfo.classList.toggle("active")
-    });
-
-    kMeansIcon.addEventListener("click", function() {
-        kMeansInfo.classList.toggle("active")
-    })
-}
-
-
 /* TRAVEL ITINERARY */
 // Function styles disabled upload photo button
 function styleDisabledButton(button) {
@@ -248,7 +228,98 @@ function getTravelItineraryButtons() {
 
 }
 
+// Function displays algorithm details
+function displayAlgorithmInformation() {
+    // Get info icons
+    const cardinalDirectionsIcon = document.getElementById("info-1")
+    const kMeansIcon = document.getElementById("info-2")
 
+    // Get info containers
+    const cardinalDirectionsInfo = document.getElementById("details-1")
+    const kMeansInfo = document.getElementById("details-2")
+
+    cardinalDirectionsIcon.addEventListener("click", function() {
+        cardinalDirectionsInfo.classList.toggle("active")
+    });
+
+    kMeansIcon.addEventListener("click", function() {
+        kMeansInfo.classList.toggle("active")
+    })
+}
+
+// Function displays the remaining characters for the name and the description of the travel itinerary
+function displayCharactersLeft() {
+    // Set maximum lengths
+    const nameMaxLength = 64
+    const descriptionMaxLength = 256
+
+    // Get input elements
+    const nameInput = document.querySelector(".optional__name-input")
+    const descriptionInput = document.querySelector(".optional__description-input")
+
+    // Get elements for display
+    const nameCharactersRemaining = document.querySelector(".optional__name-input-remaining")
+    const descriptionCharactersRemaining = document.querySelector(".optional__description-input-remaining")
+
+    // Add event listener for every input elements
+
+    // For name
+    nameInput.addEventListener("input", function() {
+        // Extract text review
+        const name = nameInput.value
+
+        // Case: nothing found
+        if (name === "") {
+            nameCharactersRemaining.innerHTML = "Characters left: 64"
+        }
+        // Case: user writes
+        else {
+            // Calculate the difference
+            const diff = nameMaxLength - name.length
+
+            // Change color when no character remained
+            if (diff == 0) {
+                nameCharactersRemaining.style.color = "#D47E73"
+            }
+            if (diff == 1) {
+                nameCharactersRemaining.style.color = "#8C98AD"
+            }
+            
+            // Display the remaining characters
+            nameCharactersRemaining.innerHTML = "Characters left: " + diff.toString()
+        }
+    });
+
+    // For description
+    descriptionInput.addEventListener("input", function() {
+        // Extract text review
+        const description = descriptionInput.value
+
+        // Case: nothing found
+        if (description === "") {
+            descriptionCharactersRemaining.innerHTML = "Characters left: 256"
+        }
+        // Case: user writes
+        else {
+            // Calculate the difference
+            const diff = descriptionMaxLength - description.length
+
+            // Change color when no character remained
+            if (diff == 0) {
+                descriptionCharactersRemaining.style.color = "#D47E73"
+            }
+            if (diff == 1) {
+                descriptionCharactersRemaining.style.color = "#8C98AD"
+            }
+            
+            // Display the remaining characters
+            descriptionCharactersRemaining.innerHTML = "Characters left: " + diff.toString()
+        }
+    });
+}
+
+
+/* STATISTICS */
 // Function creates average grades graph
 function createGradesGraph() {
     // Get graph lines
@@ -296,6 +367,7 @@ function createGradesGraph() {
 }
 
 
+/* REVIEWS */
 // Function sets different colors for profile pictures of the users
 // which do not have one
 function setProfilePictureColors() {
@@ -321,6 +393,7 @@ function setProfilePictureColors() {
 }
 
 
+/* OTHERS */
 // Function disables action buttons starting with the second click made
 function disableActionButtons() {
      // Get action buttons
@@ -350,7 +423,6 @@ function disableActionButtons() {
          }
      });
 }
-
 
 // Function applies a specific style to the sticky element when it reaches the top of the page.
 function setStyleToStickyElement () {
@@ -391,7 +463,6 @@ function setStyleToStickyElement () {
         }
     });
 }
-
 
 // Function closes the modal when the user clicks on the close button.
 function exitModal() {
@@ -444,4 +515,5 @@ window.addEventListener("load", function() {
     setProfilePictureColors()
     getTravelItineraryButtons()
     displayAlgorithmInformation()
+    displayCharactersLeft()
   });

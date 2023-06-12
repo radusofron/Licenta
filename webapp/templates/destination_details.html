@@ -146,10 +146,16 @@
                 4. (Optional) You can add a name and a description for your travel itinerary. This will help you easily
                 identify it among other itineraries:
                 <div class="travel-itineraries__optional-container">
-                    <input maxlength="64" autocomplete="off" class="optional__name-input" placeholder="Name" name="name"
-                        type="text">
-                    <input maxlength="256" autocomplete="off" class="optional__description-input"
-                        placeholder="Description" name="description" type="text">
+                    <div class="optional__name-container">
+                        <input maxlength="64" autocomplete="off" class="optional__name-input" placeholder="Name"
+                            name="name" type="text">
+                        <span class="optional__name-input-remaining">Characters left: 64</span>
+                    </div>
+                    <div class="optional__description-container">
+                        <input maxlength="256" autocomplete="off" class="optional__description-input"
+                            placeholder="Description" name="description" type="text">
+                        <span class="optional__description-input-remaining">Characters left: 256</span>
+                    </div>
                 </div>
             </div>
             <div class="travel-itineraries__step">
