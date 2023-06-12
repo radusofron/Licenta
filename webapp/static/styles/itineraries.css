@@ -306,6 +306,7 @@ button.delete__button:hover{
 
 
 /* RESPONSIVE */
+/* All itineraries */
 @media (max-width: 1400px) {
     .itineraries__grid-container{
         grid-template-columns: repeat(2, 1fr);
@@ -316,6 +317,26 @@ button.delete__button:hover{
         grid-template-columns: 1fr;
     }
 }
+/* Specific itinerary */
+@media(max-width: 750px) {
+    .representation__image-container {
+        width: 100%;
+    }
+    .representation__image {
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .itinerary__objective-details {
+        gap: 1rem;
+    }
+    .itinerary__objective-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+/* Footer */
 @media (max-width: 650px){
     .footer__bottom{
         flex-direction: column;
@@ -326,6 +347,7 @@ button.delete__button:hover{
 
 /* Change font-size */
 @media (max-height: 750px) {
+    /* All itineraries */
     .itineraries__title{
         font-size: var(--fs-big-subtitle);
     }
@@ -339,6 +361,43 @@ button.delete__button:hover{
         font-size: var(--fs-phone-description);
     }
     .itineraries__open-button{
+        font-size: var(--fs-description);
+    }
+    /* Specific itinerary */
+    .itinerary__title{
+        font-size: var(--fs-big-subtitle); 
+    }
+    .itinerary__description{
+        font-size: var(--fs-description); 
+    }
+    .itinerary__detail-text{
+        font-size: var(--fs-subtitle); 
+    }
+    .representation__title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .representaion__intro{
+        font-size: var(--fs-description);
+    }
+    .itinerary__day-title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .itinerary__objective-name{
+        font-size: var(--fs-description);
+    }
+    .itinerary__objective-detail-title{
+        font-size: var(--fs-phone-description);
+    }
+    .itinerary__objective-detail{
+        font-size: var(--fs-phone-description);
+    }
+    .delete__title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .delete__intro{
+        font-size: var(--fs-phone-description);
+    }
+    button.delete__button{
         font-size: var(--fs-description);
     }
 }
