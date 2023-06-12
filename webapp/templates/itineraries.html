@@ -77,6 +77,16 @@
             they were
             grouped by the algorithm for your customized travel plan.</p>
         <div class="representation__image-container">
+            <ul class="representation__legend">
+                {% for index in range(itinerary.days | length) %}
+                <li class="representation__legend-item">
+                    <p class="representation__legend-text">Day {{index + 1}}
+                    </p>
+                    <div class="representation__legend-color">
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
             <img class="representation__image"
                 src="{{url_for('static', filename='/user_data/' + session.user_id | string + '/' + option + '.png')}}"
                 alt="A graphic representation of the touristic objectives of this travel itinerary"

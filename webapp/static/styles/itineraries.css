@@ -177,8 +177,35 @@ section.itinerary__representation{
     height: fit-content;
     width: fit-content;
 }
-.representation__image{
+ul.representation__legend{
+    padding: 1.75rem 1.75rem 0rem 1.75rem;
+    box-sizing: border-box;
+    border-radius: 1rem 1rem 0rem 0rem;
+    background-color: var(--background-grey);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.representation__legend-item{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.representation__legend-text{
+    width: 75px;
+    font-size: var(--fs-description);
+    font-weight: var(--medium);
+    color: var(--black);  
+}
+.representation__legend-color{
+    height: 0.75rem;
+    width: 50px;
+    opacity: 0.5;
+    background-color: var(--pink);
     border-radius: 1rem;
+}
+.representation__image{
+    border-radius: 0rem 0rem 1rem 1rem;
 }
 
 /* Program */
