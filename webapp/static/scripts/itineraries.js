@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
         const containers = document.querySelectorAll(".itineraries__itinerary-text")
 
         // Add different backgrounds.
-        for (let index = 0; index <= buttons.length; index++) {
+        for (let index = 0; index < buttons.length; index++) {
             if (index % 5 == 0) {
                 buttons[index].style.backgroundColor = "#608DB8"
                 containers[index].style.borderRight = "1.5rem solid #608DB8"
@@ -39,7 +39,7 @@ window.addEventListener("load", function() {
     // Case: specific itinerary
     if (colorContainers.length != 0) {
         // Add different colors
-        for (let index = 0; index <= colorContainers.length; index++) {
+        for (let index = 0; index < colorContainers.length; index++) {
             if (index == 0) {
                 colorContainers[index].style.backgroundColor = "#608DB8"
             }
