@@ -819,6 +819,7 @@ li.photos__website-bullet{
         overflow: hidden;
     }
 }
+/* Footer */
 @media (max-width: 650px){
     .footer__bottom{
         flex-direction: column;
@@ -826,4 +827,111 @@ li.photos__website-bullet{
     }
 }
 
-/* TODO -> font-size for phone */
+/* Change font-size */
+@media (max-height: 750px) {
+    .destination__title{
+        font-size: var(--fs-big-subtitle);
+    }
+    button{
+        font-size: var(--fs-phone-description);
+    }
+    .modal__title{
+        font-size: var(--fs-description);
+    }
+    .modal__button{
+        font-size: var(--fs-description);
+    }
+    .destination__option{
+        font-size: var(--fs-subtitle);
+    }
+    .section__description{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__intro{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__step{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__day-text{
+        font-size: var(--fs-description);
+    }
+    input[type=text]{   
+        font-size: var(--fs-description);
+    }
+    li.travel-itineraries__objective{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__results-not-found{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__algorithm-name{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__algorithm-details{
+        font-size: var(--fs-phone-description);
+    }
+    button.travel-itineraries__generate-button{
+        font-size: var(--fs-description);
+    }
+    .travel-itineraries__disclaimer-title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .travel-itineraries__disclaimer-description{
+        font-size: var(--fs-phone-description);
+    }
+    .wikipedia__content > *{
+        font-size: 1rem;
+    }
+    .wikipedia__content > h1{
+        font-size: 1.6rem;
+    }
+    .wikipedia__content > h2{
+        font-size: 1.4rem;
+    }
+    .wikipedia__content > h3{
+        font-size: 1.2rem;
+    }
+    .wikipedia__content > h4{
+        font-size: 1.1rem;
+    }
+    .wikipedia__content > p{
+        font-size: 1rem;
+    }
+    .photos__more-photos-message{
+        font-size: var(--fs-description);
+    }
+    .photos__website-link{
+        font-size: var(--fs-subtitle);
+    }
+    .statistics__field{
+        font-size: var(--fs-phone-description);
+    }
+    .statistics__line-number{
+        font-size: var(--fs-phone-description);
+    }
+    .profile__photo-like{
+        font-size: var(--fs-subtitle);
+    }
+    .reviews__user{
+        font-size: var(--fs-subtitle);
+    }
+    .reviews__date{
+        font-size: var(--fs-phone-description);
+    }
+    .reviews__text{
+        font-size: var(--fs-description);
+    }
+    .weather__day-subtitle{
+        font-size: var(--fs-subtitle);
+    }
+    .weather__hour{
+        font-size: var(--fs-description);
+    }
+    .weather__temperature{
+        font-size: var(--fs-subtitle);
+    }
+    .weather__feels-like{
+        font-size: var(--fs-phone-description);
+    }
+}
