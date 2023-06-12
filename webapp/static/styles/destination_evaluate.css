@@ -383,6 +383,7 @@ button.review__button:hover{
         overflow: hidden;
     }
 }
+/* Evaluate */
 @media (max-width: 750px) {
     .evaluate__top-container{
         flex-direction: column;
@@ -392,13 +393,14 @@ button.review__button:hover{
     .evaluate__middle-container{
         overflow-x: scroll;
     }
-    section{
-        padding-top: 3rem;
-    }
     .evaluate__option{
         white-space: nowrap;
     }
+    section{
+        padding-top: 3rem;
+    }
 }
+/* Footer */
 @media (max-width: 650px) {
     .footer__bottom{
         flex-direction: column;

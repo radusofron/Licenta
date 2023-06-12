@@ -750,6 +750,7 @@ li.photos__website-bullet{
 }
 .weather__per-hours-container{
     display: flex;
+    justify-content: flex-start;
     gap: 9rem;
 }
 .weather__hour-container{
@@ -825,6 +826,88 @@ li.photos__website-bullet{
 @media (max-width: 900px) {
     .content-container-two{
         overflow: hidden;
+    }
+}
+/* Destination */
+@media (max-width: 1160px) {
+    .destination__middle-container{
+        overflow-x: scroll;
+    }
+    .destination__option{
+        white-space: nowrap;
+    }
+    section{
+        padding-top: 3rem;
+    }
+}
+@media (max-width: 1000px) {
+    .travel-itineraries__objectives-container {
+        width: 100%;
+    }
+    input[type=text].optional__name-input, input[type=text].optional__description-input {
+        width: 100%;
+    }
+    .photos__content {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 4.5rem;
+    }
+}
+@media (max-width: 750px) {
+    .destination__top-container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+    form.destination__buttons{
+        align-self: stretch;
+        gap: 3rem;
+    }
+    button.destination__button-wishlist{
+        width: 100%;
+        justify-content: center;
+    }
+    button.destination__button-visited{
+        width: 100%;
+        justify-content: center;
+    }
+    .reviews__review-details {
+       gap: 3rem;
+    }
+    .reviews__date {
+        align-self: center;
+    }
+    .weather__per-hours-container{
+        gap: 6rem;
+    }
+}
+@media (max-width: 600px){
+    .destination__top-container{
+        gap: 4.5rem;
+    }
+    form.destination__buttons{
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+@media (max-width: 500px){
+    .travel-itineraries__objective-text {
+        overflow-wrap: anywhere;
+    }
+    .photos__photo-container {
+        max-width: 100%;
+        min-width: 100%;
+        overflow: hidden;
+    }
+    .reviews__review-details {
+       flex-direction: column-reverse;
+       gap: 0rem;
+    }
+    .reviews__date {
+        align-self: flex-end;
+    }
+    .weather__per-hours-container{
+        gap: 4.5rem;
     }
 }
 /* Footer */
