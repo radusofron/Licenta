@@ -405,6 +405,9 @@ button.delete__button:hover{
     .representaion__intro{
         font-size: var(--fs-description);
     }
+    .representation__legend-text{
+        font-size: var(--fs-phone-description);
+    }
     .itinerary__day-title{
         font-size: var(--fs-big-subtitle);
     }
