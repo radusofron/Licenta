@@ -85,6 +85,13 @@ a{
     --stat-perfect-hover: #FFA90A;
     --violet: #8338EC;
     --plum: #F397D6;
+
+    --bg-novice: rgb(131, 56, 236, 0.5);
+    --bg-beginner: rgb(212, 126, 115, 0.5);
+    --bg-intermediate: rgb(96, 141, 184, 0.5);
+    --bg-advanced: rgb(126, 189, 194, 0.5);
+    --bg-expert: rgb(76, 185, 68, 0.5);
+    --bg-master: rgb(255, 188, 66, 0.5);
     
     --regular: 400;
     --medium: 500;

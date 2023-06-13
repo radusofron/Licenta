@@ -107,7 +107,7 @@ label.profile__add-photo-button{
     flex-direction: column;
     gap: 1.5rem;
 }
-.profile__username, .profile__email, .profile__date{
+.profile__username, .profile__email, .profile__level, .profile__date{
     display: flex;
     align-items: center;
     gap: 1.5rem; 
@@ -120,6 +120,37 @@ label.profile__add-photo-button{
     font-size: var(--fs-subtitle);
     font-weight: var(--medium);
     color: var(--dark-grey);
+}
+.profile__level-data{
+    padding: 4px 12px;
+    font-size: var(--fs-description);
+    font-weight: var(--medium);
+    text-transform: capitalize;
+    border-radius: 1rem;
+}
+.profile__level-data.novice{
+    background-color: var(--bg-novice);
+    color: var(--white);
+}
+.profile__level-data.beginner{
+    background-color: var(--bg-beginner);
+    color: var(--white);
+}
+.profile__level-data.intermediate{
+    background-color: var(--bg-intermediate);
+    color: var(--white);
+}
+.profile__level-data.advanced{
+    background-color: var(--bg-advanced);
+    color: var(--white);
+}
+.profile__level-data.expert{
+    background-color: var(--bg-expert);
+    color: var(--white);
+}
+.profile__level-data.master{
+    background-color: var(--bg-master);
+    color: var(--white);
 }
 .profile__subtitle-container{
     padding: 1.5rem 0vw;

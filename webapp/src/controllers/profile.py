@@ -2,7 +2,7 @@ from flask import Blueprint, make_response, jsonify, session, request, redirect,
 from flask_api import status
 from flask.wrappers import Response
 from werkzeug.utils import secure_filename
-from database import dba, update_profile_picture_relative_path, extract_photo_name, extract_username_by_id, extract_email_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date, extract_evaluated_destinations_number, extract_evaluated_destinations_total_grade, extract_destination_name_by_id
+from database import dba, update_profile_picture_relative_path, extract_photo_name, extract_username_by_id, extract_email_by_id, extract_traveler_level_by_id, extract_registration_date_by_id, login_validation, update_password, delete_account_and_associated_data, extract_visited_destinations_number, extract_destinations_number, extract_visited_destinations_number_by_date, extract_evaluated_destinations_number, extract_evaluated_destinations_total_grade, extract_destination_name_by_id
 import datetime
 from PIL import Image
 import os
@@ -291,6 +291,7 @@ def profile() -> Response:
     photo_name = extract_photo_name(dba, session["user_id"])
     username = extract_username_by_id(dba, session["user_id"])
     email = extract_email_by_id(dba, session["user_id"])
+    traveler_level = extract_traveler_level_by_id(dba, session["user_id"])
     date = extract_registration_date_by_id(dba, session["user_id"])
 
     # If photo name not found, upload default profile picture
@@ -306,8 +307,11 @@ def profile() -> Response:
     # Convert date to string format
     date = date.strftime('%d %b %Y at %H:%M:%S') # type: ignore
 
+    # Lowercase level
+    traveler_level = str(traveler_level).lower()
+
     # Create a list with them
-    user_profile_data = [profile_picture, username, email, date]
+    user_profile_data = [profile_picture, username, email, traveler_level, date]
 
     # Get user's visited destinations number
     visited_destinations_number = extract_visited_destinations_number(dba, session["user_id"])

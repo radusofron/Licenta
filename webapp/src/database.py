@@ -292,6 +292,17 @@ def extract_email_by_id(dba, user_id: int):
     return email[0]
 
 
+def extract_traveler_level_by_id(dba, user_id: int):
+    """Function returns traveler level based on id stored in session.
+    """
+    # Extract traveler level
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `traveler_level` FROM `users` WHERE `id`=%s", (user_id,))
+    traveler_level = dba_cursor.fetchone()
+    dba_cursor.close()
+    return traveler_level[0]
+
+
 def extract_registration_date_by_id(dba, user_id: int):
     """Function returns registration date based on id stored in session.
     """

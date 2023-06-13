@@ -41,10 +41,15 @@
                 <p class="profile__credential-subtitle">Email:</p>
                 <p class="profile__credential-data">{{user_profile_data[2]}}</p>
             </div>
+            <div class="profile__level">
+                <p class="profile__credential-subtitle">Traveler level:</p>
+                <p class="profile__level-data {{user_profile_data[3]}}">{{user_profile_data[3]}}</p>
+            </div>
             <div class="profile__date">
                 <p class="profile__credential-subtitle">Registration date:</p>
-                <p class="profile__credential-data">{{user_profile_data[3]}}</p>
+                <p class="profile__credential-data">{{user_profile_data[4]}}</p>
             </div>
+
         </div>
         <form class="profile__change-password-container" action="/api/profile" method="post">
             <div class="profile__subtitle-container">
