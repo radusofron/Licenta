@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, session, request, redirect, flash, get_flashed_messages
 from flask_api import status
 from flask.wrappers import Response
-from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, extract_touristic_objectives_names, extract_touristic_objective_coordinates_by_name, insert_itinerary_for_user
+from database import dba, extract_destinations_names, extract_destination_id_by_name, extract_destination_average_grades, extract_destination_reviews, insert_wishlisted_destination_for_user, delete_wishlisted_destination_for_user, insert_visited_destination_for_user, delete_visited_destination_for_user, update_traveler_level_for_user, extract_touristic_objectives_names, extract_touristic_objective_coordinates_by_name, insert_itinerary_for_user
 import requests
 from datetime import datetime, timedelta
 import os
@@ -474,6 +474,37 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
     return ""
 
 
+# POST function:
+def calculate_traveler_level(option: int):
+    """Function calculates new traveler level for user
+
+    Parameters:
+        * option = 1 -> new visited destination, so adds one to the length
+        * option = 0 -> visited destination remove, so one less from the length 
+    """
+    # Calculate visited destinations number
+    if option:
+        number = len(session["visited_destinations"]) + 1
+    else:
+        number = len(session["visited_destinations"]) - 1
+
+    # Determine traveler level
+    if number <= 2:
+        traveler_level = "Novice"
+    elif number > 2 and number <= 5:
+        traveler_level = "Beginner"
+    elif number > 5 and number <= 10:
+        traveler_level = "Intermediate"
+    elif number > 10 and number <= 20:
+        traveler_level = "Advanced"
+    elif number > 20 and number <= 30:
+        traveler_level = "Expert"
+    else:
+        traveler_level = "Master"
+    
+    return traveler_level
+
+
 @destination_details_controller_blueprint.route("/api/destination_details", methods=['GET', 'POST'])
 def destination_details() -> Response:
     # POST request:
@@ -490,14 +521,30 @@ def destination_details() -> Response:
             delete_wishlisted_destination_for_user(dba, session["user_id"], session["current_city"])
             flash("remove from wishlist")
 
-        # 3. Mark as visited
+        # 3. Mark as visited & calculate new traveler level
         elif "mark-visited" in request.form:
+
+            # Mark as visited
             insert_visited_destination_for_user(dba, session["user_id"], session["current_city"])
+
+            # Update traveler level
+            traveler_level = calculate_traveler_level(1)
+            update_traveler_level_for_user(dba, session["user_id"], traveler_level)
+
+            # Send message
             flash("mark as visited")
 
         # 4. Remove from visited
         elif "remove-visited" in request.form:
+
+            # Remove from visited
             delete_visited_destination_for_user(dba, session["user_id"], session["current_city"])
+
+            # Update traveler level
+            traveler_level = calculate_traveler_level(0)
+            update_traveler_level_for_user(dba, session["user_id"], traveler_level)
+
+            # Send message
             flash("remove from visited")
 
         # 5. Generate travel itinerary

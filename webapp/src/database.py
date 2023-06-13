@@ -131,9 +131,12 @@ def insert_user(dba, username: str, email: str, password: str):
     # Extract date
     date_time = time.strftime('%Y-%m-%d %H:%M:%S')
 
+    # Traveler level
+    traveler_level ="Novice"
+    
     # Insert user
     dba_cursor = dba.cursor()
-    dba_cursor.execute("INSERT INTO `users` (`id`, `username`, `email`, `password`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, username, email, encrypted_password, date_time))
+    dba_cursor.execute("INSERT INTO `users` (`id`, `username`, `email`, `password`, `date`, `traveler_level`) VALUES (%s, %s, %s, %s, %s, %s)", (new_max_id, username, email, encrypted_password, date_time, traveler_level))
     
     # Close cursor and commit changes
     dba_cursor.close()
@@ -582,6 +585,20 @@ def delete_visited_destination_for_user(dba, user_id: int, destination_name: str
     # Delete review given by the user 
     dba_cursor.execute("DELETE FROM `reviews_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
     
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
+def update_traveler_level_for_user(dba, user_id: int, traveler_level: str):
+    """Function updates traveler level for an user into the database.
+    """
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Insert visited destinations   
+    dba_cursor.execute("UPDATE `users` SET `traveler_level`=%s WHERE `id`=%s", (traveler_level, user_id))
+
     # Close cursor and commit changes
     dba_cursor.close()
     dba.commit()
