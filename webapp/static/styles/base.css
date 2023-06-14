@@ -87,6 +87,10 @@ a{
     --stat-perfect: #FFBC42;
     --stat-perfect-hover: #FFA90A;
 
+    --bg-photo-like-1: #D47E73;
+    --bg-photo-like-2: #CE918D;
+    --bg-photo-like-3: #C4A4A4;
+
     --bg-novice: rgb(131, 56, 236, 0.15);
     --fg-novice: rgb(131, 56, 236, 0.75);
     --bg-beginner: rgb(245, 0, 184, 0.15);

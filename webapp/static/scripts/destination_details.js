@@ -512,8 +512,8 @@ window.addEventListener("load", function() {
     exitModal()
     setStyleToStickyElement()
     createGradesGraph()
-    setProfilePictureColors()
     getTravelItineraryButtons()
     displayAlgorithmInformation()
+    setProfilePictureColors()
     displayCharactersLeft()
   });

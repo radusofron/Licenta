@@ -689,15 +689,15 @@ li.photos__website-bullet{
     text-transform: uppercase;
 }
 .profile__photo-like.one{
-    background-color: var(--pink);
+    background-color: var(--bg-photo-like-1);
     color: var(--white-75);
 }
 .profile__photo-like.two{
-    background-color: var(--light-pink);
+    background-color: var(--bg-photo-like-2);
     color: var(--white-75);
 }
 .profile__photo-like.three{
-    background-color: var(--pink-hover-dark);
+    background-color: var(--bg-photo-like-3);
     color: var(--white-75);
 }
 .reviews__user-details{
