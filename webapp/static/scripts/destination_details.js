@@ -377,15 +377,15 @@ function setProfilePictureColors() {
     if (profilePicturesLike.length > 0) {
         profilePicturesLike.forEach(profilePictureLike => {
             // Randomize
-            let colorOption = Math.floor(Math.random() * 5)
+            let colorOption = Math.floor(Math.random() * 3)
             // Set color
-            if ([0, 1].includes(colorOption)) {
+            if (colorOption == 0) {
                 profilePictureLike.classList.add("one")
             }
-            if (colorOption == 2) {
+            if (colorOption == 1) {
                 profilePictureLike.classList.add("two")
             }
-            if ([3, 4].includes(colorOption)) {
+            if (colorOption == 2) {
                 profilePictureLike.classList.add("three")
             }
         });
@@ -489,6 +489,36 @@ function exitModal() {
 }
 
 
+// Function moves HTML element inside another container to ensure the responsiveness of the website
+function responsiveLayout() {
+    // Only when screen width <= 600
+    if (window.innerWidth <= 600) {
+        // Get elements to be moved
+        const toBeMoved = document.querySelectorAll(".reviews__bottom-details")
+
+        // Get container elements
+        const container = document.querySelectorAll(".reviews__review-card")
+
+        // Move every element inside the desired container
+        for (let index = 0; index < toBeMoved.length; index++) {
+            container[index].insertBefore(toBeMoved[index], container[index].children[1])
+        }
+    }
+    else {
+        // Get elements to be moved
+        const toBeMoved = document.querySelectorAll(".reviews__bottom-details")
+
+        // Get container elements
+        const container = document.querySelectorAll(".reviews__details")
+
+        // Move every element inside the desire container
+        for (let index = 0; index < toBeMoved.length; index++) {
+            container[index].appendChild(toBeMoved[index])
+        }
+    }
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -516,4 +546,11 @@ window.addEventListener("load", function() {
     displayAlgorithmInformation()
     setProfilePictureColors()
     displayCharactersLeft()
+
+    // First time check
+    responsiveLayout()
+
+    // Add an event listener to know when window resizes
+    window.addEventListener("resize", () => responsiveLayout()) 
+
   });

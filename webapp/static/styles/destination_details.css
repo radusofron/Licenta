@@ -650,21 +650,15 @@ li.photos__website-bullet{
     gap: 4.5rem;
 }
 .reviews__review-card{
-    background-color: var(--white);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    transition: 250ms;
-}
-.reviews__review-details{
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
 }
 .reviews__user-data{
     display: flex;
     gap: 3rem;
 }
+/* Left part */
 .reviews__photo-container{
     max-width: 80px;
     min-width: 80px;
@@ -700,24 +694,43 @@ li.photos__website-bullet{
     background-color: var(--bg-photo-like-3);
     color: var(--white-75);
 }
-.reviews__user-details{
-    min-height: 100%;
-    max-height: 100%;
+/* Right part */
+.reviews__details{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+/* Top details */
+.reviews__top-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
 }
 .reviews__user{
     font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
 }
+.reviews__date{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+/* Bottom details */
+.reviews__bottom-details{
+    display: flex;
+    gap: 1.5rem;
+}
 .reviews__traveler-level{
-    align-self: flex-start;
     padding: 4px 12px;
-    font-size: var(--fs-phone-description);
+    font-size: var(--fs-description);
     font-weight: var(--medium);
     border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: capitalize;
 }
 .reviews__traveler-level.novice{
@@ -744,12 +757,19 @@ li.photos__website-bullet{
     background-color: var(--bg-master);
     color: var(--fg-master);
 }
-.reviews__date{
+.reviews__general-feeling{
+    padding: 4px 12px;
+    box-sizing: border-box;
     font-size: var(--fs-description);
-    font-weight: var(--semibold);
-    color: var(--grey);
-    white-space: nowrap;
+    font-weight: var(--medium);
+    border-radius: 2rem;
+    background-color: var(--background-grey);
+    color: var(--dark-grey);
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
+/* Text */
 .reviews__text{
     font-size: var(--fs-read);
     font-weight: var(--medium);
@@ -915,9 +935,6 @@ li.photos__website-bullet{
         width: 100%;
         justify-content: center;
     }
-    .reviews__review-details {
-       gap: 3rem;
-    }
     .weather__per-hours-container{
         gap: 6rem;
     }
@@ -930,25 +947,27 @@ li.photos__website-bullet{
         flex-direction: column;
         gap: 1.5rem;
     }
-    .reviews__review-details {
+    .reviews__top-details{
+        max-height: 100%;
+        min-height: 100%;
         flex-direction: column;
-        gap: 1.5rem;
-    }
-    .reviews__user{
-        overflow-wrap: anywhere;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0rem;
     }
 }
 @media (max-width: 500px){
     .travel-itineraries__objective-text {
         overflow-wrap: anywhere;
     }
-    .photos__photo-container {
-        max-width: 100%;
-        min-width: 100%;
-        overflow: hidden;
+    .reviews__user{
+        overflow-wrap: anywhere;
     }
     .weather__per-hours-container{
         gap: 4.5rem;
+    }
+    .reviews__photo-container{
+        align-self: flex-start;
     }
 }
 /* Footer */
@@ -1052,6 +1071,12 @@ li.photos__website-bullet{
         font-size: var(--fs-subtitle);
     }
     .reviews__date{
+        font-size: var(--fs-phone-description);
+    }
+    .reviews__traveler-level{
+        font-size: var(--fs-phone-description);
+    }
+    .reviews__general-feeling{
         font-size: var(--fs-phone-description);
     }
     .reviews__text{
