@@ -467,7 +467,7 @@ def extract_destination_reviews(dba, destination_id: int) -> list[tuple]:
     """
     # Extract reviews
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`review`, `r`.`date`, `u`.`traveler_level` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s ORDER BY `r`.`date` DESC", (destination_id,))
+    dba_cursor.execute("SELECT `u`.`username`, `u`.`photo_name`, `r`.`date`, `u`.`traveler_level`, `r`.`feeling`, `r`.`review` FROM `users` `u` INNER JOIN `reviews_destinations` `r` ON `u`.`id` = `r`.`user_id` WHERE `r`.`destination_id`=%s ORDER BY `r`.`date` DESC", (destination_id,))
     reviews = dba_cursor.fetchall()
     dba_cursor.close()
 

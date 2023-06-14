@@ -35,7 +35,7 @@
             {% if city_status.visited == True %}
             <div class="visited__button-container">
                 <div class="visited__icon-container">
-                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/unmark.png')}}">
+                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/mark.png')}}">
                 </div>
                 <button class="destination__button-visited true" type="submit" name="remove-visited">Remove from
                     visited
@@ -44,7 +44,7 @@
             {% else %}
             <div class="visited__button-container">
                 <div class="visited__icon-container">
-                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/mark.png')}}">
+                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/unmark.png')}}">
                 </div>
                 <button class="destination__button-visited false" type="submit" name="mark-visited">Mark as
                     visited
@@ -284,9 +284,9 @@
                             <p class="reviews__traveler-level {{reviews.traveler_level[index]}}">
                                 {{reviews.traveler_level[index]}}</p>
                             <p class="reviews__general-feeling">
-                                General feeling: neutral
+                                Overal feeling: {{reviews.feeling[index]}}
                                 <img class="reviews__general-feeling-icon"
-                                    src="{{url_for('static', filename='/assets/illustrations/neutral.png')}}">
+                                    src="{{url_for('static', filename='/assets/illustrations/' + reviews.feeling[index] + '.png')}}">
                             </p>
                         </div>
                     </div>

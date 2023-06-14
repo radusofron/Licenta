@@ -14,6 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 3rem;
 }
 .destination__title{
     font-size: var(--fs-title);
@@ -764,7 +765,7 @@ li.photos__website-bullet{
     font-weight: var(--medium);
     border-radius: 2rem;
     background-color: var(--background-grey);
-    color: var(--dark-grey);
+    color: var(--grey);
     display: flex;
     align-items: center;
     gap: 6px;
