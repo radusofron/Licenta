@@ -50,7 +50,7 @@ header{
     color: var(--white-50);
 }
 .header__logout-button{
-    padding: 0.4rem 1.2rem;
+    padding: 0.4rem 1.3rem;
     font-size: var(--fs-subtitle);
     border-radius: 2rem;
     background-color: var(--white-50);

@@ -18,8 +18,7 @@
                     <img class="wishlit__icon"
                         src="{{url_for('static', filename='/assets/illustrations/bookmark_filled.png')}}">
                 </div>
-                <button class="destination__button-wishlist" type="submit" name="remove-wishlist">Remove from
-                    wishlist
+                <button class="destination__button-wishlist" type="submit" name="remove-wishlist">Remove bookmark
                 </button>
             </div>
             {% else %}
@@ -29,8 +28,7 @@
                         src="{{url_for('static', filename='/assets/illustrations/bookmark.png')}}">
                 </div>
                 <button class="destination__button-wishlist" type="submit" name="add-wishlist">
-                    Add to
-                    wishlist
+                    Add bookmark
                 </button>
             </div>
             {% endif %}
