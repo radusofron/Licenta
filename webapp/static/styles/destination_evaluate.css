@@ -272,6 +272,36 @@ form.review__form{
     flex-direction: column;
     gap: 4.5rem;
 }
+.review__feeling-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+label.review__feeling-label{
+    padding: 8px 24px;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    background-color: var(--background-grey);
+    color: var(--dark-grey);
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 250ms;
+}
+label.review__feeling-label:hover{
+    color: var(--grey)
+}
+input[type="radio"].review__feeling-radio:checked + label.review__feeling-label{
+    background-color: var(--turcoise);
+    color: var(--white);
+}
+.review__feeling-radio{
+    appearance: none;
+}
 .review__input-container{
     display: flex;
     flex-direction: column;
@@ -449,6 +479,9 @@ button.review__button:hover{
         font-size: var(--fs-description);
     }
     .review__previous{
+        font-size: var(--fs-description);
+    }
+    label.review__feeling-label{
         font-size: var(--fs-description);
     }
     .review__input-remaining{

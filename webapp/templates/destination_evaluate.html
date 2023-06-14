@@ -132,11 +132,23 @@
             opinions about the city you've explored.
         </p>
         {% else %}
-        <p class="review__description">Share your personal insights, memorable moments, and honest opinions about the
+        <p class="review__description">Choose the dominant feeling that resonates with your experience, then share your
+            personal insights and honest opinions about the
             city you've explored.
         </p>
         {% endif %}
         <form class="review__form" action="/api/evaluate" method="post">
+            <div class="review__feeling-container">
+                {% for general_feeling in general_feelings %}
+                <input class="review__feeling-radio" type="radio" value="{{general_feeling}}" id="{{general_feeling}}"
+                    name="feeling" hidden>
+                <label for="{{general_feeling}}" class="review__feeling-label">
+                    {{general_feeling}}
+                    <img class="review__feeling-icon"
+                        src="{{url_for('static', filename='/assets/illustrations/' + general_feeling + '_24.png')}}">
+                </label>
+                {% endfor %}
+            </div>
             <div class="review__input-container">
                 <input maxlength="512" autocomplete="off" class="review__input" placeholder="Write your review here..."
                     name="review" type="text" required>

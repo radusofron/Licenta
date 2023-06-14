@@ -721,7 +721,7 @@ def extract_max_id_from_reviews_destinations(dba):
     return max_id[0]
 
 
-def insert_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str):
+def insert_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str, general_feeling: str):
     """Function inserts the review given by an user for a visited destination into the database.
     """
     # Extract biggest id found in the table
@@ -745,7 +745,7 @@ def insert_visited_destination_review_by_user(dba, user_id: int, destination_nam
     dba_cursor = dba.cursor()
 
     # Insert review   
-    dba_cursor.execute("INSERT INTO `reviews_destinations` (`id`, `user_id`, `destination_id`, `review`, `date`) VALUES (%s, %s, %s, %s, %s)", (new_max_id, user_id, destination_id, review, date))
+    dba_cursor.execute("INSERT INTO `reviews_destinations` (`id`, `user_id`, `destination_id`, `review`, `feeling`, `date`) VALUES (%s, %s, %s, %s, %s, %s)", (new_max_id, user_id, destination_id, review, general_feeling, date))
 
     # Close cursor and commit changes
     dba_cursor.close()

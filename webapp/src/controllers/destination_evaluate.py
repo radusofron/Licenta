@@ -54,11 +54,18 @@ def validate_url_parameters():
 
 
 def get_evaluation_aspects() -> list[str]:
-    """Function extracts evaluation aspects
+    """Function returns evaluation aspects
     """
     aspects = ["Attractions", "Accomodation", "Culture", "Entertainment", "Food and drink", 
               "History", "Natural beauty", "Night life", "Transport", "Safety"]
     return aspects
+
+
+def get_general_feelings() -> list[str]:
+    """Function returns general feelings
+    """
+    general_feelings = ["delighted", "satisfied", "neutral", "disappointed", "frustrated"]
+    return general_feelings
 
 
 def extract_input_grades() -> list[int]:
@@ -109,11 +116,14 @@ def destination_evaluate() -> Response:
 
         # 3. Send review
         elif "leave-review" in request.form:
+            # Extract general feeling
+            general_feeling = request.form["feeling"]
+
             # Extract review
             review = request.form["review"]
 
             # Insert review
-            insert_visited_destination_review_by_user(dba, session["user_id"], session["current_city"], review)
+            insert_visited_destination_review_by_user(dba, session["user_id"], session["current_city"], review, general_feeling)
             flash("review submitted") 
 
         elif "update-review" in request.form:
@@ -155,8 +165,11 @@ def destination_evaluate() -> Response:
 
     # 3. Get evaluation content
     aspects = get_evaluation_aspects()
+
+    # 4. Get general feelings
+    general_feelings = get_general_feelings()
         
     return make_response(
-        jsonify({"option": option, "visited date": visited_date, "aspects": aspects, "user feedback": user_feedback}),
+        jsonify({"option": option, "visited date": visited_date, "aspects": aspects, "general feelings": general_feelings, "user feedback": user_feedback}),
         status.HTTP_200_OK,
     )
