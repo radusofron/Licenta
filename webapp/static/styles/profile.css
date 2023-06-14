@@ -125,32 +125,32 @@ label.profile__add-photo-button{
     padding: 4px 12px;
     font-size: var(--fs-description);
     font-weight: var(--medium);
-    text-transform: capitalize;
     border-radius: 1rem;
+    text-transform: capitalize;
 }
 .profile__level-data.novice{
     background-color: var(--bg-novice);
-    color: var(--white);
+    color: var(--fg-novice);
 }
 .profile__level-data.beginner{
     background-color: var(--bg-beginner);
-    color: var(--white);
+    color: var(--fg-beginner);
 }
 .profile__level-data.intermediate{
     background-color: var(--bg-intermediate);
-    color: var(--white);
+    color: var(--fg-intermediate);
 }
 .profile__level-data.advanced{
     background-color: var(--bg-advanced);
-    color: var(--white);
+    color: var(--fg-advanced);
 }
 .profile__level-data.expert{
     background-color: var(--bg-expert);
-    color: var(--white);
+    color: var(--fg-expert);
 }
 .profile__level-data.master{
     background-color: var(--bg-master);
-    color: var(--white);
+    color: var(--fg-master);
 }
 .profile__subtitle-container{
     padding: 1.5rem 0vw;

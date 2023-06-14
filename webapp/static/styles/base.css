@@ -57,6 +57,8 @@ a{
     --turcoise-hover-dark: #59ABB1;
     --yellow: #FFBC42;
     --green: #4CB944;
+    --violet: #8338EC;
+    --plum: #F397D6;
     --light-pink: #C4A4A4; /* FIGMA */
     --glow-light-pink: #D7C1C1;
     --pink: #D47E73; /* FIGMA */
@@ -77,21 +79,26 @@ a{
     --black-12-5: rgb(0, 0, 0, 0.125);
     --black-25: rgb(0, 0, 0, 0.25);
     --black-50: rgb(0, 0, 0, 0.5);
+
     --stat-bad: #CF7063;
     --stat-bad-hover: #BB493A;
     --stat-good: #4CB944;
     --stat-good-hover: #3D9537;
     --stat-perfect: #FFBC42;
     --stat-perfect-hover: #FFA90A;
-    --violet: #8338EC;
-    --plum: #F397D6;
 
-    --bg-novice: rgb(131, 56, 236, 0.5);
-    --bg-beginner: rgb(212, 126, 115, 0.5);
-    --bg-intermediate: rgb(96, 141, 184, 0.5);
-    --bg-advanced: rgb(126, 189, 194, 0.5);
-    --bg-expert: rgb(76, 185, 68, 0.5);
-    --bg-master: rgb(255, 188, 66, 0.5);
+    --bg-novice: rgb(131, 56, 236, 0.15);
+    --fg-novice: rgb(131, 56, 236, 0.75);
+    --bg-beginner: rgb(245, 0, 184, 0.15);
+    --fg-beginner: rgb(245, 0, 184, 0.75);
+    --bg-intermediate: rgb(255, 56, 128, 0.15);
+    --fg-intermediate: rgb(255, 56, 128, 0.75);
+    --bg-advanced: rgb(255, 132, 85, 0.15);
+    --fg-advanced: rgb(255, 132, 85, 0.75);
+    --bg-expert: rgb(76, 185, 68, 0.15);
+    --fg-expert: rgb(76, 185, 68, 0.75);
+    --bg-master: rgb(255, 188, 66, 0.2);
+    --fg-master: rgb(255, 188, 66, 1);
     
     --regular: 400;
     --medium: 500;

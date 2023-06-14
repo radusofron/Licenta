@@ -251,7 +251,11 @@
                                 alt="reviews.username[index]'s profile picture">
                             {% endif %}
                         </div>
-                        <p class="reviews__user">{{reviews.username[index]}}</p>
+                        <div class="reviews__user-details">
+                            <p class="reviews__user">{{reviews.username[index]}}</p>
+                            <p class="reviews__traveler-level {{reviews.traveler_level[index]}}">
+                                {{reviews.traveler_level[index]}}</p>
+                        </div>
                     </div>
                     <p class="reviews__date">{{reviews.date[index]}}</p>
                 </div>

@@ -216,12 +216,13 @@ def get_reviews_and_associated_data(city: str) -> dict:
         return dict()
     
     # Create dictionary
-    reviews = {"username": [], "photo_name": [], "review": [], "date": []}
+    reviews = {"username": [], "photo_name": [], "review": [], "date": [], "traveler_level": []}
     for row in reviews_rows:
         reviews["username"].append(str(row[0]))
         reviews["photo_name"].append(row[1])
         reviews["review"].append(str(row[2]))
         reviews["date"].append(row[3])
+        reviews["traveler_level"].append(str(row[4]).lower())
 
     # If user has no photo change photo_name to 0, otherwise transform to string
     for index in range(len(reviews["photo_name"])):

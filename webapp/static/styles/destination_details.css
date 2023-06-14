@@ -658,11 +658,10 @@ li.photos__website-bullet{
 .reviews__user-data{
     display: flex;
     gap: 3rem;
-    align-items: center;
 }
 .reviews__photo-container{
-    max-width: 100px;
-    min-width: 100px;
+    max-width: 80px;
+    min-width: 80px;
     aspect-ratio: 1/1;
     border-radius: 50%;
 }
@@ -695,11 +694,48 @@ li.photos__website-bullet{
     background-color: var(--pink-hover-dark);
     color: var(--white-75);
 }
+.reviews__user-details{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .reviews__user{
-    justify-self: flex-start;
     font-size: var(--fs-big-subtitle);
     font-weight: var(--semibold);
     color: var(--dark-grey);
+}
+.reviews__traveler-level{
+    align-self: flex-start;
+    padding: 4px 12px;
+    font-size: var(--fs-phone-description);
+    font-weight: var(--medium);
+    border-radius: 1rem;
+    text-transform: capitalize;
+}
+.reviews__traveler-level.novice{
+    background-color: var(--bg-novice);
+    color: var(--fg-novice);
+}
+.reviews__traveler-level.beginner{
+    background-color: var(--bg-beginner);
+    color: var(--fg-beginner);
+}
+.reviews__traveler-level.intermediate{
+    background-color: var(--bg-intermediate);
+    color: var(--fg-intermediate);
+}
+.reviews__traveler-level.advanced{
+    background-color: var(--bg-advanced);
+    color: var(--fg-advanced);
+}
+.reviews__traveler-level.expert{
+    background-color: var(--bg-expert);
+    color: var(--fg-expert);
+}
+.reviews__traveler-level.master{
+    background-color: var(--bg-master);
+    color: var(--fg-master);
 }
 .reviews__date{
     font-size: var(--fs-description);
