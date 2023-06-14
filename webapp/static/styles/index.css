@@ -102,8 +102,8 @@ header{
     gap: 2.5vw;
 }
 .account-buttons > a{
-    padding: 0.4rem 1.2rem;
-    border-radius: 0.25rem;
+    padding: 0.4rem 1.3rem;
+    border-radius: 2rem;
     color: var(--white);
     display: flex;
     transition: 250ms;
@@ -195,7 +195,7 @@ section.intro.active{
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
     background-size: 300%;
     background-position: right;
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     text-align: center;
     animation: start-the-journey-animation 10s infinite;
     transition: 500ms;

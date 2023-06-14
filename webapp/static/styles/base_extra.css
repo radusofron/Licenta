@@ -52,7 +52,7 @@ header{
 .header__logout-button{
     padding: 0.4rem 1.2rem;
     font-size: var(--fs-subtitle);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     background-color: var(--white-50);
     color: var(--white);
     outline: 0.2rem solid var(--white-50);
@@ -136,7 +136,7 @@ footer{
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
-    gap: 4.5rem;
+    gap: 3rem;
 }
 .footer__review-description{
     font-size: var(--fs-description);
@@ -183,7 +183,7 @@ input[type=text].footer__review-input:focus::placeholder{
     box-sizing: border-box;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     outline: 0.2rem solid var(--white-50);
     background-color: var(--white-50);
     color: var(--white);
@@ -299,7 +299,7 @@ nav.phone{
     }
     .header__link.phone{
         width: 100%;
-        border-radius: 0.5rem;
+        border-radius: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -13,18 +13,45 @@
         <h3 class="destination__title">{{ city_name }}</h3>
         <form class="destination__buttons" action="/api/destination_details" method="post">
             {% if city_status.wishlisted == True %}
-            <button class="destination__button-wishlist true" type="submit" name="remove-wishlist">Remove from
-                wishlist</button>
+            <div class="wishlist__button-container">
+                <div class="wishlist__icon-container">
+                    <img class="wishlit__icon"
+                        src="{{url_for('static', filename='/assets/illustrations/bookmark_filled.png')}}">
+                </div>
+                <button class="destination__button-wishlist" type="submit" name="remove-wishlist">Remove from
+                    wishlist
+                </button>
+            </div>
             {% else %}
-            <button class="destination__button-wishlist false" type="submit" name="add-wishlist">Add to
-                wishlist</button>
+            <div class="wishlist__button-container">
+                <div class="wishlist__icon-container">
+                    <img class="wishlit__icon"
+                        src="{{url_for('static', filename='/assets/illustrations/bookmark.png')}}">
+                </div>
+                <button class="destination__button-wishlist" type="submit" name="add-wishlist">
+                    Add to
+                    wishlist
+                </button>
+            </div>
             {% endif %}
             {% if city_status.visited == True %}
-            <button class="destination__button-visited true" type="submit" name="remove-visited">Remove from
-                visited</button>
+            <div class="visited__button-container">
+                <div class="visited__icon-container">
+                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/unmark.png')}}">
+                </div>
+                <button class="destination__button-visited true" type="submit" name="remove-visited">Remove from
+                    visited
+                </button>
+            </div>
             {% else %}
-            <button class="destination__button-visited false" type="submit" name="mark-visited">Mark as
-                visited</button>
+            <div class="visited__button-container">
+                <div class="visited__icon-container">
+                    <img class="visited__icon" src="{{url_for('static', filename='/assets/illustrations/mark.png')}}">
+                </div>
+                <button class="destination__button-visited false" type="submit" name="mark-visited">Mark as
+                    visited
+                </button>
+            </div>
             {% endif %}
         </form>
     </div>

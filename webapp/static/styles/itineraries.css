@@ -281,7 +281,7 @@ button.delete__button{
     box-sizing: border-box;
     font-size: var(--fs-read);
     font-weight: var(--semibold);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     border: 0.2rem solid var(--dark-pink);
     background-color: var(--dark-pink);
     color: var(--white);

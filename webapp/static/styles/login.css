@@ -102,7 +102,7 @@ input[type=password]:focus{
     padding: 1vh;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
     background-size: 300%;
     background-position: right;

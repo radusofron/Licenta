@@ -222,7 +222,7 @@ button{
     box-sizing: border-box;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     color: var(--white);
     display: flex;
     align-items: center;

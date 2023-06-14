@@ -94,7 +94,7 @@ main.grid-container{
     box-sizing: border-box;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     color: var(--white);
     transition: 250ms;
 }

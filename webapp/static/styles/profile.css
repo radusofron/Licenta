@@ -84,7 +84,7 @@ label.profile__add-photo-button{
     box-sizing: border-box;
     width: calc(30% + 1.5rem + 0.5rem + 55px);
     min-width: calc(150px + 1.5rem + 0.5rem + 55px);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
     color: var(--white);
@@ -215,7 +215,7 @@ input[type=password].profile__input.error::placeholder{
     width: fit-content;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     background: linear-gradient(45deg, var(--pink), var(--glow-pink), var(--pink), var(--pink));
     background-size: 300%;
     background-position: right;
@@ -243,7 +243,7 @@ form.profile__delete-account-container{
     width: fit-content;
     font-size: var(--fs-subtitle);
     font-weight: var(--semibold);
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     background: linear-gradient(45deg, var(--dark-pink), var(--glow-dark-pink), var(--dark-pink), var(--dark-pink));
     background-size: 300%;
     background-position: right;
@@ -411,6 +411,9 @@ li.profile__stat{
     }
     .profile__credential-data{
         font-size: var(--fs-description);
+    }
+    .profile__level-data {
+        font-size: var(--fs-phone-description);
     }
     .profile__subtitle{
         font-size: var(--fs-big-subtitle);
