@@ -20,10 +20,10 @@
                 <div class="username-container">
                     <p class="username">Username</p>
                     {% if messages[0] == "username_error" %}
-                    <input maxlength="40" autocomplete="off" class="error" name="username" type="text"
+                    <input maxlength="20" autocomplete="off" class="error" name="username" type="text"
                         placeholder="Username already exists!" required>
                     {% else %}
-                    <input maxlength="40" autocomplete="off" name="username" type="text"
+                    <input maxlength="20" autocomplete="off" name="username" type="text"
                         placeholder="Your username (individual)" required>
                     {% endif %}
                 </div>
@@ -60,7 +60,7 @@
                 <!-- First time displaying the page: -->
                 <div class="username-container">
                     <p class="username">Username</p>
-                    <input maxlength="40" autocomplete="off" name="username" type="text"
+                    <input maxlength="20" autocomplete="off" name="username" type="text"
                         placeholder="Your username (individual)" required>
                 </div>
                 <div class="email-container">

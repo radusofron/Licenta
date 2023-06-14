@@ -695,7 +695,8 @@ li.photos__website-bullet{
     color: var(--white-75);
 }
 .reviews__user-details{
-    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -741,6 +742,7 @@ li.photos__website-bullet{
     font-size: var(--fs-description);
     font-weight: var(--semibold);
     color: var(--grey);
+    white-space: nowrap;
 }
 .reviews__text{
     font-size: var(--fs-read);
@@ -910,9 +912,6 @@ li.photos__website-bullet{
     .reviews__review-details {
        gap: 3rem;
     }
-    .reviews__date {
-        align-self: center;
-    }
     .weather__per-hours-container{
         gap: 6rem;
     }
@@ -925,6 +924,13 @@ li.photos__website-bullet{
         flex-direction: column;
         gap: 1.5rem;
     }
+    .reviews__review-details {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .reviews__user{
+        overflow-wrap: anywhere;
+    }
 }
 @media (max-width: 500px){
     .travel-itineraries__objective-text {
@@ -934,13 +940,6 @@ li.photos__website-bullet{
         max-width: 100%;
         min-width: 100%;
         overflow: hidden;
-    }
-    .reviews__review-details {
-       flex-direction: column-reverse;
-       gap: 0rem;
-    }
-    .reviews__date {
-        align-self: flex-end;
     }
     .weather__per-hours-container{
         gap: 4.5rem;
