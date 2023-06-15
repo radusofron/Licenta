@@ -64,7 +64,7 @@ def get_evaluation_aspects() -> list[str]:
 def get_general_feelings() -> list[str]:
     """Function returns general feelings
     """
-    general_feelings = ["delighted", "satisfied", "neutral", "disappointed", "frustrated"]
+    general_feelings = ["delighted", "impressed", "satisfied", "neutral", "disappointed", "bored", "frustrated"]
     return general_feelings
 
 

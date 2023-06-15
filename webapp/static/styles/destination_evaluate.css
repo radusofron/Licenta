@@ -261,6 +261,32 @@ button.evaluate__button.disabled:hover{
     flex-direction: column;
     gap: 3rem;
 }
+ul.review__previous{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+li.review__previous-element{
+    position: relative;
+    padding: 0rem 0rem 0rem 2rem;
+    box-sizing: border-box;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+li.review__previous-element::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(100%/2 - 0.25rem);
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: var(--dark-grey);
+}
 .review__previous-feeling{
     align-self: flex-start;
     padding: 8px 24px;
@@ -491,6 +517,9 @@ button.review__button:hover{
         font-size: var(--fs-description);
     }
     .review__description{
+        font-size: var(--fs-description);
+    }
+    li.review__previous-element{
         font-size: var(--fs-description);
     }
     .review__previous-feeling{

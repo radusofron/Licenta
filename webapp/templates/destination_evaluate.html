@@ -125,16 +125,23 @@
         <div class="review__already">
             <p class="review__description">You have already submitted a review for this city:
             </p>
-            <p class="review__previous-feeling">
-                {{user_feedback.review[1]}}
-                <img class="review__feeling-icon"
-                    src="{{url_for('static', filename='/assets/illustrations/' + user_feedback.review[1] + '_24.png')}}">
-            </p>
-            <p class="review__previous-text">" {{user_feedback.review[0]}} "</p>
+            <ul class="review__previous">
+                <li class="review__previous-element">previous dominant feeling:
+                    <p class="review__previous-feeling">
+                        {{user_feedback.review[1]}}
+                        <img class="review__feeling-icon"
+                            src="{{url_for('static', filename='/assets/illustrations/' + user_feedback.review[1] + '_24.png')}}">
+                    </p>
+                </li>
+                <li class="review__previous-element">previous text:
+                    <span class="review__previous-text">" {{user_feedback.review[0]}} "</span>
+                </li>
+            </ul>
         </div>
         <p class="review__description">However, you can still
-            modify your it if you wish. Choose the dominant feeling that resonates with your experience, then share your
-            personal insights and honest opinions about the
+            modify it if you wish. To update your review, choose a new dominant feeling that resonates with your
+            experience, then share your
+            new perspective about the
             city you've explored.
         </p>
         {% else %}
@@ -147,7 +154,7 @@
             <div class="review__feeling-container">
                 {% for general_feeling in general_feelings %}
                 <input class="review__feeling-radio" type="radio" value="{{general_feeling}}" id="{{general_feeling}}"
-                    name="feeling" hidden>
+                    name="feeling" hidden required>
                 <label for="{{general_feeling}}" class="review__feeling-label">
                     {{general_feeling}}
                     <img class="review__feeling-icon"
