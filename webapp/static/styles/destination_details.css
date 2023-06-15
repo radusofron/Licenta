@@ -121,7 +121,7 @@ dialog[open].modal{
     min-width: fit-content;
     font-size: var(--fs-read);
     font-weight: var(--semibold);
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     color: var(--white);
     cursor: pointer;
     transition: 250ms;

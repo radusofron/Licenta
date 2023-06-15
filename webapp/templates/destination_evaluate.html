@@ -125,11 +125,17 @@
         <div class="review__already">
             <p class="review__description">You have already submitted a review for this city:
             </p>
-            <p class="review__previous">" {{user_feedback.review}} "</p>
+            <p class="review__previous-feeling">
+                {{user_feedback.review[1]}}
+                <img class="review__feeling-icon"
+                    src="{{url_for('static', filename='/assets/illustrations/' + user_feedback.review[1] + '_24.png')}}">
+            </p>
+            <p class="review__previous-text">" {{user_feedback.review[0]}} "</p>
         </div>
         <p class="review__description">However, you can still
-            modify your evaluation if you wish. Share your updated personal insights, memorable moments, and honest
-            opinions about the city you've explored.
+            modify your it if you wish. Choose the dominant feeling that resonates with your experience, then share your
+            personal insights and honest opinions about the
+            city you've explored.
         </p>
         {% else %}
         <p class="review__description">Choose the dominant feeling that resonates with your experience, then share your

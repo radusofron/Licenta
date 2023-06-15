@@ -261,7 +261,22 @@ button.evaluate__button.disabled:hover{
     flex-direction: column;
     gap: 3rem;
 }
-.review__previous{
+.review__previous-feeling{
+    align-self: flex-start;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    font-style: italic;
+    background-color: var(--background-grey);
+    color: var(--dark-grey);
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.review__previous-text{
     font-size: var(--fs-read);
     font-weight: var(--medium);
     color: var(--dark-grey);
@@ -478,7 +493,10 @@ button.review__button:hover{
     .review__description{
         font-size: var(--fs-description);
     }
-    .review__previous{
+    .review__previous-feeling{
+        font-size: var(--fs-description);
+    }
+    .review__previous-text{
         font-size: var(--fs-description);
     }
     label.review__feeling-label{

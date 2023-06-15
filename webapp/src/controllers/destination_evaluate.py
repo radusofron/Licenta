@@ -127,11 +127,14 @@ def destination_evaluate() -> Response:
             flash("review submitted") 
 
         elif "update-review" in request.form:
+            # Extract general feeling
+            general_feeling = request.form["feeling"]
+
             # Extract review
             review = request.form["review"]
 
             # Update review
-            update_visited_destination_review_by_user(dba, session["user_id"], session["current_city"], review)
+            update_visited_destination_review_by_user(dba, session["user_id"], session["current_city"], review, general_feeling)
             flash("review updated") 
             
         return make_response(

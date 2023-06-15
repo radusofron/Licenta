@@ -760,17 +760,17 @@ def extract_visited_destination_review_by_user(dba, user_id: int, destination_na
 
     # Extract review
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `review` FROM `reviews_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
+    dba_cursor.execute("SELECT `review`, `feeling` FROM `reviews_destinations` WHERE `user_id`=%s AND `destination_id`=%s", (user_id, destination_id))
     review = dba_cursor.fetchone()
     dba_cursor.close()
 
     # Case: no review found
     if review is None:
-        return ""
-    return review[0]
+        return []
+    return review
 
 
-def update_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str):
+def update_visited_destination_review_by_user(dba, user_id: int, destination_name: str, review: str, general_feeling: str):
     """Function updates the review given by an user for a visited destination into the database.
     """
     # Extract destination id
@@ -783,7 +783,7 @@ def update_visited_destination_review_by_user(dba, user_id: int, destination_nam
     dba_cursor = dba.cursor()
 
     # Update review   
-    dba_cursor.execute("UPDATE `reviews_destinations` SET `review`=%s, `date`=%s WHERE `user_id`=%s AND `destination_id`=%s", (review, date, user_id, destination_id))
+    dba_cursor.execute("UPDATE `reviews_destinations` SET `review`=%s, `feeling`=%s, `date`=%s WHERE `user_id`=%s AND `destination_id`=%s", (review, general_feeling, date, user_id, destination_id))
 
     # Close cursor and commit changes
     dba_cursor.close()
