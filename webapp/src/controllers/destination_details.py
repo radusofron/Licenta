@@ -195,6 +195,46 @@ def change_date_format(date) -> str:
         return str(current_date.minute - date.minute) + " minute(s) ago"
     
     return "Now"
+
+
+def get_traveler_degree(traveler_level: str):
+    """Function returns traveler degree.
+    
+    Traveler degree  makes filtering easier.
+    """
+    if traveler_level == "master":
+        return 0
+    elif traveler_level == "expert":
+        return 1
+    elif traveler_level == "advanced":
+        return 2
+    elif traveler_level == "intermediate":
+        return 3
+    elif traveler_level == "beginner":
+        return 4
+    elif traveler_level == "novice":
+        return 5
+    
+
+def get_feeling_degree(general_feeling: str):
+    """Function returns feeling degree.
+
+    Feeling degree makes filtering easier.
+    """
+    if general_feeling == "delighted":
+        return 0
+    elif general_feeling == "impressed":
+        return 1
+    elif general_feeling == "satisfied":
+        return 2
+    elif general_feeling == "neutral":
+        return 3
+    elif general_feeling == "disappointed":
+        return 4
+    elif general_feeling == "bored":
+        return 5
+    elif general_feeling == "frustrated":
+        return 6
         
 
 def get_reviews_and_associated_data(city: str) -> dict:
@@ -216,7 +256,7 @@ def get_reviews_and_associated_data(city: str) -> dict:
         return dict()
     
     # Create dictionary
-    reviews = {"username": [], "photo_name": [], "date": [], "traveler_level": [], "feeling": [], "review": []}
+    reviews = {"username": [], "photo_name": [], "date": [], "traveler_level": [], "feeling": [], "review": [], "traveler_degree": [], "feeling_degree": []}
     for row in reviews_rows:
         reviews["username"].append(str(row[0]))
         reviews["photo_name"].append(row[1])
@@ -224,6 +264,9 @@ def get_reviews_and_associated_data(city: str) -> dict:
         reviews["traveler_level"].append(str(row[3]).lower())
         reviews["feeling"].append(str(row[4]))
         reviews["review"].append(str(row[5]))
+        # Add traveler level degree and feeling degree
+        reviews["traveler_degree"].append(get_traveler_degree(str(reviews["traveler_level"][-1])))
+        reviews["feeling_degree"].append(get_feeling_degree(str(reviews["feeling"][-1])))
 
     # If user has no photo change photo_name to 0, otherwise transform to string
     for index in range(len(reviews["photo_name"])):

@@ -292,7 +292,8 @@
         </div>
         <div class="reviews__content">
             {% for index in range(reviews.username | length) %}
-            <div class="reviews__review-card" pulbished_date="{{index}}">
+            <div class="reviews__review-card" traveler_level="{{reviews.traveler_degree[index]}}"
+                general_feeling="{{reviews.feeling_degree[index]}}" published_date="{{index}}">
                 <div class="reviews__user-data">
                     <div class="reviews__photo-container">
                         {% if reviews.photo_name[index] == "0" %}

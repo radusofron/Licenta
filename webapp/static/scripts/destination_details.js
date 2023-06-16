@@ -519,12 +519,22 @@ function responsiveLayout() {
 }
 
 
+//
+function ascendentSorting(dateOne, dateTwo) {
+    if (dateOne.getAttribute("published_date") < dateTwo.getAttribute("published_date"))
+        return - 1
+    if (dateOne.getAttribute("published_date") > dateTwo.getAttribute("published_date"))
+        return 1
+    return 0
+}
+
+
 // Function ensures dropdown menus style for filter options and the filtering
 function filterReviews() {
     // Get filter buttons
     const buttons = document.querySelectorAll(".filter__options-button")
 
-    // Get filter options containers
+    // Get dropdown menus
     const dropdownMenus = document.querySelectorAll(".filter__dropdown-container")
 
     // Get filter options buttons
@@ -556,7 +566,7 @@ function filterReviews() {
         });
     }
 
-    // Uncheck the last radio button when a new radio button is checked
+    // Change styles on new radio button checked
     for (let index = 0; index < optionButtons.length; index++) {
 
         optionButtons[index].addEventListener("change", function() {
@@ -569,6 +579,7 @@ function filterReviews() {
                 }
             }
             
+            // Change styles
             if ([0, 1].includes(index)) {
                 // Close current dropdown menu
                 dropdownMenus[0].classList.remove("active")
@@ -590,43 +601,147 @@ function filterReviews() {
                 // Change style for current button pressed
                 buttons[2].classList.remove("active")
             }
+
+            // Get reviews container
+            const reviewsContainer = document.querySelector(".reviews__content")
+
+            // Get reviews cards
+            const reviews = document.querySelectorAll(".reviews__review-card")
+            // Create array with review cards
+            const arrayReviews = Array.from(reviews)
+
+            // Determine filter chosen and proceed accordingly
+            if (optionButtons[index].name == "level") {
+                if (optionButtons[index].value == "Highest to lowest") {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        levelOne = elementOne.getAttribute("traveler_level")
+                        levelTwo = elementTwo.getAttribute("traveler_level")
+
+                        // Check which is bigger
+                        if (levelOne < levelTwo) {
+                            return -1
+                        }
+                        if (levelOne > levelTwo) {
+                            return 1
+                        }
+                        if (levelOne == levelTwo) {
+                            return 0
+                        }
+                    });
+                }
+                else {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        levelOne = elementOne.getAttribute("traveler_level")
+                        levelTwo = elementTwo.getAttribute("traveler_level")
+
+                        console
+
+                        // Check which is bigger
+                        if (levelOne < levelTwo) {
+                            return 1
+                        }
+                        if (levelOne > levelTwo) {
+                            return -1
+                        }
+                        if (levelOne == levelTwo) {
+                            return 0
+                        }
+                    });
+                }
+            }
+            if (optionButtons[index].name == "feeling") {
+                if (optionButtons[index].value == "Best to worst") {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        feelingOne = elementOne.getAttribute("general_feeling")
+                        feelingTwo = elementTwo.getAttribute("general_feeling")
+
+                        // Check which is bigger
+                        if (feelingOne < feelingTwo) {
+                            return -1
+                        }
+                        if (feelingOne > feelingTwo) {
+                            return 1
+                        }
+                        if (feelingOne == feelingTwo) {
+                            return 0
+                        }
+                    });
+                }
+                else {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        feelingOne = elementOne.getAttribute("general_feeling")
+                        feelingTwo = elementTwo.getAttribute("general_feeling")
+
+                        console
+
+                        // Check which is bigger
+                        if (feelingOne < feelingTwo) {
+                            return 1
+                        }
+                        if (feelingOne > feelingTwo) {
+                            return -1
+                        }
+                        if (feelingOne == feelingTwo) {
+                            return 0
+                        }
+                    });
+                }
+            }
+            if (optionButtons[index].name == "date") {
+                if (optionButtons[index].value == "Descending") {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        dateOne = elementOne.getAttribute("published_date")
+                        dateTwo = elementTwo.getAttribute("published_date")
+
+                        // Check which is bigger
+                        if (dateOne < dateTwo) {
+                            return -1
+                        }
+                        if (dateOne > dateTwo) {
+                            return 1
+                        }
+                        if (dateOne == dateTwo) {
+                            return 0
+                        }
+                    });
+                }
+                else {
+                    // Sort reviews
+                    arrayReviews.sort((elementOne, elementTwo) => {
+                        // Extract attribute values
+                        dateOne = elementOne.getAttribute("published_date")
+                        dateTwo = elementTwo.getAttribute("published_date")
+
+                        // Check which is bigger
+                        if (dateOne < dateTwo) {
+                            return 1
+                        }
+                        if (dateOne > dateTwo) {
+                            return -1
+                        }
+                        if (dateOne == dateTwo) {
+                            return 0
+                        }
+                    });
+                }
+            }
+
+            // Add reviews to reviews container in a new order
+            arrayReviews.forEach(review => {
+                reviewsContainer.appendChild(review)
+            });
         });
     }
-    
-    // First time: get reviews container
-    // const reviewsContainer = document.querySelectorAll(".reviews__content")
-
-    // First time: get reviews in descending order
-    // const descendingOrderReviews = document.querySelectorAll(".reviews__review-card")
-
-    // Filter according to options
-    // for (let index = 0; index < optionButtons.length; index++) {
-    //     optionButtons[index].addEventListener("change", function() {
-    //         // Get reviews
-    //         const reviews = document.querySelectorAll(".reviews__review-card")
-
-    //         // Determine filter chosen
-    //         if (optionButtons[index].name == "level") {
-    //             console.log("Dupaa nivel")
-    //         }
-    //         if (optionButtons[index].name == "feeling") {
-    //             console.log("Dupaa feeling")
-    //         }
-    //         if (optionButtons[index].name == "date") {
-    //             // Determine option chosen
-    //             if (optionButtons[index].value == "Descending") {
-    //                 reviews.forEach(review => {
-    //                     reviewsContainer.appendChild(review)
-    //                 });
-    //             }
-    //             else {
-    //                 reviews.forEach(review => {
-    //                     reviewsContainer.appendChild(review)
-    //                 });
-    //             }
-    //         }
-    //     });
-    // }
 }
 
 

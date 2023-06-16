@@ -669,7 +669,7 @@ li.photos__website-bullet{
     display: flex;
 }
 .filter__options-button{
-    padding: 24px 36px;
+    padding: 16px 36px;
     box-sizing: border-box;
     border-radius: 2rem;
     font-size: var(--fs-read);
@@ -717,7 +717,7 @@ form.filter__dropdown-container.active{
     }
 }
 label.filter__option{
-    padding: 24px 12px;
+    padding: 16px 12px;
     font-size: var(--fs-description);
     font-weight: var(--medium);
     background-color: var(--background-grey-hover);
