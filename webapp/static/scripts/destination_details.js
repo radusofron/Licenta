@@ -525,45 +525,108 @@ function filterReviews() {
     const buttons = document.querySelectorAll(".filter__options-button")
 
     // Get filter options containers
-    const optionsContainers = document.querySelectorAll(".filter__dropdown-container")
+    const dropdownMenus = document.querySelectorAll(".filter__dropdown-container")
 
     // Get filter options buttons
     const optionButtons = document.querySelectorAll(".filter__option-radio")
 
-    // Change style on click: open dropdown menu
+    // Change styles on click
     for (let index = 0; index < buttons.length; index++) {
+
         buttons[index].addEventListener("click", function() {
+
+            // Close the last opened dropdown menu
+            dropdownMenus.forEach(dropdownMenu => {
+                if (dropdownMenu != dropdownMenus[index] && dropdownMenu.classList.contains("active")) {
+                    dropdownMenu.classList.remove("active")
+                }
+            });
+
+            // Change style for last button pressed 
+            buttons.forEach(button => {
+                if (button != buttons[index] && button.classList.contains("active")) {
+                    button.classList.remove("active")
+                }
+            });
+            
+            // Change style for new button pressed
             buttons[index].classList.toggle("active")
-            optionsContainers[index].classList.toggle("active")
+            // Open correspondent dropdown menu
+            dropdownMenus[index].classList.toggle("active")
         });
     }
 
-    // Change style on click: close dropdown menu
+    // Uncheck the last radio button when a new radio button is checked
     for (let index = 0; index < optionButtons.length; index++) {
-        optionButtons[index].addEventListener("click", function() {
 
-            // Change style for correspondent container
+        optionButtons[index].addEventListener("change", function() {
+         
+            // Uncheck last checked radio button
+            for (let index2 = 0; index2 < optionButtons.length; index2++) {
+                
+                if (index != index2 && optionButtons[index2].checked == true) {
+                    optionButtons[index2].checked = false
+                }
+            }
+            
             if ([0, 1].includes(index)) {
-                buttons[0].classList.toggle("active")
-                optionsContainers[0].classList.toggle("active")
+                // Close current dropdown menu
+                dropdownMenus[0].classList.remove("active")
+
+                // Change style for current button pressed
+                buttons[0].classList.remove("active")
             }
             if ([2, 3].includes(index)) {
-                buttons[1].classList.toggle("active")
-                optionsContainers[1].classList.toggle("active")
+                // Close current dropdown menu
+                dropdownMenus[1].classList.remove("active")
+
+                // Change style for current button pressed
+                buttons[1].classList.remove("active")
             }
             if ([4, 5].includes(index)) {
-                buttons[2].classList.toggle("active")
-                optionsContainers[2].classList.toggle("active")
+                // Close current dropdown menu
+                dropdownMenus[2].classList.remove("active")
+
+                // Change style for current button pressed
+                buttons[2].classList.remove("active")
             }
         });
     }
+    
+    // First time: get reviews container
+    // const reviewsContainer = document.querySelectorAll(".reviews__content")
+
+    // First time: get reviews in descending order
+    // const descendingOrderReviews = document.querySelectorAll(".reviews__review-card")
 
     // Filter according to options
-    for (let index = 0; index < optionButtons.length; index++) {
-        optionButtons[index].addEventListener("change", function() {
-            console.log("Aici abia acum intra")
-        });
-    }
+    // for (let index = 0; index < optionButtons.length; index++) {
+    //     optionButtons[index].addEventListener("change", function() {
+    //         // Get reviews
+    //         const reviews = document.querySelectorAll(".reviews__review-card")
+
+    //         // Determine filter chosen
+    //         if (optionButtons[index].name == "level") {
+    //             console.log("Dupaa nivel")
+    //         }
+    //         if (optionButtons[index].name == "feeling") {
+    //             console.log("Dupaa feeling")
+    //         }
+    //         if (optionButtons[index].name == "date") {
+    //             // Determine option chosen
+    //             if (optionButtons[index].value == "Descending") {
+    //                 reviews.forEach(review => {
+    //                     reviewsContainer.appendChild(review)
+    //                 });
+    //             }
+    //             else {
+    //                 reviews.forEach(review => {
+    //                     reviewsContainer.appendChild(review)
+    //                 });
+    //             }
+    //         }
+    //     });
+    // }
 }
 
 

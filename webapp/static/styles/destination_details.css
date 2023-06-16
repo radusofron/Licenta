@@ -648,7 +648,7 @@ li.photos__website-bullet{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 48px;
+    gap: 3rem;
 }
 .filter__title{
     font-size: var(--fs-subtitle);
@@ -660,10 +660,15 @@ li.photos__website-bullet{
 }
 .filter__options-container{
     display: flex;
-    gap: 48px;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+.filter__option{
+    position: relative;
+    align-items: center;
+    display: flex;
 }
 .filter__options-button{
-    position: relative;
     padding: 24px 36px;
     box-sizing: border-box;
     border-radius: 2rem;
@@ -672,9 +677,7 @@ li.photos__website-bullet{
     background-color: var(--background-grey);
     color: var(--dark-grey);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
+    gap: 12px;
     cursor: pointer;
     transition: background-color 250ms, border-radius 200ms;
 }
@@ -1021,15 +1024,6 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
     button.destination__button-visited{
         width: 100%;
         justify-content: center;
-    }
-    .reviews__filter-container{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4.5rem;
-    }
-    .filter__options-container{
-        flex-direction: column;
-        gap: 4.5rem;
     }
     .weather__per-hours-container{
         gap: 6rem;

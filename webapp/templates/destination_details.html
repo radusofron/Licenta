@@ -266,10 +266,13 @@
             <p class="filter__title">Filter by:</p>
             <div class="filter__options-container">
                 {% for filter_name, filter in reviews_filters.items() %}
-                <div class="filter__options-button">
-                    {{filter_name}}
-                    <img class="filter__image"
-                        src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}" alt="Options here">
+                <div class="filter__option">
+                    <p class="filter__options-button">
+                        {{filter_name}}
+                        <img class="filter__image"
+                            src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
+                            alt="Options here">
+                    </p>
                     <form class="filter__dropdown-container">
                         {% for index in range(filter.options | length) %}
                         {% if filter.options[index] == "Descending" %}
@@ -289,7 +292,7 @@
         </div>
         <div class="reviews__content">
             {% for index in range(reviews.username | length) %}
-            <div class="reviews__review-card">
+            <div class="reviews__review-card" pulbished_date="{{index}}">
                 <div class="reviews__user-data">
                     <div class="reviews__photo-container">
                         {% if reviews.photo_name[index] == "0" %}
