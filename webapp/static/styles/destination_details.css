@@ -644,6 +644,88 @@ li.photos__website-bullet{
 }
 
 /* For Reviews section */
+.reviews__filter-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 48px;
+}
+.filter__title{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter__options-button{
+    position: relative;
+    padding: 24px 36px;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    background-color: var(--background-grey);
+    color: var(--dark-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    cursor: pointer;
+    transition: 250ms;
+}
+.filter__options-button:hover{
+    background-color: var(--background-grey-hover);
+}
+.filter__options-button.active{
+    border-radius: 2rem 2rem 0rem 0rem;
+    background-color: var(--background-grey-hover);
+}
+form.filter__options-container{
+    position: absolute;
+    border-top: 2px solid var(--dark-grey);
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    border-radius: 0rem 0rem 2rem 2rem;
+    box-shadow: 0rem 0.5rem 0.5rem var(--black-25);
+    background-color: var(--background-grey-hover);
+    display: none;
+}
+form.filter__options-container.active{
+    display: flex;
+    flex-direction: column;
+    animation: display-dropdown-with-transition 250ms;
+}
+@keyframes display-dropdown-with-transition{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+label.filter__option{
+    padding: 24px 12px;
+    font-size: var(--fs-description);
+    font-weight: var(--medium);
+    background-color: var(--background-grey-hover);
+    color: var(--dark-grey-light);
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    transition: 250ms;
+}
+label.filter__option:hover{
+    background-color: var(--background-grey-dark-hover);
+}
+label.filter__option.last{
+    border-radius: 0rem 0rem 2rem 2rem;
+}
+input[type="radio"].filter__option-radio:checked + label.filter__option{
+    background-color: var(--background-grey-dark-hover);
+}
 .reviews__content{
     width: 100%;
     display: flex;

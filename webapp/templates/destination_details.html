@@ -86,15 +86,15 @@
 
     <div class="destination__middle-container">
         <ul class="destination__options">
-            <li class="destination__option travel-itineraries active">Travel itineraries</li>
+            <li class="destination__option travel-itineraries">Travel itineraries</li>
             <li class="destination__option wikipedia">Description</li>
             <li class="destination__option photos">Photos</li>
             <li class="destination__option statistics">Statistics</li>
-            <li class="destination__option reviews">Reviews</li>
+            <li class="destination__option reviews active">Reviews</li>
             <li class="destination__option weather">Weather</li>
         </ul>
     </div>
-    <section class="section travel-itineraries active">
+    <section class="section travel-itineraries">
         <p class="section__description">Create a personalized travel plan for {{city_name}}. We offer you a vast
             selection of up to 250 touristic
             objectives to choose from.</p>
@@ -257,11 +257,53 @@
             {% endfor %}
         </div>
     </section>
-    <section class="section reviews">
+    <section class="section reviews active">
         {% if reviews | length > 0 %}
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by
             other
             users.</p>
+        <div class="reviews__filter-container">
+            <p class="filter__title">Filter by:</p>
+            <div class="filter__options-button">
+                Traveler level
+                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
+                    alt="Options here">
+                <form class="filter__options-container">
+                    <input class="filter__option-radio" type="radio" name="level" value="Highest to lowest" id="highest"
+                        hidden>
+                    <label for="highest" class="filter__option first">Highest to lowest</label>
+                    <input class="filter__option-radio" type="radio" name="level" value="Lowest to highest" id="lowest"
+                        hidden>
+                    <label for="lowest" class="filter__option last">Lowest to highest</label>
+                </form>
+            </div>
+            <div class="filter__options-button">
+                Overal feeling
+                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
+                    alt="Options here">
+                <form class="filter__options-container">
+                    <input class="filter__option-radio" type="radio" name="feeling" value="Best to worst" id="best"
+                        hidden>
+                    <label for="best" class="filter__option first">Best to worst</label>
+                    <input class="filter__option-radio" type="radio" name="feeling" value="Worst to best" id="worst"
+                        hidden>
+                    <label for="worst" class="filter__option last">Worst to best</label>
+                </form>
+            </div>
+            <div class="filter__options-button">
+                Date
+                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
+                    alt="Options here">
+                <form class="filter__options-container">
+                    <input class="filter__option-radio" type="radio" name="date" value="Descending" id="descending"
+                        checked hidden>
+                    <label for="descending" class="filter__option first">Descendent</label>
+                    <input class="filter__option-radio" type="radio" name="date" value="Ascending" id="ascending"
+                        hidden>
+                    <label for="ascending" class="filter__option last">Ascendent</label>
+                </form>
+            </div>
+        </div>
         <div class="reviews__content">
             {% for index in range(reviews.username | length) %}
             <div class="reviews__review-card">

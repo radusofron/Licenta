@@ -519,6 +519,54 @@ function responsiveLayout() {
 }
 
 
+// Function ensures dropdown menus style for filter options and the filtering
+function filterReviews() {
+    // Get filter buttons
+    const buttons = document.querySelectorAll(".filter__options-button")
+
+    // Get filter options containers
+    const optionsContainers = document.querySelectorAll(".filter__options-container")
+
+    // Get filter options buttons
+    const optionButtons = document.querySelectorAll(".filter__option-radio")
+
+    // Change style on click: open dropdown menu
+    for (let index = 0; index < buttons.length; index++) {
+        buttons[index].addEventListener("click", function() {
+            buttons[index].classList.toggle("active")
+            optionsContainers[index].classList.toggle("active")
+        });
+    }
+
+    // Change style on click: close dropdown menu
+    for (let index = 0; index < optionButtons.length; index++) {
+        optionButtons[index].addEventListener("click", function() {
+
+            // Change style for correspondent container
+            if ([0, 1].includes(index)) {
+                buttons[0].classList.toggle("active")
+                optionsContainers[0].classList.toggle("active")
+            }
+            if ([2, 3].includes(index)) {
+                buttons[1].classList.toggle("active")
+                optionsContainers[1].classList.toggle("active")
+            }
+            if ([4, 5].includes(index)) {
+                buttons[2].classList.toggle("active")
+                optionsContainers[2].classList.toggle("active")
+            }
+        });
+    }
+
+    // Filter according to options
+    for (let index = 0; index < optionButtons.length; index++) {
+        optionButtons[index].addEventListener("change", function() {
+            console.log("Aici abia acum intra")
+        });
+    }
+}
+
+
 // Start after HTML code is rendered
 window.addEventListener("load", function() {
     // Get destination options
@@ -544,13 +592,13 @@ window.addEventListener("load", function() {
     createGradesGraph()
     getTravelItineraryButtons()
     displayAlgorithmInformation()
+    filterReviews()
     setProfilePictureColors()
     displayCharactersLeft()
-
+    
     // First time check
     responsiveLayout()
 
     // Add an event listener to know when window resizes
-    window.addEventListener("resize", () => responsiveLayout()) 
-
+    window.addEventListener("resize", () => responsiveLayout())
   });
