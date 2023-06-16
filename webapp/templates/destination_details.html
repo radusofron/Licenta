@@ -264,44 +264,27 @@
             users.</p>
         <div class="reviews__filter-container">
             <p class="filter__title">Filter by:</p>
-            <div class="filter__options-button">
-                Traveler level
-                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
-                    alt="Options here">
-                <form class="filter__options-container">
-                    <input class="filter__option-radio" type="radio" name="level" value="Highest to lowest" id="highest"
-                        hidden>
-                    <label for="highest" class="filter__option first">Highest to lowest</label>
-                    <input class="filter__option-radio" type="radio" name="level" value="Lowest to highest" id="lowest"
-                        hidden>
-                    <label for="lowest" class="filter__option last">Lowest to highest</label>
-                </form>
-            </div>
-            <div class="filter__options-button">
-                Overal feeling
-                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
-                    alt="Options here">
-                <form class="filter__options-container">
-                    <input class="filter__option-radio" type="radio" name="feeling" value="Best to worst" id="best"
-                        hidden>
-                    <label for="best" class="filter__option first">Best to worst</label>
-                    <input class="filter__option-radio" type="radio" name="feeling" value="Worst to best" id="worst"
-                        hidden>
-                    <label for="worst" class="filter__option last">Worst to best</label>
-                </form>
-            </div>
-            <div class="filter__options-button">
-                Date
-                <img class="filter__image" src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}"
-                    alt="Options here">
-                <form class="filter__options-container">
-                    <input class="filter__option-radio" type="radio" name="date" value="Descending" id="descending"
-                        checked hidden>
-                    <label for="descending" class="filter__option first">Descendent</label>
-                    <input class="filter__option-radio" type="radio" name="date" value="Ascending" id="ascending"
-                        hidden>
-                    <label for="ascending" class="filter__option last">Ascendent</label>
-                </form>
+            <div class="filter__options-container">
+                {% for filter_name, filter in reviews_filters.items() %}
+                <div class="filter__options-button">
+                    {{filter_name}}
+                    <img class="filter__image"
+                        src="{{url_for('static', filename='/assets/illustrations/down_arrow.png')}}" alt="Options here">
+                    <form class="filter__dropdown-container">
+                        {% for index in range(filter.options | length) %}
+                        {% if filter.options[index] == "Descending" %}
+                        <input class="filter__option-radio" type="radio" name="{{filter.name}}"
+                            value="{{filter.options[index]}}" id="{{filter.ids[index]}}" checked hidden>
+                        {% else %}
+                        <input class="filter__option-radio" type="radio" name="{{filter.name}}"
+                            value="{{filter.options[index]}}" id="{{filter.ids[index]}}" hidden>
+                        {% endif %}
+                        <label for="{{filter.ids[index]}}"
+                            class="filter__option first">{{filter.options[index]}}</label>
+                        {% endfor %}
+                    </form>
+                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="reviews__content">

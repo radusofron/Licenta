@@ -8,6 +8,16 @@ import json
 destination_details_view_blueprint = Blueprint("destination_details_view_blueprint", __name__)
 
 
+def get_reviews_filter_options():
+    """Function returns filter options for reviews
+    """
+    filter_options = {"Traveler level": {"options": ["Highest to lowest", "Lowest to highest"], "name": "level", "ids": ["highest", "lowest"]},
+                      "Overall feeling": {"options": ["Best to worst", "Worst to best"], "name":"feeling", "ids": ["best", "worst"]},
+                      "Date": {"options": ["Descending", "Ascending"], "name": "date", "ids": ["descending", "ascending"]}
+                      }
+    return filter_options
+
+
 @destination_details_view_blueprint.route("/destination")
 def destination_details_view() -> Response:
     # User is not logged in
@@ -33,11 +43,12 @@ def destination_details_view() -> Response:
     wikipedia = destination_data["wikipedia"]
     websites_links = destination_data["websites links"]
     statistics = destination_data["statistics"]
+    reviews_filters = get_reviews_filter_options()
     reviews = destination_data["reviews"]
     weather_data = destination_data["weather data"]
 
     return make_response(
         render_template("destination_details.html", city_name = option, city_status = city_status, touristic_objectives = touristic_objectives, 
-                        wikipedia = wikipedia, websites_links = websites_links, statistics = statistics, reviews = reviews, 
-                        weather_data = weather_data)
+                        wikipedia = wikipedia, websites_links = websites_links, statistics = statistics, reviews_filters = reviews_filters,
+                        reviews = reviews, weather_data = weather_data)
     )

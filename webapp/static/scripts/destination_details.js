@@ -525,7 +525,7 @@ function filterReviews() {
     const buttons = document.querySelectorAll(".filter__options-button")
 
     // Get filter options containers
-    const optionsContainers = document.querySelectorAll(".filter__options-container")
+    const optionsContainers = document.querySelectorAll(".filter__dropdown-container")
 
     // Get filter options buttons
     const optionButtons = document.querySelectorAll(".filter__option-radio")
