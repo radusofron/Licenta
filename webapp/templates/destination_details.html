@@ -90,7 +90,8 @@
             <li class="destination__option wikipedia">Description</li>
             <li class="destination__option photos">Photos</li>
             <li class="destination__option statistics">Statistics</li>
-            <li class="destination__option reviews active">Reviews</li>
+            <li class="destination__option reviews">Reviews</li>
+            <li class="destination__option news active">News</li>
             <li class="destination__option weather">Weather</li>
         </ul>
     </div>
@@ -257,13 +258,13 @@
             {% endfor %}
         </div>
     </section>
-    <section class="section reviews active">
+    <section class="section reviews">
         {% if reviews | length > 0 %}
         <p class="section__description">The following reviews offer real-life experiences and opinions shared by
             other
             users.</p>
         <div class="reviews__filter-container">
-            <p class="filter__title">Filter by:</p>
+            <p class="filter__title">Sort by:</p>
             <div class="filter__options-container">
                 {% for filter_name, filter in reviews_filters.items() %}
                 <div class="filter__option">
@@ -331,6 +332,27 @@
             one
             has submitted one yet. :(</p>
         {% endif %}
+    </section>
+    <section class="section news active">
+        <p class="section__description">
+            Stay informed about the latest news of the city.
+        </p>
+        <div class="news__content">
+            {% for news in news_data %}
+            <div class="news__element">
+                <img class="news__image" src="{{news[2]}}" alt="News image">
+                <div class="news__details">
+                    <p class="news__title">{{news[0]}}</p>
+                    <p class="news__source">
+                        Source:
+                        <a class="news__source-link" href="{{news[5]}}">{{news[4]}}</a>
+                    </p>
+                    <p class="news__description">{{news[1]}} <a class="news__link" href="{{news[3]}}">Read the full
+                            article</a></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </section>
     <section class="section weather">
         <p class="section__description">Stay updated with the latest weather conditions in the city. Here is the

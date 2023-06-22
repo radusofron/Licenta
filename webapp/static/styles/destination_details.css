@@ -866,6 +866,67 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
     color: var(--dark-grey);
 }
 
+/* For News section */
+.news__content{
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+.news__element{
+    border-radius: 0.5rem;
+    display: flex;
+    gap: 1.5rem;
+}
+.news__image{
+    border-radius: 0.5rem;
+    aspect-ratio: 2/1;
+    max-width: 300px;
+    min-width: 300px;
+}
+.news__details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.news__title{
+    font-size: var(--fs-big-subtitle);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.news__source{
+    font-size: var(--fs-description);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.news__source-link{
+    text-decoration: underline;
+    color: var(--blue);
+    transition: 250ms;
+}
+.news__source-link:hover{
+    color: var(--grey);
+}
+.news__description{
+    font-size: var(--fs-read);
+    font-weight: var(--medium);
+    color: var(--dark-grey);
+}
+.news__link{
+    text-decoration: underline;
+    color: var(--blue);
+    transition: 250ms;
+}
+.news__link:hover{
+    color: var(--grey);
+}
+hr{
+    display: block;
+}
+
 /* For Weather section */
 .weather__content{
     display: flex;
@@ -994,6 +1055,12 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
         padding-top: 3rem;
     }
 }
+@media (max-width: 1100px) {
+    .news__image{
+        max-height: 200px;
+        min-height: 100px;
+    }
+}
 @media (max-width: 1000px) {
     .travel-itineraries__objectives-container {
         width: 100%;
@@ -1024,6 +1091,13 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
     button.destination__button-visited{
         width: 100%;
         justify-content: center;
+    }
+    .news__element{
+        flex-direction: column;
+    }
+    .news__image{
+        max-height: auto;
+        min-height: auto;
     }
     .weather__per-hours-container{
         gap: 6rem;
@@ -1058,6 +1132,12 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
     }
     .reviews__photo-container{
         align-self: flex-start;
+    }
+}
+@media (max-width: 350px) {
+    .news__image{
+        max-width: 100%;
+        min-width: 100%;
     }
 }
 /* Footer */
@@ -1179,6 +1259,15 @@ input[type="radio"].filter__option-radio:checked + label.filter__option{
         font-size: var(--fs-phone-description);
     }
     .reviews__text{
+        font-size: var(--fs-description);
+    }
+    .news__title{
+        font-size: var(--fs-subtitle);
+    }
+    .news__source{
+        font-size: var(--fs-phone-description);
+    }
+    .news__description{
         font-size: var(--fs-description);
     }
     .weather__day-subtitle{

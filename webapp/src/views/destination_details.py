@@ -45,10 +45,11 @@ def destination_details_view() -> Response:
     statistics = destination_data["statistics"]
     reviews_filters = get_reviews_filter_options()
     reviews = destination_data["reviews"]
+    news_data = destination_data["news data"]
     weather_data = destination_data["weather data"]
 
     return make_response(
         render_template("destination_details.html", city_name = option, city_status = city_status, touristic_objectives = touristic_objectives, 
                         wikipedia = wikipedia, websites_links = websites_links, statistics = statistics, reviews_filters = reviews_filters,
-                        reviews = reviews, weather_data = weather_data)
+                        reviews = reviews, news_data = news_data, weather_data = weather_data)
     )

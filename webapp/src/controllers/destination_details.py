@@ -282,6 +282,80 @@ def get_reviews_and_associated_data(city: str) -> dict:
     return reviews
 
 
+def update_news(city: str):
+    """Function retrieves and updates the news for a given city every 12 hours to avoid excesive API calls.
+    
+    Function writes news details in a correspondent JSON file.
+    """
+    # Read Weather Map API key
+    try:
+        with open("webapp/static/API_keys/GNews.txt", "r") as file:
+            key = file.read()
+    except:
+        return None
+    
+    # Create json name and json path
+    json_name = "news" + ".json"
+    json_path = "webapp/static/destinations_data/" + city + "/" + json_name
+
+    if os.path.exists(json_path):
+        # Case: check last update
+        last_modification_timestamp = os.path.getmtime(json_path)
+        # Convert from timestamp to datetime
+        last_modification_time = datetime.fromtimestamp(last_modification_timestamp)
+
+        # Calcualte time elapsed since the last modification
+        current_date = datetime.now()
+        # Return time elapsed in seconds
+        time_elapsed = (current_date - last_modification_time).total_seconds()
+        # Convert to hours
+        hours_elapsed = time_elapsed /  3600
+
+        # Check if 12 hours have elapsed since the last modification
+        if hours_elapsed < 12:
+            # Case: no update
+            return None
+        
+    # Case: update
+    # Create url
+    url = f"https://gnews.io/api/v4/search?q={city}&lang=en&max=10&apikey={key}"
+    # Create request
+    response = requests.get(url)
+    # Get json format
+    response = response.json()
+
+    # Write news data in correspondent json file
+    try:
+        with open(json_path, "w") as file:
+            json.dump(response, file)
+    except:
+        return None
+
+
+def read_news(city: str):
+    """Function reads the news from a correspondent JSON file and processes the required 
+    information for website
+    """
+    # Create json name and json path
+    json_name = "news" + ".json"
+    json_path = "webapp/static/destinations_data/" + city + "/" + json_name
+
+    # Extract news
+    try:
+        with open(json_path, "r") as file:
+            news = json.load(file)
+    except:
+        return []
+    
+    news_list = []
+    # Create a list for every news and append it to main list
+    for a_news in news["articles"]:
+        news_element = [a_news["title"], a_news["description"], a_news["image"], a_news["url"], a_news["source"]["name"], a_news["source"]["url"]]
+        news_list.append(news_element)
+
+    return news_list
+
+
 def update_weather(city: str):
     """Function retrieves and updates the weather details of a given city at most once per hour to avoid excesive API calls.
 
@@ -464,7 +538,7 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
 
     if algorithm == "kmeans":
         # Group touristic objectives using kmeans
-        km = KMeans(n_clusters=days, init='k-means++', random_state=1)
+        km = KMeans(n_clusters=days, init='k-means++')
         clusters = km.fit_predict(df[["Longitude", "Latitude"]])
 
         # Convert to list
@@ -662,7 +736,11 @@ def destination_details() -> Response:
     # 5. Get reviews
     reviews = get_reviews_and_associated_data(option)
     
-    # 6. Update weather, get weather details, calculate weather days and create dictionary with data
+    # 6. Update news, get news
+    update_news(option)
+    news_data = read_news(option)
+    
+    # 7. Update weather, get weather details, calculate weather days and create dictionary with data
     update_weather(option)
     weather = read_weather(option)
     days = get_weather_days()
@@ -673,6 +751,6 @@ def destination_details() -> Response:
         del weather_data["weather"][0]
         
     return make_response(
-        jsonify({"option": option, "city status": city_status , "touristic objectives": touristic_objectives, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "weather data": weather_data}),
+        jsonify({"option": option, "city status": city_status , "touristic objectives": touristic_objectives, "wikipedia": wikipedia, "websites links": websites_links, "statistics": statistics, "reviews": reviews, "news data": news_data, "weather data": weather_data}),
         status.HTTP_200_OK,
     )

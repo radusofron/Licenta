@@ -67,11 +67,7 @@ def extract_city_cover_photo(cities):
             key = file.read()
     except:
         return None
-    
-    # Connect to dba
-    dba = mysql.connector.connect(host='localhost', password='mysqlradu', user='radu', database='travel_with_us')
-    # Create cursor
-    dba_cursor = dba.cursor()
+
 
     # For every city, get a cover photo and insert its path into database
     for city in cities:
@@ -98,13 +94,6 @@ def extract_city_cover_photo(cities):
 
         # Wait to prevent crashes
         time.sleep(2)
-
-    # Close cursor and commit the changes
-    dba_cursor.close()
-    dba.commit()
-
-    # Close connection to database
-    dba.close()
 
 
 def resize_images(cities: list[str]):
