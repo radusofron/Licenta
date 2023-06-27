@@ -1,0 +1,115 @@
+main.statistics{
+    padding: 4.5rem 5vw;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+.statistics__title{
+    font-size: var(--fs-title);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+}
+.statistics__description{
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    color: var(--grey);
+}
+.statistics__description.no-data{
+    color: var(--pink);
+}
+.raitings__graph, section.statistics__reviews-graph{
+    padding: 3.75rem 0vw;
+    max-height: 500px;
+    min-height: 500px;
+    width: 100%;
+    border-radius: 1rem;
+    background-color: var(--background-grey);
+    display: flex;
+    flex: 1 1 0;
+    justify-content: flex-start;
+    gap: 3rem;
+    overflow-x: scroll;
+    transition: 250ms;
+}
+.raitings__graph::-webkit-scrollbar{
+    height: 1rem;
+}
+.raitings__graph::-webkit-scrollbar-track {
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+}
+.raitings__graph::-webkit-scrollbar-thumb {
+    opacity: 0.5;
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+    transition: 250ms;
+}
+.raitings__graph::-webkit-scrollbar-thumb:hover{
+    background-color: var(--black-50);
+}
+section.statistics__reviews-graph::-webkit-scrollbar{
+    height: 1rem;
+}
+section.statistics__reviews-graph::-webkit-scrollbar-track {
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+}
+section.statistics__reviews-graph::-webkit-scrollbar-thumb {
+    opacity: 0.5;
+    background-color: var(--black-12-5);
+    border-radius: 0.5rem;
+    transition: 250ms;
+}
+section.statistics__reviews-graph::-webkit-scrollbar-thumb:hover{
+    background-color: var(--black-50);
+}
+.graph__column{
+    min-width: 148px;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 250ms;
+}
+.graph__city{
+    height: 10%;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.graph__line{
+    width: 25%;
+    border-radius: 2rem;
+    transition: 250ms;
+}
+.graph__line.bad{
+    background-color: var(--stat-bad);
+}
+.graph__line.bad:hover{
+    background-color: var(--stat-bad-hover);
+}
+.graph__line.good{
+    background-color: var(--stat-good);
+}
+.graph__line.good:hover{
+    background-color: var(--stat-good-hover);
+}
+.graph__line.perfect{
+    background-color: var(--stat-perfect);
+}
+.graph__line.perfect:hover{
+    background-color: var(--stat-perfect-hover);
+}
+.graph__line-number{
+    height: 10%;
+    font-size: var(--fs-read);
+    font-weight: var(--semibold);
+    color: var(--dark-grey);
+    text-align: center;
+}

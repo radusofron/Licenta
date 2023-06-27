@@ -898,5 +898,20 @@ def delete_itinerary_for_user(dba, itinerary_id: str):
     dba.commit()
 
 
+def extract_destinations_average_grade(dba):
+    """Function returns the average grade of every destination from database.
+    """
+    # Extract avergae grades
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT (AVG(`grade_attractions`) + AVG(`grade_acommodation`) + AVG(`grade_culture`) + AVG(`grade_entertainment`) + AVG(`grade_food_and_drink`) + AVG(`grade_history`) + AVG(`grade_natural_beauty`) + AVG(`grade_night_life`) + AVG(`grade_transport`) + AVG(`grade_safety`)) / 10 AS `Average`, `name` FROM `grades_destinations` `g` JOIN `destinations` `d` ON `d`.`id` = `g`.`destination_id` GROUP BY `destination_id` ORDER BY `Average` DESC")
+    average_grades = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    # Case: no grades for any destination untill now
+    if average_grades is None:
+        return []
+    return average_grades
+
+
 # Create database object
 dba = connect_to_dba()

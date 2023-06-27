@@ -1,0 +1,40 @@
+{% extends "post_login_base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/statistics.css') }}" />
+<script src="{{ url_for('static', filename='scripts/statistics.js') }}"></script>
+{% endblock %}
+
+{% block title %} Statistics | TOYO {% endblock %}
+
+{% block content %}
+
+<main class="statistics">
+    <h3 class="statistics__title">Statistics</h3>
+    <p class="statistics__description">
+        Discover cities that have received the best grades and the most favorable reviews.
+    </p>
+    <section class="statistics__raitings">
+        {% if average_grades | length > 0 %}
+        <div class="raitings__graph">
+            {% for average_grade in average_grades %}
+            <div class="graph__column">
+                <span class="graph__city">{{average_grade[1]}}</span>
+                <div class="graph__line" grade="{{average_grade[0]}}"></div>
+                <span class="graph__line-number">{{average_grade[0]}}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="statistics__description no-data">At the moment, best grades statistic cannot be displayed due to the
+            absence of
+            users'
+            evaluations. :(
+        </p>
+        {% endif %}
+    </section>
+    <section class="statistics__reviews-graph">
+
+    </section>
+</main>
+{% endblock %}

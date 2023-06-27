@@ -328,40 +328,32 @@ function createGradesGraph() {
     // Define average grade per field array
     const gradePerField = []
 
-    // Extract per-year attribute values (i.e. visited destinations per year)
+    // Extract average grade from grade attribute
     graphLines.forEach(graphLine => {
         gradePerField.push(graphLine.getAttribute("grade"))
         graphLine.removeAttribute("grade")
      });
 
     // Set specific heights and colors for graph lines
-    for (let index = 0; index < gradePerField.length; index++)
-    {
-        // Convert visited destinations per year from string to int
-        gradePerField[index] = parseInt(gradePerField[index])
+    for (let index = 0; index < gradePerField.length; index++) {   
+        // 10% -> statistics__field, 10% -> statistics__line-number => maximum height is 80% 
+        let height = gradePerField[index] * 8
 
-        // Case: no evaluations yet
-        if (gradePerField[index] == 0) {
-            graphLines[index].style.height = "5%"
-            graphLines[index].classList.add("empty")
+        // Set height
+        graphLines[index].style.height = height.toString() + "%"
+
+        // Set color after grade
+        // Less than 5
+        if (height < 40) {
+            graphLines[index].classList.add("bad")
         }
-        else {
-            // Compute height
-            height_computed = gradePerField[index] * 8
-
-            // Set height
-            graphLines[index].style.height = height_computed.toString() + "%"
-
-            // Set color after grade
-            if (gradePerField[index] < 5) {
-                graphLines[index].classList.add("bad")
-            }
-            if (gradePerField[index] >= 5 && gradePerField[index] < 10) {
-                graphLines[index].classList.add("good")
-            }
-            if (gradePerField[index] == 10) {
-                graphLines[index].classList.add("perfect")
-            }
+        // Between 5 and 7.5
+        if (height >= 40 && height < 60) {
+            graphLines[index].classList.add("good")
+        }
+        // Bigger than 7.5
+        if (height >= 60) {
+            graphLines[index].classList.add("perfect")
         }
     }
 }

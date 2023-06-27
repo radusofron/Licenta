@@ -8,6 +8,7 @@ from controllers.profile import profile_controller_blueprint
 from controllers.destination_details import destination_details_controller_blueprint
 from controllers.destination_evaluate import destination_evaluate_controller_blueprint
 from controllers.itineraries import itineraries_controller_blueprint
+from controllers.statistics import statistics_controller_blueprint
 from views.index import index_view_blueprint
 from views.login import login_view_blueprint
 from views.register import register_view_blueprint
@@ -18,6 +19,7 @@ from views.error_404 import error_404_view_blueprint
 from views.destination_details import destination_details_view_blueprint
 from views.destination_evaluate import destination_evaluate_view_blueprint
 from views.itineraries import itineraries_view_blueprint
+from views.statistics import statistics_view_blueprint
 from datetime import timedelta
 
 
@@ -46,6 +48,8 @@ app.register_blueprint(destination_evaluate_controller_blueprint)
 app.register_blueprint(destination_evaluate_view_blueprint)
 app.register_blueprint(itineraries_controller_blueprint)
 app.register_blueprint(itineraries_view_blueprint)
+app.register_blueprint(statistics_controller_blueprint)
+app.register_blueprint(statistics_view_blueprint)
 app.register_blueprint(error_404_view_blueprint)
 
 
