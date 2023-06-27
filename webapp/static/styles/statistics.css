@@ -4,6 +4,11 @@ main.statistics{
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 6rem;
+}
+.statistics__intro{
+    display: flex;
+    flex-direction: column;
     gap: 4.5rem;
 }
 .statistics__title{
@@ -19,12 +24,24 @@ main.statistics{
 .statistics__description.no-data{
     color: var(--pink);
 }
-.raitings__graph, section.statistics__reviews-graph{
+section.statistics__raitings, section.statistics__reviews{
+    display: block;
+}
+.statistics__field{
+    padding: 3.75rem 0rem 0rem 55.5px;
+    font-size: var(--fs-subtitle);
+    font-weight: var(--semibold);
+    border-radius: 1rem 1rem 0rem 0rem;
+    color: var(--dark-grey);
+    background-color: var(--background-grey);
+    text-align: center;
+}
+.raitings__graph, .reviews__graph{
     padding: 3.75rem 0vw;
     max-height: 500px;
     min-height: 500px;
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 0rem 0rem 1rem 1rem;
     background-color: var(--background-grey);
     display: flex;
     flex: 1 1 0;
@@ -49,20 +66,20 @@ main.statistics{
 .raitings__graph::-webkit-scrollbar-thumb:hover{
     background-color: var(--black-50);
 }
-section.statistics__reviews-graph::-webkit-scrollbar{
+.reviews__graph::-webkit-scrollbar{
     height: 1rem;
 }
-section.statistics__reviews-graph::-webkit-scrollbar-track {
+.reviews__graph::-webkit-scrollbar-track {
     background-color: var(--black-12-5);
     border-radius: 0.5rem;
 }
-section.statistics__reviews-graph::-webkit-scrollbar-thumb {
+.reviews__graph::-webkit-scrollbar-thumb {
     opacity: 0.5;
     background-color: var(--black-12-5);
     border-radius: 0.5rem;
     transition: 250ms;
 }
-section.statistics__reviews-graph::-webkit-scrollbar-thumb:hover{
+.reviews__graph::-webkit-scrollbar-thumb:hover{
     background-color: var(--black-50);
 }
 .graph__column{
@@ -82,28 +99,32 @@ section.statistics__reviews-graph::-webkit-scrollbar-thumb:hover{
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    transition: 250ms;
 }
-.graph__line{
+.graph__city:hover{
+    color: var(--grey);
+}
+.graph__line, .graph-2__line{
     width: 25%;
     border-radius: 2rem;
     transition: 250ms;
 }
-.graph__line.bad{
+.bad{
     background-color: var(--stat-bad);
 }
-.graph__line.bad:hover{
+.bad:hover{
     background-color: var(--stat-bad-hover);
 }
-.graph__line.good{
+.good{
     background-color: var(--stat-good);
 }
-.graph__line.good:hover{
+.good:hover{
     background-color: var(--stat-good-hover);
 }
-.graph__line.perfect{
+.perfect{
     background-color: var(--stat-perfect);
 }
-.graph__line.perfect:hover{
+.perfect:hover{
     background-color: var(--stat-perfect-hover);
 }
 .graph__line-number{
@@ -112,4 +133,24 @@ section.statistics__reviews-graph::-webkit-scrollbar-thumb:hover{
     font-weight: var(--semibold);
     color: var(--dark-grey);
     text-align: center;
+}
+
+
+/* Change font-size */
+@media (max-height: 750px){
+    .statistics__title{
+        font-size: var(--fs-big-subtitle);
+    }
+    .statistics__description{
+        font-size: var(--fs-description);
+    }
+    .statistics__field{
+        font-size: var(--fs-description);
+    }
+    .graph__city{
+        font-size: var(--fs-phone-description);
+    }
+    .graph__line-number{
+        font-size: var(--fs-phone-description);
+    }
 }

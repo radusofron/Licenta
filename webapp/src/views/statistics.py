@@ -20,6 +20,8 @@ def statistics_view() -> Response:
     results = statistics()
     statistics_data = json.loads(results.data)
     average_grades = statistics_data["average grades"]
+    percentages = statistics_data["percentages"]
+
     return make_response(
-        render_template("statistics.html", average_grades = average_grades)
+        render_template("statistics.html", average_grades = average_grades, percentages = percentages)
     )    

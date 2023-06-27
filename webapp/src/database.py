@@ -913,5 +913,35 @@ def extract_destinations_average_grade(dba):
     return average_grades
 
 
+def extract_destinations_good_overall_feeling_reviews(dba):
+    """Function returns the number of good general feelings of every destination from database.
+    """
+    # Extract good overall feelings reviews
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*), `name` FROM `reviews_destinations` `r` JOIN `destinations` `d` ON `r`.`destination_id` = `d`.`id` WHERE `feeling` IN ('delighted', 'impressed', 'satisfied') GROUP BY `destination_id`")
+    good_reviews = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    # Case: no overal feelings for any destination untill now
+    if good_reviews is None:
+        return []
+    return good_reviews
+
+
+def extract_destinations_total_reviews(dba):
+    """Function returns reviews number of every destination from database.
+    """
+    # Extract total reviews number
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT COUNT(*), `name` FROM `reviews_destinations` `r` JOIN `destinations` `d` ON `r`.`destination_id` = `d`.`id` GROUP BY `destination_id`")
+    reviews = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    # Case: no overal feelings for any destination untill now
+    if reviews is None:
+        return []
+    return reviews
+
+
 # Create database object
 dba = connect_to_dba()
