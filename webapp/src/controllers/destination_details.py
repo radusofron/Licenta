@@ -541,6 +541,7 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
     # -------------------
     # Group touristic objectives using kmeans (using Euclidean distance)
     km = KMeans(n_clusters=days, init='k-means++')
+    global clusters
     clusters = km.fit_predict(df[["Longitude", "Latitude"]])
 
     # Convert to list
@@ -552,112 +553,81 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
 
         # Determine desired cardinal of clusters
         desired_cardinal = len(objectives) // days
+        remaining = len(objectives) - desired_cardinal * days
 
         # Compute cardinal of every cluster
         clusters_cardinals = Counter(clusters)
 
         # Determine which clusters must remove elements and which clusters must add elements
-        remove_from_clusters = []
-        add_to_clusters = []
+        overloaded_clusters = []
+        underloaded_clusters = []
         for cluster_index in range(days):
             if clusters_cardinals[cluster_index] < desired_cardinal:
-                add_to_clusters.append(cluster_index)
+                underloaded_clusters.append(cluster_index)
             elif clusters_cardinals[cluster_index] > desired_cardinal:
-                remove_from_clusters.append(cluster_index)
+                overloaded_clusters.append(cluster_index)
 
         # Proceed only if underloaded clusters exists, otherwise don't modify
-        if len(add_to_clusters) > 0:
+        if len(underloaded_clusters) > 0:
 
             # Extract centroids coordinates
             centroids = km.cluster_centers_
             # Convert to list
             centroids = centroids.tolist()
 
-            # Extend current pandas dataframe. Add a column to insert the distance between every tourist
-            # objective that belongs to a overloaded cluster and the centroid of every underloaded cluster
-            for underloaded_cluster in add_to_clusters:
-                df = df.assign(**{str(underloaded_cluster): None})
+            # Create dicitonary to store the attractions for every cluster
+            cluster = {0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: []}
+            # Create list to store the attractions used
+            used_attractions = []
+            # For every cluster
+            for current_cluster in clusters_cardinals.keys():
+                # Create dictionary key
+                cluster[current_cluster] = []
+                # For every tourist objective
+                for attraction_index in range(len(objectives)):
+                    # Compute the Manhattan distance between every attraction and the current cluster
+                    lat_dist = abs(df.loc[attraction_index, "Latitude"] - centroids[current_cluster][0])
+                    long_dist = abs(df.loc[attraction_index, "Longitude"] - centroids[current_cluster][1])
+                    total_distance = lat_dist + long_dist
+                    # Add attraction index and its distance to specific dictionary
+                    cluster[current_cluster].append([attraction_index, total_distance])
+                # Remove attractions that were already used
+                cluster_copy = cluster[current_cluster].copy() 
+                for element in cluster_copy:
+                    if element[0] in used_attractions:
+                        cluster[current_cluster].remove(element)
+                # Add the desired number of attractions for cluster
+                if remaining > 0:
+                    cluster[current_cluster] = sorted(cluster[current_cluster], key=lambda x: x[1])[:(desired_cardinal + 1)]
+                    remaining -= 1
+                else:
+                    cluster[current_cluster] = sorted(cluster[current_cluster], key=lambda x: x[1])[:desired_cardinal]
+                # Store used attractions
+                for element in cluster[current_cluster]:
+                    used_attractions.append(element[0])
+                # Store positions
+                cluster_copy = cluster[current_cluster].copy()
+                cluster[current_cluster] = []
+                for element in cluster_copy:
+                    cluster[current_cluster].append(element[0])
 
-            # Compute which attractions may be moved to other clusters and compute the distances to them
-            # For every tourist objective
-            for attraction_index in range(len(clusters)):
-                # If the tourist objective belongs to an overloaded cluster
-                if clusters[attraction_index] in remove_from_clusters:
-                    # Compute the distances mentioned above and insert all of them accordingly (Manhattan distance)
-                    for underloaded_cluster in add_to_clusters:
-                        lat_dist = abs(df.loc[attraction_index, "Latitude"] - centroids[underloaded_cluster][0])
-                        long_dist = abs(df.loc[attraction_index, "Longitude"] - centroids[underloaded_cluster][1])
-                        total_dsitance = lat_dist + long_dist
-                        df.loc[attraction_index, str(underloaded_cluster)] = total_dsitance
-
-            print("Cardinalul dorit este: ", desired_cardinal)
-            print("Cardinalele curente ale clustere-lor arata astfel: ", clusters_cardinals)
-            print("Clustere la care trebuie sa adaugam: ", add_to_clusters)
-            print("Clustere din care trebuie sa eliminam: ", remove_from_clusters)
-            print("Coordonatele centroizilor sunt: ", centroids, type(centroids))
-            print("Obiectivele complete inainte de realocare:\n", df)
-            print("----Clustere-le arata astfel inainte schimbare: ", clusters)
-
-            done = False
-            iter = 0
-            while done == False:
-                # Pentru fiecare rand din dataframe
-                smallest_list = []
-                for index, row in df.iterrows():
-                    # Pentru fiecare cluster subincarcat, pe rand, asociez punctele care trebuie puse
-                    cluster_list = []
-                    distance_list = []
-                    for underloaded_cluster in df.columns[3:]:
-                        if row[underloaded_cluster] != None:
-                            cluster_list.append(underloaded_cluster)
-                            distance_list.append(row[underloaded_cluster])
-                    # Daca lista nu e goala
-                    if len(distance_list) > 0:
-                        index, value = min(enumerate(distance_list), key=lambda x: x[1])
-                        smallest = [cluster_list[index], value]
-                    else:
-                        smallest = [None, 100000000]
-                    smallest_list.append(smallest)
-
-                # Determin minimul
-                smallest_list_sorted = sorted(enumerate(smallest_list), key=lambda x: x[1][1])
-                
-                # print("smallest_list_sorted: ", smallest_list_sorted)
-
-                # print("Clustere-le arata astfel inainte de schimbare: ", clusters)
-
-                # Il pun daca se poate, daca nu, trec mai departe
-                # Daca nu e None
-                # print("\n\nElementul care tre sa aiba valoare -- smallest_list_sorted[0][1][0]: ", smallest_list_sorted[0][1][0])
-                # print("Pozitia pe care trebuie pus noul cluster -- smallest_list_sorted[0][0]: ", smallest_list_sorted[0][0])
-                # print("Cluster-ul -- smallest_list_sorted[0][1][1]: ", smallest_list_sorted[0][1][1])
-
-                if smallest_list_sorted[0][1][0] != None:
-                    # Daca inca mai putem aloca
-                    if clusters_cardinals[smallest_list_sorted[0][1][0]] < desired_cardinal:
-                            clusters[smallest_list_sorted[0][0]] = int(smallest_list_sorted[0][1][0])
-
-                # Le egalam cu None pe cele folosite
-                for col_index in df.columns[3:]:
-                    df.loc[int(smallest_list_sorted[0][0]), col_index] = None
-
-                # Conditia de oprire
-                # Recompute cardinal of every cluster
-                clusters_cardinals = Counter(clusters)
-                # done = True
-                # for underloaded_cluster in add_to_clusters:
-                #     if clusters_cardinals[underloaded_cluster] < desired_cardinal:
-                #         done = False
-                if iter == 3:
-                    done = True
-                iter += 1
-
-                
-                print("Cum le distribui la iteratia asta: ", smallest_list)
-                print("Cardinalele dupa schimbare ale clustere-lor arata astfel: ", clusters_cardinals)
-                print("Clustere-le arata astfel dupa schimbare: ", clusters)
-                print("Obiectivele distribuite la iteratia asta:\n", df)
-        
+            clusters = []
+            # Add clusters lists to same list
+            for attraction in sorted(used_attractions):
+                if attraction in cluster[0]:
+                    clusters.append(0)
+                elif attraction in cluster[1]:
+                    clusters.append(1)
+                elif attraction in cluster[2]:
+                    clusters.append(2)
+                elif attraction in cluster[3]:
+                    clusters.append(3)
+                elif attraction in cluster[4]:
+                    clusters.append(4)
+                elif attraction in cluster[5]:
+                    clusters.append(5)
+                elif attraction in cluster[6]:
+                    clusters.append(6)
 
     # Group objectives by clusters
     # Create a string containing all the objectives of a group, for every group
