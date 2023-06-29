@@ -137,7 +137,8 @@
                     <div class="travel-itineraries__algorithm">
                         <input class="travel-itineraries__algorithm-radio" type="radio" value="modified"
                             id="coordinates" name="algorithm">
-                        <span class="travel-itineraries__algorithm-name">Balanced grouping by geographical proximity
+                        <span class="travel-itineraries__algorithm-name">Balanced grouping by partial geographical
+                            proximity
                             (Modified k-Means)
                         </span>
                         <img class="travel-itineraries__algorithm-info-icon" id="info-1"
@@ -145,8 +146,10 @@
                     </div>
                     <p class="travel-itineraries__algorithm-details" id="details-1">
                         This algorithm groups the attractions based on their geographical
-                        proximity. It employs a modified version of the k-Means clustering algorithm to ensure that each
-                        group contains a similar number of attractions while considering their spatial relationships.
+                        proximity, but with partial consideration. It employs a modified version of the k-Means
+                        clustering algorithm to ensure that each
+                        group contains a similar number of attractions while moderately acknowledging their spatial
+                        relationships.
                         The
                         number of groups will be equal to the number of days chosen.
                     </p>
