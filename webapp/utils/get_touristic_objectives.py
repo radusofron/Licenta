@@ -67,6 +67,7 @@ def get_city_touristic_objectives(dba, city: str):
     # Start to process data
     touristic_objectives = dict()
     index = 0
+    names = []
 
     # Process every touristic objective found
     for touristic_objective in response["features"]:
@@ -76,22 +77,30 @@ def get_city_touristic_objectives(dba, city: str):
         # Add data
         if "name" in touristic_objective["properties"]:
             new_data["name"] = touristic_objective["properties"]["name"]
-            # Skip if not found
-            if "formatted" in touristic_objective["properties"]:
-                new_data["address"] = touristic_objective["properties"]["formatted"]
-            else:
-                new_data["address"] = None
-            # Skip if not found
-            if "opening_hours" in touristic_objective["properties"]["datasource"]["raw"]:
-                new_data["opening_hours"] = touristic_objective["properties"]["datasource"]["raw"]["opening_hours"]
-            else:
-                new_data["opening_hours"] = None
-            new_data["coordinates"]["longitude"] = float(touristic_objective["geometry"]["coordinates"][0])
-            new_data["coordinates"]["latitude"] = float(touristic_objective["geometry"]["coordinates"][1])
-            new_data["place_id"] = touristic_objective["properties"]["place_id"]
-            
-            # Insert touristic objective into the database
-            insert_touristic_objective(dba, city, new_data)
+
+            # API problem: same tourist objective multiple times
+            # Check to be unique
+            if new_data["name"] not in names:
+
+                # Add name
+                names.append(new_data["name"])
+
+                # Skip if not found
+                if "formatted" in touristic_objective["properties"]:
+                    new_data["address"] = touristic_objective["properties"]["formatted"]
+                else:
+                    new_data["address"] = None
+                # Skip if not found
+                if "opening_hours" in touristic_objective["properties"]["datasource"]["raw"]:
+                    new_data["opening_hours"] = touristic_objective["properties"]["datasource"]["raw"]["opening_hours"]
+                else:
+                    new_data["opening_hours"] = None
+                new_data["coordinates"]["longitude"] = float(touristic_objective["geometry"]["coordinates"][0])
+                new_data["coordinates"]["latitude"] = float(touristic_objective["geometry"]["coordinates"][1])
+                new_data["place_id"] = touristic_objective["properties"]["place_id"]
+                
+                # Insert touristic objective into the database
+                insert_touristic_objective(dba, city, new_data)
 
 
 def main():
