@@ -135,36 +135,36 @@
                 3. Choose your preferred method of organizing your touristic attractions:
                 <div class="travel-itineraries__algorithm-container">
                     <div class="travel-itineraries__algorithm">
-                        <input class="travel-itineraries__algorithm-radio" type="radio" value="coordinates"
+                        <input class="travel-itineraries__algorithm-radio" type="radio" value="modified"
                             id="coordinates" name="algorithm">
-                        <span class="travel-itineraries__algorithm-name">Group by Cardinal Directions
+                        <span class="travel-itineraries__algorithm-name">Balanced grouping by geographical proximity
+                            (Modified k-Means)
                         </span>
                         <img class="travel-itineraries__algorithm-info-icon" id="info-1"
                             src="{{url_for('static', filename='/assets/illustrations/information.png')}}">
                     </div>
                     <p class="travel-itineraries__algorithm-details" id="details-1">
-                        This method groups the attractions based on cardinal directions (North, South, East, West,
-                        Northeast and so on). It will categorize the attractions into distinct regions based on their
-                        general compass direction. The number of regions will be equal to the number of days chosen.
+                        This algorithm groups the attractions based on their geographical
+                        proximity. It employs a modified version of the k-Means clustering algorithm to ensure that each
+                        group contains a similar number of attractions while considering their spatial relationships.
+                        The
+                        number of groups will be equal to the number of days chosen.
                     </p>
                 </div>
                 <div class="travel-itineraries__algorithm-container">
                     <div class="travel-itineraries__algorithm">
-                        <input class="travel-itineraries__algorithm-radio" type="radio" value="kmeans" id="kmeans"
+                        <input class="travel-itineraries__algorithm-radio" type="radio" value="standard" id="kmeans"
                             name="algorithm">
-                        <span class="travel-itineraries__algorithm-name">Group by geographical proximity (Coordinate
-                            Clustering using K-Means
-                            algortihm)
+                        <span class="travel-itineraries__algorithm-name">Unbalanced grouping by geographical proximity
+                            (Standard k-Means)
                         </span>
                         <img class="travel-itineraries__algorithm-info-icon" id="info-2"
                             src="{{url_for('static', filename='/assets/illustrations/information.png')}}">
                     </div>
                     <p class="travel-itineraries__algorithm-details" id="details-2">
-                        This method groups the attractions based on their coordinates using the K-Means clustering
-                        algorithm. It will create clusters based on their proximity to each other in terms of their
-                        coordinates. It does not explicitly consider cardinal directions, but focuses on grouping
-                        attractions that are close to each other geographically. The number of clusters will be equal to
-                        the number of days chosen.
+                        This algortihm groups the attractions based on their geographical
+                        proximity without enforcing a strict balance in the number of attractions within each group. The
+                        number of groups will be equal to the number of days chosen.
                     </p>
                 </div>
             </div>

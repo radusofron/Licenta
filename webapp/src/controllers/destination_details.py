@@ -12,6 +12,7 @@ import matplotlib
 from sklearn.cluster import KMeans
 import uuid
 import urllib.parse
+from collections import Counter
 
 
 destination_details_controller_blueprint = Blueprint("destination_details_controller_blueprint", __name__)
@@ -536,61 +537,173 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
     df["Longitude"] = df["Longitude"].astype(float)
     df["Latitude"] = df["Latitude"].astype(float)
 
-    if algorithm == "kmeans":
-        # Group touristic objectives using kmeans
-        km = KMeans(n_clusters=days, init='k-means++')
-        clusters = km.fit_predict(df[["Longitude", "Latitude"]])
+    # FOR BOTH algorithms
+    # -------------------
+    # Group touristic objectives using kmeans (using Euclidean distance)
+    km = KMeans(n_clusters=days, init='k-means++')
+    clusters = km.fit_predict(df[["Longitude", "Latitude"]])
 
-        # Convert to list
-        clusters = clusters.tolist()
+    # Convert to list
+    clusters = clusters.tolist()
 
-        # Group objectives by clusters
-        # Create a string containing all the objectives of a group, for every group
-        objectives_groups = {"day1": "", "day2": "", "day3": "", "day4": "", "day5": "", "day6": "", "day7": ""}
-        # The objectives of a group are delimitated using 
-        delimiter = "####"
-        for index in range(len(objectives)):
-            if clusters[index] == 0:
-                objectives_groups["day1"] = objectives_groups["day1"] + objectives[index] + delimiter
-            elif clusters[index] == 1:
-                objectives_groups["day2"] = objectives_groups["day2"] + objectives[index] + delimiter
-            elif clusters[index] == 2:
-                objectives_groups["day3"] = objectives_groups["day3"] + objectives[index] + delimiter
-            elif clusters[index] == 3:
-                objectives_groups["day4"] = objectives_groups["day4"] + objectives[index] + delimiter
-            elif clusters[index] == 4:
-                objectives_groups["day5"] = objectives_groups["day5"] + objectives[index] + delimiter
-            elif clusters[index] == 5:
-                objectives_groups["day6"] = objectives_groups["day6"] + objectives[index] + delimiter
-            elif clusters[index] == 6:
-                objectives_groups["day7"] = objectives_groups["day7"] + objectives[index] + delimiter
+    # ONLY FOR MODIFIED algorithm
+    # ---------------------------
+    if algorithm == "modified":
 
-        # Set colors for clusters
-        colors = colors_for_clusters(clusters)
+        # Determine desired cardinal of clusters
+        desired_cardinal = len(objectives) // days
 
-        # Create cluster representation
-        # 1. Set backend for writing to file
-        matplotlib.use("agg")
-        # Set colors and create figure
-        plt.figure(facecolor = "#F2F2F2")
-        axes = plt.axes()
-        axes.scatter(df["Longitude"], df["Latitude"], color = colors, alpha=0.5)
-        axes.set_facecolor("#F2F2F2")
+        # Compute cardinal of every cluster
+        clusters_cardinals = Counter(clusters)
 
-        # Save representation
-        create_user_folder(str(session["user_id"]))
-        # Create itinerary id
-        itinerary["id"] = urllib.parse.quote(str(uuid.uuid4()))
-        plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + itinerary["id"] +  ".png")
+        # Determine which clusters must remove elements and which clusters must add elements
+        remove_from_clusters = []
+        add_to_clusters = []
+        for cluster_index in range(days):
+            if clusters_cardinals[cluster_index] < desired_cardinal:
+                add_to_clusters.append(cluster_index)
+            elif clusters_cardinals[cluster_index] > desired_cardinal:
+                remove_from_clusters.append(cluster_index)
 
-        # Insert itinerary into the database
-        insert_itinerary_for_user(dba, itinerary, session["user_id"], session["current_city"], 
-                                  objectives_groups)
+        # Proceed only if underloaded clusters exists, otherwise don't modify
+        if len(add_to_clusters) > 0:
 
-        # Return itinerary id
-        return itinerary["id"]
+            # Extract centroids coordinates
+            centroids = km.cluster_centers_
+            # Convert to list
+            centroids = centroids.tolist()
 
-    return ""
+            # Extend current pandas dataframe. Add a column to insert the distance between every tourist
+            # objective that belongs to a overloaded cluster and the centroid of every underloaded cluster
+            for underloaded_cluster in add_to_clusters:
+                df = df.assign(**{str(underloaded_cluster): None})
+
+            # Compute which attractions may be moved to other clusters and compute the distances to them
+            # For every tourist objective
+            for attraction_index in range(len(clusters)):
+                # If the tourist objective belongs to an overloaded cluster
+                if clusters[attraction_index] in remove_from_clusters:
+                    # Compute the distances mentioned above and insert all of them accordingly (Manhattan distance)
+                    for underloaded_cluster in add_to_clusters:
+                        lat_dist = abs(df.loc[attraction_index, "Latitude"] - centroids[underloaded_cluster][0])
+                        long_dist = abs(df.loc[attraction_index, "Longitude"] - centroids[underloaded_cluster][1])
+                        total_dsitance = lat_dist + long_dist
+                        df.loc[attraction_index, str(underloaded_cluster)] = total_dsitance
+
+            print("Cardinalul dorit este: ", desired_cardinal)
+            print("Cardinalele curente ale clustere-lor arata astfel: ", clusters_cardinals)
+            print("Clustere la care trebuie sa adaugam: ", add_to_clusters)
+            print("Clustere din care trebuie sa eliminam: ", remove_from_clusters)
+            print("Coordonatele centroizilor sunt: ", centroids, type(centroids))
+            print("Obiectivele complete inainte de realocare:\n", df)
+            print("----Clustere-le arata astfel inainte schimbare: ", clusters)
+
+            done = False
+            iter = 0
+            while done == False:
+                # Pentru fiecare rand din dataframe
+                smallest_list = []
+                for index, row in df.iterrows():
+                    # Pentru fiecare cluster subincarcat, pe rand, asociez punctele care trebuie puse
+                    cluster_list = []
+                    distance_list = []
+                    for underloaded_cluster in df.columns[3:]:
+                        if row[underloaded_cluster] != None:
+                            cluster_list.append(underloaded_cluster)
+                            distance_list.append(row[underloaded_cluster])
+                    # Daca lista nu e goala
+                    if len(distance_list) > 0:
+                        index, value = min(enumerate(distance_list), key=lambda x: x[1])
+                        smallest = [cluster_list[index], value]
+                    else:
+                        smallest = [None, 100000000]
+                    smallest_list.append(smallest)
+
+                # Determin minimul
+                smallest_list_sorted = sorted(enumerate(smallest_list), key=lambda x: x[1][1])
+                
+                # print("smallest_list_sorted: ", smallest_list_sorted)
+
+                # print("Clustere-le arata astfel inainte de schimbare: ", clusters)
+
+                # Il pun daca se poate, daca nu, trec mai departe
+                # Daca nu e None
+                # print("\n\nElementul care tre sa aiba valoare -- smallest_list_sorted[0][1][0]: ", smallest_list_sorted[0][1][0])
+                # print("Pozitia pe care trebuie pus noul cluster -- smallest_list_sorted[0][0]: ", smallest_list_sorted[0][0])
+                # print("Cluster-ul -- smallest_list_sorted[0][1][1]: ", smallest_list_sorted[0][1][1])
+
+                if smallest_list_sorted[0][1][0] != None:
+                    # Daca inca mai putem aloca
+                    if clusters_cardinals[smallest_list_sorted[0][1][0]] < desired_cardinal:
+                            clusters[smallest_list_sorted[0][0]] = int(smallest_list_sorted[0][1][0])
+
+                # Le egalam cu None pe cele folosite
+                for col_index in df.columns[3:]:
+                    df.loc[int(smallest_list_sorted[0][0]), col_index] = None
+
+                # Conditia de oprire
+                # Recompute cardinal of every cluster
+                clusters_cardinals = Counter(clusters)
+                # done = True
+                # for underloaded_cluster in add_to_clusters:
+                #     if clusters_cardinals[underloaded_cluster] < desired_cardinal:
+                #         done = False
+                if iter == 3:
+                    done = True
+                iter += 1
+
+                
+                print("Cum le distribui la iteratia asta: ", smallest_list)
+                print("Cardinalele dupa schimbare ale clustere-lor arata astfel: ", clusters_cardinals)
+                print("Clustere-le arata astfel dupa schimbare: ", clusters)
+                print("Obiectivele distribuite la iteratia asta:\n", df)
+        
+
+    # Group objectives by clusters
+    # Create a string containing all the objectives of a group, for every group
+    objectives_groups = {"day1": "", "day2": "", "day3": "", "day4": "", "day5": "", "day6": "", "day7": ""}
+    # The objectives of a group are delimitated using 
+    delimiter = "####"
+    for index in range(len(objectives)):
+        if clusters[index] == 0:
+            objectives_groups["day1"] = objectives_groups["day1"] + objectives[index] + delimiter
+        elif clusters[index] == 1:
+            objectives_groups["day2"] = objectives_groups["day2"] + objectives[index] + delimiter
+        elif clusters[index] == 2:
+            objectives_groups["day3"] = objectives_groups["day3"] + objectives[index] + delimiter
+        elif clusters[index] == 3:
+            objectives_groups["day4"] = objectives_groups["day4"] + objectives[index] + delimiter
+        elif clusters[index] == 4:
+            objectives_groups["day5"] = objectives_groups["day5"] + objectives[index] + delimiter
+        elif clusters[index] == 5:
+            objectives_groups["day6"] = objectives_groups["day6"] + objectives[index] + delimiter
+        elif clusters[index] == 6:
+            objectives_groups["day7"] = objectives_groups["day7"] + objectives[index] + delimiter
+
+    # Set colors for clusters
+    colors = colors_for_clusters(clusters)
+
+    # Create cluster representation
+    # 1. Set backend for writing to file
+    matplotlib.use("agg")
+    # Set colors and create figure
+    plt.figure(facecolor = "#F2F2F2")
+    axes = plt.axes()
+    axes.scatter(df["Longitude"], df["Latitude"], color = colors, alpha=0.5)
+    axes.set_facecolor("#F2F2F2")
+
+    # Save representation
+    create_user_folder(str(session["user_id"]))
+    # Create itinerary id
+    itinerary["id"] = urllib.parse.quote(str(uuid.uuid4()))
+    plt.savefig("webapp/static/user_data/" + str(session["user_id"]) + "/" + itinerary["id"] +  ".png")
+
+    # Insert itinerary into the database
+    insert_itinerary_for_user(dba, itinerary, session["user_id"], session["current_city"], 
+                                objectives_groups)
+
+    # Return itinerary id
+    return itinerary["id"]
 
 
 # POST function:
