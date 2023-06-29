@@ -529,10 +529,11 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
     # Extract touristic objectives details
     objectives_details = []
     for objective in objectives:
-        objectives_details.extend(extract_touristic_objective_coordinates_by_name(dba, objective))
+        objectives_details.extend(extract_touristic_objective_coordinates_by_name(dba, objective, session["current_city"]))
     
     # Create pandas dataframe
     df = pd.DataFrame(objectives_details, columns=["Name", "Longitude", "Latitude"])
+    print("Df: ", df)
     # Convert from string to float
     df["Longitude"] = df["Longitude"].astype(float)
     df["Latitude"] = df["Latitude"].astype(float)

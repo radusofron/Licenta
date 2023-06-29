@@ -805,12 +805,15 @@ def extract_touristic_objectives_names(dba, destination_name: str):
     return touristic_objectives
 
 
-def extract_touristic_objective_coordinates_by_name(dba, objective_name: str):
+def extract_touristic_objective_coordinates_by_name(dba, objective_name: str, destination_name: str):
     """Function returns the coordinates of a touristic objective from database.
     """
+    # Extract destination id
+    destination_id = extract_destination_id_by_name(dba, destination_name)
+
     # Extract coordinates
     dba_cursor = dba.cursor()
-    dba_cursor.execute("SELECT `name`, `longitude`, `latitude` FROM `touristic_objectives` WHERE `name`=%s", (objective_name,))
+    dba_cursor.execute("SELECT `name`, `longitude`, `latitude` FROM `touristic_objectives` WHERE `name`=%s AND `destination_id`=%s", (objective_name, destination_id))
     coordinates = dba_cursor.fetchall()
     dba_cursor.close()
 
