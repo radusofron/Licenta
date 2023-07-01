@@ -87,6 +87,34 @@ def delete_previous_touristic_objectives(dba):
     dba.commit()
 
 
+def extract_tourisitic_objectives_names(dba):
+    """Function returns the names of the touristic objectives.
+    """
+    # Extract names
+    dba_cursor = dba.cursor()
+    dba_cursor.execute("SELECT `name` FROM `touristic_objectives`")
+    names = dba_cursor.fetchall()
+    dba_cursor.close()
+
+    if names is None:
+        return []
+    return names
+
+
+def add_translated_name(dba, name: str, translated_name: str):
+    """Function adds the translated name of a touristic objective.
+    """
+    # Open cursor
+    dba_cursor = dba.cursor()
+
+    # Update touristic objective
+    dba_cursor.execute("UPDATE `touristic_objectives` SET `translated_name`=%s WHERE `name`=%s", (translated_name, name))
+
+    # Close cursor and commit changes
+    dba_cursor.close()
+    dba.commit()
+
+
 def close_connection_to_dba(dba):
     """Function closes the connection with the database.
     """

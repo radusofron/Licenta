@@ -13,6 +13,7 @@ from sklearn.cluster import KMeans
 import uuid
 import urllib.parse
 from collections import Counter
+import math
 
 
 destination_details_controller_blueprint = Blueprint("destination_details_controller_blueprint", __name__)
@@ -586,10 +587,10 @@ def create_travel_itinerary(days: int, objectives: list[str], algorithm: str, it
                 cluster[current_cluster] = []
                 # For every tourist objective
                 for attraction_index in range(len(objectives)):
-                    # Compute the Manhattan distance between every attraction and the current cluster
-                    lat_dist = abs(df.loc[attraction_index, "Latitude"] - centroids[current_cluster][0])
-                    long_dist = abs(df.loc[attraction_index, "Longitude"] - centroids[current_cluster][1])
-                    total_distance = lat_dist + long_dist
+                    # Compute the Euclidian distance between every attraction and the current cluster
+                    lat_dist = (df.loc[attraction_index, "Latitude"] - centroids[current_cluster][0])**2
+                    long_dist = (df.loc[attraction_index, "Longitude"] - centroids[current_cluster][1])**2
+                    total_distance = math.sqrt(lat_dist + long_dist)
                     # Add attraction index and its distance to specific dictionary
                     cluster[current_cluster].append([attraction_index, total_distance])
                 # Remove attractions that were already used
