@@ -1,4 +1,0 @@
-DE TINUT MINTE:
----------------
-
-1. Cum mai puteam face pentru profile si destination_page pentru un request "POST"?
