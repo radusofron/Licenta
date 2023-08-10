@@ -11,4 +11,4 @@ The available options regarding a city are:
 * to find the latest news
 * to check the weather forecast
 
-Also, the user can see some statistics about their travel activity.
+Also, the users can see some statistics about their travel activity.
