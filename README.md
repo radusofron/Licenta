@@ -9,6 +9,6 @@ The available options regarding a city are:
 * to examine some statistics (derived from users’ evaluations)
 * to see and sort the reviews written by other users
 * to find the latest news
-* to check the weather forecast
+* to check the weather forecast.
 
 Also, the users can see some statistics about their travel activity.
