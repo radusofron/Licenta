@@ -1,5 +1,7 @@
 # Toyo Travel Companion
 
+Video: [https://youtu.be/YLdVbMWkYKw](https://youtu.be/YLdVbMWkYKw)
+
 Toyo Travel Companion represents my bachelor's degree project. It is an interactive web platform designed to assist travelers in planning their city trips effectively.
 
 The available options regarding a city are:
